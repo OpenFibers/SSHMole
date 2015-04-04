@@ -11,9 +11,20 @@
 @interface SMServerConfig : NSObject
 
 @property (nonatomic, strong) NSString *serverName;
+@property (nonatomic, strong) NSString *account;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, assign) NSUInteger serverPort;
 @property (nonatomic, assign) NSUInteger localPort;
-@property (nonatomic, readonly) NSString *configID;
+
+- (id)init;
+
+- (BOOL)ableToConnect;
+
+- (NSString *)accountStringForKeychain;
+
+- (NSString *)commentsForKeychain;//exclude password
+
++ (SMServerConfig *)serverConfigWithKeychainCommentString:(NSString *)keychainCommentString
+                                                 password:(NSString *)password;
 
 @end
