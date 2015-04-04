@@ -177,12 +177,15 @@ CFTypeRef SSKeychainAccessibilityType = NULL;
     return [self setPasswordData:password forService:service account:account error:nil];
 }
 
-
 + (BOOL)setPasswordData:(NSData *)password forService:(NSString *)service account:(NSString *)account error:(NSError **)error {
+    return [self setPasswordData:password forService:service account:account kind:nil comments:nil error:error];
+}
+
++ (BOOL)setPasswordData:(NSData *)password forService:(NSString *)service account:(NSString *)account kind:(NSString *)kind comments:(NSString *)comments error:(NSError **)error {
     OSStatus status = SSKeychainErrorBadArguments;
 	if (password && service && account) {
         [self deletePasswordForService:service account:account];
-        NSMutableDictionary *query = [self _queryForService:service account:account];
+        NSMutableDictionary *query = [self _queryForService:service account:account kind:kind comments:comments];
 #if __has_feature(objc_arc)
 		[query setObject:password forKey:(__bridge id)kSecValueData];
 #else

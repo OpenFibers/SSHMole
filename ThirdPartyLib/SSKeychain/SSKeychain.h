@@ -323,6 +323,27 @@ extern NSString *const kSSKeychainWhereKey;
  */
 + (BOOL)setPasswordData:(NSData *)password forService:(NSString *)serviceName account:(NSString *)account error:(NSError **)error;
 
+/**
+ Sets arbirary data in the Keychain.
+ 
+ @param password The data to store in the Keychain.
+ 
+ @param serviceName The service for which to set the corresponding password.
+ 
+ @param account The account for which to set the corresponding password.
+ 
+ @param kind The kind for which to set the corresponding password.
+ 
+ @param comments The comments for which to set the corresponding password.
+ 
+ @param error If setting the password fails, upon return contains an error that describes the problem.
+ 
+ @return Returns `YES` on success, or `NO` on failure.
+ 
+ @see setPasswordData:forService:account:
+ */
++ (BOOL)setPasswordData:(NSData *)password forService:(NSString *)service account:(NSString *)account kind:(NSString *)kind comments:(NSString *)comments error:(NSError **)error;
+
 
 ///--------------------
 /// @name Configuration
