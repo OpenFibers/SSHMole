@@ -13,6 +13,10 @@
 		42E0A4551ACFBAB800890EA7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42E0A4541ACFBAB800890EA7 /* Images.xcassets */; };
 		42E0A4581ACFBAB800890EA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42E0A4561ACFBAB800890EA7 /* Main.storyboard */; };
 		42E0A4641ACFBAB800890EA7 /* SSHMoleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4631ACFBAB800890EA7 /* SSHMoleTests.m */; };
+		42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4771ACFBD4700890EA7 /* SSKeychain.m */; };
+		42E0A47A1ACFBD5500890EA7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E0A4791ACFBD5500890EA7 /* Security.framework */; };
+		42E0A47E1ACFBDAA00890EA7 /* SMServerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A47D1ACFBDAA00890EA7 /* SMServerConfig.m */; };
+		42E0A4811ACFBDBA00890EA7 /* SMSSHTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4801ACFBDBA00890EA7 /* SMSSHTask.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,13 @@
 		42E0A45D1ACFBAB800890EA7 /* SSHMoleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSHMoleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42E0A4621ACFBAB800890EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42E0A4631ACFBAB800890EA7 /* SSHMoleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSHMoleTests.m; sourceTree = "<group>"; };
+		42E0A4761ACFBD4700890EA7 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		42E0A4771ACFBD4700890EA7 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
+		42E0A4791ACFBD5500890EA7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		42E0A47C1ACFBDAA00890EA7 /* SMServerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfig.h; sourceTree = "<group>"; };
+		42E0A47D1ACFBDAA00890EA7 /* SMServerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfig.m; sourceTree = "<group>"; };
+		42E0A47F1ACFBDBA00890EA7 /* SMSSHTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSHTask.h; sourceTree = "<group>"; };
+		42E0A4801ACFBDBA00890EA7 /* SMSSHTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSHTask.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E0A47A1ACFBD5500890EA7 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,8 +73,12 @@
 		42E0A43E1ACFBAB800890EA7 = {
 			isa = PBXGroup;
 			children = (
+				42E0A4721ACFBD2700890EA7 /* Model */,
+				42E0A4731ACFBD2700890EA7 /* SSHTask */,
 				42E0A4491ACFBAB800890EA7 /* SSHMole */,
 				42E0A4601ACFBAB800890EA7 /* SSHMoleTests */,
+				42E0A4741ACFBD3500890EA7 /* ThirdPartyLib */,
+				42E0A47B1ACFBD7700890EA7 /* Frameworks */,
 				42E0A4481ACFBAB800890EA7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -114,6 +130,50 @@
 				42E0A4621ACFBAB800890EA7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		42E0A4721ACFBD2700890EA7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				42E0A47C1ACFBDAA00890EA7 /* SMServerConfig.h */,
+				42E0A47D1ACFBDAA00890EA7 /* SMServerConfig.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		42E0A4731ACFBD2700890EA7 /* SSHTask */ = {
+			isa = PBXGroup;
+			children = (
+				42E0A47F1ACFBDBA00890EA7 /* SMSSHTask.h */,
+				42E0A4801ACFBDBA00890EA7 /* SMSSHTask.m */,
+			);
+			path = SSHTask;
+			sourceTree = "<group>";
+		};
+		42E0A4741ACFBD3500890EA7 /* ThirdPartyLib */ = {
+			isa = PBXGroup;
+			children = (
+				42E0A4751ACFBD4700890EA7 /* SSKeychain */,
+			);
+			path = ThirdPartyLib;
+			sourceTree = "<group>";
+		};
+		42E0A4751ACFBD4700890EA7 /* SSKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				42E0A4761ACFBD4700890EA7 /* SSKeychain.h */,
+				42E0A4771ACFBD4700890EA7 /* SSKeychain.m */,
+			);
+			path = SSKeychain;
+			sourceTree = "<group>";
+		};
+		42E0A47B1ACFBD7700890EA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42E0A4791ACFBD5500890EA7 /* Security.framework */,
+			);
+			name = Frameworks;
+			path = SSHMoleTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,7 +275,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E0A47E1ACFBDAA00890EA7 /* SMServerConfig.m in Sources */,
+				42E0A4811ACFBDBA00890EA7 /* SMSSHTask.m in Sources */,
 				42E0A4531ACFBAB800890EA7 /* ViewController.m in Sources */,
+				42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */,
 				42E0A4501ACFBAB800890EA7 /* main.m in Sources */,
 				42E0A44E1ACFBAB800890EA7 /* AppDelegate.m in Sources */,
 			);
@@ -404,6 +467,7 @@
 				42E0A4691ACFBAB800890EA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		42E0A46A1ACFBAB800890EA7 /* Build configuration list for PBXNativeTarget "SSHMoleTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +476,7 @@
 				42E0A46C1ACFBAB800890EA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
