@@ -30,29 +30,43 @@
     if (self)
     {
         _serverConfigDictionary = [NSMutableDictionary dictionary];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:NSApplicationWillTerminateNotification object:nil];
+        [self load];
     }
     return self;
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 - (void)addConfig:(SMServerConfig *)config
 {
-    _serverConfigDictionary[config.configID] = config;
+    _serverConfigDictionary[[config accountStringForKeychain]] = config;
+    [config saveToKeychain];
+}
+
+- (NSArray *)configs
+{
+    return _serverConfigDictionary.allValues;
 }
 
 - (void)removeConfig:(SMServerConfig *)config
 {
-    [_serverConfigDictionary removeObjectForKey:config.configID];
+    [_serverConfigDictionary removeObjectForKey:[config accountStringForKeychain]];
+}
+
+- (void)load
+{
+    NSArray *accounts = [SSKeychain accountsForService:SSHMoleKeychainServiceString];
+    for (NSDictionary *eachAccountDictionary in accounts)
+    {
+        SMServerConfig *config = [SMServerConfig serverConfigWithKeychainAccountDictionary:eachAccountDictionary];
+        _serverConfigDictionary[[config accountStringForKeychain]] = config;
+    }
 }
 
 - (void)save
 {
-    
+    for (SMServerConfig *config in _serverConfigDictionary.allValues)
+    {
+        [config saveToKeychain];
+    }
 }
 
 @end

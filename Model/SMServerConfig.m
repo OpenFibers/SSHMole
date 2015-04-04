@@ -8,6 +8,9 @@
 
 #import "SMServerConfig.h"
 #import "YYYJsonParser.h"
+#import "SSKeychain.h"
+
+NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
 @implementation SMServerConfig
 
@@ -42,9 +45,13 @@
     return YES;
 }
 
+#pragma mark - Save to keychain
+
 - (NSString *)accountStringForKeychain
 {
-    NSString *account = self.account.length != 0 ? self.account : @"";
+    NSString *account = ((self.account.length != 0 && self.serverName.length != 0) ?
+                         [self.account stringByAppendingString:@"@"] :
+                         @"");
     NSString *server = self.serverName.length != 0 ? self.serverName : @"";
     NSString *port = ((self.serverPort != 0 && self.serverName.length != 0) ?
                       [NSString stringWithFormat:@":%tu", self.serverPort] :
@@ -54,7 +61,7 @@
 
 - (NSDictionary *)commentsDictionaryForKeychain//exclude password
 {
-    NSMutableDictionary *configDictionary = nil;
+    NSMutableDictionary *configDictionary = [NSMutableDictionary dictionary];
     if (self.serverName)
     {
         configDictionary[@"ServerName"] = self.serverName;
@@ -82,6 +89,23 @@
     return jsonString;
 }
 
+- (BOOL)saveToKeychain
+{
+    NSString *accountString = [self accountStringForKeychain];
+    NSData *passwordData = [self.password dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *commentString = [self commentsForKeychain];
+    NSString *kind = @"SSH Account";
+    BOOL success = [SSKeychain setPasswordData:passwordData
+                                    forService:SSHMoleKeychainServiceString
+                                       account:accountString
+                                          kind:kind
+                                      comments:commentString
+                                         error:nil];
+    return success;
+}
+
+#pragma mark - Load from keychain
+
 + (SMServerConfig *)serverConfigWithUnsecuireDictionary:(NSDictionary *)dictionary
                                                password:(NSString *)password
 {
@@ -100,6 +124,15 @@
     NSDictionary *unsecuireDictionary = [keychainCommentString objectFromJSONString];
     SMServerConfig *config = [self serverConfigWithUnsecuireDictionary:unsecuireDictionary
                                                               password:password];
+    return config;
+}
+
++ (SMServerConfig *)serverConfigWithKeychainAccountDictionary:(NSDictionary *)dictionary
+{
+    NSString *comment = [dictionary objectForKey:(__bridge id)kSecAttrComment];
+    NSString *account = [dictionary objectForKey:(__bridge id)kSecAttrAccount];
+    NSString *password = [SSKeychain passwordForService:SSHMoleKeychainServiceString account:account];
+    SMServerConfig *config = [self serverConfigWithKeychainCommentString:comment password:password];
     return config;
 }
 

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const SSHMoleKeychainServiceString;
+
 @interface SMServerConfig : NSObject
 
 @property (nonatomic, strong) NSString *serverName;
@@ -22,9 +24,9 @@
 
 - (NSString *)accountStringForKeychain;
 
-- (NSString *)commentsForKeychain;//exclude password
+- (BOOL)saveToKeychain;
 
-+ (SMServerConfig *)serverConfigWithKeychainCommentString:(NSString *)keychainCommentString
-                                                 password:(NSString *)password;
++ (SMServerConfig *)serverConfigWithKeychainAccountDictionary:(NSDictionary *)dictionary;
+
 
 @end
