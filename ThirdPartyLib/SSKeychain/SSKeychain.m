@@ -233,7 +233,12 @@ CFTypeRef SSKeychainAccessibilityType = NULL;
 #pragma mark - Private
 
 + (NSMutableDictionary *)_queryForService:(NSString *)service account:(NSString *)account {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *dictionary = [self _queryForService:service account:account kind:nil comments:nil];
+    return dictionary;
+}
++ (NSMutableDictionary *)_queryForService:(NSString *)service account:(NSString *)account kind:(NSString *)kind comments:(NSString *)comments {
+
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity:5];
 #if __has_feature(objc_arc)
     [dictionary setObject:(__bridge id)kSecClassGenericPassword forKey:(__bridge id)kSecClass];
 #else
@@ -255,6 +260,22 @@ CFTypeRef SSKeychainAccessibilityType = NULL;
 		[dictionary setObject:account forKey:(id)kSecAttrAccount];
 #endif
 	}
+    
+    if (kind) {
+#if __has_feature(objc_arc)
+        [dictionary setObject:kind forKey:(__bridge id)kSecAttrDescription];
+#else
+        [dictionary setObject:kind forKey:(id)kSecAttrDescription];
+#endif
+    }
+    
+    if (comments) {
+#if __has_feature(objc_arc)
+        [dictionary setObject:comments forKey:(__bridge id)kSecAttrComment];
+#else
+        [dictionary setObject:comments forKey:(id)kSecAttrComment];
+#endif
+    }
 	
     return dictionary;
 }
