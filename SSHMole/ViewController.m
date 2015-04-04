@@ -7,13 +7,14 @@
 //
 
 #import "ViewController.h"
+#import "SMServerConfigStorage.h"
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // Do any additional setup after loading the view.
+    [SMServerConfigStorage defaultStorage];
 }
 
 - (void)setRepresentedObject:(id)representedObject {

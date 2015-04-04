@@ -17,6 +17,8 @@
 		42E0A47A1ACFBD5500890EA7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E0A4791ACFBD5500890EA7 /* Security.framework */; };
 		42E0A47E1ACFBDAA00890EA7 /* SMServerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A47D1ACFBDAA00890EA7 /* SMServerConfig.m */; };
 		42E0A4811ACFBDBA00890EA7 /* SMSSHTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4801ACFBDBA00890EA7 /* SMSSHTask.m */; };
+		42E0A4841ACFC49400890EA7 /* SMServerConfigStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4831ACFC49400890EA7 /* SMServerConfigStorage.m */; };
+		42E0A48B1ACFC67500890EA7 /* SMUUIDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A48A1ACFC67500890EA7 /* SMUUIDHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,10 @@
 		42E0A47D1ACFBDAA00890EA7 /* SMServerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfig.m; sourceTree = "<group>"; };
 		42E0A47F1ACFBDBA00890EA7 /* SMSSHTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSHTask.h; sourceTree = "<group>"; };
 		42E0A4801ACFBDBA00890EA7 /* SMSSHTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSHTask.m; sourceTree = "<group>"; };
+		42E0A4821ACFC49400890EA7 /* SMServerConfigStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigStorage.h; sourceTree = "<group>"; };
+		42E0A4831ACFC49400890EA7 /* SMServerConfigStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigStorage.m; sourceTree = "<group>"; };
+		42E0A4891ACFC67500890EA7 /* SMUUIDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUUIDHelper.h; sourceTree = "<group>"; };
+		42E0A48A1ACFC67500890EA7 /* SMUUIDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMUUIDHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,7 @@
 		42E0A43E1ACFBAB800890EA7 = {
 			isa = PBXGroup;
 			children = (
+				42E0A4881ACFC66B00890EA7 /* Helpers */,
 				42E0A4721ACFBD2700890EA7 /* Model */,
 				42E0A4731ACFBD2700890EA7 /* SSHTask */,
 				42E0A4491ACFBAB800890EA7 /* SSHMole */,
@@ -137,6 +144,8 @@
 			children = (
 				42E0A47C1ACFBDAA00890EA7 /* SMServerConfig.h */,
 				42E0A47D1ACFBDAA00890EA7 /* SMServerConfig.m */,
+				42E0A4821ACFC49400890EA7 /* SMServerConfigStorage.h */,
+				42E0A4831ACFC49400890EA7 /* SMServerConfigStorage.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,6 +183,15 @@
 			);
 			name = Frameworks;
 			path = SSHMoleTests;
+			sourceTree = "<group>";
+		};
+		42E0A4881ACFC66B00890EA7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				42E0A4891ACFC67500890EA7 /* SMUUIDHelper.h */,
+				42E0A48A1ACFC67500890EA7 /* SMUUIDHelper.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,12 +293,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E0A48B1ACFC67500890EA7 /* SMUUIDHelper.m in Sources */,
 				42E0A47E1ACFBDAA00890EA7 /* SMServerConfig.m in Sources */,
 				42E0A4811ACFBDBA00890EA7 /* SMSSHTask.m in Sources */,
 				42E0A4531ACFBAB800890EA7 /* ViewController.m in Sources */,
 				42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */,
 				42E0A4501ACFBAB800890EA7 /* main.m in Sources */,
 				42E0A44E1ACFBAB800890EA7 /* AppDelegate.m in Sources */,
+				42E0A4841ACFC49400890EA7 /* SMServerConfigStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +417,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SSHMole/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -408,6 +429,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SSHMole/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
