@@ -19,6 +19,7 @@
 		42E0A4811ACFBDBA00890EA7 /* SMSSHTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4801ACFBDBA00890EA7 /* SMSSHTask.m */; };
 		42E0A4841ACFC49400890EA7 /* SMServerConfigStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4831ACFC49400890EA7 /* SMServerConfigStorage.m */; };
 		42E0A48B1ACFC67500890EA7 /* SMUUIDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A48A1ACFC67500890EA7 /* SMUUIDHelper.m */; };
+		42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		42E0A4831ACFC49400890EA7 /* SMServerConfigStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigStorage.m; sourceTree = "<group>"; };
 		42E0A4891ACFC67500890EA7 /* SMUUIDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUUIDHelper.h; sourceTree = "<group>"; };
 		42E0A48A1ACFC67500890EA7 /* SMUUIDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMUUIDHelper.m; sourceTree = "<group>"; };
+		42E0A48D1AD0073500890EA7 /* YYYJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYYJsonParser.h; sourceTree = "<group>"; };
+		42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYYJsonParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +165,7 @@
 		42E0A4741ACFBD3500890EA7 /* ThirdPartyLib */ = {
 			isa = PBXGroup;
 			children = (
+				42E0A48C1AD0073500890EA7 /* YYYJsonParser */,
 				42E0A4751ACFBD4700890EA7 /* SSKeychain */,
 			);
 			path = ThirdPartyLib;
@@ -192,6 +196,15 @@
 				42E0A48A1ACFC67500890EA7 /* SMUUIDHelper.m */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		42E0A48C1AD0073500890EA7 /* YYYJsonParser */ = {
+			isa = PBXGroup;
+			children = (
+				42E0A48D1AD0073500890EA7 /* YYYJsonParser.h */,
+				42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */,
+			);
+			path = YYYJsonParser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +309,7 @@
 				42E0A48B1ACFC67500890EA7 /* SMUUIDHelper.m in Sources */,
 				42E0A47E1ACFBDAA00890EA7 /* SMServerConfig.m in Sources */,
 				42E0A4811ACFBDBA00890EA7 /* SMSSHTask.m in Sources */,
+				42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */,
 				42E0A4531ACFBAB800890EA7 /* ViewController.m in Sources */,
 				42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */,
 				42E0A4501ACFBAB800890EA7 /* main.m in Sources */,
