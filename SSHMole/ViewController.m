@@ -11,10 +11,20 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+}
 
-    [SMServerConfigStorage defaultStorage];
+- (void)addServerConfig
+{
+    SMServerConfig *config = [[SMServerConfig alloc] init];
+    config.serverName = @"123123";
+    config.account = @"root";
+    config.password = @"123123";
+    config.serverPort = 22;
+    config.localPort = 7070;
+    [[SMServerConfigStorage defaultStorage] addConfig:config];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
