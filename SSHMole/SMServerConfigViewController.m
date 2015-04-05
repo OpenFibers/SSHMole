@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 openthread. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "SMServerConfigViewController.h"
 #import "SMServerConfigStorage.h"
 #import "NSView+Vibrancy.h"
 
-@implementation ViewController
+@implementation SMServerConfigViewController
 
 - (void)viewDidLoad
 {
