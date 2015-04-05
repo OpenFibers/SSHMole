@@ -12,6 +12,24 @@
 
 @implementation SMServerConfigView
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    if ((self = [super initWithCoder:aDecoder]))
+    {
+        NSArray *array = nil;
+        [[NSBundle mainBundle] loadNibNamed:@"ServerConfigView" owner:self topLevelObjects:&array];
+        for (id subObject in array)
+        {
+            if ([subObject isKindOfClass:[NSView class]])
+            {
+                [self addSubview:subObject];
+                break;
+            }
+        }
+    }
+    return self;
+}
+
 - (void)addServerConfig
 {
     SMServerConfig *config = [[SMServerConfig alloc] init];
