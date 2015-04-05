@@ -18,10 +18,11 @@
     {
         NSArray *array = nil;
         [[NSBundle mainBundle] loadNibNamed:@"ServerConfigView" owner:self topLevelObjects:&array];
-        for (id subObject in array)
+        for (NSView *subObject in array)
         {
             if ([subObject isKindOfClass:[NSView class]])
             {
+                subObject.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
                 [self addSubview:subObject];
                 break;
             }
