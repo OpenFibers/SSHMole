@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SMServerConfigViewController : NSViewController
+@interface SMServerConfigView : NSView
 
 
 @end

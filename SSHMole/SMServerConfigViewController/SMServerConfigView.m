@@ -6,17 +6,11 @@
 //  Copyright (c) 2015 openthread. All rights reserved.
 //
 
-#import "SMServerConfigViewController.h"
+#import "SMServerConfigView.h"
 #import "SMServerConfigStorage.h"
 #import "NSView+Vibrancy.h"
 
-@implementation SMServerConfigViewController
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self.view insertVibrancyViewBlendingMode:NSVisualEffectBlendingModeBehindWindow];
-}
+@implementation SMServerConfigView
 
 - (void)addServerConfig
 {
@@ -29,10 +23,11 @@
     [[SMServerConfigStorage defaultStorage] addConfig:config];
 }
 
-- (void)setRepresentedObject:(id)representedObject {
-    [super setRepresentedObject:representedObject];
-
-    // Update the view, if already loaded.
+- (void)drawRect:(NSRect)dirtyRect
+{
+    [[NSColor whiteColor] setFill];
+    NSRectFill(dirtyRect);
+    [super drawRect:dirtyRect];
 }
 
 @end

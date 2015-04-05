@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SMServerListViewController : NSViewController
+@interface SMServerListView : NSVisualEffectView
 
 @end

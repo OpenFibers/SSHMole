@@ -7,6 +7,7 @@
 //
 
 #import "SMServerConfigSplitController.h"
+#import "NSView+Vibrancy.h"
 
 @interface SMServerConfigSplitController () <NSSplitViewDelegate>
 
@@ -21,12 +22,12 @@
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex
 {
-    return proposedMinimumPosition + 100.f;
+    return proposedMinimumPosition + 150.f;
 }
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex
 {
-    return proposedMaximumPosition - 100.f;
+    return proposedMaximumPosition - 350.f;
 }
 
 @end
