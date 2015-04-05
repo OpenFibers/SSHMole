@@ -7,7 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SMServerConfig.h"
 
 @interface SMSSHTask : NSObject
+
+@property (nonatomic, assign) BOOL connectionInProgress;
+@property (nonatomic, assign) BOOL connected;
+
+- (id)initWithServerConfig:(SMServerConfig *)config;
+
+- (void)connect;
+
+- (void)disconnect;
 
 @end
