@@ -22,6 +22,8 @@ extern NSString *const SSHMoleKeychainServiceString;
 
 - (BOOL)ableToConnect;
 
+- (NSString *)sshCommandString;
+
 - (NSString *)accountStringForKeychain;
 
 - (BOOL)saveToKeychain;

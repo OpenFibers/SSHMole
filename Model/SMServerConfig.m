@@ -45,6 +45,21 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
     return YES;
 }
 
+- (NSString *)sshCommandString
+{
+    if ([self ableToConnect])
+    {
+        NSString *result = [NSString stringWithFormat:@"ssh -D %tu %@@%@ -p %tu",
+                            self.localPort,
+                            self.account,
+                            self.serverName,
+                            self.serverPort
+                            ];
+        return result;
+    }
+    return nil;
+}
+
 #pragma mark - Save to keychain
 
 - (NSString *)accountStringForKeychain
