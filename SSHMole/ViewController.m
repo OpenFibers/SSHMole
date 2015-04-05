@@ -8,12 +8,14 @@
 
 #import "ViewController.h"
 #import "SMServerConfigStorage.h"
+#import "NSView+Vibrancy.h"
 
 @implementation ViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view insertVibrancyViewBlendingMode:NSVisualEffectBlendingModeBehindWindow];
 }
 
 - (void)addServerConfig

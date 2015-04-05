@@ -20,6 +20,7 @@
 		42E0A4841ACFC49400890EA7 /* SMServerConfigStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4831ACFC49400890EA7 /* SMServerConfigStorage.m */; };
 		42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */; };
 		42F8D6651AD14D400085DF6C /* SMUUIDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F8D6641AD14D400085DF6C /* SMUUIDHelper.m */; };
+		42F8D6691AD14DE90085DF6C /* NSView+Vibrancy.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F8D6681AD14DE90085DF6C /* NSView+Vibrancy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYYJsonParser.m; sourceTree = "<group>"; };
 		42F8D6631AD14D400085DF6C /* SMUUIDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUUIDHelper.h; sourceTree = "<group>"; };
 		42F8D6641AD14D400085DF6C /* SMUUIDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMUUIDHelper.m; sourceTree = "<group>"; };
+		42F8D6671AD14DE90085DF6C /* NSView+Vibrancy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+Vibrancy.h"; sourceTree = "<group>"; };
+		42F8D6681AD14DE90085DF6C /* NSView+Vibrancy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+Vibrancy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +195,7 @@
 		42E0A4881ACFC66B00890EA7 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				42F8D6661AD14DC80085DF6C /* NSView+Vibrancy */,
 				42F8D6621AD14D400085DF6C /* SMUUIDHelper */,
 			);
 			path = Helpers;
@@ -213,6 +217,15 @@
 				42F8D6641AD14D400085DF6C /* SMUUIDHelper.m */,
 			);
 			path = SMUUIDHelper;
+			sourceTree = "<group>";
+		};
+		42F8D6661AD14DC80085DF6C /* NSView+Vibrancy */ = {
+			isa = PBXGroup;
+			children = (
+				42F8D6671AD14DE90085DF6C /* NSView+Vibrancy.h */,
+				42F8D6681AD14DE90085DF6C /* NSView+Vibrancy.m */,
+			);
+			path = "NSView+Vibrancy";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +332,7 @@
 				42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */,
 				42E0A4531ACFBAB800890EA7 /* ViewController.m in Sources */,
 				42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */,
+				42F8D6691AD14DE90085DF6C /* NSView+Vibrancy.m in Sources */,
 				42F8D6651AD14D400085DF6C /* SMUUIDHelper.m in Sources */,
 				42E0A4501ACFBAB800890EA7 /* main.m in Sources */,
 				42E0A44E1ACFBAB800890EA7 /* AppDelegate.m in Sources */,
