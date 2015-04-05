@@ -9,6 +9,7 @@
 #import "SMServerConfigView.h"
 #import "SMServerConfigStorage.h"
 #import "NSView+Vibrancy.h"
+#import "SMSSHTask.h"
 
 @interface SMServerConfigView ()
 
@@ -42,6 +43,8 @@
                 break;
             }
         }
+        
+        [self addServerConfig];
     }
     return self;
 }
@@ -55,6 +58,9 @@
     config.serverPort = 22;
     config.localPort = 7070;
     [[SMServerConfigStorage defaultStorage] addConfig:config];
+    
+    SMSSHTask *task = [[SMSSHTask alloc] initWithServerConfig:config];
+    [task connect];
 }
 
 - (void)layout

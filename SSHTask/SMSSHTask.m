@@ -36,7 +36,7 @@
     NSString *argumentString = [_config sshCommandString];
     NSArray *args = [NSArray arrayWithObjects:argumentString, _config.password, nil];
     
-    outputContent	= @"";
+    outputContent = @"";
     
     [sshTask setLaunchPath:helperPath];
     [sshTask setArguments:args];
@@ -68,7 +68,7 @@
     sshTask = nil;
 }
 
-- (void) handleProcessusExecution:(NSNotification *) aNotification
+- (void)handleProcessusExecution:(NSNotification *)aNotification
 {
     NSData		*data;
     NSPredicate *checkError;
@@ -139,7 +139,7 @@
     }
 }
 
-- (void) listernerForSSHTunnelDown:(NSNotification *)notification
+- (void)listernerForSSHTunnelDown:(NSNotification *)notification
 {	
     [[stdOut fileHandleForReading] closeFile];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSTaskDidTerminateNotification object:sshTask];
