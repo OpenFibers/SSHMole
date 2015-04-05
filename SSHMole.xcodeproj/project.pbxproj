@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42D61B151AD15B610000CC58 /* SMServerConfigSplitController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D61B141AD15B610000CC58 /* SMServerConfigSplitController.m */; };
+		42D61B1D1AD15C470000CC58 /* SMServerConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D61B1C1AD15C470000CC58 /* SMServerConfigViewController.m */; };
 		42E0A44E1ACFBAB800890EA7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A44D1ACFBAB800890EA7 /* AppDelegate.m */; };
 		42E0A4501ACFBAB800890EA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A44F1ACFBAB800890EA7 /* main.m */; };
-		42E0A4531ACFBAB800890EA7 /* SMServerConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4521ACFBAB800890EA7 /* SMServerConfigViewController.m */; };
 		42E0A4551ACFBAB800890EA7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42E0A4541ACFBAB800890EA7 /* Images.xcassets */; };
 		42E0A4581ACFBAB800890EA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42E0A4561ACFBAB800890EA7 /* Main.storyboard */; };
 		42E0A4641ACFBAB800890EA7 /* SSHMoleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4631ACFBAB800890EA7 /* SSHMoleTests.m */; };
@@ -34,13 +35,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		42D61B131AD15B610000CC58 /* SMServerConfigSplitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigSplitController.h; sourceTree = "<group>"; };
+		42D61B141AD15B610000CC58 /* SMServerConfigSplitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigSplitController.m; sourceTree = "<group>"; };
+		42D61B1B1AD15C470000CC58 /* SMServerConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigViewController.h; sourceTree = "<group>"; };
+		42D61B1C1AD15C470000CC58 /* SMServerConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigViewController.m; sourceTree = "<group>"; };
 		42E0A4471ACFBAB800890EA7 /* SSHMole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSHMole.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42E0A44B1ACFBAB800890EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42E0A44C1ACFBAB800890EA7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		42E0A44D1ACFBAB800890EA7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		42E0A44F1ACFBAB800890EA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		42E0A4511ACFBAB800890EA7 /* SMServerConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMServerConfigViewController.h; sourceTree = "<group>"; };
-		42E0A4521ACFBAB800890EA7 /* SMServerConfigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigViewController.m; sourceTree = "<group>"; };
 		42E0A4541ACFBAB800890EA7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		42E0A4571ACFBAB800890EA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		42E0A45D1ACFBAB800890EA7 /* SSHMoleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSHMoleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +85,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42D61B121AD15B480000CC58 /* SMServerConfigSplitController */ = {
+			isa = PBXGroup;
+			children = (
+				42D61B131AD15B610000CC58 /* SMServerConfigSplitController.h */,
+				42D61B141AD15B610000CC58 /* SMServerConfigSplitController.m */,
+			);
+			path = SMServerConfigSplitController;
+			sourceTree = "<group>";
+		};
+		42D61B1A1AD15C470000CC58 /* SMServerConfigViewController */ = {
+			isa = PBXGroup;
+			children = (
+				42D61B1B1AD15C470000CC58 /* SMServerConfigViewController.h */,
+				42D61B1C1AD15C470000CC58 /* SMServerConfigViewController.m */,
+			);
+			path = SMServerConfigViewController;
+			sourceTree = "<group>";
+		};
 		42E0A43E1ACFBAB800890EA7 = {
 			isa = PBXGroup;
 			children = (
@@ -110,8 +131,8 @@
 			children = (
 				42E0A44C1ACFBAB800890EA7 /* AppDelegate.h */,
 				42E0A44D1ACFBAB800890EA7 /* AppDelegate.m */,
-				42E0A4511ACFBAB800890EA7 /* SMServerConfigViewController.h */,
-				42E0A4521ACFBAB800890EA7 /* SMServerConfigViewController.m */,
+				42D61B121AD15B480000CC58 /* SMServerConfigSplitController */,
+				42D61B1A1AD15C470000CC58 /* SMServerConfigViewController */,
 				42E0A4541ACFBAB800890EA7 /* Images.xcassets */,
 				42E0A4561ACFBAB800890EA7 /* Main.storyboard */,
 				42E0A44A1ACFBAB800890EA7 /* Supporting Files */,
@@ -327,16 +348,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42D61B1D1AD15C470000CC58 /* SMServerConfigViewController.m in Sources */,
 				42E0A47E1ACFBDAA00890EA7 /* SMServerConfig.m in Sources */,
 				42E0A4811ACFBDBA00890EA7 /* SMSSHTask.m in Sources */,
 				42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */,
-				42E0A4531ACFBAB800890EA7 /* SMServerConfigViewController.m in Sources */,
 				42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */,
 				42F8D6691AD14DE90085DF6C /* NSView+Vibrancy.m in Sources */,
 				42F8D6651AD14D400085DF6C /* SMUUIDHelper.m in Sources */,
 				42E0A4501ACFBAB800890EA7 /* main.m in Sources */,
 				42E0A44E1ACFBAB800890EA7 /* AppDelegate.m in Sources */,
 				42E0A4841ACFC49400890EA7 /* SMServerConfigStorage.m in Sources */,
+				42D61B151AD15B610000CC58 /* SMServerConfigSplitController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
