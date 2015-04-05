@@ -10,7 +10,21 @@
 #import "SMServerConfigStorage.h"
 #import "NSView+Vibrancy.h"
 
+@interface SMServerConfigView ()
+
+@property (weak) IBOutlet NSTextField *serverTextField;
+@property (weak) IBOutlet NSTextField *portTextField;
+@property (weak) IBOutlet NSTextField *userNameTextField;
+@property (weak) IBOutlet NSTextField *passwordTextField;
+@property (weak) IBOutlet NSTextField *localPortTextField;
+@property (weak) IBOutlet NSTextField *remarkTextField;
+@property (weak) IBOutlet NSButton *connectButton;
+@end
+
 @implementation SMServerConfigView
+{
+    NSView *_innerXibView;
+}
 
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -22,7 +36,8 @@
         {
             if ([subObject isKindOfClass:[NSView class]])
             {
-                subObject.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+                _innerXibView = subObject;
+                _innerXibView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
                 [self addSubview:subObject];
                 break;
             }
@@ -44,7 +59,7 @@
 
 - (void)layout
 {
-    NSLog(@"%@", NSStringFromRect(self.frame));
+    _innerXibView.frame = self.bounds;
     [super layout];
 }
 
