@@ -42,6 +42,12 @@
     [[SMServerConfigStorage defaultStorage] addConfig:config];
 }
 
+- (void)layout
+{
+    NSLog(@"%@", NSStringFromRect(self.frame));
+    [super layout];
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
     [[NSColor whiteColor] setFill];
