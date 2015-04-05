@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		421E20C71AD1CF7B0042AD0E /* SSHCommand.sh in Resources */ = {isa = PBXBuildFile; fileRef = 421E20C61AD1CF7B0042AD0E /* SSHCommand.sh */; };
 		4262AF211AD17ADF00C54A2A /* ServerConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */; };
 		42D61B151AD15B610000CC58 /* SMServerConfigSplitController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D61B141AD15B610000CC58 /* SMServerConfigSplitController.m */; };
 		42D61B1D1AD15C470000CC58 /* SMServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D61B1C1AD15C470000CC58 /* SMServerConfigView.m */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		421E20C61AD1CF7B0042AD0E /* SSHCommand.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = SSHCommand.sh; sourceTree = "<group>"; };
 		4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerConfigView.xib; sourceTree = "<group>"; };
 		42D61B131AD15B610000CC58 /* SMServerConfigSplitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigSplitController.h; sourceTree = "<group>"; };
 		42D61B141AD15B610000CC58 /* SMServerConfigSplitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigSplitController.m; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				42D61B1E1AD15D580000CC58 /* SMServerListViewController */,
 				42D61B1A1AD15C470000CC58 /* SMServerConfigViewController */,
 				42E0A4541ACFBAB800890EA7 /* Images.xcassets */,
+				421E20C61AD1CF7B0042AD0E /* SSHCommand.sh */,
 				42E0A4561ACFBAB800890EA7 /* Main.storyboard */,
 				4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */,
 				42E0A44A1ACFBAB800890EA7 /* Supporting Files */,
@@ -348,6 +351,7 @@
 				4262AF211AD17ADF00C54A2A /* ServerConfigView.xib in Resources */,
 				42E0A4551ACFBAB800890EA7 /* Images.xcassets in Resources */,
 				42E0A4581ACFBAB800890EA7 /* Main.storyboard in Resources */,
+				421E20C71AD1CF7B0042AD0E /* SSHCommand.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
