@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SMServerConfigSplitController : NSSplitViewController
+@interface SMServerConfigSplitController : NSViewController
 
 @end

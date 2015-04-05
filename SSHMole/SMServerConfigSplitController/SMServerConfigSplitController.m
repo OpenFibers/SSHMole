@@ -8,7 +8,7 @@
 
 #import "SMServerConfigSplitController.h"
 
-@interface SMServerConfigSplitController ()
+@interface SMServerConfigSplitController () <NSSplitViewDelegate>
 
 @end
 
@@ -16,7 +16,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
+    self.view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex
+{
+    return proposedMinimumPosition + 100.f;
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex
+{
+    return proposedMaximumPosition - 100.f;
 }
 
 @end
