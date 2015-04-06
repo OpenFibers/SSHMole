@@ -7,9 +7,7 @@
 //
 
 #import "SMServerConfigView.h"
-#import "SMServerConfigStorage.h"
-#import "NSView+Vibrancy.h"
-#import "SMSSHTask.h"
+#import "SMSSHTaskManager.h"
 
 @interface SMServerConfigView ()
 
@@ -58,15 +56,12 @@
     config.password = @"234";
     config.serverPort = 22;
     config.localPort = 7070;
-    [[SMServerConfigStorage defaultStorage] addConfig:config];
     
-    static SMSSHTask *task = nil;
-    task = [[SMSSHTask alloc] initWithServerConfig:config];
-    [task connect:^(SMSSHTaskStatus status, NSError *error) {
+    [[SMSSHTaskManager defaultManager] beginConnectWithServerConfig:config callback:^(SMSSHTaskStatus status, NSError *error) {
         NSLog(@"%zd %@", status, error);
     }];
     
-    [task performSelector:@selector(disconnect) withObject:nil afterDelay:10];
+    [[SMSSHTaskManager defaultManager] performSelector:@selector(disconnect) withObject:nil afterDelay:10];
 }
 
 - (void)layout
