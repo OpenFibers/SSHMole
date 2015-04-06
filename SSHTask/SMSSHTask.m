@@ -43,6 +43,13 @@
 
 - (void)connect
 {
+    //check config available
+    if (!_config || ![_config ableToConnect])
+    {
+#warning puts error
+        return;
+    }
+    
     //init output string
     _outputContent = nil;
     _outputContent = [NSMutableString string];
