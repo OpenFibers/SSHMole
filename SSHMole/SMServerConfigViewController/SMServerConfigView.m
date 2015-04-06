@@ -52,15 +52,19 @@
 - (void)addServerConfig
 {
     SMServerConfig *config = [[SMServerConfig alloc] init];
+//    config.serverName = @"104.128.80.176";
     config.serverName = @"123123";
     config.account = @"root";
-    config.password = @"123123";
+    config.password = @"234";
     config.serverPort = 22;
     config.localPort = 7070;
     [[SMServerConfigStorage defaultStorage] addConfig:config];
     
-    SMSSHTask *task = [[SMSSHTask alloc] initWithServerConfig:config];
+    static SMSSHTask *task = nil;
+    task = [[SMSSHTask alloc] initWithServerConfig:config];
     [task connect];
+    
+    [task performSelector:@selector(disconnect) withObject:nil afterDelay:10];
 }
 
 - (void)layout
