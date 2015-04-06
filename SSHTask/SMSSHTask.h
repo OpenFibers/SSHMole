@@ -9,6 +9,27 @@
 #import <Foundation/Foundation.h>
 #import "SMServerConfig.h"
 
+typedef NS_ENUM(NSUInteger, SMSSHTaskStatus) {
+    SMSSHTaskStatusConnecting,
+    SMSSHTaskStatusConnected,
+    SMSSHTaskStatusErrorOccured,
+    SMSSHTaskStatusDisconnected,
+};
+
+typedef NS_ENUM(NSUInteger, SMSSHTaskErrorCode) {
+    SMSSHTaskErrorCodeGeneralError,
+    SMSSHTaskErrorCodeRefused,
+    SMSSHTaskErrorCodeHostNotFound,
+    SMSSHTaskErrorCodeLocalPortCouldNotForward,
+    SMSSHTaskErrorCodeBadLocalPort,
+    SMSSHTaskErrorCodePrivilegedLocalPortUnavailable,
+    SMSSHTaskErrorCodeLocalPortUsed,
+    SMSSHTaskErrorCodeBadRemotePort,
+    SMSSHTaskErrorCodeRemotePortClosedByServer,
+    SMSSHTaskErrorCodeSyntaxError,
+    SMSSHTaskErrorCodeWrongPassword,
+};
+
 @interface SMSSHTask : NSObject
 
 @property (nonatomic, readonly) BOOL connectionInProgress;
