@@ -62,7 +62,9 @@
     
     static SMSSHTask *task = nil;
     task = [[SMSSHTask alloc] initWithServerConfig:config];
-    [task connect];
+    [task connect:^(SMSSHTaskStatus status, NSError *error) {
+        NSLog(@"%zd %@", status, error);
+    }];
     
     [task performSelector:@selector(disconnect) withObject:nil afterDelay:10];
 }

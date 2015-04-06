@@ -11,6 +11,7 @@
 @implementation SMSSHTask
 {
     SMServerConfig *_config;
+    void(^_callback)(SMSSHTaskStatus status, NSError *error);
     NSTask *_sshTask;
     NSPipe *_stdOut;
     NSMutableString *_outputContent;
@@ -38,15 +39,19 @@
 
 - (void)dealloc
 {
-    [self disconnectWithoutCallback];
+    [self disconnect];
 }
 
-- (void)connect
+- (void)connect:(void(^)(SMSSHTaskStatus status, NSError *error))callback
 {
+    //store callback block
+    _callback = [callback copy];
+    
     //check config available
     if (!_config || ![_config ableToConnect])
     {
-#warning puts error
+        NSError *error = [[NSError alloc] initWithDomain:@"SSH config error" code:SMSSHTaskErrorCodeConfigError userInfo:nil];
+        _callback(SMSSHTaskStatusErrorOccured, error);
         return;
     }
     
@@ -87,14 +92,17 @@
     [self setConnectionInProgress:YES];
     
     [_sshTask launch];
+    
+    _callback(SMSSHTaskStatusConnecting, nil);
 }
 
 - (void)disconnect
 {
-    [self disconnectWithoutCallback];
+    [self disconnectWithoutResetCallback];
+    _callback = nil;
 }
 
-- (void)disconnectWithoutCallback
+- (void)disconnectWithoutResetCallback
 {
     if ([_sshTask isRunning])
     {
@@ -114,12 +122,12 @@
     static NSPredicate *refusedPredicate;
     
     //host error
-    static NSPredicate *checkHostPredicate;
+    static NSPredicate *hostNotFoundPredicate;
     
     //local port error
     static NSPredicate *localPortCouldNotForwardPredicate;
     static NSPredicate *badLocalForwardingPredicate;
-    static NSPredicate *privilegdLocalPortUnavailablePredicate;
+    static NSPredicate *privilegedLocalPortUnavailablePredicate;
     static NSPredicate *localPortUsedPredicate;
     
     //remote port error
@@ -143,12 +151,12 @@
         refusedPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'CONNECTION_REFUSED'"];
         
         //host error
-        checkHostPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'NO_ROUTE_TO_HOST'"];
+        hostNotFoundPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'NO_ROUTE_TO_HOST'"];
         
         //forwarding port error
         localPortCouldNotForwardPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'Could not request local forwarding'"];
         badLocalForwardingPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'BAD_DYNAMIC_FORWARDING_SPECIFICATION'"];
-        privilegdLocalPortUnavailablePredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'PRIVILEGED_DYNAMIC_PORTS_UNAVAILABLE'"];
+        privilegedLocalPortUnavailablePredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'PRIVILEGED_DYNAMIC_PORTS_UNAVAILABLE'"];
         localPortUsedPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'DYNAMIC_PORTS_USED'"];
         
         //remote port error
@@ -175,52 +183,96 @@
         //error and refused
         if ([errorPredicate evaluateWithObject:_outputContent] == YES)
         {
-            [self disconnectWithoutCallback];
+            [self disconnectWithoutResetCallback];
+            NSError *error = [NSError errorWithDomain:@"SSH connection error occurred"
+                                                 code:SMSSHTaskErrorCodeGeneralError
+                                             userInfo:nil];
+            _callback(SMSSHTaskStatusErrorOccured, error);
         }
         else if ([refusedPredicate evaluateWithObject:_outputContent] == YES)
         {
-            [self disconnectWithoutCallback];
+            [self disconnectWithoutResetCallback];
+            NSError *error = [NSError errorWithDomain:@"SSH connection refused"
+                                                 code:SMSSHTaskErrorCodeRefused
+                                             userInfo:nil];
+            _callback(SMSSHTaskStatusErrorOccured, error);
         }
         //host error
-        else if ([checkHostPredicate evaluateWithObject:_outputContent] == YES)
+        else if ([hostNotFoundPredicate evaluateWithObject:_outputContent] == YES)
         {
-            [self disconnectWithoutCallback];
+            [self disconnectWithoutResetCallback];
+            NSError *error = [NSError errorWithDomain:@"Host not found"
+                                                 code:SMSSHTaskErrorCodeHostNotFound
+                                             userInfo:nil];
+            _callback(SMSSHTaskStatusErrorOccured, error);
         }
         //local port error
         else if ([localPortCouldNotForwardPredicate evaluateWithObject:_outputContent] == YES)
         {
-            [self disconnectWithoutCallback];
+            [self disconnectWithoutResetCallback];
+            NSError *error = [NSError errorWithDomain:@"Local port could not forward"
+                                                 code:SMSSHTaskErrorCodeLocalPortCouldNotForward
+                                             userInfo:nil];
+            _callback(SMSSHTaskStatusErrorOccured, error);
         }
         else if ([badLocalForwardingPredicate evaluateWithObject:_outputContent] == YES)
         {
-            [self disconnectWithoutCallback];
+            [self disconnectWithoutResetCallback];
+            NSError *error = [NSError errorWithDomain:@"Bad local port"
+                                                 code:SMSSHTaskErrorCodeBadLocalPort
+                                             userInfo:nil];
+            _callback(SMSSHTaskStatusErrorOccured, error);
         }
-        else if ([privilegdLocalPortUnavailablePredicate evaluateWithObject:_outputContent] == YES)
+        else if ([privilegedLocalPortUnavailablePredicate evaluateWithObject:_outputContent] == YES)
         {
-            [self disconnectWithoutCallback];
+            [self disconnectWithoutResetCallback];
+            NSError *error = [NSError errorWithDomain:@"Privileged local port unavailable"
+                                                 code:SMSSHTaskErrorCodePrivilegedLocalPortUnavailable
+                                             userInfo:nil];
+            _callback(SMSSHTaskStatusErrorOccured, error);
         }
         else if ([localPortUsedPredicate evaluateWithObject:_outputContent] == YES)
         {
-            [self disconnectWithoutCallback];
+            [self disconnectWithoutResetCallback];
+            NSError *error = [NSError errorWithDomain:@"Local port used"
+                                                 code:SMSSHTaskErrorCodeLocalPortUsed
+                                             userInfo:nil];
+            _callback(SMSSHTaskStatusErrorOccured, error);
         }
         //remote port error
         else if ([badRemotePortPredicate evaluateWithObject:_outputContent] == YES)
         {
-            [self disconnectWithoutCallback];
+            [self disconnectWithoutResetCallback];
+            NSError *error = [NSError errorWithDomain:@"Bad remote port"
+                                                 code:SMSSHTaskErrorCodeBadRemotePort
+                                             userInfo:nil];
+            _callback(SMSSHTaskStatusErrorOccured, error);
         }
         else if ([remotePortCloseByServerPredicate evaluateWithObject:_outputContent] == YES)
         {
-            [self disconnectWithoutCallback];
+            [self disconnectWithoutResetCallback];
+            NSError *error = [NSError errorWithDomain:@"Remote port closed by server"
+                                                 code:SMSSHTaskErrorCodeRemotePortClosedByServer
+                                             userInfo:nil];
+            _callback(SMSSHTaskStatusErrorOccured, error);
         }
         //syntax error
         else if ([syntaxErrorPredicate evaluateWithObject:_outputContent] == YES)
         {
-            [self disconnectWithoutCallback];
+            [self disconnectWithoutResetCallback];
+            NSError *error = [NSError errorWithDomain:@"Syntax Error"
+                                                 code:SMSSHTaskErrorCodeSyntaxError
+                                             userInfo:nil];
+            _callback(SMSSHTaskStatusErrorOccured, error);
         }
         //wrong password
         else if ([wrongPasswordPredicate evaluateWithObject:_outputContent] == YES)
         {
-            [self disconnectWithoutCallback];
+            [self disconnectWithoutResetCallback];
+            NSError *error = [NSError errorWithDomain:@"Wrong Password"
+                                                 code:SMSSHTaskErrorCodeWrongPassword
+                                             userInfo:nil];
+            _callback(SMSSHTaskStatusErrorOccured, error);
         }
         //connected
         else if ([connectedPredicate evaluateWithObject:_outputContent] == YES || [loginPredicate evaluateWithObject:_outputContent] == YES)
@@ -228,6 +280,7 @@
             [[NSNotificationCenter defaultCenter] removeObserver:self name:NSFileHandleReadCompletionNotification object:[_stdOut fileHandleForReading]];
             [self setConnected:YES];
             [self setConnectionInProgress:NO];
+            _callback(SMSSHTaskStatusConnected, nil);
         }
         //unfinished reading
         else
@@ -243,6 +296,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSTaskDidTerminateNotification object:_sshTask];
     [self setConnected:NO];
     [self setConnectionInProgress:NO];
+    _callback(SMSSHTaskStatusDisconnected, nil);
 }
 
 @end
