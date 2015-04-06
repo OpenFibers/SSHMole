@@ -29,6 +29,7 @@ typedef NS_ENUM(NSUInteger, SMSSHTaskErrorCode) {
     SMSSHTaskErrorCodeRemotePortClosedByServer,
     SMSSHTaskErrorCodeSyntaxError,
     SMSSHTaskErrorCodeWrongPassword,
+    SMSSHTaskErrorCodeNSTaskException,
 };
 
 @interface SMSSHTask : NSObject

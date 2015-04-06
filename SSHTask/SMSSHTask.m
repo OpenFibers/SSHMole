@@ -285,7 +285,16 @@
         //unfinished reading
         else
         {
-            [[_stdOut fileHandleForReading] readInBackgroundAndNotify];
+            @try
+            {
+                [[_stdOut fileHandleForReading] readInBackgroundAndNotify];
+            }
+            @catch (NSException *exception)
+            {
+                NSError *error = [[NSError alloc] initWithDomain:@"File handle reading excetion" code:SMSSHTaskErrorCodeNSTaskException userInfo:nil];
+                _callback(SMSSHTaskStatusErrorOccured, error);
+                [self disconnect];
+            }
         }
     }
 }
