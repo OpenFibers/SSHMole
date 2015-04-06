@@ -110,60 +110,60 @@
 - (void)handleProcessusExecution:(NSNotification *)aNotification
 {
     //Predicate to check states
-    static NSPredicate *checkError;
-    static NSPredicate *checkRefused;
+    static NSPredicate *errorPredicate;
+    static NSPredicate *refusedPredicate;
     
     //host error
-    static NSPredicate *checkHost;
+    static NSPredicate *checkHostPredicate;
     
     //local port error
-    static NSPredicate *checkPort;
-    static NSPredicate *checkBadLocalForwarding;
-    static NSPredicate *checkPrivilegdLocalPorts;
-    static NSPredicate *checkLocalPortUsed;
+    static NSPredicate *localPortCouldNotForwardPredicate;
+    static NSPredicate *badLocalForwardingPredicate;
+    static NSPredicate *privilegdLocalPortUnavailablePredicate;
+    static NSPredicate *localPortUsedPredicate;
     
     //remote port error
-    static NSPredicate *badRemotePort;
-    static NSPredicate *remotePortCloseByServer;
+    static NSPredicate *badRemotePortPredicate;
+    static NSPredicate *remotePortCloseByServerPredicate;
     
     //syntax error
-    static NSPredicate *syntaxError;
+    static NSPredicate *syntaxErrorPredicate;
     
     //wrong pass
-    static NSPredicate *checkWrongPass;
+    static NSPredicate *wrongPasswordPredicate;
 
     //connected or login
-    static NSPredicate *checkConnected;
-    static NSPredicate *checkLoggedIn;
+    static NSPredicate *connectedPredicate;
+    static NSPredicate *loginPredicate;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         //error or refused
-        checkError = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'CONNECTION_ERROR'"];
-        checkRefused = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'CONNECTION_REFUSED'"];
+        errorPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'CONNECTION_ERROR'"];
+        refusedPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'CONNECTION_REFUSED'"];
         
         //host error
-        checkHost = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'NO_ROUTE_TO_HOST'"];
+        checkHostPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'NO_ROUTE_TO_HOST'"];
         
         //forwarding port error
-        checkPort = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'Could not request local forwarding'"];
-        checkBadLocalForwarding = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'BAD_DYNAMIC_FORWARDING_SPECIFICATION'"];
-        checkPrivilegdLocalPorts = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'PRIVILEGED_DYNAMIC_PORTS_UNAVAILABLE'"];
-        checkLocalPortUsed = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'DYNAMIC_PORTS_USED'"];
+        localPortCouldNotForwardPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'Could not request local forwarding'"];
+        badLocalForwardingPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'BAD_DYNAMIC_FORWARDING_SPECIFICATION'"];
+        privilegdLocalPortUnavailablePredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'PRIVILEGED_DYNAMIC_PORTS_UNAVAILABLE'"];
+        localPortUsedPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'DYNAMIC_PORTS_USED'"];
         
         //remote port error
-        badRemotePort = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'BAD_REMOTE_PORT'"];
-        remotePortCloseByServer = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'REMOTE_PORT_SHUT_DOWN'"];
+        badRemotePortPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'BAD_REMOTE_PORT'"];
+        remotePortCloseByServerPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'REMOTE_PORT_SHUT_DOWN'"];
         
         //syntax error
-        syntaxError = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'SSH_SYNTAX_ERROR'"];
+        syntaxErrorPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'SSH_SYNTAX_ERROR'"];
         
         //wrong pass check
-        checkWrongPass	= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'WRONG_PASSWORD'"];
+        wrongPasswordPredicate	= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'WRONG_PASSWORD'"];
         
         //success check
-        checkConnected	= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'CONNECTED'"];
-        checkLoggedIn   = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'Last login:'"]; // This is for if there is a pub/priv key set up
+        connectedPredicate	= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'CONNECTED'"];
+        loginPredicate   = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'Last login:'"]; // This is for if there is a pub/priv key set up
     });
     
     //Get last read data
@@ -173,57 +173,57 @@
     if ([data length])
     {
         //error and refused
-        if ([checkError evaluateWithObject:_outputContent] == YES)
+        if ([errorPredicate evaluateWithObject:_outputContent] == YES)
         {
             [self disconnectWithoutCallback];
         }
-        else if ([checkRefused evaluateWithObject:_outputContent] == YES)
+        else if ([refusedPredicate evaluateWithObject:_outputContent] == YES)
         {
             [self disconnectWithoutCallback];
         }
         //host error
-        else if ([checkHost evaluateWithObject:_outputContent] == YES)
+        else if ([checkHostPredicate evaluateWithObject:_outputContent] == YES)
         {
             [self disconnectWithoutCallback];
         }
         //local port error
-        else if ([checkPort evaluateWithObject:_outputContent] == YES)
+        else if ([localPortCouldNotForwardPredicate evaluateWithObject:_outputContent] == YES)
         {
             [self disconnectWithoutCallback];
         }
-        else if ([checkBadLocalForwarding evaluateWithObject:_outputContent] == YES)
+        else if ([badLocalForwardingPredicate evaluateWithObject:_outputContent] == YES)
         {
             [self disconnectWithoutCallback];
         }
-        else if ([checkPrivilegdLocalPorts evaluateWithObject:_outputContent] == YES)
+        else if ([privilegdLocalPortUnavailablePredicate evaluateWithObject:_outputContent] == YES)
         {
             [self disconnectWithoutCallback];
         }
-        else if ([checkLocalPortUsed evaluateWithObject:_outputContent] == YES)
+        else if ([localPortUsedPredicate evaluateWithObject:_outputContent] == YES)
         {
             [self disconnectWithoutCallback];
         }
         //remote port error
-        else if ([badRemotePort evaluateWithObject:_outputContent] == YES)
+        else if ([badRemotePortPredicate evaluateWithObject:_outputContent] == YES)
         {
             [self disconnectWithoutCallback];
         }
-        else if ([remotePortCloseByServer evaluateWithObject:_outputContent] == YES)
+        else if ([remotePortCloseByServerPredicate evaluateWithObject:_outputContent] == YES)
         {
             [self disconnectWithoutCallback];
         }
         //syntax error
-        else if ([syntaxError evaluateWithObject:_outputContent] == YES)
+        else if ([syntaxErrorPredicate evaluateWithObject:_outputContent] == YES)
         {
             [self disconnectWithoutCallback];
         }
         //wrong password
-        else if ([checkWrongPass evaluateWithObject:_outputContent] == YES)
+        else if ([wrongPasswordPredicate evaluateWithObject:_outputContent] == YES)
         {
             [self disconnectWithoutCallback];
         }
         //connected
-        else if ([checkConnected evaluateWithObject:_outputContent] == YES || [checkLoggedIn evaluateWithObject:_outputContent] == YES)
+        else if ([connectedPredicate evaluateWithObject:_outputContent] == YES || [loginPredicate evaluateWithObject:_outputContent] == YES)
         {
             [[NSNotificationCenter defaultCenter] removeObserver:self name:NSFileHandleReadCompletionNotification object:[_stdOut fileHandleForReading]];
             [self setConnected:YES];
