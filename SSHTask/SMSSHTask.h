@@ -11,8 +11,8 @@
 
 @interface SMSSHTask : NSObject
 
-@property (nonatomic, assign) BOOL connectionInProgress;
-@property (nonatomic, assign) BOOL connected;
+@property (nonatomic, readonly) BOOL connectionInProgress;
+@property (nonatomic, readonly) BOOL connected;
 
 - (id)initWithServerConfig:(SMServerConfig *)config;
 

@@ -11,9 +11,19 @@
 @implementation SMSSHTask
 {
     SMServerConfig *_config;
-    NSTask *sshTask;
-    NSPipe *stdOut;
-    NSString *outputContent;
+    NSTask *_sshTask;
+    NSPipe *_stdOut;
+    NSMutableString *_outputContent;
+}
+
+- (void)setConnected:(BOOL)connected
+{
+    _connected = connected;
+}
+
+- (void)setConnectionInProgress:(BOOL)connectionInProgress
+{
+    _connectionInProgress = connectionInProgress;
 }
 
 - (id)initWithServerConfig:(SMServerConfig *)config
@@ -26,123 +36,134 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [self disconnectWithoutCallback];
+}
+
 - (void)connect
 {
-    sshTask = [[NSTask alloc] init];
-
-    stdOut = [NSPipe pipe];
-    NSString *helperPath = [[NSBundle mainBundle] pathForResource:@"SSHCommand" ofType:@"sh"];
+    //init output string
+    _outputContent = nil;
+    _outputContent = [NSMutableString string];
     
+    //init pipe
+    _stdOut = [NSPipe pipe];
+
+    //init task
+    if (_sshTask)
+    {
+        [_sshTask terminate];
+        _sshTask = nil;
+    }
+    _sshTask = [[NSTask alloc] init];
+
+    //setup task
+    NSString *helperPath = [[NSBundle mainBundle] pathForResource:@"SSHCommand" ofType:@"sh"];
     NSString *argumentString = [_config sshCommandString];
     NSArray *args = [NSArray arrayWithObjects:argumentString, _config.password, nil];
-    
-    outputContent = @"";
-    
-    [sshTask setLaunchPath:helperPath];
-    [sshTask setArguments:args];
-    
-    [sshTask setStandardOutput:stdOut];
+    [_sshTask setLaunchPath:helperPath];
+    [_sshTask setArguments:args];
+    [_sshTask setStandardOutput:_stdOut];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleProcessusExecution:)
                                                  name:NSFileHandleReadCompletionNotification
-                                               object:[[sshTask standardOutput] fileHandleForReading]];
+                                               object:[[_sshTask standardOutput] fileHandleForReading]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(listernerForSSHTunnelDown:)
                                                  name:NSTaskDidTerminateNotification
-                                               object:sshTask];
+                                               object:_sshTask];
     
-    [[stdOut fileHandleForReading] readInBackgroundAndNotify];
+    [[_stdOut fileHandleForReading] readInBackgroundAndNotify];
     [self setConnectionInProgress:YES];
     
-    [sshTask launch];
+    [_sshTask launch];
 }
 
 - (void)disconnect
 {
-    if ([sshTask isRunning])
+    [self disconnectWithoutCallback];
+}
+
+- (void)disconnectWithoutCallback
+{
+    if ([_sshTask isRunning])
     {
-        [sshTask terminate];
+        [_sshTask terminate];
     }
-    sshTask = nil;
+    _sshTask = nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self setConnected:NO];
+    [self setConnectionInProgress:NO];
 }
 
 - (void)handleProcessusExecution:(NSNotification *)aNotification
 {
-    NSData		*data;
-    NSPredicate *checkError;
-    NSPredicate *checkWrongPass;
-    NSPredicate *checkConnected;
-    NSPredicate *checkRefused;
-    NSPredicate *checkPort;
-    NSPredicate *checkLoggedIn;
+    //Predicate to check states
+    static NSPredicate *checkError;
+    static NSPredicate *checkWrongPass;
+    static NSPredicate *checkNoRoute;
+    static NSPredicate *checkConnected;
+    static NSPredicate *checkRefused;
+    static NSPredicate *checkPort;
+    static NSPredicate *checkLoggedIn;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        checkError		= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'CONNECTION_ERROR'"];
+        checkWrongPass	= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'WRONG_PASSWORD'"];
+        checkNoRoute	= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'NO_ROUTE_TO_HOST'"];
+        checkConnected	= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'CONNECTED'"];
+        checkRefused	= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'CONNECTION_REFUSED'"];
+        checkPort		= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'Could not request local forwarding'"];
+        checkLoggedIn   = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'Last login:'"]; // This is for if there is a pub/priv key set up
+    });
     
-    data = [[aNotification userInfo] objectForKey:NSFileHandleNotificationDataItem];
-    
-    outputContent	= [outputContent stringByAppendingString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
-    checkError		= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'CONNECTION_ERROR'"];
-    checkWrongPass	= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'WRONG_PASSWORD'"];
-    checkConnected	= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'CONNECTED'"];
-    checkRefused	= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'CONNECTION_REFUSED'"];
-    checkPort		= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'Could not request local forwarding'"];
-    checkLoggedIn   = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'Last login:'"]; // This is for if there is a pub/priv key set up
-    
+    //Get last read data
+    NSData *data = [[aNotification userInfo] objectForKey:NSFileHandleNotificationDataItem];
+    [_outputContent appendString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
     
     if ([data length])
     {
-        if ([checkError evaluateWithObject:outputContent] == YES)
+        if ([checkError evaluateWithObject:_outputContent] == YES)
         {
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:NSFileHandleReadCompletionNotification object:[stdOut fileHandleForReading]];
-            
-            [self setConnected:NO];
-            [self setConnectionInProgress:NO];
-            [sshTask terminate];
+            [self disconnectWithoutCallback];
         }
-        else if ([checkWrongPass evaluateWithObject:outputContent] == YES)
+        else if ([checkWrongPass evaluateWithObject:_outputContent] == YES)
         {
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:NSFileHandleReadCompletionNotification object:[stdOut fileHandleForReading]];
-            [self setConnected:NO];
-            [self setConnectionInProgress:NO];
-            [sshTask terminate];
+            [self disconnectWithoutCallback];
         }
-        else if ([checkRefused evaluateWithObject:outputContent] == YES)
+        else if ([checkNoRoute evaluateWithObject:_outputContent] == YES)
         {
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:NSFileHandleReadCompletionNotification object:[stdOut fileHandleForReading]];
-            [self setConnected:NO];
-            [self setConnectionInProgress:NO];
-            [sshTask terminate];
+            [self disconnectWithoutCallback];
         }
-        else if ([checkPort evaluateWithObject:outputContent] == YES)
+        else if ([checkRefused evaluateWithObject:_outputContent] == YES)
         {
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:NSFileHandleReadCompletionNotification object:[stdOut fileHandleForReading]];
-            [self setConnected:NO];
-            [self setConnectionInProgress:NO];
-            [sshTask terminate];
+            [self disconnectWithoutCallback];
         }
-        else if ([checkConnected evaluateWithObject:outputContent] == YES || [checkLoggedIn evaluateWithObject:outputContent] == YES)
+        else if ([checkPort evaluateWithObject:_outputContent] == YES)
         {
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:NSFileHandleReadCompletionNotification object:[stdOut fileHandleForReading]];
+            [self disconnectWithoutCallback];
+        }
+        else if ([checkConnected evaluateWithObject:_outputContent] == YES || [checkLoggedIn evaluateWithObject:_outputContent] == YES)
+        {
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:NSFileHandleReadCompletionNotification object:[_stdOut fileHandleForReading]];
             [self setConnected:YES];
             [self setConnectionInProgress:NO];
         }
         else
         {
-            [[stdOut fileHandleForReading] readInBackgroundAndNotify];
+            [[_stdOut fileHandleForReading] readInBackgroundAndNotify];
         }
-        
-        data = nil;
-        checkError = nil;
-        checkWrongPass = nil;
-        checkConnected = nil;
-        checkPort = nil;
     }
 }
 
 - (void)listernerForSSHTunnelDown:(NSNotification *)notification
 {	
-    [[stdOut fileHandleForReading] closeFile];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSTaskDidTerminateNotification object:sshTask];
+    [[_stdOut fileHandleForReading] closeFile];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSTaskDidTerminateNotification object:_sshTask];
     [self setConnected:NO];
     [self setConnectionInProgress:NO];
 }
