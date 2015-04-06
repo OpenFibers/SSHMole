@@ -13,12 +13,23 @@ set timeout 1
 
 set timeout -1
 expect {
+#connection failed
 		"?sh: Error*" {puts "CONNECTION_ERROR"; exit};
+#connection refused
+        "*onnection refused*" {puts "CONNECTION_REFUSED"; exit};
+#host error
 		"*o route to host*" {puts "NO_ROUTE_TO_HOST"; exit};
+#forwarding port error
 		"*ad dynamic forwarding specification*" {puts "BAD_DYNAMIC_FORWARDING_SPECIFICATION"; exit};
+        "*rivileged ports can only be forwarded by root*" {puts "PRIVILEGED_DYNAMIC_PORTS_UNAVAILABLE"; exit};
+        "*annot listen to port*" {puts "DYNAMIC_PORTS_USED"; exit};
+#syntax error
 		"*sage*" {puts "SSH_SYNTAX_ERROR"; exit};
-		"*ad port*" {puts "BAD_LOCAL_PORT"; exit};
-		"*Connection refused*" {puts "CONNECTION_REFUSED"; exit};
+#remote port error
+		"*ad port*" {puts "BAD_REMOTE_PORT"; exit};
+        "*onnection closed by remote host*" {puts "REMOTE_PORT_SHUT_DOWN"; exit};
+
+#bot answers
 		"*yes/no*" {send "yes\r"; exp_continue};
 		"*?assword:*" {	send "$password\r"; set timeout 4;
 						expect "*?assword:*" {puts "WRONG_PASSWORD"; exit;}
