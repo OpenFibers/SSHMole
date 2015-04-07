@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="149" height="257"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <scrollView autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LT0-96-Mnz">
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LT0-96-Mnz">
                     <rect key="frame" x="0.0" y="0.0" width="149" height="257"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="eKs-gb-1xW">
                         <rect key="frame" x="1" y="0.0" width="238" height="134"/>
@@ -23,7 +23,7 @@
                                 <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn width="144" minWidth="40" maxWidth="1000" id="M3u-nE-Nb0">
+                                    <tableColumn width="146" minWidth="40" maxWidth="1000" id="M3u-nE-Nb0">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -37,7 +37,7 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
                                             <tableCellView id="oER-Xa-DQg">
-                                                <rect key="frame" x="1" y="1" width="144" height="24"/>
+                                                <rect key="frame" x="1" y="1" width="146" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pa0-vO-h5Q">
@@ -53,7 +53,7 @@
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="ota-SQ-sFq"/>
                                                     </imageView>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iAh-rP-0Va">
-                                                        <rect key="frame" x="22" y="4" width="118" height="17"/>
+                                                        <rect key="frame" x="22" y="4" width="120" height="17"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="evn-NN-wY3">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
