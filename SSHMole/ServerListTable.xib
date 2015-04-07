@@ -18,7 +18,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" viewBased="YES" id="iKp-US-02N">
-                                <rect key="frame" x="0.0" y="0.0" width="238" height="134"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -50,7 +49,7 @@
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="ota-SQ-sFq"/>
                                                     </imageView>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iAh-rP-0Va">
-                                                        <rect key="frame" x="20" y="4" width="110" height="17"/>
+                                                        <rect key="frame" x="20" y="4" width="119" height="17"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="evn-NN-wY3">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -59,7 +58,7 @@
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="iAh-rP-0Va" secondAttribute="trailing" constant="16" id="NoC-sx-KDn"/>
+                                                    <constraint firstAttribute="trailing" secondItem="iAh-rP-0Va" secondAttribute="trailing" constant="7" id="NoC-sx-KDn"/>
                                                     <constraint firstItem="iAh-rP-0Va" firstAttribute="leading" secondItem="Pa0-vO-h5Q" secondAttribute="trailing" constant="7" id="f1o-22-TtZ"/>
                                                     <constraint firstItem="Pa0-vO-h5Q" firstAttribute="top" secondItem="oER-Xa-DQg" secondAttribute="top" constant="6" id="ojU-OC-y5D"/>
                                                     <constraint firstItem="Pa0-vO-h5Q" firstAttribute="leading" secondItem="oER-Xa-DQg" secondAttribute="leading" constant="3" id="pue-Dd-uNk"/>
