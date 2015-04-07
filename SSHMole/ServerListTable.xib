@@ -41,15 +41,19 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pa0-vO-h5Q">
-                                                        <rect key="frame" x="3" y="6" width="12" height="12"/>
+                                                        <rect key="frame" x="6" y="6" width="12" height="12"/>
                                                         <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="12" id="PhI-CG-DGv"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="12" id="QeY-8a-0dR"/>
                                                             <constraint firstAttribute="width" constant="12" id="Rqp-MR-Q9L"/>
                                                             <constraint firstAttribute="height" constant="12" id="ScN-BT-fgo"/>
+                                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="12" id="oiv-Tn-ctR"/>
+                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="12" id="zDh-D5-73d"/>
                                                         </constraints>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="ota-SQ-sFq"/>
                                                     </imageView>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iAh-rP-0Va">
-                                                        <rect key="frame" x="20" y="4" width="119" height="17"/>
+                                                        <rect key="frame" x="22" y="4" width="118" height="17"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="evn-NN-wY3">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -58,12 +62,12 @@
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="iAh-rP-0Va" secondAttribute="trailing" constant="7" id="NoC-sx-KDn"/>
-                                                    <constraint firstItem="iAh-rP-0Va" firstAttribute="leading" secondItem="Pa0-vO-h5Q" secondAttribute="trailing" constant="7" id="f1o-22-TtZ"/>
-                                                    <constraint firstItem="Pa0-vO-h5Q" firstAttribute="top" secondItem="oER-Xa-DQg" secondAttribute="top" constant="6" id="ojU-OC-y5D"/>
-                                                    <constraint firstItem="Pa0-vO-h5Q" firstAttribute="leading" secondItem="oER-Xa-DQg" secondAttribute="leading" constant="3" id="pue-Dd-uNk"/>
-                                                    <constraint firstItem="iAh-rP-0Va" firstAttribute="top" secondItem="oER-Xa-DQg" secondAttribute="top" constant="3" id="tt1-Ra-0dE"/>
-                                                    <constraint firstAttribute="bottom" secondItem="iAh-rP-0Va" secondAttribute="bottom" constant="4" id="yO4-qN-ifh"/>
+                                                    <constraint firstAttribute="trailing" secondItem="iAh-rP-0Va" secondAttribute="trailing" constant="6" id="8fm-5u-UsL"/>
+                                                    <constraint firstItem="Pa0-vO-h5Q" firstAttribute="top" secondItem="oER-Xa-DQg" secondAttribute="top" constant="6" id="S3I-jx-tHB"/>
+                                                    <constraint firstItem="Pa0-vO-h5Q" firstAttribute="leading" secondItem="oER-Xa-DQg" secondAttribute="leading" constant="6" id="mDr-20-2Ce"/>
+                                                    <constraint firstItem="iAh-rP-0Va" firstAttribute="leading" secondItem="Pa0-vO-h5Q" secondAttribute="trailing" constant="6" id="n4i-nx-IVO"/>
+                                                    <constraint firstItem="iAh-rP-0Va" firstAttribute="top" secondItem="oER-Xa-DQg" secondAttribute="top" constant="3" id="sjA-Hw-bgH"/>
+                                                    <constraint firstAttribute="bottom" secondItem="iAh-rP-0Va" secondAttribute="bottom" constant="4" id="ySR-mS-hvt"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="imageView" destination="Pa0-vO-h5Q" id="kc7-EL-Jaa"/>
