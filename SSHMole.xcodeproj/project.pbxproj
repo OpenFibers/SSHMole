@@ -10,9 +10,9 @@
 		421E20C71AD1CF7B0042AD0E /* SSHCommand.sh in Resources */ = {isa = PBXBuildFile; fileRef = 421E20C61AD1CF7B0042AD0E /* SSHCommand.sh */; };
 		4262AF211AD17ADF00C54A2A /* ServerConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */; };
 		42B2F0851AD2DF4B000977C4 /* SMSSHTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */; };
-		42CCF0A01AD3AD5900BE3841 /* ServerListTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CCF09F1AD3AD5900BE3841 /* ServerListTable.xib */; };
 		42CCF0A41AD3B3B200BE3841 /* SMServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CCF0A31AD3B3B200BE3841 /* SMServerConfigView.m */; };
 		42CCF0A81AD3B3D200BE3841 /* SMServerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CCF0A71AD3B3D200BE3841 /* SMServerListView.m */; };
+		42CCF0AA1AD3C3CF00BE3841 /* ServerListTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CCF0A91AD3C3CF00BE3841 /* ServerListTable.xib */; };
 		42D61B151AD15B610000CC58 /* SMServerConfigSplitController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D61B141AD15B610000CC58 /* SMServerConfigSplitController.m */; };
 		42E0A44E1ACFBAB800890EA7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A44D1ACFBAB800890EA7 /* AppDelegate.m */; };
 		42E0A4501ACFBAB800890EA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A44F1ACFBAB800890EA7 /* main.m */; };
@@ -44,11 +44,11 @@
 		4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerConfigView.xib; sourceTree = "<group>"; };
 		42B2F0831AD2DF4B000977C4 /* SMSSHTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSHTaskManager.h; sourceTree = "<group>"; };
 		42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSHTaskManager.m; sourceTree = "<group>"; };
-		42CCF09F1AD3AD5900BE3841 /* ServerListTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerListTable.xib; sourceTree = "<group>"; };
 		42CCF0A21AD3B3B200BE3841 /* SMServerConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigView.h; sourceTree = "<group>"; };
 		42CCF0A31AD3B3B200BE3841 /* SMServerConfigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigView.m; sourceTree = "<group>"; };
 		42CCF0A61AD3B3D200BE3841 /* SMServerListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerListView.h; sourceTree = "<group>"; };
 		42CCF0A71AD3B3D200BE3841 /* SMServerListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerListView.m; sourceTree = "<group>"; };
+		42CCF0A91AD3C3CF00BE3841 /* ServerListTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerListTable.xib; sourceTree = "<group>"; };
 		42D61B131AD15B610000CC58 /* SMServerConfigSplitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigSplitController.h; sourceTree = "<group>"; };
 		42D61B141AD15B610000CC58 /* SMServerConfigSplitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigSplitController.m; sourceTree = "<group>"; };
 		42E0A4471ACFBAB800890EA7 /* SSHMole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSHMole.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,7 +159,7 @@
 				421E20C61AD1CF7B0042AD0E /* SSHCommand.sh */,
 				42E0A4561ACFBAB800890EA7 /* Main.storyboard */,
 				4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */,
-				42CCF09F1AD3AD5900BE3841 /* ServerListTable.xib */,
+				42CCF0A91AD3C3CF00BE3841 /* ServerListTable.xib */,
 				42E0A44A1ACFBAB800890EA7 /* Supporting Files */,
 			);
 			path = SSHMole;
@@ -358,7 +358,7 @@
 			files = (
 				4262AF211AD17ADF00C54A2A /* ServerConfigView.xib in Resources */,
 				42E0A4551ACFBAB800890EA7 /* Images.xcassets in Resources */,
-				42CCF0A01AD3AD5900BE3841 /* ServerListTable.xib in Resources */,
+				42CCF0AA1AD3C3CF00BE3841 /* ServerListTable.xib in Resources */,
 				42E0A4581ACFBAB800890EA7 /* Main.storyboard in Resources */,
 				421E20C71AD1CF7B0042AD0E /* SSHCommand.sh in Resources */,
 			);

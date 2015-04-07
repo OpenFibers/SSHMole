@@ -9,18 +9,38 @@
 #import "SMServerListView.h"
 #import "NSView+Vibrancy.h"
 
-@interface SMServerListView ()
+@interface SMServerListView () <NSTableViewDataSource, NSTableViewDelegate>
 
 @end
 
 @implementation SMServerListView
-
-- (id)initWithFrame:(NSRect)frameRect
 {
-    self = [super initWithFrame:frameRect];
-    if (self) {
+    NSView *_innerXibTableView;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if ((self = [super initWithCoder:aDecoder]))
+    {
+        NSArray *array = nil;
+        [[NSBundle mainBundle] loadNibNamed:@"ServerListTable" owner:self topLevelObjects:&array];
+        for (NSView *subObject in array)
+        {
+            if ([subObject isKindOfClass:[NSView class]])
+            {
+                _innerXibTableView = subObject;
+                _innerXibTableView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+                [self addSubview:subObject];
+                break;
+            }
+        }
     }
     return self;
+}
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    return 10;
 }
 
 @end
