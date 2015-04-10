@@ -49,9 +49,7 @@
         }
     }
     
-//    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
-//    [self.tableView selectRowIndexes:indexSet byExtendingSelection:NO];
-    
+    //Set auto-save properties
     [self.tableView setAutosaveName:@"ServerListTableView"];
     [self.tableView setAutosaveTableColumns:YES];
     
@@ -59,6 +57,10 @@
     _redLightImage = [NSImage imageNamed:@"ServerListRedLight"];
     _yellowLightImage = [NSImage imageNamed:@"ServerListYellowLight"];
     _greenLightImage = [NSImage imageNamed:@"ServerListGreenLight"];
+    
+    //Set initial table selected index
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+    [self.tableView selectRowIndexes:indexSet byExtendingSelection:NO];
 }
 
 - (void)reloadData
@@ -68,7 +70,7 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return _serverConfigs.count + 1;
+    return _serverConfigs.count + 12;
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
@@ -86,6 +88,7 @@
             SMServerConfig *config = _serverConfigs[row];
             [cellView.textField setStringValue:config.serverName];
             [cellView.imageView setImage:_redLightImage];
+#warning light color not implemented
         }
         return cellView;
     }
@@ -94,7 +97,16 @@
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
-    NSLog(@"%@", notification);
+    NSInteger selectedRow = self.tableView.selectedRow;
+    if (selectedRow >= 0 && selectedRow < _serverConfigs.count)
+    {
+        SMServerConfig *config = _serverConfigs[selectedRow];
+        [self.delegate serverListView:self didPickAddConfig:config];
+    }
+    else
+    {
+        [self.delegate serverListViewDidPickAddConfig:self];
+    }
 }
 
 @end
