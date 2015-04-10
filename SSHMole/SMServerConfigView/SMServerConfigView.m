@@ -7,7 +7,6 @@
 //
 
 #import "SMServerConfigView.h"
-#import "SMSSHTaskManager.h"
 
 @interface SMServerConfigView ()
 
@@ -41,27 +40,8 @@
                 break;
             }
         }
-        
-        [self addServerConfig];
     }
     return self;
-}
-
-- (void)addServerConfig
-{
-    SMServerConfig *config = [[SMServerConfig alloc] init];
-//    config.serverName = @"104.128.80.176";
-    config.serverName = @"123123";
-    config.account = @"root";
-    config.password = @"234";
-    config.serverPort = 22;
-    config.localPort = 7070;
-    
-    [[SMSSHTaskManager defaultManager] beginConnectWithServerConfig:config callback:^(SMSSHTaskStatus status, NSError *error) {
-        NSLog(@"%zd %@", status, error);
-    }];
-    
-    [[SMSSHTaskManager defaultManager] performSelector:@selector(disconnect) withObject:nil afterDelay:10];
 }
 
 - (void)layout
