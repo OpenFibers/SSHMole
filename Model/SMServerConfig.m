@@ -93,6 +93,10 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
     {
         configDictionary[@"LocalPort"] = [NSNumber numberWithInteger:self.localPort];
     }
+    if (self.remark)
+    {
+        configDictionary[@"Remark"] = self.remark;
+    }
     NSDictionary *result = [NSDictionary dictionaryWithDictionary:configDictionary];
     return result;
 }
@@ -130,6 +134,7 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
     config.account = dictionary[@"Account"];
     config.serverPort = [dictionary[@"ServerPort"] integerValue];
     config.localPort = [dictionary[@"LocalPort"] integerValue];
+    config.remark = dictionary[@"Remark"];
     return config;
 }
 
