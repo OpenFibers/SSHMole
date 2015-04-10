@@ -7,6 +7,7 @@
 //
 
 #import "SMServerConfigView.h"
+#import "SMServerConfig.h"
 
 @interface SMServerConfigView ()
 
@@ -42,6 +43,19 @@
         }
     }
     return self;
+}
+
+- (void)setServerConfig:(SMServerConfig *)config
+{
+#warning 更改各字段的显示
+    if (!config)
+    {
+        //User will add new config
+    }
+    else
+    {
+        //User will edit current config
+    }
 }
 
 - (void)layout
