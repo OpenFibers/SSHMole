@@ -38,6 +38,7 @@
 - (void)addConfig:(SMServerConfig *)config
 {
     _serverConfigDictionary[[config accountStringForKeychain]] = config;
+    [config saveToKeychain];
 }
 
 - (NSArray *)configs
