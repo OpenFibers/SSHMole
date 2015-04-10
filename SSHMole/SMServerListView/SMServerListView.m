@@ -50,9 +50,9 @@
     }
     
     //Load images
-    _redLightImage = [NSImage imageNamed:@"Images/ServerListRedLight"];
-    _yellowLightImage = [NSImage imageNamed:@"Images/ServerListYellowLight"];
-    _greenLightImage = [NSImage imageNamed:@"Images/ServerListGreenLight"];
+    _redLightImage = [NSImage imageNamed:@"ServerListRedLight"];
+    _yellowLightImage = [NSImage imageNamed:@"ServerListYellowLight"];
+    _greenLightImage = [NSImage imageNamed:@"ServerListGreenLight"];
 }
 
 - (void)reloadData
@@ -74,7 +74,6 @@
         if (row >= _serverConfigs.count)//View for "Add new config"
         {
             [cellView.textField setStringValue:@"Add new config"];
-            [cellView.imageView setImage:_redLightImage];
         }
         else//View for added configs
         {
