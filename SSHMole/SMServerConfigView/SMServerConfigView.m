@@ -47,14 +47,23 @@
 
 - (void)setServerConfig:(SMServerConfig *)config
 {
-#warning 更改各字段的显示
-    if (!config)
+    if (!config)//User will add a new config
     {
-        //User will add new config
+        [self.serverTextField setStringValue:@""];
+        [self.portTextField setStringValue:@""];
+        [self.userNameTextField setStringValue:@""];
+        [self.passwordTextField setStringValue:@""];
+        [self.localPortTextField setStringValue:@""];
+        [self.remarkTextField setStringValue:@""];
     }
-    else
+    else//User will edit current config
     {
-        //User will edit current config
+        [self.serverTextField setStringValue:config.serverName];
+        [self.portTextField setStringValue:[NSString stringWithFormat:@"%tu", config.serverPort]];
+        [self.userNameTextField setStringValue:config.account];
+        [self.passwordTextField setStringValue:config.password];
+        [self.localPortTextField setStringValue:[NSString stringWithFormat:@"%tu", config.localPort]];
+        [self.remarkTextField setStringValue:config.remark];
     }
 }
 
