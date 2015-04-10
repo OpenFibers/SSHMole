@@ -9,8 +9,9 @@
 #import "SMServerListView.h"
 #import "NSView+Vibrancy.h"
 #import "SMServerConfigStorage.h"
+#import "SMCellClickDetectingTableView.h"
 
-@interface SMServerListView () <NSTableViewDataSource, NSTableViewDelegate>
+@interface SMServerListView () <NSTableViewDataSource, NSTableViewDelegate, SMCellClickDetectingTableViewDelegate>
 
 @end
 
@@ -84,6 +85,11 @@
         return cellView;
     }
     return nil;
+}
+
+- (void)tableView:(NSTableView *)tableView didClickedRow:(NSInteger)row
+{
+    NSLog(@"%zd", row);
 }
 
 @end
