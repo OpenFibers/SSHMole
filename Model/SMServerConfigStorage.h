@@ -14,6 +14,8 @@
 
 + (instancetype)defaultStorage;
 
+- (NSArray *)configs;
+
 - (void)addConfig:(SMServerConfig *)config;
 
 - (void)removeConfig:(SMServerConfig *)config;
