@@ -14,10 +14,11 @@
 @property (weak) IBOutlet NSTextField *serverTextField;
 @property (weak) IBOutlet NSTextField *portTextField;
 @property (weak) IBOutlet NSTextField *userNameTextField;
-@property (weak) IBOutlet NSTextField *passwordTextField;
+@property (weak) IBOutlet NSSecureTextField *passwordTextField;
 @property (weak) IBOutlet NSTextField *localPortTextField;
 @property (weak) IBOutlet NSTextField *remarkTextField;
 @property (weak) IBOutlet NSButton *connectButton;
+@property (weak) IBOutlet NSButton *saveButton;
 @end
 
 @implementation SMServerConfigView
@@ -83,6 +84,11 @@
 - (IBAction)connectButtonTouched:(NSButton *)sender
 {
     [self.delegate serverConfigViewConnectButtonTouched:self];
+}
+
+- (IBAction)saveButtonTouched:(NSButton *)sender
+{
+    
 }
 
 @end
