@@ -18,6 +18,9 @@
 {
     NSView *_innerXibTableView;
     NSArray *_serverConfigs;
+    NSImage *_redLightImage;
+    NSImage *_yellowLightImage;
+    NSImage *_greenLightImage;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -32,6 +35,7 @@
 
 - (void)loadView
 {
+    //Load table from xib
     NSArray *array = nil;
     [[NSBundle mainBundle] loadNibNamed:@"ServerListTable" owner:self topLevelObjects:&array];
     for (NSView *subObject in array)
@@ -44,6 +48,11 @@
             break;
         }
     }
+    
+    //Load images
+    _redLightImage = [NSImage imageNamed:@"Images/ServerListRedLight"];
+    _yellowLightImage = [NSImage imageNamed:@"Images/ServerListYellowLight"];
+    _greenLightImage = [NSImage imageNamed:@"Images/ServerListGreenLight"];
 }
 
 - (void)reloadData
@@ -65,11 +74,13 @@
         if (row >= _serverConfigs.count)//View for "Add new config"
         {
             [cellView.textField setStringValue:@"Add new config"];
+            [cellView.imageView setImage:_redLightImage];
         }
         else//View for added configs
         {
             SMServerConfig *config = _serverConfigs[row];
             [cellView.textField setStringValue:config.serverName];
+            [cellView.imageView setImage:_redLightImage];
         }
         return cellView;
     }
