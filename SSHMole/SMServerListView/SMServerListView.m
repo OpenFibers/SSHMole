@@ -7,7 +7,6 @@
 //
 
 #import "SMServerListView.h"
-#import "NSView+Vibrancy.h"
 #import "SMServerConfigStorage.h"
 
 @interface SMServerListView () <NSTableViewDataSource, NSTableViewDelegate>
