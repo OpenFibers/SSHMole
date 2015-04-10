@@ -9,10 +9,9 @@
 #import "SMServerListView.h"
 #import "NSView+Vibrancy.h"
 #import "SMServerConfigStorage.h"
-#import "SMCellClickDetectingTableView.h"
 
-@interface SMServerListView () <NSTableViewDataSource, NSTableViewDelegate, SMCellClickDetectingTableViewDelegate>
-
+@interface SMServerListView () <NSTableViewDataSource, NSTableViewDelegate>
+@property (nonatomic, weak) IBOutlet NSTableView *tableView;
 @end
 
 @implementation SMServerListView
@@ -49,6 +48,12 @@
             break;
         }
     }
+    
+//    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+//    [self.tableView selectRowIndexes:indexSet byExtendingSelection:NO];
+    
+    [self.tableView setAutosaveName:@"ServerListTableView"];
+    [self.tableView setAutosaveTableColumns:YES];
     
     //Load images
     _redLightImage = [NSImage imageNamed:@"ServerListRedLight"];
@@ -87,9 +92,9 @@
     return nil;
 }
 
-- (void)tableView:(NSTableView *)tableView didClickedRow:(NSInteger)row
+- (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
-    NSLog(@"%zd", row);
+    NSLog(@"%@", notification);
 }
 
 @end
