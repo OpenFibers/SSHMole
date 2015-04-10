@@ -23,6 +23,6 @@
 
 @interface SMServerListView : NSVisualEffectView
 
-@property (nonatomic, weak) id<SMServerListViewDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<SMServerListViewDelegate> delegate;
 
 @end
