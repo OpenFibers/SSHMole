@@ -7,9 +7,15 @@
 //
 
 #import "SMServerConfigSplitController.h"
+
+//Subviews
 #import "SMServerListView.h"
 #import "SMServerConfigView.h"
+
+//Managers & models
 #import "SMServerConfig.h"
+#import "SMServerConfigStorage.h"
+#import "SMSSHTaskManager.h"
 
 @interface SMServerConfigSplitController () <NSSplitViewDelegate, SMServerListViewDelegate, SMServerConfigViewDelegate>
 @property (nonatomic, weak) IBOutlet SMServerListView *serverListView;
@@ -21,6 +27,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+    
+//    [self testAdd];
+}
+
+- (void)testAdd
+{
+    SMServerConfig *config = [[SMServerConfig alloc] init];
+    //    config.serverName = @"104.128.80.176";
+    config.serverName = @"123123";
+    config.account = @"root";
+    config.password = @"234";
+    config.serverPort = 22;
+    config.localPort = 7070;
+    
+    [[SMServerConfigStorage defaultStorage] addConfig:config];
+    
+    [[SMSSHTaskManager defaultManager] beginConnectWithServerConfig:config callback:^(SMSSHTaskStatus status, NSError *error) {
+        NSLog(@"%zd %@", status, error);
+    }];
+    
+    [[SMSSHTaskManager defaultManager] performSelector:@selector(disconnect) withObject:nil afterDelay:10];
 }
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex
