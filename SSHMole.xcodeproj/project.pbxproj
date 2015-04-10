@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		421E20C71AD1CF7B0042AD0E /* SSHCommand.sh in Resources */ = {isa = PBXBuildFile; fileRef = 421E20C61AD1CF7B0042AD0E /* SSHCommand.sh */; };
 		4262AF211AD17ADF00C54A2A /* ServerConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */; };
+		427237871AD7AAAE00BC072D /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 427237861AD7AAAE00BC072D /* Images */; };
 		42B2F0851AD2DF4B000977C4 /* SMSSHTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */; };
 		42CCF0A41AD3B3B200BE3841 /* SMServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CCF0A31AD3B3B200BE3841 /* SMServerConfigView.m */; };
 		42CCF0A81AD3B3D200BE3841 /* SMServerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CCF0A71AD3B3D200BE3841 /* SMServerListView.m */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		421E20C61AD1CF7B0042AD0E /* SSHCommand.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = SSHCommand.sh; sourceTree = "<group>"; };
 		4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerConfigView.xib; sourceTree = "<group>"; };
+		427237861AD7AAAE00BC072D /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		42B2F0831AD2DF4B000977C4 /* SMSSHTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSHTaskManager.h; sourceTree = "<group>"; };
 		42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSHTaskManager.m; sourceTree = "<group>"; };
 		42CCF0A21AD3B3B200BE3841 /* SMServerConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigView.h; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				42D61B121AD15B480000CC58 /* SMServerConfigSplitController */,
 				42CCF0A51AD3B3D200BE3841 /* SMServerListView */,
 				42CCF0A11AD3B3B200BE3841 /* SMServerConfigView */,
+				427237861AD7AAAE00BC072D /* Images */,
 				42E0A4541ACFBAB800890EA7 /* Images.xcassets */,
 				421E20C61AD1CF7B0042AD0E /* SSHCommand.sh */,
 				42E0A4561ACFBAB800890EA7 /* Main.storyboard */,
@@ -360,6 +363,7 @@
 				42E0A4551ACFBAB800890EA7 /* Images.xcassets in Resources */,
 				42CCF0AA1AD3C3CF00BE3841 /* ServerListTable.xib in Resources */,
 				42E0A4581ACFBAB800890EA7 /* Main.storyboard in Resources */,
+				427237871AD7AAAE00BC072D /* Images in Resources */,
 				421E20C71AD1CF7B0042AD0E /* SSHCommand.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
