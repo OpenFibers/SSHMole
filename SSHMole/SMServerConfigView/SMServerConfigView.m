@@ -88,7 +88,7 @@
 
 - (IBAction)saveButtonTouched:(NSButton *)sender
 {
-    
+    [self.delegate serverConfigViewSaveButtonTouched:self];
 }
 
 @end

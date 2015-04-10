@@ -11,6 +11,7 @@
                 <outlet property="passwordTextField" destination="gQr-Yi-xaQ" id="etD-MJ-QWQ"/>
                 <outlet property="portTextField" destination="rwk-xs-e6k" id="2dg-ht-6Is"/>
                 <outlet property="remarkTextField" destination="KDZ-aP-lK9" id="ubc-xP-SX9"/>
+                <outlet property="saveButton" destination="15W-1c-COJ" id="5FX-9A-G9J"/>
                 <outlet property="serverTextField" destination="N74-Ik-32K" id="e1a-nd-M1Q"/>
                 <outlet property="userNameTextField" destination="GIX-To-zAn" id="qAG-Yh-jSM"/>
             </connections>
@@ -148,6 +149,20 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="15W-1c-COJ">
+                    <rect key="frame" x="103" y="13" width="127" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="115" id="27B-Gg-LP5"/>
+                        <constraint firstAttribute="height" constant="21" id="9c7-g0-WB2"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xhb-Et-5g1">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="saveButtonTouched:" target="-2" id="yhw-bA-lM5"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="1G9-DT-jJx" firstAttribute="top" secondItem="gQr-Yi-xaQ" secondAttribute="bottom" constant="10" id="0Wk-s6-Hqq"/>
@@ -179,8 +194,10 @@
                 <constraint firstItem="GIX-To-zAn" firstAttribute="leading" secondItem="7Tm-ma-GNC" secondAttribute="trailing" constant="24" id="pBW-am-Wf9"/>
                 <constraint firstItem="rwk-xs-e6k" firstAttribute="leading" secondItem="KdI-gq-4Q8" secondAttribute="trailing" constant="8" id="spL-yr-p7Z"/>
                 <constraint firstAttribute="trailing" secondItem="281-h3-MnZ" secondAttribute="trailing" constant="20" id="tkt-eq-sP1"/>
+                <constraint firstItem="15W-1c-COJ" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="109" id="toq-aN-mzL"/>
                 <constraint firstItem="MRD-lz-7Oc" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="33" id="wEZ-iR-CJv"/>
                 <constraint firstItem="gQr-Yi-xaQ" firstAttribute="leading" secondItem="oNu-fB-PwY" secondAttribute="trailing" constant="24" id="wkQ-PR-Xac"/>
+                <constraint firstAttribute="bottom" secondItem="15W-1c-COJ" secondAttribute="bottom" constant="20" id="y8X-OO-UNv"/>
             </constraints>
             <point key="canvasLocation" x="341" y="321.5"/>
         </customView>
