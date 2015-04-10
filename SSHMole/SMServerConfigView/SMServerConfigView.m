@@ -80,4 +80,9 @@
     [super drawRect:dirtyRect];
 }
 
+- (IBAction)connectButtonTouched:(NSButton *)sender
+{
+    [self.delegate serverConfigViewConnectButtonTouched:self];
+}
+
 @end
