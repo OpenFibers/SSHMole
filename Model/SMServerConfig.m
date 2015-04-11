@@ -62,7 +62,9 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
 #pragma mark - Save to keychain
 
-- (NSString *)accountString
+//Account string in keychain. Use as key in server config storage
+//Format username@server_address:server_port
+- (NSString *)accountAndServerAddressString
 {
     NSString *account = ((self.account.length != 0 && self.serverName.length != 0) ?
                          [self.account stringByAppendingString:@"@"] :
@@ -76,7 +78,7 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
 - (NSString *)accountStringForDisplay
 {
-    NSString *accountString = [self accountString];
+    NSString *accountString = [self accountAndServerAddressString];
     if (self.remark.length != 0)
     {
         NSString *resultString = [self.remark stringByAppendingFormat:@"(%@)", accountString];
