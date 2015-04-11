@@ -29,6 +29,31 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
 #pragma mark - Properties for read
 
++ (NSString *)safeStringForString:(NSString *)string
+{
+    return string ? string : @"";
+}
+
+- (NSString *)serverAddress
+{
+    return [[self class] safeStringForString:_serverAddress];
+}
+
+- (NSString *)account
+{
+    return [[self class] safeStringForString:_account];
+}
+
+- (NSString *)password
+{
+    return [[self class] safeStringForString:_password];
+}
+
+- (NSString *)remark
+{
+    return [[self class] safeStringForString:_remark];
+}
+
 #pragma mark - Connection methods
 
 - (BOOL)ableToConnect
