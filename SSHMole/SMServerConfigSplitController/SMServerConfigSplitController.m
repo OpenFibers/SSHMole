@@ -84,6 +84,10 @@
     {
         self.currentConfig = [[SMServerConfig alloc] init];
     }
+    else
+    {
+        [self.currentConfig removeFromKeychain];
+    }
     
     //Generate a new config
     self.currentConfig.serverAddress = view.serverAddressString;

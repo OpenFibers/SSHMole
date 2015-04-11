@@ -159,6 +159,8 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
 - (BOOL)saveToKeychain
 {
+    [self removeFromKeychain];
+    
     NSString *accountString = [self accountStringForDisplay];
     NSData *passwordData = [self.password dataUsingEncoding:NSUTF8StringEncoding];
     NSString *commentString = [self commentsForKeychain];
@@ -170,6 +172,14 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
                                       comments:commentString
                                          error:nil];
     return success;
+}
+
+- (BOOL)removeFromKeychain
+{
+    NSString *accountString = [self accountStringForDisplay];
+    BOOL succesed = [SSKeychain deletePasswordForService:SSHMoleKeychainServiceString
+                                                 account:accountString];
+    return succesed;
 }
 
 #pragma mark - Load from keychain

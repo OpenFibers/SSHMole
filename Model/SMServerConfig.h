@@ -34,6 +34,9 @@ extern NSString *const SSHMoleKeychainServiceString;
 //This method will get called when config added to storage.
 - (BOOL)saveToKeychain;
 
+//Remove from keychain
+- (BOOL)removeFromKeychain;
+
 + (SMServerConfig *)serverConfigWithKeychainAccountDictionary:(NSDictionary *)dictionary;
 
 
