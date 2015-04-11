@@ -68,25 +68,25 @@
 
 - (BOOL)becomeFirstResponder
 {
-    if (self.passwordString.length == 0)
+    if (self.serverAddressString.length == 0)
     {
-        return [self.serverAddressTextField becomeFirstResponder];
+        return [self.serverAddressTextField.window makeFirstResponder:self.serverAddressTextField];
     }
     else if (self.remarkString.length == 0)
     {
-        return [self.remarkTextField becomeFirstResponder];
+        return [self.remarkTextField.window makeFirstResponder:self.remarkTextField];
     }
     else if (self.accountString.length == 0)
     {
-        return [self.accountTextField becomeFirstResponder];
+        return [self.accountTextField.window makeFirstResponder:self.accountTextField];
     }
     else if (self.passwordString.length == 0)
     {
-        return [self.passwordTextField becomeFirstResponder];
+        return [self.passwordTextField.window makeFirstResponder:self.passwordTextField];
     }
     else
     {
-        return [self.connectButton becomeFirstResponder];
+        return [self.connectButton.window makeFirstResponder:self.connectButton];
     }
 }
 
