@@ -22,6 +22,7 @@
     NSImage *_redLightImage;
     NSImage *_yellowLightImage;
     NSImage *_greenLightImage;
+    NSImage *_settingImage;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -85,6 +86,14 @@
         if (row >= _serverConfigs.count)//View for "Add new config"
         {
             [cellView.textField setStringValue:@"Add new config"];
+            if (!_settingImage)
+            {
+                _settingImage = cellView.imageView.image;
+            }
+            else
+            {
+                cellView.imageView.image = _settingImage;
+            }
         }
         else//View for added configs
         {
