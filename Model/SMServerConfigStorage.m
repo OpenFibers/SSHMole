@@ -44,14 +44,18 @@
     [config saveToKeychain];
 }
 
+- (void)removeConfig:(SMServerConfig *)config
+{
+    if ([_serverConfigArray containsObject:config])
+    {
+        [_serverConfigArray removeObject:config];
+    }
+    [config removeFromKeychain];
+}
+
 - (NSArray *)configs
 {
     return [NSArray arrayWithArray:_serverConfigArray];
-}
-
-- (void)removeConfig:(SMServerConfig *)config
-{
-    [_serverConfigArray removeObject:config];
 }
 
 - (void)load
