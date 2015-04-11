@@ -9,14 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
-@protocol SMCellClickDetectingTableViewDelegate <NSObject>
+@protocol SMUserEventDetectingTableViewDelegate <NSObject>
 
 - (void)tableView:(NSTableView *)tableView didClickedRow:(NSInteger)row;
+- (void)tableViewDeleteKeyDown:(NSTableView *)tableView;
 
 @end
 
-@interface SMCellClickDetectingTableView : NSTableView
+@interface SMUserEventDetectingTableView : NSTableView
 
-@property (nonatomic, weak) IBOutlet id <SMCellClickDetectingTableViewDelegate> cellClickDelegate;
+@property (nonatomic, weak) IBOutlet id <SMUserEventDetectingTableViewDelegate> userEventDelegate;
 
 @end
