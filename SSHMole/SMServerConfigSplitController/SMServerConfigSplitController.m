@@ -27,6 +27,10 @@
 {
 }
 
+#warning disable save button at config picked, enable when text changed
+#warning change connection button function for different status
+#warning update traffic light color when disconnect button touched
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
