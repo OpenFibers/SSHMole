@@ -11,7 +11,7 @@
 
 @implementation SMServerConfigStorage
 {
-    NSMutableDictionary *_serverConfigDictionary;
+    NSMutableArray *_serverConfigArray;
 }
 
 + (instancetype)defaultStorage
@@ -29,7 +29,7 @@
     self = [super init];
     if (self)
     {
-        _serverConfigDictionary = [NSMutableDictionary dictionary];
+        _serverConfigArray = [NSMutableArray array];
         [self load];
     }
     return self;
@@ -37,18 +37,18 @@
 
 - (void)addConfig:(SMServerConfig *)config
 {
-    _serverConfigDictionary[[config accountString]] = config;
+    [_serverConfigArray addObject:config];
     [config saveToKeychain];
 }
 
 - (NSArray *)configs
 {
-    return _serverConfigDictionary.allValues;
+    return [NSArray arrayWithArray:_serverConfigArray];
 }
 
 - (void)removeConfig:(SMServerConfig *)config
 {
-    [_serverConfigDictionary removeObjectForKey:[config accountString]];
+    [_serverConfigArray removeObject:config];
 }
 
 - (void)load
@@ -57,13 +57,13 @@
     for (NSDictionary *eachAccountDictionary in accounts)
     {
         SMServerConfig *config = [SMServerConfig serverConfigWithKeychainAccountDictionary:eachAccountDictionary];
-        _serverConfigDictionary[[config accountString]] = config;
+        [_serverConfigArray addObject:config];
     }
 }
 
 - (void)save
 {
-    for (SMServerConfig *config in _serverConfigDictionary.allValues)
+    for (SMServerConfig *config in _serverConfigArray)
     {
         [config saveToKeychain];
     }
