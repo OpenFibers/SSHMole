@@ -12,6 +12,14 @@
 
 NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
+@interface SMServerConfig ()
+
+//Account string in keychain. Use as key in server config storage
+//Format username@server_address:server_port
+- (NSString *)accountAndServerAddressString;
+
+@end
+
 @implementation SMServerConfig
 
 - (id)init
@@ -25,6 +33,21 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
         self.remark = @"";
     }
     return self;
+}
+
+- (BOOL)isEqualTo:(id)object
+{
+    if (self == object)
+    {
+        return YES;
+    }
+    if ([object isKindOfClass:[SMServerConfig class]])
+    {
+        NSString *objectAccountAndServerAddress = ((SMServerConfig *)object).accountAndServerAddressString;
+        BOOL result = [self.accountAndServerAddressString isEqualToString:objectAccountAndServerAddress];
+        return result;
+    }
+    return [super isEqualTo:object];
 }
 
 #pragma mark - Properties for read
