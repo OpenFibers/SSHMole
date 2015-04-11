@@ -62,7 +62,7 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
 #pragma mark - Save to keychain
 
-- (NSString *)accountStringForKeychain
+- (NSString *)accountString
 {
     NSString *account = ((self.account.length != 0 && self.serverName.length != 0) ?
                          [self.account stringByAppendingString:@"@"] :
@@ -72,6 +72,17 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
                       [NSString stringWithFormat:@":%tu", self.serverPort] :
                       @"");
     return [NSString stringWithFormat:@"%@%@%@", account, server, port];
+}
+
+- (NSString *)accountStringForDisplay
+{
+    NSString *accountString = [self accountString];
+    if (self.remark.length != 0)
+    {
+        NSString *resultString = [self.remark stringByAppendingFormat:@"(%@)", accountString];
+        return resultString;
+    }
+    return accountString;
 }
 
 - (NSDictionary *)commentsDictionaryForKeychain//exclude password
@@ -110,7 +121,7 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
 - (BOOL)saveToKeychain
 {
-    NSString *accountString = [self accountStringForKeychain];
+    NSString *accountString = [self accountStringForDisplay];
     NSData *passwordData = [self.password dataUsingEncoding:NSUTF8StringEncoding];
     NSString *commentString = [self commentsForKeychain];
     NSString *kind = @"SSH Account";

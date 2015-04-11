@@ -26,9 +26,13 @@ extern NSString *const SSHMoleKeychainServiceString;
 //Format: ssh -D local_port username@server_address:server_port
 - (NSString *)sshCommandString;
 
-//Account string in keychain.
+//Account string in keychain. Use as key in server config storage
 //Format username@server_address:server_port
-- (NSString *)accountStringForKeychain;
+- (NSString *)accountString;
+
+//Account string for display
+//Format: remark()
+- (NSString *)accountStringForDisplay;
 
 //Save to keychain
 //This method will get called when config added to storage.

@@ -37,7 +37,7 @@
 
 - (void)addConfig:(SMServerConfig *)config
 {
-    _serverConfigDictionary[[config accountStringForKeychain]] = config;
+    _serverConfigDictionary[[config accountString]] = config;
     [config saveToKeychain];
 }
 
@@ -48,7 +48,7 @@
 
 - (void)removeConfig:(SMServerConfig *)config
 {
-    [_serverConfigDictionary removeObjectForKey:[config accountStringForKeychain]];
+    [_serverConfigDictionary removeObjectForKey:[config accountString]];
 }
 
 - (void)load
@@ -57,7 +57,7 @@
     for (NSDictionary *eachAccountDictionary in accounts)
     {
         SMServerConfig *config = [SMServerConfig serverConfigWithKeychainAccountDictionary:eachAccountDictionary];
-        _serverConfigDictionary[[config accountStringForKeychain]] = config;
+        _serverConfigDictionary[[config accountString]] = config;
     }
 }
 
