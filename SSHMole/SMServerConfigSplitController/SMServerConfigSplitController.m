@@ -46,7 +46,6 @@
 //User did select add config table row.
 - (void)serverListViewDidPickAddConfig:(SMServerListView *)serverListView
 {
-    [self.serverConfigView setServerConfig:nil];
     self.currentConfig = nil;
     
     self.serverConfigView.serverAddressString = @"";
@@ -60,7 +59,6 @@
 //User did select existing server config.
 - (void)serverListView:(SMServerListView *)serverListView didPickAddConfig:(SMServerConfig *)config
 {
-    [self.serverConfigView setServerConfig:config];
     self.currentConfig = config;
     
     self.serverConfigView.serverAddressString = config.serverAddress;

@@ -7,7 +7,6 @@
 //
 
 #import "SMServerConfigView.h"
-#import "SMServerConfig.h"
 
 @interface SMServerConfigView ()
 
@@ -44,28 +43,6 @@
         }
     }
     return self;
-}
-
-- (void)setServerConfig:(SMServerConfig *)config
-{
-    if (!config)//User will add a new config
-    {
-        [self.serverAddressTextField setStringValue:@""];
-        [self.serverPortTextField setStringValue:@""];
-        [self.accountTextField setStringValue:@""];
-        [self.passwordTextField setStringValue:@""];
-        [self.localPortTextField setStringValue:@""];
-        [self.remarkTextField setStringValue:@""];
-    }
-    else//User will edit current config
-    {
-        [self.serverAddressTextField setStringValue:config.serverAddress];
-        [self.serverPortTextField setStringValue:[NSString stringWithFormat:@"%tu", config.serverPort]];
-        [self.accountTextField setStringValue:config.account];
-        [self.passwordTextField setStringValue:config.password];
-        [self.localPortTextField setStringValue:[NSString stringWithFormat:@"%tu", config.localPort]];
-        [self.remarkTextField setStringValue:config.remark];
-    }
 }
 
 - (void)layout

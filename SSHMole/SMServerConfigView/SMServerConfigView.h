@@ -9,7 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 
-@class SMServerConfig;
 @class SMServerConfigView;
 
 @protocol SMServerConfigViewDelegate <NSObject>
@@ -29,8 +28,6 @@
 @property (nonatomic, strong) NSString *passwordString;
 @property (nonatomic, assign) NSUInteger localPort;//if setted to 0, will use 7070 as default
 @property (nonatomic, strong) NSString *remarkString;
-
-- (void)setServerConfig:(SMServerConfig *)config;//only for display, view will not retain config reference
 
 @end
 
