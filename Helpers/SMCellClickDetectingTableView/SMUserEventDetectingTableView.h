@@ -11,6 +11,7 @@
 
 @protocol SMUserEventDetectingTableViewDelegate <NSObject>
 
+@optional
 - (void)tableView:(NSTableView *)tableView didClickedRow:(NSInteger)row;
 - (void)tableViewDeleteKeyDown:(NSTableView *)tableView;
 

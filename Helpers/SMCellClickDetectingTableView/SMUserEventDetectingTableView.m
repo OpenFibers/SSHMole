@@ -20,14 +20,21 @@
     
     if (clickedRow != -1)
     {
-        [self.userEventDelegate tableView:self didClickedRow:clickedRow];
+        if ([self.userEventDelegate respondsToSelector:@selector(tableView:didClickedRow:)])
+        {
+            [self.userEventDelegate tableView:self didClickedRow:clickedRow];
+        }
     }
 }
 
 - (void)keyDown:(NSEvent *)event
 {
     unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
-    if(key == NSDeleteCharacter)
+    if((key == NSDeleteCharacter) || //backspace
+       (key == NSDeleteFunctionKey) || //delete
+       (key == NSDeleteCharFunctionKey) || //delete
+       (key == 'd' && ([event modifierFlags] & NSControlKeyMask)) //control - D
+       )
     {
         if([self selectedRow] == -1)
         {
@@ -35,7 +42,10 @@
         }
         else
         {
-            [self.userEventDelegate tableViewDeleteKeyDown:self];
+            if ([self.userEventDelegate respondsToSelector:@selector(tableViewDeleteKeyDown:)])
+            {
+                [self.userEventDelegate tableViewDeleteKeyDown:self];
+            }
         }
     }
     
