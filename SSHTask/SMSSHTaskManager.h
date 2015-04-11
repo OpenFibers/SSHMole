@@ -18,4 +18,8 @@
                             callback:(void(^)(SMSSHTaskStatus status, NSError *error))callback;
 - (void)disconnect;
 
+- (SMSSHTaskStatus)currentConnectionStatus;
+
+- (SMServerConfig *)currentConfig;
+
 @end

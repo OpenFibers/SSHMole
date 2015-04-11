@@ -43,4 +43,14 @@
     _currentTask = nil;
 }
 
+- (SMSSHTaskStatus)currentConnectionStatus
+{
+    return _currentTask.currentStatus;
+}
+
+- (SMServerConfig *)currentConfig
+{
+    return _currentTask.config;
+}
+
 @end
