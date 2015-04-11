@@ -73,7 +73,7 @@
 
 - (void)serverListViewDeleteKeyDown:(SMServerListView *)serverListView onConfig:(SMServerConfig *)config
 {
-    [config removeFromKeychain];
+    [[SMServerConfigStorage defaultStorage] removeConfig:config];
     [self.serverListView reloadData];
 }
 
