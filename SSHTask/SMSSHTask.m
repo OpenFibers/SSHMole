@@ -17,6 +17,11 @@
     NSMutableString *_outputContent;
 }
 
+- (SMServerConfig *)config
+{
+    return _config;
+}
+
 - (void)setConnected:(BOOL)connected
 {
     _connected = connected;

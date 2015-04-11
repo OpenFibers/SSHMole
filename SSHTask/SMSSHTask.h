@@ -36,6 +36,7 @@ typedef NS_ENUM(NSUInteger, SMSSHTaskErrorCode) {
 
 @property (nonatomic, readonly) BOOL connectionInProgress;
 @property (nonatomic, readonly) BOOL connected;
+@property (nonatomic, readonly) SMServerConfig *config;
 
 - (id)initWithServerConfig:(SMServerConfig *)config;
 
