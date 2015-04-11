@@ -11,9 +11,9 @@
 
 @interface SMServerConfigView ()
 
-@property (weak) IBOutlet NSTextField *serverTextField;
-@property (weak) IBOutlet NSTextField *portTextField;
-@property (weak) IBOutlet NSTextField *userNameTextField;
+@property (weak) IBOutlet NSTextField *serverAddressTextField;
+@property (weak) IBOutlet NSTextField *serverPortTextField;
+@property (weak) IBOutlet NSTextField *accountTextField;
 @property (weak) IBOutlet NSSecureTextField *passwordTextField;
 @property (weak) IBOutlet NSTextField *localPortTextField;
 @property (weak) IBOutlet NSTextField *remarkTextField;
@@ -50,18 +50,18 @@
 {
     if (!config)//User will add a new config
     {
-        [self.serverTextField setStringValue:@""];
-        [self.portTextField setStringValue:@""];
-        [self.userNameTextField setStringValue:@""];
+        [self.serverAddressTextField setStringValue:@""];
+        [self.serverPortTextField setStringValue:@""];
+        [self.accountTextField setStringValue:@""];
         [self.passwordTextField setStringValue:@""];
         [self.localPortTextField setStringValue:@""];
         [self.remarkTextField setStringValue:@""];
     }
     else//User will edit current config
     {
-        [self.serverTextField setStringValue:config.serverName];
-        [self.portTextField setStringValue:[NSString stringWithFormat:@"%tu", config.serverPort]];
-        [self.userNameTextField setStringValue:config.account];
+        [self.serverAddressTextField setStringValue:config.serverName];
+        [self.serverPortTextField setStringValue:[NSString stringWithFormat:@"%tu", config.serverPort]];
+        [self.accountTextField setStringValue:config.account];
         [self.passwordTextField setStringValue:config.password];
         [self.localPortTextField setStringValue:[NSString stringWithFormat:@"%tu", config.localPort]];
         [self.remarkTextField setStringValue:config.remark];
@@ -80,6 +80,41 @@
     NSRectFill(dirtyRect);
     [super drawRect:dirtyRect];
 }
+
+#pragma mark - Public readonly methods to read input values
+
+- (NSString *)serverAddressString
+{
+    return [self.serverAddressTextField stringValue];
+}
+
+- (NSUInteger)serverPort
+{
+    NSUInteger serverPort = (NSUInteger)[[self.serverPortTextField stringValue] integerValue];
+    return serverPort;
+}
+
+- (NSString *)accountString
+{
+    return [self.accountTextField stringValue];
+}
+
+- (NSString *)passwordString
+{
+    return [self.passwordTextField stringValue];
+}
+
+- (NSUInteger)localPort
+{
+    return (NSUInteger)[[self.localPortTextField stringValue] integerValue];
+}
+
+- (NSString *)remarkString
+{
+    return [self.remarkTextField stringValue];
+}
+
+#pragma mark - Button actions
 
 - (IBAction)connectButtonTouched:(NSButton *)sender
 {

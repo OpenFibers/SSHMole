@@ -22,7 +22,14 @@
 @interface SMServerConfigView : NSView
 
 @property (nonatomic, weak) IBOutlet id<SMServerConfigViewDelegate> delegate;
-#warning 增加readonly方法读取config view的设置
+
+@property (nonatomic, readonly) NSString *serverAddressString;
+@property (nonatomic, readonly) NSUInteger serverPort;
+@property (nonatomic, readonly) NSString *accountString;
+@property (nonatomic, readonly) NSString *passwordString;
+@property (nonatomic, readonly) NSUInteger localPort;
+@property (nonatomic, readonly) NSString *remarkString;
+
 - (void)setServerConfig:(SMServerConfig *)config;//only for display, view will not retain config reference
 
 @end

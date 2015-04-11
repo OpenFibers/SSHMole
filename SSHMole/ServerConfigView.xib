@@ -6,14 +6,14 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SMServerConfigView">
             <connections>
+                <outlet property="accountTextField" destination="GIX-To-zAn" id="zUY-ci-CJH"/>
                 <outlet property="connectButton" destination="281-h3-MnZ" id="V20-Hq-SKw"/>
                 <outlet property="localPortTextField" destination="1G9-DT-jJx" id="0lD-vo-biq"/>
                 <outlet property="passwordTextField" destination="gQr-Yi-xaQ" id="etD-MJ-QWQ"/>
-                <outlet property="portTextField" destination="rwk-xs-e6k" id="2dg-ht-6Is"/>
                 <outlet property="remarkTextField" destination="KDZ-aP-lK9" id="ubc-xP-SX9"/>
                 <outlet property="saveButton" destination="15W-1c-COJ" id="5FX-9A-G9J"/>
-                <outlet property="serverTextField" destination="N74-Ik-32K" id="e1a-nd-M1Q"/>
-                <outlet property="userNameTextField" destination="GIX-To-zAn" id="qAG-Yh-jSM"/>
+                <outlet property="serverAddressTextField" destination="N74-Ik-32K" id="gZv-ZZ-82r"/>
+                <outlet property="serverPortTextField" destination="rwk-xs-e6k" id="gTf-lr-r1f"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
