@@ -21,7 +21,7 @@
                         <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" autosaveName="" rowHeight="24" rowSizeStyle="automatic" viewBased="YES" id="iKp-US-02N">
+                            <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" autosaveName="" rowHeight="24" rowSizeStyle="automatic" viewBased="YES" id="iKp-US-02N" customClass="SMUserEventDetectingTableView">
                                 <rect key="frame" x="0.0" y="0.0" width="149" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -85,6 +85,7 @@
                                 <connections>
                                     <outlet property="dataSource" destination="-2" id="6l1-BL-r5y"/>
                                     <outlet property="delegate" destination="-2" id="VQJ-VV-GOX"/>
+                                    <outlet property="userEventDelegate" destination="-2" id="Tch-4J-B40"/>
                                 </connections>
                             </tableView>
                         </subviews>

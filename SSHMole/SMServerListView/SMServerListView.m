@@ -9,9 +9,10 @@
 #import "SMServerListView.h"
 #import "SMServerConfigStorage.h"
 #import "SMSSHTaskManager.h"
+#import "SMUserEventDetectingTableView.h"
 
-@interface SMServerListView () <NSTableViewDataSource, NSTableViewDelegate>
-@property (nonatomic, weak) IBOutlet NSTableView *tableView;
+@interface SMServerListView () <NSTableViewDataSource, NSTableViewDelegate, SMUserEventDetectingTableViewDelegate>
+@property (nonatomic, weak) IBOutlet SMUserEventDetectingTableView *tableView;
 @end
 
 @implementation SMServerListView
@@ -126,6 +127,16 @@
     else
     {
         [self.delegate serverListViewDidPickAddConfig:self];
+    }
+}
+
+- (void)tableViewDeleteKeyDown:(NSTableView *)tableView
+{
+    NSInteger selectedRow = self.tableView.selectedRow;
+    if (selectedRow >= 0 && selectedRow < _serverConfigs.count)
+    {
+        SMServerConfig *config = _serverConfigs[selectedRow];
+        [self.delegate serverListViewDeleteKeyDown:self onConfig:config];
     }
 }
 
