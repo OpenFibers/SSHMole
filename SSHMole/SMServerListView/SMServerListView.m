@@ -27,8 +27,8 @@
 {
     if ((self = [super initWithCoder:aDecoder]))
     {
-        [self loadView];
         [self reloadData];
+        [self performSelector:@selector(loadView) withObject:nil afterDelay:0];
     }
     return self;
 }
@@ -61,6 +61,7 @@
     //Set initial table selected index
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
     [self.tableView selectRowIndexes:indexSet byExtendingSelection:NO];
+    [self.tableView.delegate tableViewSelectionDidChange:nil];
 }
 
 - (void)reloadData
