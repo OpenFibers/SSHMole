@@ -8,6 +8,7 @@
 
 #import "SMServerListView.h"
 #import "SMServerConfigStorage.h"
+#import "SMSSHTaskManager.h"
 
 @interface SMServerListView () <NSTableViewDataSource, NSTableViewDelegate>
 @property (nonatomic, weak) IBOutlet NSTableView *tableView;
@@ -86,8 +87,26 @@
         {
             SMServerConfig *config = _serverConfigs[row];
             [cellView.textField setStringValue:config.serverName];
-            [cellView.imageView setImage:_redLightImage];
-#warning light color not implemented
+            if ([[SMSSHTaskManager defaultManager] currentConfig] == config)
+            {
+                switch ([[SMSSHTaskManager defaultManager] currentConnectionStatus])
+                {
+                    case SMSSHTaskStatusConnecting:
+                        [cellView.imageView setImage:_redLightImage];
+                        break;
+                    case SMSSHTaskStatusConnected:
+                        [cellView.imageView setImage:_greenLightImage];
+                        break;
+                    case SMSSHTaskStatusDisconnected:
+                    case SMSSHTaskStatusErrorOccured:
+                        [cellView.imageView setImage:_redLightImage];
+                        break;
+                }
+            }
+            else
+            {
+                [cellView.imageView setImage:_redLightImage];
+            }
         }
         return cellView;
     }
