@@ -23,12 +23,12 @@
 
 @property (nonatomic, weak) IBOutlet id<SMServerConfigViewDelegate> delegate;
 
-@property (nonatomic, readonly) NSString *serverAddressString;
-@property (nonatomic, readonly) NSUInteger serverPort;
-@property (nonatomic, readonly) NSString *accountString;
-@property (nonatomic, readonly) NSString *passwordString;
-@property (nonatomic, readonly) NSUInteger localPort;
-@property (nonatomic, readonly) NSString *remarkString;
+@property (nonatomic, strong) NSString *serverAddressString;
+@property (nonatomic, assign) NSUInteger serverPort;//if setted to 0, will use 22 as default
+@property (nonatomic, strong) NSString *accountString;
+@property (nonatomic, strong) NSString *passwordString;
+@property (nonatomic, assign) NSUInteger localPort;//if setted to 0, will use 7070 as default
+@property (nonatomic, strong) NSString *remarkString;
 
 - (void)setServerConfig:(SMServerConfig *)config;//only for display, view will not retain config reference
 
