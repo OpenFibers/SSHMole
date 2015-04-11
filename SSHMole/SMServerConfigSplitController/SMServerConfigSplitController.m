@@ -80,17 +80,23 @@
 
 - (void)serverConfigViewSaveButtonTouched:(SMServerConfigView *)view
 {
+    if (!self.currentConfig)
+    {
+        self.currentConfig = [[SMServerConfig alloc] init];
+    }
+    
     //Generate a new config
-    SMServerConfig *config = [[SMServerConfig alloc] init];
-    config.serverAddress = view.serverAddressString;
-    config.serverPort = view.serverPort;
-    config.account = view.accountString;
-    config.password = view.passwordString;
-    config.localPort = view.localPort;
-    config.remark = view.remarkString;
+    self.currentConfig.serverAddress = view.serverAddressString;
+    self.currentConfig.serverPort = view.serverPort;
+    self.currentConfig.account = view.accountString;
+    self.currentConfig.password = view.passwordString;
+    self.currentConfig.localPort = view.localPort;
+    self.currentConfig.remark = view.remarkString;
     
     //Save to storage
-    [[SMServerConfigStorage defaultStorage] addConfig:config];
+    [[SMServerConfigStorage defaultStorage] addConfig:self.currentConfig];
+    
+    [self.serverListView reloadData];
 }
 
 @end

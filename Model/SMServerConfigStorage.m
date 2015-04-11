@@ -37,7 +37,10 @@
 
 - (void)addConfig:(SMServerConfig *)config
 {
-    [_serverConfigArray addObject:config];
+    if (![_serverConfigArray containsObject:config])
+    {
+        [_serverConfigArray addObject:config];
+    }
     [config saveToKeychain];
 }
 

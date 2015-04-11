@@ -25,4 +25,6 @@
 
 @property (nonatomic, weak) IBOutlet id<SMServerListViewDelegate> delegate;
 
+- (void)reloadData;
+
 @end
