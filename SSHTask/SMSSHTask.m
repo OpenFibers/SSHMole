@@ -318,6 +318,10 @@
 {
     _currentStatus = status;
     _callback(status, error);
+    if (error)
+    {
+        [self disconnect];
+    }
 }
 
 @end
