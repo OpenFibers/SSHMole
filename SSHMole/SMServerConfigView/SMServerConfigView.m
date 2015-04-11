@@ -7,6 +7,7 @@
 //
 
 #import "SMServerConfigView.h"
+#import "SMOnlyIntegerNumberFormatter.h"
 
 @interface SMServerConfigView ()
 
@@ -41,6 +42,11 @@
                 break;
             }
         }
+        
+        //Only number available in port text fields
+        SMOnlyIntegerNumberFormatter *formatter = [[SMOnlyIntegerNumberFormatter alloc] init];
+        [self.serverPortTextField setFormatter:formatter];
+        [self.localPortTextField setFormatter:formatter];
     }
     return self;
 }

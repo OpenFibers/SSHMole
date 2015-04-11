@@ -16,6 +16,7 @@
 		427237BB1AD7B01F00BC072D /* ServerListYellowLight.png in Resources */ = {isa = PBXBuildFile; fileRef = 427237B51AD7B01F00BC072D /* ServerListYellowLight.png */; };
 		427237BC1AD7B01F00BC072D /* ServerListYellowLight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 427237B61AD7B01F00BC072D /* ServerListYellowLight@2x.png */; };
 		427237C01AD7B18700BC072D /* SMCellClickDetectingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427237BF1AD7B18700BC072D /* SMCellClickDetectingTableView.m */; };
+		42905AF51AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42905AF41AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m */; };
 		42B2F0851AD2DF4B000977C4 /* SMSSHTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */; };
 		42CCF0A41AD3B3B200BE3841 /* SMServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CCF0A31AD3B3B200BE3841 /* SMServerConfigView.m */; };
 		42CCF0A81AD3B3D200BE3841 /* SMServerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CCF0A71AD3B3D200BE3841 /* SMServerListView.m */; };
@@ -57,6 +58,8 @@
 		427237B61AD7B01F00BC072D /* ServerListYellowLight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ServerListYellowLight@2x.png"; sourceTree = "<group>"; };
 		427237BE1AD7B18700BC072D /* SMCellClickDetectingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCellClickDetectingTableView.h; sourceTree = "<group>"; };
 		427237BF1AD7B18700BC072D /* SMCellClickDetectingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCellClickDetectingTableView.m; sourceTree = "<group>"; };
+		42905AF31AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMOnlyIntegerNumberFormatter.h; sourceTree = "<group>"; };
+		42905AF41AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMOnlyIntegerNumberFormatter.m; sourceTree = "<group>"; };
 		42B2F0831AD2DF4B000977C4 /* SMSSHTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSHTaskManager.h; sourceTree = "<group>"; };
 		42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSHTaskManager.m; sourceTree = "<group>"; };
 		42CCF0A21AD3B3B200BE3841 /* SMServerConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigView.h; sourceTree = "<group>"; };
@@ -132,6 +135,15 @@
 				427237BF1AD7B18700BC072D /* SMCellClickDetectingTableView.m */,
 			);
 			path = SMCellClickDetectingTableView;
+			sourceTree = "<group>";
+		};
+		42905AF21AD9A0CC00B12AD3 /* SMOnlyIntegerNumberFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				42905AF31AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.h */,
+				42905AF41AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m */,
+			);
+			path = SMOnlyIntegerNumberFormatter;
 			sourceTree = "<group>";
 		};
 		42CCF0A11AD3B3B200BE3841 /* SMServerConfigView */ = {
@@ -281,6 +293,7 @@
 		42E0A4881ACFC66B00890EA7 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				42905AF21AD9A0CC00B12AD3 /* SMOnlyIntegerNumberFormatter */,
 				42F8D6661AD14DC80085DF6C /* NSView+Vibrancy */,
 				42F8D6621AD14D400085DF6C /* SMUUIDHelper */,
 				427237BD1AD7B17400BC072D /* SMCellClickDetectingTableView */,
@@ -432,6 +445,7 @@
 				42F8D6651AD14D400085DF6C /* SMUUIDHelper.m in Sources */,
 				42E0A4501ACFBAB800890EA7 /* main.m in Sources */,
 				427237C01AD7B18700BC072D /* SMCellClickDetectingTableView.m in Sources */,
+				42905AF51AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m in Sources */,
 				42E0A44E1ACFBAB800890EA7 /* AppDelegate.m in Sources */,
 				42E0A4841ACFC49400890EA7 /* SMServerConfigStorage.m in Sources */,
 				42CCF0A41AD3B3B200BE3841 /* SMServerConfigView.m in Sources */,
