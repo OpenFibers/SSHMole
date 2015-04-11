@@ -85,11 +85,42 @@
 
 - (void)serverConfigViewConnectButtonTouched:(SMServerConfigView *)configView
 {
-    [[SMSSHTaskManager defaultManager] beginConnectWithServerConfig:self.currentConfig callback:^(SMSSHTaskStatus status, NSError *error) {
-        NSLog(@"%zd %@", status, error);
+    [[SMSSHTaskManager defaultManager] beginConnectWithServerConfig:self.currentConfig callback:^(SMSSHTaskStatus status, NSError *error)
+    {
+        //Generate info
+        NSMutableDictionary *infoDictionary = [NSMutableDictionary dictionary];
+        infoDictionary[@"Status"] = [NSNumber numberWithUnsignedInteger:status];
+        if (error)
+        {
+            infoDictionary[@"Error"] = error;
+        }
+        //Call on main thread
+        if ([NSThread isMainThread])
+        {
+            [self updateUIForConnectionStatusChangedWithInfo:infoDictionary];
+        }
+        else
+        {
+            [self performSelectorOnMainThread:@selector(updateUIForConnectionStatusChangedWithInfo:)
+                                   withObject:infoDictionary
+                                waitUntilDone:NO];
+        }
     }];
     
     [[SMSSHTaskManager defaultManager] performSelector:@selector(disconnect) withObject:nil afterDelay:10];
+}
+
+- (void)updateUIForConnectionStatusChangedWithInfo:(NSDictionary *)info
+{
+    [self.serverListView reloadData];
+    if (info[@"Error"])
+    {
+        NSError *error = info[@"Error"];
+        NSAlert *alert = [[NSAlert alloc]init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:error.domain];
+        [alert runModal];
+    }
 }
 
 - (void)serverConfigViewSaveButtonTouched:(SMServerConfigView *)view

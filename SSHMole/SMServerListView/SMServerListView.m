@@ -104,7 +104,7 @@
                 switch ([[SMSSHTaskManager defaultManager] currentConnectionStatus])
                 {
                     case SMSSHTaskStatusConnecting:
-                        [cellView.imageView setImage:_redLightImage];
+                        [cellView.imageView setImage:_yellowLightImage];
                         break;
                     case SMSSHTaskStatusConnected:
                         [cellView.imageView setImage:_greenLightImage];
