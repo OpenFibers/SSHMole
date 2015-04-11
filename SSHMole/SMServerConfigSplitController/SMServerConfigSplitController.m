@@ -43,6 +43,8 @@
     return proposedMaximumPosition - 350.f;
 }
 
+#pragma mark - List table callback
+
 //User did select add config table row.
 - (void)serverListViewDidPickAddConfig:(SMServerListView *)serverListView
 {
@@ -68,6 +70,14 @@
     self.serverConfigView.localPort = config.localPort;//server config view will use default 7070 port
     self.serverConfigView.remarkString = config.remark;
 }
+
+- (void)serverListViewDeleteKeyDown:(SMServerListView *)serverListView onConfig:(SMServerConfig *)config
+{
+    [config removeFromKeychain];
+    [self.serverListView reloadData];
+}
+
+#pragma mark - Server config view call back
 
 - (void)serverConfigViewConnectButtonTouched:(SMServerConfigView *)configView
 {

@@ -182,6 +182,11 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
 - (BOOL)saveToKeychain
 {
+    if (self.accountStringForDisplay.length == 0)
+    {
+        return NO;
+    }
+    
     [self removeFromKeychain];
     
     NSString *accountString = [self accountStringForDisplay];
