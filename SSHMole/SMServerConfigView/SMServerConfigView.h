@@ -29,5 +29,7 @@
 @property (nonatomic, assign) NSUInteger localPort;//if setted to 0, will use 7070 as default
 @property (nonatomic, strong) NSString *remarkString;
 
+- (BOOL)becomeFirstResponder;
+
 @end
 

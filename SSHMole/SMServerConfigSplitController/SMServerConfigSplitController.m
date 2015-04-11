@@ -56,6 +56,8 @@
     self.serverConfigView.passwordString = @"";
     self.serverConfigView.localPort = 0;//server config view will use default 7070 port
     self.serverConfigView.remarkString = @"";
+    
+    [self.serverConfigView becomeFirstResponder];
 }
 
 //User did select existing server config.
@@ -69,6 +71,8 @@
     self.serverConfigView.passwordString = config.password;
     self.serverConfigView.localPort = config.localPort;//server config view will use default 7070 port
     self.serverConfigView.remarkString = config.remark;
+    
+    [self.serverConfigView becomeFirstResponder];
 }
 
 - (void)serverListViewDeleteKeyDown:(SMServerListView *)serverListView onConfig:(SMServerConfig *)config

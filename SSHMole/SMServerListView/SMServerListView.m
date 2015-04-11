@@ -98,7 +98,7 @@
         else//View for added configs
         {
             SMServerConfig *config = _serverConfigs[row];
-            [cellView.textField setStringValue:config.serverAddress];
+            [cellView.textField setStringValue:[config accountStringForDisplay]];
             if ([[SMSSHTaskManager defaultManager] currentConfig] == config)
             {
                 switch ([[SMSSHTaskManager defaultManager] currentConnectionStatus])

@@ -64,6 +64,32 @@
     [super drawRect:dirtyRect];
 }
 
+#pragma mark - Become first responder
+
+- (BOOL)becomeFirstResponder
+{
+    if (self.passwordString.length == 0)
+    {
+        return [self.serverAddressTextField becomeFirstResponder];
+    }
+    else if (self.remarkString.length == 0)
+    {
+        return [self.remarkTextField becomeFirstResponder];
+    }
+    else if (self.accountString.length == 0)
+    {
+        return [self.accountTextField becomeFirstResponder];
+    }
+    else if (self.passwordString.length == 0)
+    {
+        return [self.passwordTextField becomeFirstResponder];
+    }
+    else
+    {
+        return [self.connectButton becomeFirstResponder];
+    }
+}
+
 #pragma mark - Public methods to access input values
 
 - (NSString *)serverAddressString
