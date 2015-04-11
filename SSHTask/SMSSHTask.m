@@ -8,6 +8,8 @@
 
 #import "SMSSHTask.h"
 
+#warning separate connect and set callback
+
 @implementation SMSSHTask
 {
     SMServerConfig *_config;
