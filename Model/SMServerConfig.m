@@ -17,12 +17,23 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 - (id)init
 {
     self = [super init];
+    if (self)
+    {
+        self.serverAddress = @"";
+        self.account = @"";
+        self.password = @"";
+        self.remark = @"";
+    }
     return self;
 }
 
+#pragma mark - Properties for read
+
+#pragma mark - Connection methods
+
 - (BOOL)ableToConnect
 {
-    if (self.serverName.length == 0)
+    if (self.serverAddress.length == 0)
     {
         return NO;
     }
@@ -52,7 +63,7 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
         NSString *result = [NSString stringWithFormat:@"ssh -D %tu %@@%@ -p %tu",
                             self.localPort,
                             self.account,
-                            self.serverName,
+                            self.serverAddress,
                             self.serverPort
                             ];
         return result;
@@ -66,11 +77,11 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 //Format username@server_address:server_port
 - (NSString *)accountAndServerAddressString
 {
-    NSString *account = ((self.account.length != 0 && self.serverName.length != 0) ?
+    NSString *account = ((self.account.length != 0 && self.serverAddress.length != 0) ?
                          [self.account stringByAppendingString:@"@"] :
                          @"");
-    NSString *server = self.serverName.length != 0 ? self.serverName : @"";
-    NSString *port = ((self.serverPort != 0 && self.serverName.length != 0) ?
+    NSString *server = self.serverAddress.length != 0 ? self.serverAddress : @"";
+    NSString *port = ((self.serverPort != 0 && self.serverAddress.length != 0) ?
                       [NSString stringWithFormat:@":%tu", self.serverPort] :
                       @"");
     return [NSString stringWithFormat:@"%@%@%@", account, server, port];
@@ -90,9 +101,9 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 - (NSDictionary *)commentsDictionaryForKeychain//exclude password
 {
     NSMutableDictionary *configDictionary = [NSMutableDictionary dictionary];
-    if (self.serverName)
+    if (self.serverAddress)
     {
-        configDictionary[@"ServerName"] = self.serverName;
+        configDictionary[@"ServerName"] = self.serverAddress;
     }
     if (self.account)
     {
@@ -143,7 +154,7 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 {
     SMServerConfig *config = [[SMServerConfig alloc] init];
     config.password = password;
-    config.serverName = dictionary[@"ServerName"];
+    config.serverAddress = dictionary[@"ServerName"];
     config.account = dictionary[@"Account"];
     config.serverPort = [dictionary[@"ServerPort"] integerValue];
     config.localPort = [dictionary[@"LocalPort"] integerValue];

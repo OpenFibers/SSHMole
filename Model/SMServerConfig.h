@@ -12,7 +12,7 @@ extern NSString *const SSHMoleKeychainServiceString;
 
 @interface SMServerConfig : NSObject
 
-@property (nonatomic, strong) NSString *serverName;
+@property (nonatomic, strong) NSString *serverAddress;
 @property (nonatomic, strong) NSString *account;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, assign) NSUInteger serverPort;

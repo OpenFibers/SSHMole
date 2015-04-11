@@ -66,6 +66,7 @@
 - (void)reloadData
 {
     _serverConfigs = [[SMServerConfigStorage defaultStorage] configs];
+    [self.tableView reloadData];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
@@ -86,7 +87,7 @@
         else//View for added configs
         {
             SMServerConfig *config = _serverConfigs[row];
-            [cellView.textField setStringValue:config.serverName];
+            [cellView.textField setStringValue:config.serverAddress];
             if ([[SMSSHTaskManager defaultManager] currentConfig] == config)
             {
                 switch ([[SMSSHTaskManager defaultManager] currentConnectionStatus])

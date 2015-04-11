@@ -59,7 +59,7 @@
     }
     else//User will edit current config
     {
-        [self.serverAddressTextField setStringValue:config.serverName];
+        [self.serverAddressTextField setStringValue:config.serverAddress];
         [self.serverPortTextField setStringValue:[NSString stringWithFormat:@"%tu", config.serverPort]];
         [self.accountTextField setStringValue:config.account];
         [self.passwordTextField setStringValue:config.password];

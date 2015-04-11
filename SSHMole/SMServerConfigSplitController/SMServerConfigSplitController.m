@@ -63,7 +63,7 @@
     [self.serverConfigView setServerConfig:config];
     self.currentConfig = config;
     
-    self.serverConfigView.serverAddressString = config.serverName;
+    self.serverConfigView.serverAddressString = config.serverAddress;
     self.serverConfigView.serverPort = config.serverPort;//server config view will use default 22 port
     self.serverConfigView.accountString = config.account;
     self.serverConfigView.passwordString = config.password;
@@ -84,7 +84,7 @@
 {
     //Generate a new config
     SMServerConfig *config = [[SMServerConfig alloc] init];
-    config.serverName = view.serverAddressString;
+    config.serverAddress = view.serverAddressString;
     config.serverPort = view.serverPort;
     config.account = view.accountString;
     config.password = view.passwordString;
