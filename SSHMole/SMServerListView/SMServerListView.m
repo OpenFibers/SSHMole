@@ -84,6 +84,18 @@
     return serverConfigCount;
 }
 
+- (NSUInteger)selectedIndex
+{
+    NSUInteger index = [self.tableView selectedRow];
+    return index;
+}
+
+- (void)setSelectedIndex:(NSUInteger)index
+{
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:index];
+    [self.tableView selectColumnIndexes:indexSet byExtendingSelection:NO];
+}
+
 - (void)reloadRowForServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index
 {
     if (index >= _serverConfigs.count)

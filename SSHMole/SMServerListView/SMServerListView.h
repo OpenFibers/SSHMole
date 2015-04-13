@@ -27,6 +27,7 @@
 @interface SMServerListView : NSVisualEffectView
 
 @property (nonatomic, weak) IBOutlet id<SMServerListViewDelegate> delegate;
+@property (nonatomic, assign) NSUInteger selectedIndex;
 
 - (NSUInteger)indexOfConfig:(SMServerConfig *)config;
 - (NSUInteger)configCount;
