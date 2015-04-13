@@ -68,7 +68,7 @@
 }
 
 //User did select existing server config.
-- (void)serverListView:(SMServerListView *)serverListView didPickAddConfig:(SMServerConfig *)config
+- (void)serverListView:(SMServerListView *)serverListView didPickConfig:(SMServerConfig *)config
 {
     self.currentConfig = config;
     

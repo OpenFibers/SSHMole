@@ -17,7 +17,7 @@
 - (void)serverListViewDidPickAddConfig:(SMServerListView *)serverListView;
 
 //User did select existing server config.
-- (void)serverListView:(SMServerListView *)serverListView didPickAddConfig:(SMServerConfig *)config;
+- (void)serverListView:(SMServerListView *)serverListView didPickConfig:(SMServerConfig *)config;
 
 //Delete key down on config
 - (void)serverListViewDeleteKeyDown:(SMServerListView *)serverListView onConfig:(SMServerConfig *)config;

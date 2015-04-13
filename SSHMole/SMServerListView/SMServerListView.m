@@ -186,7 +186,7 @@
     if (selectedRow >= 0 && selectedRow < _serverConfigs.count)
     {
         SMServerConfig *config = _serverConfigs[selectedRow];
-        [self.delegate serverListView:self didPickAddConfig:config];
+        [self.delegate serverListView:self didPickConfig:config];
     }
     else
     {
