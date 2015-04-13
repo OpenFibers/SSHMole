@@ -163,7 +163,28 @@
     [self.remarkTextField setStringValue:remarkString];
 }
 
-#pragma mark - Button actions
+- (BOOL)saveButtonEnabled
+{
+    BOOL enabled = self.saveButton.enabled;
+    return enabled;
+}
+
+- (void)setSaveButtonEnabled:(BOOL)saveButtonEnabled
+{
+    self.saveButton.enabled = saveButtonEnabled;
+}
+
+#pragma mark - Text Field Actions
+
+- (void)controlTextDidChange:(NSNotification *)notification
+{
+    if (!self.saveButtonEnabled)
+    {
+        self.saveButtonEnabled = YES;
+    }
+}
+
+#pragma mark - Button Actions
 
 - (IBAction)connectButtonTouched:(NSButton *)sender
 {

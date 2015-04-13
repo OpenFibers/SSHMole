@@ -82,12 +82,16 @@
     self.serverConfigView.remarkString = config.remark;
     
     [self.serverConfigView.window makeFirstResponder:self.serverConfigView];
+    
+    [self.serverConfigView setSaveButtonEnabled:NO];
 }
 
 - (void)serverListViewDeleteKeyDown:(SMServerListView *)serverListView onConfig:(SMServerConfig *)config
 {
     [[SMServerConfigStorage defaultStorage] removeConfig:config];
     [self.serverListView reloadData];
+    
+    [self.serverConfigView setSaveButtonEnabled:NO];
 }
 
 #pragma mark - Server config view call back
