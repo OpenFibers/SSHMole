@@ -88,8 +88,15 @@
 
 - (void)serverListViewDeleteKeyDown:(SMServerListView *)serverListView onConfig:(SMServerConfig *)config
 {
+    //remove config from storage and server list view
     [[SMServerConfigStorage defaultStorage] removeConfig:config];
-    [self.serverListView reloadData];
+    [self.serverListView removeServerConfig:config];
+    
+    if ([[SMSSHTaskManager defaultManager] currentConfig] == config)//if current config connecting
+    {
+        //disconnect it
+        [[SMSSHTaskManager defaultManager] disconnect];
+    }
 }
 
 #pragma mark - Server config view call back
@@ -100,8 +107,9 @@
     if (self.serverConfigView.saveButtonEnabled)
     {
         [self serverConfigViewSaveButtonTouched:self.serverConfigView];
-        self.serverConfigView.saveButtonEnabled = NO;
     }
+    
+    NSUInteger currentConfigIndex = [self.serverListView indexOfConfig:self.currentConfig];
     
     //Make a connection
     [[SMSSHTaskManager defaultManager] beginConnectWithServerConfig:self.currentConfig callback:^(SMSSHTaskStatus status, NSError *error)
@@ -109,6 +117,7 @@
         //Generate info
         NSMutableDictionary *infoDictionary = [NSMutableDictionary dictionary];
         infoDictionary[@"Status"] = [NSNumber numberWithUnsignedInteger:status];
+        infoDictionary[@"ConfigIndex"] = [NSNumber numberWithUnsignedInteger:currentConfigIndex];
         if (error)
         {
             infoDictionary[@"Error"] = error;
@@ -131,7 +140,9 @@
 
 - (void)updateUIForConnectionStatusChangedWithInfo:(NSDictionary *)info
 {
-    [self.serverListView reloadData];
+    NSNumber *indexNumber = info[@"ConfigIndex"];
+    SMServerConfig *connectingConfig = [[SMSSHTaskManager defaultManager] currentConfig];
+    [self.serverListView reloadRowForServerConfig:connectingConfig atIndex:indexNumber.unsignedIntegerValue];
     if (info[@"Error"])
     {
         NSError *error = info[@"Error"];
@@ -144,16 +155,21 @@
 
 - (void)serverConfigViewSaveButtonTouched:(SMServerConfigView *)view
 {
-    if (!self.currentConfig)
+    //disable save button
+    self.serverConfigView.saveButtonEnabled = NO;
+
+    //get current editing or adding config index
+    NSUInteger configIndex = [self.serverListView configCount];
+    
+    //if current config exist, remove from server config storage
+    if (self.currentConfig)
     {
-        self.currentConfig = [[SMServerConfig alloc] init];
-    }
-    else
-    {
-        [self.currentConfig removeFromKeychain];
+        configIndex = [self.serverListView indexOfConfig:self.currentConfig];
+        [[SMServerConfigStorage defaultStorage] removeConfig:self.currentConfig];
     }
     
     //Generate a new config
+    self.currentConfig = [[SMServerConfig alloc] init];
     self.currentConfig.serverAddress = view.serverAddressString;
     self.currentConfig.serverPort = view.serverPort;
     self.currentConfig.account = view.accountString;
@@ -162,9 +178,16 @@
     self.currentConfig.remark = view.remarkString;
     
     //Save to storage
-    [[SMServerConfigStorage defaultStorage] addConfig:self.currentConfig];
-    
-    [self.serverListView reloadData];
+    [[SMServerConfigStorage defaultStorage] insertConfig:self.currentConfig atIndex:configIndex];
+
+    if (configIndex == [self.serverListView configCount])//If about to add
+    {
+        [self.serverListView addServerConfig:self.currentConfig];
+    }
+    else//If editing exist config
+    {
+        [self.serverListView reloadRowForServerConfig:self.currentConfig atIndex:configIndex];
+    }
 }
 
 @end

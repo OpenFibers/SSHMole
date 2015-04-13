@@ -29,6 +29,7 @@
 @property (nonatomic, weak) IBOutlet id<SMServerListViewDelegate> delegate;
 
 - (NSUInteger)indexOfConfig:(SMServerConfig *)config;
+- (NSUInteger)configCount;
 - (void)reloadRowForServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index;
 - (void)addServerConfig:(SMServerConfig *)config;
 - (void)insertServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index;

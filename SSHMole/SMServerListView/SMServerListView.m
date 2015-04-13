@@ -78,6 +78,12 @@
     return index;
 }
 
+- (NSUInteger)configCount
+{
+    NSUInteger serverConfigCount = _serverConfigs.count;
+    return serverConfigCount;
+}
+
 - (void)reloadRowForServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index
 {
     if (index >= _serverConfigs.count)
@@ -105,9 +111,9 @@
 - (void)insertServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index
 {
     [self.tableView beginUpdates];
-    [_serverConfigs insertObject:config atIndex:index];
     NSIndexSet *addedIndex = [NSIndexSet indexSetWithIndex:_serverConfigs.count];
     [self.tableView insertRowsAtIndexes:addedIndex withAnimation:NSTableViewAnimationEffectGap];
+    [_serverConfigs insertObject:config atIndex:index];
     [self.tableView endUpdates];
 }
 
