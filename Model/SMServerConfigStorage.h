@@ -18,6 +18,8 @@
 
 - (void)addConfig:(SMServerConfig *)config;
 
+- (void)insertConfig:(SMServerConfig *)config atIndex:(NSUInteger)index;
+
 - (void)removeConfig:(SMServerConfig *)config;
 
 @end

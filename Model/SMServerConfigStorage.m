@@ -37,9 +37,14 @@
 
 - (void)addConfig:(SMServerConfig *)config
 {
+    [self insertConfig:config atIndex:_serverConfigArray.count];
+}
+
+- (void)insertConfig:(SMServerConfig *)config atIndex:(NSUInteger)index
+{
     if (![_serverConfigArray containsObject:config])
     {
-        [_serverConfigArray addObject:config];
+        [_serverConfigArray insertObject:config atIndex:index];
     }
     [config saveToKeychain];
 }
