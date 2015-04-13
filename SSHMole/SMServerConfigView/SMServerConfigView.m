@@ -24,6 +24,7 @@
 @implementation SMServerConfigView
 {
     NSView *_innerXibView;
+    SMServerConfigViewConnectButtonStatus _connectButtonStatus;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -172,6 +173,28 @@
 - (void)setSaveButtonEnabled:(BOOL)saveButtonEnabled
 {
     self.saveButton.enabled = saveButtonEnabled;
+}
+
+- (SMServerConfigViewConnectButtonStatus)connectButtonStatus
+{
+    return _connectButtonStatus;
+}
+
+- (void)setConnectButtonStatus:(SMServerConfigViewConnectButtonStatus)connectButtonStatus
+{
+    _connectButtonStatus = connectButtonStatus;
+    NSString *buttonText = @"Connect";
+    switch (connectButtonStatus) {
+        case SMServerConfigViewConnectButtonStatusConnected:
+            buttonText = @"Connected";
+            break;
+        case SMServerConfigViewConnectButtonStatusConnecting:
+            buttonText = @"Connecting...";
+            break;
+        case SMServerConfigViewConnectButtonStatusDisconnected:
+            buttonText = @"Connect";
+    }
+    [self.connectButton setTitle:buttonText];
 }
 
 #pragma mark - Text Field Actions

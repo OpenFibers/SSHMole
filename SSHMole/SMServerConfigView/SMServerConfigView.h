@@ -9,6 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, SMServerConfigViewConnectButtonStatus) {
+    SMServerConfigViewConnectButtonStatusDisconnected = 0,
+    SMServerConfigViewConnectButtonStatusConnecting = 1,
+    SMServerConfigViewConnectButtonStatusConnected = 2,
+};
+
 @class SMServerConfigView;
 
 @protocol SMServerConfigViewDelegate <NSObject>
@@ -29,7 +35,8 @@
 @property (nonatomic, assign) NSUInteger localPort;//if setted to 0, will use 7070 as default
 @property (nonatomic, strong) NSString *remarkString;
 
-@property (nonatomic, assign) BOOL saveButtonEnabled;
+@property (nonatomic, assign) BOOL saveButtonEnabled;//Get and read save button enable status
+@property (nonatomic, assign) SMServerConfigViewConnectButtonStatus connectButtonStatus;//Connect button status
 
 - (BOOL)becomeFirstResponder;
 
