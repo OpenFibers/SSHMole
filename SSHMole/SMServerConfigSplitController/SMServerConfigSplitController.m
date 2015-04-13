@@ -159,12 +159,11 @@
     self.serverConfigView.saveButtonEnabled = NO;
 
     //get current editing or adding config index
-    NSUInteger configIndex = [self.serverListView configCount];
+    NSUInteger configIndex = [self.serverListView selectedIndex];
     
     //if current config exist, remove from server config storage
     if (self.currentConfig)
     {
-        configIndex = [self.serverListView indexOfConfig:self.currentConfig];
         [[SMServerConfigStorage defaultStorage] removeConfig:self.currentConfig];
     }
     
@@ -183,6 +182,7 @@
     if (configIndex == [self.serverListView configCount])//If about to add
     {
         [self.serverListView addServerConfig:self.currentConfig];
+#warning change selected index here
     }
     else//If editing exist config
     {
