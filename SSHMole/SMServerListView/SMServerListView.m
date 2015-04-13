@@ -18,7 +18,7 @@
 @implementation SMServerListView
 {
     NSView *_innerXibTableView;
-    NSArray *_serverConfigs;
+    NSMutableArray *_serverConfigs;
     NSImage *_redLightImage;
     NSImage *_yellowLightImage;
     NSImage *_greenLightImage;
@@ -68,9 +68,64 @@
 
 - (void)reloadData
 {
-    _serverConfigs = [[SMServerConfigStorage defaultStorage] configs];
+    _serverConfigs = [[[SMServerConfigStorage defaultStorage] configs] mutableCopy];
     [self.tableView reloadData];
 }
+
+- (NSUInteger)indexOfConfig:(SMServerConfig *)config
+{
+    NSUInteger index = [_serverConfigs indexOfObject:config];
+    return index;
+}
+
+- (void)reloadRowForServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index
+{
+    if (index >= _serverConfigs.count)
+    {
+        return;
+    }
+    
+    [self.tableView beginUpdates];
+    if (_serverConfigs[index] != config)//config object changed at this index
+    {
+        //change it
+        [_serverConfigs replaceObjectAtIndex:index withObject:config];
+    }
+    NSIndexSet *rowIndexSet = [NSIndexSet indexSetWithIndex:index];
+    NSIndexSet *columnIndexSet = [NSIndexSet indexSetWithIndex:0];
+    [self.tableView reloadDataForRowIndexes:rowIndexSet columnIndexes:columnIndexSet];
+    [self.tableView endUpdates];
+}
+
+- (void)addServerConfig:(SMServerConfig *)config
+{
+    [self insertServerConfig:config atIndex:_serverConfigs.count];
+}
+
+- (void)insertServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index
+{
+    [self.tableView beginUpdates];
+    [_serverConfigs insertObject:config atIndex:index];
+    NSIndexSet *addedIndex = [NSIndexSet indexSetWithIndex:_serverConfigs.count];
+    [self.tableView insertRowsAtIndexes:addedIndex withAnimation:NSTableViewAnimationEffectGap];
+    [self.tableView endUpdates];
+}
+
+- (void)removeServerConfig:(SMServerConfig *)config
+{
+    if (![_serverConfigs containsObject:config])
+    {
+        return;
+    }
+    [self.tableView beginUpdates];
+    NSUInteger index = [_serverConfigs indexOfObject:config];
+    NSIndexSet *removedIndex = [NSIndexSet indexSetWithIndex:index];
+    [self.tableView removeRowsAtIndexes:removedIndex withAnimation:NSTableViewAnimationEffectGap];
+    [_serverConfigs removeObject:config];
+    [self.tableView endUpdates];
+}
+
+#pragma mark - Table view callback
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
