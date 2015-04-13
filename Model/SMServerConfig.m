@@ -137,13 +137,11 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
 - (NSString *)accountStringForDisplay
 {
-    NSString *accountString = [self accountAndServerAddressString];
     if (self.remark.length != 0)
     {
-        NSString *resultString = [self.remark stringByAppendingFormat:@"(%@)", accountString];
-        return resultString;
+        return self.remark;
     }
-    return accountString;
+    return [self accountAndServerAddressString];
 }
 
 - (NSDictionary *)commentsDictionaryForKeychain//exclude password
@@ -182,14 +180,14 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
 - (BOOL)saveToKeychain
 {
-    if (self.accountStringForDisplay.length == 0)
+    if ([self accountAndServerAddressString].length == 0)
     {
         return NO;
     }
     
     [self removeFromKeychain];
     
-    NSString *accountString = [self accountStringForDisplay];
+    NSString *accountString = [self accountAndServerAddressString];
     NSData *passwordData = [self.password dataUsingEncoding:NSUTF8StringEncoding];
     NSString *commentString = [self commentsForKeychain];
     NSString *kind = @"SSH Account";
@@ -204,7 +202,7 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
 - (BOOL)removeFromKeychain
 {
-    NSString *accountString = [self accountStringForDisplay];
+    NSString *accountString = [self accountAndServerAddressString];
     BOOL succesed = [SSKeychain deletePasswordForService:SSHMoleKeychainServiceString
                                                  account:accountString];
     return succesed;
