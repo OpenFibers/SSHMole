@@ -29,7 +29,6 @@
 
 #warning change connection button function for different status
 #warning update traffic light color when disconnect button touched
-#warning save when connect button clicked
 #warning table view ui problem should be fix
 #warning context menu and status bar icon
 #warning change network settings
