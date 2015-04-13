@@ -27,7 +27,6 @@
 {
 }
 
-#warning disable save button at config picked, enable when text changed
 #warning change connection button function for different status
 #warning update traffic light color when disconnect button touched
 #warning save when connect button clicked
@@ -98,6 +97,14 @@
 
 - (void)serverConfigViewConnectButtonTouched:(SMServerConfigView *)configView
 {
+    //Save config if unsaved
+    if (self.serverConfigView.saveButtonEnabled)
+    {
+        [self serverConfigViewSaveButtonTouched:self.serverConfigView];
+        self.serverConfigView.saveButtonEnabled = NO;
+    }
+    
+    //Make a connection
     [[SMSSHTaskManager defaultManager] beginConnectWithServerConfig:self.currentConfig callback:^(SMSSHTaskStatus status, NSError *error)
     {
         //Generate info
