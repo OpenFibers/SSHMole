@@ -181,7 +181,6 @@
     if (configIndex == [self.serverListView configCount])//If about to add
     {
         [self.serverListView addServerConfig:self.currentConfig];
-#warning change selected index here
     }
     else//If editing exist config
     {
