@@ -138,17 +138,9 @@
          {
              infoDictionary[@"Error"] = error;
          }
-         //Call on main thread
-         if ([NSThread isMainThread])
-         {
-             [self updateUIForConnectionStatusChangedWithInfo:infoDictionary];
-         }
-         else
-         {
-             [self performSelectorOnMainThread:@selector(updateUIForConnectionStatusChangedWithInfo:)
-                                    withObject:infoDictionary
-                                 waitUntilDone:NO];
-         }
+         
+         //Update UI
+         [self updateUIForConnectionStatusChangedWithInfo:infoDictionary];
      }];
 }
 
@@ -172,6 +164,15 @@
 
 - (void)updateUIForConnectionStatusChangedWithInfo:(NSDictionary *)info
 {
+    //Forcely called in main thread
+    if (![NSThread isMainThread])
+    {
+        [self performSelectorOnMainThread:@selector(updateUIForConnectionStatusChangedWithInfo:)
+                               withObject:info
+                            waitUntilDone:NO];
+        return;
+    }
+    
     //Update server list view UI
     NSNumber *indexNumber = info[@"ConfigIndex"];
     SMServerConfig *connectingConfig = [[SMSSHTaskManager defaultManager] connectingConfig];
