@@ -22,4 +22,6 @@
 
 - (void)removeConfig:(SMServerConfig *)config;
 
+- (NSArray *)sameServerConfigWithConfig:(SMServerConfig *)config;
+
 @end

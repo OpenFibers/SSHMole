@@ -35,6 +35,11 @@
     return self;
 }
 
+- (NSArray *)configs
+{
+    return [NSArray arrayWithArray:_serverConfigArray];
+}
+
 - (void)addConfig:(SMServerConfig *)config
 {
     [self insertConfig:config atIndex:_serverConfigArray.count];
@@ -58,9 +63,17 @@
     [config removeFromKeychain];
 }
 
-- (NSArray *)configs
+- (NSArray *)sameServerConfigWithConfig:(SMServerConfig *)config
 {
-    return [NSArray arrayWithArray:_serverConfigArray];
+    NSMutableArray *sameConfigArray = [NSMutableArray array];
+    for (SMServerConfig *storedConfig in _serverConfigArray)
+    {
+        if ([storedConfig isEqualTo:config])
+        {
+            [sameConfigArray addObject:storedConfig];
+        }
+    }
+    return [NSArray arrayWithArray:sameConfigArray];
 }
 
 - (void)load
