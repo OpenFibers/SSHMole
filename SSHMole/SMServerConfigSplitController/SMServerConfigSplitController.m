@@ -95,9 +95,9 @@
     [[SMServerConfigStorage defaultStorage] removeConfig:config];
     [self.serverListView removeServerConfig:config];
     
-    if ([[SMSSHTaskManager defaultManager] connectingConfig] == config)//if current config connecting
+    //if removing config connected, disconnect it.
+    if ([[SMSSHTaskManager defaultManager] connectingConfig] == config)
     {
-        //disconnect it
         [[SMSSHTaskManager defaultManager] disconnect];
     }
 }
@@ -248,6 +248,12 @@
         {
             [[SMServerConfigStorage defaultStorage] removeConfig:existingSameConfig];
             [self.serverListView removeServerConfig:existingSameConfig];
+            
+            //if removing config connected, disconnect it.
+            if ([[SMSSHTaskManager defaultManager] connectingConfig] == existingSameConfig)
+            {
+                [[SMSSHTaskManager defaultManager] disconnect];
+            }
         }
     }
     
