@@ -66,6 +66,12 @@
     [self.tableView.delegate tableViewSelectionDidChange:nil];
 }
 
+- (void)layout
+{
+    _innerXibTableView.frame = self.bounds;
+    [super layout];
+}
+
 - (void)reloadData
 {
     _serverConfigs = [[[SMServerConfigStorage defaultStorage] configs] mutableCopy];
