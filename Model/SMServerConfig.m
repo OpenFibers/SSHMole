@@ -50,6 +50,13 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
     return [super isEqualTo:object];
 }
 
+- (NSUInteger)hash
+{
+    NSString *objectAccountAndServerAddress = self.accountAndServerAddressString;
+    NSUInteger hash = [objectAccountAndServerAddress hash];
+    return hash;
+}
+
 #pragma mark - Properties for read
 
 + (NSString *)safeStringForString:(NSString *)string
