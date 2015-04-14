@@ -129,9 +129,11 @@
 - (void)insertServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index
 {
     [self.tableView beginUpdates];
-    NSIndexSet *addedIndex = [NSIndexSet indexSetWithIndex:_serverConfigs.count];
-    [self.tableView insertRowsAtIndexes:addedIndex withAnimation:NSTableViewAnimationEffectGap];
     [_serverConfigs insertObject:config atIndex:index];
+    NSIndexSet *addedIndex = [NSIndexSet indexSetWithIndex:_serverConfigs.count];
+    NSIndexSet *reloadIndex = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, _serverConfigs.count - index)];
+    [self.tableView insertRowsAtIndexes:addedIndex withAnimation:NSTableViewAnimationEffectFade];
+    [self.tableView reloadDataForRowIndexes:reloadIndex columnIndexes:[NSIndexSet indexSetWithIndex:0]];
     [self.tableView endUpdates];
 }
 
