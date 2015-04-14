@@ -175,16 +175,29 @@
     self.currentConfig.localPort = view.localPort;
     self.currentConfig.remark = view.remarkString;
     
+    //Remove existing same config
+    NSArray *sameConfigArray = [[SMServerConfigStorage defaultStorage] sameServerConfigWithConfig:self.currentConfig];
+    if (sameConfigArray.count > 0)
+    {
+        for (SMServerConfig *existingSameConfig in sameConfigArray)
+        {
+            [[SMServerConfigStorage defaultStorage] removeConfig:existingSameConfig];
+            [self.serverListView removeServerConfig:existingSameConfig];
+        }
+    }
+    
+    NSUInteger newSavingIndex = configIndex - sameConfigArray.count;
+    
     //Save to storage
-    [[SMServerConfigStorage defaultStorage] insertConfig:self.currentConfig atIndex:configIndex];
-
-    if (configIndex == [self.serverListView configCount])//If about to add
+    [[SMServerConfigStorage defaultStorage] insertConfig:self.currentConfig atIndex:newSavingIndex];
+    
+    if (newSavingIndex == [self.serverListView configCount])//If about to add
     {
         [self.serverListView addServerConfig:self.currentConfig];
     }
     else//If editing exist config
     {
-        [self.serverListView reloadRowForServerConfig:self.currentConfig atIndex:configIndex];
+        [self.serverListView reloadRowForServerConfig:self.currentConfig atIndex:newSavingIndex];
     }
 }
 
