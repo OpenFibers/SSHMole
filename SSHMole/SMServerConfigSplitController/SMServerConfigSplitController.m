@@ -108,6 +108,7 @@
 {
     if (configView.connectButtonStatus == SMServerConfigViewConnectButtonStatusDisconnected)
     {
+        [self disconnectConnectingConfig];
         [self connectCurrentConfig];
     }
     else
@@ -154,6 +155,10 @@
 - (void)disconnectConnectingConfig
 {
     SMServerConfig *connectingConfig = [[SMSSHTaskManager defaultManager] connectingConfig];
+    if (!connectingConfig)
+    {
+        return;
+    }
 
     //Disconnect
     [[SMSSHTaskManager defaultManager] disconnect];
