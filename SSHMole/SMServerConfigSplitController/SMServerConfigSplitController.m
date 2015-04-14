@@ -65,7 +65,9 @@
     
     [self.serverConfigView.window makeFirstResponder:self.serverConfigView];
     
+    //Update server config view UI
     [self.serverConfigView setSaveButtonEnabled:NO];
+    [self updateServerConfigViewConnectButtonStatus];
 }
 
 //User did select existing server config.
@@ -82,7 +84,9 @@
     
     [self.serverConfigView.window makeFirstResponder:self.serverConfigView];
     
+    //Update server config view UI
     [self.serverConfigView setSaveButtonEnabled:NO];
+    [self updateServerConfigViewConnectButtonStatus];
 }
 
 - (void)serverListViewDeleteKeyDown:(SMServerListView *)serverListView onConfig:(SMServerConfig *)config
@@ -102,6 +106,18 @@
 
 - (void)serverConfigViewConnectButtonTouched:(SMServerConfigView *)configView
 {
+    if (configView.connectButtonStatus == SMServerConfigViewConnectButtonStatusDisconnected)
+    {
+        [self connectCurrentConfig];
+    }
+    else
+    {
+        [self disconnectConnectingConfig];
+    }
+}
+
+- (void)connectCurrentConfig
+{
     //Save config if unsaved
     if (self.serverConfigView.saveButtonEnabled)
     {
@@ -112,36 +128,54 @@
     
     //Make a connection
     [[SMSSHTaskManager defaultManager] beginConnectWithServerConfig:self.currentConfig callback:^(SMSSHTaskStatus status, NSError *error)
-    {
-        //Generate info
-        NSMutableDictionary *infoDictionary = [NSMutableDictionary dictionary];
-        infoDictionary[@"Status"] = [NSNumber numberWithUnsignedInteger:status];
-        infoDictionary[@"ConfigIndex"] = [NSNumber numberWithUnsignedInteger:currentConfigIndex];
-        if (error)
-        {
-            infoDictionary[@"Error"] = error;
-        }
-        //Call on main thread
-        if ([NSThread isMainThread])
-        {
-            [self updateUIForConnectionStatusChangedWithInfo:infoDictionary];
-        }
-        else
-        {
-            [self performSelectorOnMainThread:@selector(updateUIForConnectionStatusChangedWithInfo:)
-                                   withObject:infoDictionary
-                                waitUntilDone:NO];
-        }
-    }];
+     {
+         //Generate info
+         NSMutableDictionary *infoDictionary = [NSMutableDictionary dictionary];
+         infoDictionary[@"Status"] = [NSNumber numberWithUnsignedInteger:status];
+         infoDictionary[@"ConfigIndex"] = [NSNumber numberWithUnsignedInteger:currentConfigIndex];
+         if (error)
+         {
+             infoDictionary[@"Error"] = error;
+         }
+         //Call on main thread
+         if ([NSThread isMainThread])
+         {
+             [self updateUIForConnectionStatusChangedWithInfo:infoDictionary];
+         }
+         else
+         {
+             [self performSelectorOnMainThread:@selector(updateUIForConnectionStatusChangedWithInfo:)
+                                    withObject:infoDictionary
+                                 waitUntilDone:NO];
+         }
+     }];
+}
+
+- (void)disconnectConnectingConfig
+{
+    SMServerConfig *connectingConfig = [[SMSSHTaskManager defaultManager] connectingConfig];
+
+    //Disconnect
+    [[SMSSHTaskManager defaultManager] disconnect];
     
-    [[SMSSHTaskManager defaultManager] performSelector:@selector(disconnect) withObject:nil afterDelay:10];
+    //Update server list view UI
+    [self.serverListView reloadRowForServerConfig:connectingConfig atIndex:[self.serverListView indexOfConfig:connectingConfig]];
+    
+    //Update server config view UI
+    [self.serverConfigView setConnectButtonStatus:SMServerConfigViewConnectButtonStatusDisconnected];
 }
 
 - (void)updateUIForConnectionStatusChangedWithInfo:(NSDictionary *)info
 {
+    //Update server list view UI
     NSNumber *indexNumber = info[@"ConfigIndex"];
     SMServerConfig *connectingConfig = [[SMSSHTaskManager defaultManager] connectingConfig];
     [self.serverListView reloadRowForServerConfig:connectingConfig atIndex:indexNumber.unsignedIntegerValue];
+    
+    //Update server config view UI
+    [self updateServerConfigViewConnectButtonStatus];
+    
+    //Show alert if error occurred
     if (info[@"Error"])
     {
         NSError *error = info[@"Error"];
@@ -149,6 +183,32 @@
         [alert addButtonWithTitle:@"OK"];
         [alert setMessageText:error.domain];
         [alert runModal];
+    }
+}
+
+- (void)updateServerConfigViewConnectButtonStatus
+{
+    if (self.currentConfig == [[SMSSHTaskManager defaultManager] connectingConfig])
+    {
+        SMSSHTaskStatus status = [[SMSSHTaskManager defaultManager] currentConnectionStatus];
+        switch (status) {
+            case SMSSHTaskStatusConnected:
+                self.serverConfigView.connectButtonStatus = SMServerConfigViewConnectButtonStatusConnected;
+                break;
+            case SMSSHTaskStatusConnecting:
+                self.serverConfigView.connectButtonStatus = SMServerConfigViewConnectButtonStatusConnecting;
+                break;
+            case SMSSHTaskStatusDisconnected:
+            case SMSSHTaskStatusErrorOccured:
+                self.serverConfigView.connectButtonStatus = SMServerConfigViewConnectButtonStatusDisconnected;
+                break;
+            default:
+                break;
+        }
+    }
+    else
+    {
+        self.serverConfigView.connectButtonStatus = SMServerConfigViewConnectButtonStatusDisconnected;
     }
 }
 
