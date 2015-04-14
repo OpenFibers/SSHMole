@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 #import "SMServerConfig.h"
 #import "SMSSHTask.h"
 

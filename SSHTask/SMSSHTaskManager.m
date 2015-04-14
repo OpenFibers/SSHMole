@@ -23,6 +23,24 @@
     return manager;
 }
 
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(disconnect)
+                                                     name:NSApplicationWillTerminateNotification
+                                                   object:nil];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)beginConnectWithServerConfig:(SMServerConfig *)config
                             callback:(void(^)(SMSSHTaskStatus status, NSError *error))callback
 {
