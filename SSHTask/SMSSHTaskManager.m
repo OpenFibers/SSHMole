@@ -48,7 +48,7 @@
     return _currentTask.currentStatus;
 }
 
-- (SMServerConfig *)currentConfig
+- (SMServerConfig *)connectingConfig
 {
     return _currentTask.config;
 }

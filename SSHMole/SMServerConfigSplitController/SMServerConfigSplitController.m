@@ -91,7 +91,7 @@
     [[SMServerConfigStorage defaultStorage] removeConfig:config];
     [self.serverListView removeServerConfig:config];
     
-    if ([[SMSSHTaskManager defaultManager] currentConfig] == config)//if current config connecting
+    if ([[SMSSHTaskManager defaultManager] connectingConfig] == config)//if current config connecting
     {
         //disconnect it
         [[SMSSHTaskManager defaultManager] disconnect];
@@ -140,7 +140,7 @@
 - (void)updateUIForConnectionStatusChangedWithInfo:(NSDictionary *)info
 {
     NSNumber *indexNumber = info[@"ConfigIndex"];
-    SMServerConfig *connectingConfig = [[SMSSHTaskManager defaultManager] currentConfig];
+    SMServerConfig *connectingConfig = [[SMSSHTaskManager defaultManager] connectingConfig];
     [self.serverListView reloadRowForServerConfig:connectingConfig atIndex:indexNumber.unsignedIntegerValue];
     if (info[@"Error"])
     {

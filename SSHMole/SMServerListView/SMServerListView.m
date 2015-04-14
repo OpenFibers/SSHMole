@@ -180,7 +180,7 @@
         {
             SMServerConfig *config = _serverConfigs[row];
             [cellView.textField setStringValue:[config accountStringForDisplay]];
-            if ([[SMSSHTaskManager defaultManager] currentConfig] == config)
+            if ([[SMSSHTaskManager defaultManager] connectingConfig] == config)
             {
                 switch ([[SMSSHTaskManager defaultManager] currentConnectionStatus])
                 {

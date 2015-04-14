@@ -20,6 +20,6 @@
 
 - (SMSSHTaskStatus)currentConnectionStatus;
 
-- (SMServerConfig *)currentConfig;
+- (SMServerConfig *)connectingConfig;
 
 @end
