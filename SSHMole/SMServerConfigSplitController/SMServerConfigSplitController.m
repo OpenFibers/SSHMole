@@ -225,6 +225,10 @@
 
     //get current editing or adding config index
     NSUInteger configIndex = [self.serverListView selectedIndex];
+    if (configIndex == -1)
+    {
+        return;
+    }
     
     //if current config exist, remove from server config storage
     if (self.currentConfig)
