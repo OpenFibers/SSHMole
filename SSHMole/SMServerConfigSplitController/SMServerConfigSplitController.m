@@ -197,7 +197,11 @@
 
 - (void)updateServerConfigViewConnectButtonStatus
 {
-    if (self.currentConfig == [[SMSSHTaskManager defaultManager] connectingConfig])
+    if (self.currentConfig == nil)
+    {
+        self.serverConfigView.connectButtonStatus = SMServerConfigViewConnectButtonStatusDisconnected;
+    }
+    else if (self.currentConfig == [[SMSSHTaskManager defaultManager] connectingConfig])
     {
         SMSSHTaskStatus status = [[SMSSHTaskManager defaultManager] currentConnectionStatus];
         switch (status) {
