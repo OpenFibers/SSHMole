@@ -35,5 +35,6 @@
 - (void)addServerConfig:(SMServerConfig *)config;
 - (void)insertServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index;
 - (void)removeServerConfig:(SMServerConfig *)config;
+- (void)selectConfig:(SMServerConfig *)config;
 
 @end

@@ -91,6 +91,9 @@
 
 - (void)serverListViewDeleteKeyDown:(SMServerListView *)serverListView onConfig:(SMServerConfig *)config
 {
+    //Select Add config column
+    [self.serverListView selectConfig:nil];
+    
     //remove config from storage and server list view
     [[SMServerConfigStorage defaultStorage] removeConfig:config];
     [self.serverListView removeServerConfig:config];

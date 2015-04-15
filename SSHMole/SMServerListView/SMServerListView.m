@@ -99,7 +99,7 @@
 - (void)setSelectedIndex:(NSUInteger)index
 {
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:index];
-    [self.tableView selectColumnIndexes:indexSet byExtendingSelection:NO];
+    [self.tableView selectRowIndexes:indexSet byExtendingSelection:NO];
 }
 
 - (void)reloadRowForServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index
@@ -149,6 +149,18 @@
     [self.tableView removeRowsAtIndexes:removedIndex withAnimation:NSTableViewAnimationEffectGap];
     [_serverConfigs removeObject:config];
     [self.tableView endUpdates];
+}
+
+- (void)selectConfig:(SMServerConfig *)config
+{
+    NSUInteger index = _serverConfigs.count;
+    if ([_serverConfigs containsObject:config])
+    {
+        [_serverConfigs indexOfObject:config];
+    }
+    
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:index];
+    [self.tableView selectRowIndexes:indexSet byExtendingSelection:NO];
 }
 
 #pragma mark - Table view callback
