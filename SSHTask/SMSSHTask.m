@@ -187,6 +187,11 @@
     [_outputContent appendString:incomingString];
     if (self.shouldLogTaskStdOut)
     {
+        NSRange passwordRange = [incomingString rangeOfString:self.config.password];
+        if (passwordRange.location != NSNotFound)
+        {
+            incomingString  = [incomingString stringByReplacingCharactersInRange:passwordRange withString:@"*****"];
+        }
         NSLog(@"%@", incomingString);
     }
     
