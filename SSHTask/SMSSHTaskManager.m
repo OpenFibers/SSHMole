@@ -50,6 +50,7 @@
         _currentTask = nil;
     }
     _currentTask = [[SMSSHTask alloc] initWithServerConfig:config];
+    _currentTask.shouldLogTaskStdOut = YES;
     [_currentTask connect:^(SMSSHTaskStatus status, NSError *error) {
         callback(status, error);
     }];

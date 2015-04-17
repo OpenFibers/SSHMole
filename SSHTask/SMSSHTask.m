@@ -183,7 +183,12 @@
     
     //Get last read data
     NSData *data = [[aNotification userInfo] objectForKey:NSFileHandleNotificationDataItem];
-    [_outputContent appendString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+    NSString *incomingString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    [_outputContent appendString:incomingString];
+    if (self.shouldLogTaskStdOut)
+    {
+        NSLog(@"%@", incomingString);
+    }
     
     if ([data length])
     {
