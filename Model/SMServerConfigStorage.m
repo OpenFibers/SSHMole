@@ -47,7 +47,23 @@
 
 - (void)insertConfig:(SMServerConfig *)config atIndex:(NSUInteger)index
 {
-    if (![_serverConfigArray containsObject:config])
+    SMServerConfig *existingConfigToRemove = nil;
+    NSUInteger existingIndex = NSNotFound;
+    for (SMServerConfig *existingConfig in _serverConfigArray)
+    {
+        if ([existingConfig.identifierString isEqualToString:config.identifierString])
+        {
+            existingConfigToRemove = existingConfig;
+            existingIndex = [_serverConfigArray indexOfObject:existingConfigToRemove];
+            break;
+        }
+    }
+    if (existingConfigToRemove)
+    {
+        [self removeConfig:existingConfigToRemove];
+        [_serverConfigArray insertObject:config atIndex:existingIndex];
+    }
+    else
     {
         [_serverConfigArray insertObject:config atIndex:index];
     }

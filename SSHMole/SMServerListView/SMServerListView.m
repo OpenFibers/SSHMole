@@ -147,13 +147,35 @@
 
 - (void)insertServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index
 {
-    [self.tableView beginUpdates];
-    [_serverConfigs insertObject:config atIndex:index];
-    NSIndexSet *addedIndex = [NSIndexSet indexSetWithIndex:_serverConfigs.count];
-    NSIndexSet *reloadIndex = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, _serverConfigs.count - index)];
-    [self.tableView insertRowsAtIndexes:addedIndex withAnimation:NSTableViewAnimationEffectFade];
-    [self.tableView reloadDataForRowIndexes:reloadIndex columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-    [self.tableView endUpdates];
+    SMServerConfig *existingConfigToRemove = nil;
+    NSUInteger existingIndex = NSNotFound;
+    for (SMServerConfig *existingConfig in _serverConfigs)
+    {
+        if ([existingConfig.identifierString isEqualToString:config.identifierString])
+        {
+            existingConfigToRemove = existingConfig;
+            existingIndex = [_serverConfigs indexOfObject:existingConfigToRemove];
+            break;
+        }
+    }
+    if (existingConfigToRemove)
+    {
+        [self.tableView beginUpdates];
+        [_serverConfigs replaceObjectAtIndex:existingIndex withObject:config];
+        NSIndexSet *reloadIndex = [NSIndexSet indexSetWithIndex:existingIndex];
+        [self.tableView reloadDataForRowIndexes:reloadIndex columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+        [self.tableView endUpdates];
+    }
+    else
+    {
+        [self.tableView beginUpdates];
+        [_serverConfigs insertObject:config atIndex:index];
+        NSIndexSet *addedIndex = [NSIndexSet indexSetWithIndex:_serverConfigs.count];
+        NSIndexSet *reloadIndex = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, _serverConfigs.count - index)];
+        [self.tableView insertRowsAtIndexes:addedIndex withAnimation:NSTableViewAnimationEffectFade];
+        [self.tableView reloadDataForRowIndexes:reloadIndex columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+        [self.tableView endUpdates];
+    }
 }
 
 - (void)removeServerConfig:(SMServerConfig *)config
