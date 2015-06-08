@@ -30,8 +30,19 @@ extern NSString *const SSHMoleKeychainServiceString;
 //Format: remark(username@server_address:server_port)
 - (NSString *)accountStringForDisplay;
 
-//Save to keychain
-//This method will get called when config added to storage.
+/**
+ *  The identifier of server config.
+ *
+ *  @return The identifier of server config.
+ */
+- (NSString *)identifierString;
+
+/**
+ *  Save this config to keychain.
+ *  This method will get called when config added to storage.
+ *
+ *  @return Successed if YES, otherwise NO.
+ */
 - (BOOL)saveToKeychain;
 
 //Remove from keychain

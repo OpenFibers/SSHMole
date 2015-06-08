@@ -151,6 +151,11 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
     return [self accountAndServerAddressString];
 }
 
+- (NSString *)identifierString
+{
+    return [self accountAndServerAddressString];
+}
+
 - (NSDictionary *)commentsDictionaryForKeychain//exclude password
 {
     NSMutableDictionary *configDictionary = [NSMutableDictionary dictionary];
