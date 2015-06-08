@@ -120,6 +120,7 @@
         [_sshTask terminate];
     }
     _sshTask = nil;
+    _currentStatus = SMSSHTaskStatusDisconnected;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self setConnected:NO];
