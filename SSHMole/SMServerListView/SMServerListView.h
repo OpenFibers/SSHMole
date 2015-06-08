@@ -31,7 +31,22 @@
 
 - (NSUInteger)indexOfConfig:(SMServerConfig *)config;
 - (NSUInteger)configCount;
+
+/**
+ *  Reload table row for a config. Find the same one by config.identifierString.
+ *
+ *  @param config The config to reload.
+ */
+- (void)reloadRowForServerConfig:(SMServerConfig *)config;
+
+/**
+ *  Reload table row for a config.
+ *
+ *  @param config The config to reload.
+ *  @param index The specific index to reload. If passed NSNotFound, server list view will reload the existing config has the same identifierString with the inputed config.
+ */
 - (void)reloadRowForServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index;
+
 - (void)addServerConfig:(SMServerConfig *)config;
 - (void)insertServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index;
 - (void)removeServerConfig:(SMServerConfig *)config;

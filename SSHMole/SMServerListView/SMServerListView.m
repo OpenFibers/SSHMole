@@ -102,20 +102,39 @@
     [self.tableView selectRowIndexes:indexSet byExtendingSelection:NO];
 }
 
-- (void)reloadRowForServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)index
+- (void)reloadRowForServerConfig:(SMServerConfig *)config
 {
-    if (index >= _serverConfigs.count)
+    [self reloadRowForServerConfig:config atIndex:NSNotFound];
+}
+
+- (void)reloadRowForServerConfig:(SMServerConfig *)config atIndex:(NSUInteger)inputIndex
+{
+    NSUInteger actualConfigIndex = inputIndex;
+    if (actualConfigIndex == NSNotFound)//if called did not give a input index
+    {
+        //find the actual config index
+        for (SMServerConfig *eachConfig in _serverConfigs)
+        {
+            if ([eachConfig.identifierString isEqualToString:config.identifierString])
+            {
+                actualConfigIndex = [_serverConfigs indexOfObject:eachConfig];
+                break;
+            }
+        }
+    }
+    
+    if (actualConfigIndex == NSNotFound)//if actual config index not found, return
     {
         return;
     }
     
     [self.tableView beginUpdates];
-    if (_serverConfigs[index] != config)//config object changed at this index
+    if (_serverConfigs[actualConfigIndex] != config)//config object changed at this index
     {
         //change it
-        [_serverConfigs replaceObjectAtIndex:index withObject:config];
+        [_serverConfigs replaceObjectAtIndex:actualConfigIndex withObject:config];
     }
-    NSIndexSet *rowIndexSet = [NSIndexSet indexSetWithIndex:index];
+    NSIndexSet *rowIndexSet = [NSIndexSet indexSetWithIndex:actualConfigIndex];
     NSIndexSet *columnIndexSet = [NSIndexSet indexSetWithIndex:0];
     [self.tableView reloadDataForRowIndexes:rowIndexSet columnIndexes:columnIndexSet];
     [self.tableView endUpdates];

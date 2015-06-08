@@ -128,7 +128,7 @@
         [self serverConfigViewSaveButtonTouched:self.serverConfigView];
     }
     
-    NSUInteger currentConfigIndex = [self.serverListView indexOfConfig:self.currentConfig];
+    SMServerConfig *currentConfig = self.currentConfig;
     
     //Make a connection
     [[SMSSHTaskManager defaultManager] beginConnectWithServerConfig:self.currentConfig callback:^(SMSSHTaskStatus status, NSError *error)
@@ -136,7 +136,7 @@
          //Generate info
          NSMutableDictionary *infoDictionary = [NSMutableDictionary dictionary];
          infoDictionary[@"Status"] = [NSNumber numberWithUnsignedInteger:status];
-         infoDictionary[@"ConfigIndex"] = [NSNumber numberWithUnsignedInteger:currentConfigIndex];
+         infoDictionary[@"Config"] = currentConfig;
          if (error)
          {
              infoDictionary[@"Error"] = error;
@@ -157,12 +157,6 @@
 
     //Disconnect
     [[SMSSHTaskManager defaultManager] disconnect];
-    
-    //Update server list view UI
-    [self.serverListView reloadRowForServerConfig:connectingConfig atIndex:[self.serverListView indexOfConfig:connectingConfig]];
-    
-    //Update server config view UI
-    [self.serverConfigView setConnectButtonStatus:SMServerConfigViewConnectButtonStatusDisconnected];
 }
 
 - (void)updateUIForConnectionStatusChangedWithInfo:(NSDictionary *)info
@@ -177,9 +171,8 @@
     }
     
     //Update server list view UI
-    NSNumber *indexNumber = info[@"ConfigIndex"];
-    SMServerConfig *connectingConfig = [[SMSSHTaskManager defaultManager] connectingConfig];
-    [self.serverListView reloadRowForServerConfig:connectingConfig atIndex:indexNumber.unsignedIntegerValue];
+    SMServerConfig *connectingConfig = info[@"Config"];
+    [self.serverListView reloadRowForServerConfig:connectingConfig];
     
     //Update server config view UI
     [self updateServerConfigViewConnectButtonStatus];
