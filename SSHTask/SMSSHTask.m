@@ -106,6 +106,10 @@
 - (void)disconnect
 {
     [self disconnectWithoutResetCallback];
+    if (_callback)
+    {
+        _callback(SMSSHTaskStatusDisconnected, nil);
+    }
     _callback = nil;
 }
 
