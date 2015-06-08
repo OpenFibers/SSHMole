@@ -17,6 +17,7 @@
 		427237BC1AD7B01F00BC072D /* ServerListYellowLight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 427237B61AD7B01F00BC072D /* ServerListYellowLight@2x.png */; };
 		427237C01AD7B18700BC072D /* SMUserEventDetectingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427237BF1AD7B18700BC072D /* SMUserEventDetectingTableView.m */; };
 		42905AF51AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42905AF41AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m */; };
+		429422841B2584B8008A19F8 /* SMSystemPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 429422831B2584B8008A19F8 /* SMSystemPreferenceManager.m */; };
 		42B2F0851AD2DF4B000977C4 /* SMSSHTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */; };
 		42BC34C71ADFD1A100A8BA66 /* SSHMole.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 42BC34C61ADFD1A100A8BA66 /* SSHMole.iconset */; };
 		42CCF0A41AD3B3B200BE3841 /* SMServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CCF0A31AD3B3B200BE3841 /* SMServerConfigView.m */; };
@@ -61,6 +62,8 @@
 		427237BF1AD7B18700BC072D /* SMUserEventDetectingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMUserEventDetectingTableView.m; sourceTree = "<group>"; };
 		42905AF31AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMOnlyIntegerNumberFormatter.h; sourceTree = "<group>"; };
 		42905AF41AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMOnlyIntegerNumberFormatter.m; sourceTree = "<group>"; };
+		429422821B2584B8008A19F8 /* SMSystemPreferenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSystemPreferenceManager.h; sourceTree = "<group>"; };
+		429422831B2584B8008A19F8 /* SMSystemPreferenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSystemPreferenceManager.m; sourceTree = "<group>"; };
 		42B2F0831AD2DF4B000977C4 /* SMSSHTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSHTaskManager.h; sourceTree = "<group>"; };
 		42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSHTaskManager.m; sourceTree = "<group>"; };
 		42BC34941ADCAE0E00A8BA66 /* SSHMole.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SSHMole.entitlements; sourceTree = "<group>"; };
@@ -149,6 +152,23 @@
 			path = SMOnlyIntegerNumberFormatter;
 			sourceTree = "<group>";
 		};
+		429422801B25848D008A19F8 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				429422811B2584A6008A19F8 /* SystemPreferenceManager */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		429422811B2584A6008A19F8 /* SystemPreferenceManager */ = {
+			isa = PBXGroup;
+			children = (
+				429422821B2584B8008A19F8 /* SMSystemPreferenceManager.h */,
+				429422831B2584B8008A19F8 /* SMSystemPreferenceManager.m */,
+			);
+			path = SystemPreferenceManager;
+			sourceTree = "<group>";
+		};
 		42CCF0A11AD3B3B200BE3841 /* SMServerConfigView */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				42E0A4881ACFC66B00890EA7 /* Helpers */,
+				429422801B25848D008A19F8 /* Manager */,
 				42E0A4721ACFBD2700890EA7 /* Model */,
 				42E0A4731ACFBD2700890EA7 /* SSHTask */,
 				42E0A4491ACFBAB800890EA7 /* SSHMole */,
@@ -452,6 +473,7 @@
 				42E0A4811ACFBDBA00890EA7 /* SMSSHTask.m in Sources */,
 				42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */,
 				42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */,
+				429422841B2584B8008A19F8 /* SMSystemPreferenceManager.m in Sources */,
 				42F8D6691AD14DE90085DF6C /* NSView+Vibrancy.m in Sources */,
 				42F8D6651AD14D400085DF6C /* SMUUIDHelper.m in Sources */,
 				42E0A4501ACFBAB800890EA7 /* main.m in Sources */,
