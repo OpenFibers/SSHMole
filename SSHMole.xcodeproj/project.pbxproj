@@ -18,6 +18,7 @@
 		427237C01AD7B18700BC072D /* SMUserEventDetectingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427237BF1AD7B18700BC072D /* SMUserEventDetectingTableView.m */; };
 		42905AF51AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42905AF41AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m */; };
 		429422841B2584B8008A19F8 /* SMSystemPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 429422831B2584B8008A19F8 /* SMSystemPreferenceManager.m */; };
+		429422891B268523008A19F8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429422881B268523008A19F8 /* SystemConfiguration.framework */; };
 		42B2F0851AD2DF4B000977C4 /* SMSSHTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */; };
 		42BC34C71ADFD1A100A8BA66 /* SSHMole.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 42BC34C61ADFD1A100A8BA66 /* SSHMole.iconset */; };
 		42CCF0A41AD3B3B200BE3841 /* SMServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CCF0A31AD3B3B200BE3841 /* SMServerConfigView.m */; };
@@ -64,6 +65,7 @@
 		42905AF41AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMOnlyIntegerNumberFormatter.m; sourceTree = "<group>"; };
 		429422821B2584B8008A19F8 /* SMSystemPreferenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSystemPreferenceManager.h; sourceTree = "<group>"; };
 		429422831B2584B8008A19F8 /* SMSystemPreferenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSystemPreferenceManager.m; sourceTree = "<group>"; };
+		429422881B268523008A19F8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		42B2F0831AD2DF4B000977C4 /* SMSSHTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSHTaskManager.h; sourceTree = "<group>"; };
 		42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSHTaskManager.m; sourceTree = "<group>"; };
 		42BC34941ADCAE0E00A8BA66 /* SSHMole.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SSHMole.entitlements; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				429422891B268523008A19F8 /* SystemConfiguration.framework in Frameworks */,
 				42E0A47A1ACFBD5500890EA7 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +313,7 @@
 		42E0A47B1ACFBD7700890EA7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				429422881B268523008A19F8 /* SystemConfiguration.framework */,
 				42E0A4791ACFBD5500890EA7 /* Security.framework */,
 			);
 			name = Frameworks;
