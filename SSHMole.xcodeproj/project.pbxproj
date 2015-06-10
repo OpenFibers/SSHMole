@@ -20,6 +20,7 @@
 		429422841B2584B8008A19F8 /* SMSystemPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 429422831B2584B8008A19F8 /* SMSystemPreferenceManager.m */; };
 		429422891B268523008A19F8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429422881B268523008A19F8 /* SystemConfiguration.framework */; };
 		429422981B282681008A19F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 429422971B282681008A19F8 /* main.m */; };
+		429422A71B2828E3008A19F8 /* SSHMoleSystemConfigurationHelper in Resources */ = {isa = PBXBuildFile; fileRef = 429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */; };
 		42B2F0851AD2DF4B000977C4 /* SMSSHTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */; };
 		42BC34C71ADFD1A100A8BA66 /* SSHMole.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 42BC34C61ADFD1A100A8BA66 /* SSHMole.iconset */; };
 		42CCF0A41AD3B3B200BE3841 /* SMServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CCF0A31AD3B3B200BE3841 /* SMServerConfigView.m */; };
@@ -216,9 +217,9 @@
 				42E0A4721ACFBD2700890EA7 /* Model */,
 				42E0A4731ACFBD2700890EA7 /* SSHTask */,
 				42E0A4491ACFBAB800890EA7 /* SSHMole */,
-				42E0A4741ACFBD3500890EA7 /* ThirdPartyLib */,
 				429422961B282681008A19F8 /* SSHMoleSystemConfigurationHelper */,
 				42E0A47B1ACFBD7700890EA7 /* Frameworks */,
+				42E0A4741ACFBD3500890EA7 /* ThirdPartyLib */,
 				42E0A4481ACFBAB800890EA7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -433,6 +434,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				429422A71B2828E3008A19F8 /* SSHMoleSystemConfigurationHelper in Resources */,
 				4262AF211AD17ADF00C54A2A /* ServerConfigView.xib in Resources */,
 				42E0A4551ACFBAB800890EA7 /* Images.xcassets in Resources */,
 				427237B81AD7B01F00BC072D /* ServerListGreenLight@2x.png in Resources */,
@@ -627,6 +629,7 @@
 				4294229B1B282681008A19F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		42E0A4421ACFBAB800890EA7 /* Build configuration list for PBXProject "SSHMole" */ = {
 			isa = XCConfigurationList;
