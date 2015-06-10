@@ -29,7 +29,6 @@
 		42E0A4501ACFBAB800890EA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A44F1ACFBAB800890EA7 /* main.m */; };
 		42E0A4551ACFBAB800890EA7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42E0A4541ACFBAB800890EA7 /* Images.xcassets */; };
 		42E0A4581ACFBAB800890EA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42E0A4561ACFBAB800890EA7 /* Main.storyboard */; };
-		42E0A4641ACFBAB800890EA7 /* SSHMoleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4631ACFBAB800890EA7 /* SSHMoleTests.m */; };
 		42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4771ACFBD4700890EA7 /* SSKeychain.m */; };
 		42E0A47A1ACFBD5500890EA7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E0A4791ACFBD5500890EA7 /* Security.framework */; };
 		42E0A47E1ACFBDAA00890EA7 /* SMServerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A47D1ACFBDAA00890EA7 /* SMServerConfig.m */; };
@@ -39,16 +38,6 @@
 		42F8D6651AD14D400085DF6C /* SMUUIDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F8D6641AD14D400085DF6C /* SMUUIDHelper.m */; };
 		42F8D6691AD14DE90085DF6C /* NSView+Vibrancy.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F8D6681AD14DE90085DF6C /* NSView+Vibrancy.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		42E0A45E1ACFBAB800890EA7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 42E0A43F1ACFBAB800890EA7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 42E0A4461ACFBAB800890EA7;
-			remoteInfo = SSHMole;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		421E20C61AD1CF7B0042AD0E /* SSHCommand.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = SSHCommand.sh; sourceTree = "<group>"; };
@@ -84,9 +73,6 @@
 		42E0A44F1ACFBAB800890EA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		42E0A4541ACFBAB800890EA7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		42E0A4571ACFBAB800890EA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		42E0A45D1ACFBAB800890EA7 /* SSHMoleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSHMoleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		42E0A4621ACFBAB800890EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		42E0A4631ACFBAB800890EA7 /* SSHMoleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSHMoleTests.m; sourceTree = "<group>"; };
 		42E0A4761ACFBD4700890EA7 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
 		42E0A4771ACFBD4700890EA7 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		42E0A4791ACFBD5500890EA7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -111,13 +97,6 @@
 			files = (
 				429422891B268523008A19F8 /* SystemConfiguration.framework in Frameworks */,
 				42E0A47A1ACFBD5500890EA7 /* Security.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		42E0A45A1ACFBAB800890EA7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +186,6 @@
 				42E0A4721ACFBD2700890EA7 /* Model */,
 				42E0A4731ACFBD2700890EA7 /* SSHTask */,
 				42E0A4491ACFBAB800890EA7 /* SSHMole */,
-				42E0A4601ACFBAB800890EA7 /* SSHMoleTests */,
 				42E0A4741ACFBD3500890EA7 /* ThirdPartyLib */,
 				42E0A47B1ACFBD7700890EA7 /* Frameworks */,
 				42E0A4481ACFBAB800890EA7 /* Products */,
@@ -218,7 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				42E0A4471ACFBAB800890EA7 /* SSHMole.app */,
-				42E0A45D1ACFBAB800890EA7 /* SSHMoleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,23 +226,6 @@
 			children = (
 				42E0A44B1ACFBAB800890EA7 /* Info.plist */,
 				42E0A44F1ACFBAB800890EA7 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		42E0A4601ACFBAB800890EA7 /* SSHMoleTests */ = {
-			isa = PBXGroup;
-			children = (
-				42E0A4631ACFBAB800890EA7 /* SSHMoleTests.m */,
-				42E0A4611ACFBAB800890EA7 /* Supporting Files */,
-			);
-			path = SSHMoleTests;
-			sourceTree = "<group>";
-		};
-		42E0A4611ACFBAB800890EA7 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				42E0A4621ACFBAB800890EA7 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -378,24 +338,6 @@
 			productReference = 42E0A4471ACFBAB800890EA7 /* SSHMole.app */;
 			productType = "com.apple.product-type.application";
 		};
-		42E0A45C1ACFBAB800890EA7 /* SSHMoleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 42E0A46A1ACFBAB800890EA7 /* Build configuration list for PBXNativeTarget "SSHMoleTests" */;
-			buildPhases = (
-				42E0A4591ACFBAB800890EA7 /* Sources */,
-				42E0A45A1ACFBAB800890EA7 /* Frameworks */,
-				42E0A45B1ACFBAB800890EA7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				42E0A45F1ACFBAB800890EA7 /* PBXTargetDependency */,
-			);
-			name = SSHMoleTests;
-			productName = SSHMoleTests;
-			productReference = 42E0A45D1ACFBAB800890EA7 /* SSHMoleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -413,10 +355,6 @@
 							};
 						};
 					};
-					42E0A45C1ACFBAB800890EA7 = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 42E0A4461ACFBAB800890EA7;
-					};
 				};
 			};
 			buildConfigurationList = 42E0A4421ACFBAB800890EA7 /* Build configuration list for PBXProject "SSHMole" */;
@@ -433,7 +371,6 @@
 			projectRoot = "";
 			targets = (
 				42E0A4461ACFBAB800890EA7 /* SSHMole */,
-				42E0A45C1ACFBAB800890EA7 /* SSHMoleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -455,13 +392,6 @@
 				42BC34C71ADFD1A100A8BA66 /* SSHMole.iconset in Resources */,
 				427237BA1AD7B01F00BC072D /* ServerListRedLight@2x.png in Resources */,
 				427237BB1AD7B01F00BC072D /* ServerListYellowLight.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		42E0A45B1ACFBAB800890EA7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,23 +421,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		42E0A4591ACFBAB800890EA7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				42E0A4641ACFBAB800890EA7 /* SSHMoleTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		42E0A45F1ACFBAB800890EA7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 42E0A4461ACFBAB800890EA7 /* SSHMole */;
-			targetProxy = 42E0A45E1ACFBAB800890EA7 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		42E0A4561ACFBAB800890EA7 /* Main.storyboard */ = {
@@ -621,42 +535,6 @@
 			};
 			name = Release;
 		};
-		42E0A46B1ACFBAB800890EA7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SSHMoleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SSHMole.app/Contents/MacOS/SSHMole";
-			};
-			name = Debug;
-		};
-		42E0A46C1ACFBAB800890EA7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SSHMoleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SSHMole.app/Contents/MacOS/SSHMole";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -674,15 +552,6 @@
 			buildConfigurations = (
 				42E0A4681ACFBAB800890EA7 /* Debug */,
 				42E0A4691ACFBAB800890EA7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		42E0A46A1ACFBAB800890EA7 /* Build configuration list for PBXNativeTarget "SSHMoleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				42E0A46B1ACFBAB800890EA7 /* Debug */,
-				42E0A46C1ACFBAB800890EA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
