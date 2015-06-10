@@ -124,13 +124,12 @@ OSStatus authorize(AuthorizationRef *authorization)
 {
     @autoreleasepool
     {
-        static AuthorizationRef authRef;
         static AuthorizationFlags authFlags;
         authFlags = kAuthorizationFlagDefaults
         | kAuthorizationFlagExtendRights
         | kAuthorizationFlagInteractionAllowed
         | kAuthorizationFlagPreAuthorize;
-        OSStatus authErr = AuthorizationCreate(nil, kAuthorizationEmptyEnvironment, authFlags, &authRef);
+        OSStatus authErr = AuthorizationCreate(nil, kAuthorizationEmptyEnvironment, authFlags, authorization);
         return authErr;
     }
 }
