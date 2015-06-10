@@ -2,7 +2,7 @@
 //  YYYJsonParser.m
 //  NeteaseMusic
 //
-//  Created by 史江浩 on 9/25/14.
+//  Created by openthread on 9/25/14.
 //  Copyright (c) 2014 openthread. All rights reserved.
 //
 

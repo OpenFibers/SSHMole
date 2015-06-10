@@ -2,7 +2,7 @@
 //  SMCellClickDetectingTableView.h
 //  SSHMole
 //
-//  Created by 史江浩 on 4/10/15.
+//  Created by openthread on 4/10/15.
 //  Copyright (c) 2015 openthread. All rights reserved.
 //
 

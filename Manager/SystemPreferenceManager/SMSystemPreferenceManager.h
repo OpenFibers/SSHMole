@@ -2,7 +2,7 @@
 //  SMSystemPreferenceManager.h
 //  SSHMole
 //
-//  Created by 史江浩 on 6/8/15.
+//  Created by openthread on 6/8/15.
 //  Copyright (c) 2015 openthread. All rights reserved.
 //
 
