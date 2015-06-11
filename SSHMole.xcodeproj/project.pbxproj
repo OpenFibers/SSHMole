@@ -24,14 +24,14 @@
 		42840D911B2981040015DA34 /* SMServerConfigStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D851B2981040015DA34 /* SMServerConfigStorage.m */; };
 		42840D921B2981040015DA34 /* SMSSHTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D881B2981040015DA34 /* SMSSHTask.m */; };
 		42840D931B2981040015DA34 /* SMSSHTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D8A1B2981040015DA34 /* SMSSHTaskManager.m */; };
+		42840D9E1B2981630015DA34 /* SMServerConfigSplitController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D971B2981630015DA34 /* SMServerConfigSplitController.m */; };
+		42840D9F1B2981630015DA34 /* SMServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D9A1B2981630015DA34 /* SMServerConfigView.m */; };
+		42840DA01B2981630015DA34 /* SMServerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D9D1B2981630015DA34 /* SMServerListView.m */; };
 		429422891B268523008A19F8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429422881B268523008A19F8 /* SystemConfiguration.framework */; };
 		429422981B282681008A19F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 429422971B282681008A19F8 /* main.m */; };
 		429422A71B2828E3008A19F8 /* SSHMoleSystemConfigurationHelper in Resources */ = {isa = PBXBuildFile; fileRef = 429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */; };
 		42BC34C71ADFD1A100A8BA66 /* SSHMole.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 42BC34C61ADFD1A100A8BA66 /* SSHMole.iconset */; };
-		42CCF0A41AD3B3B200BE3841 /* SMServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CCF0A31AD3B3B200BE3841 /* SMServerConfigView.m */; };
-		42CCF0A81AD3B3D200BE3841 /* SMServerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CCF0A71AD3B3D200BE3841 /* SMServerListView.m */; };
 		42CCF0AA1AD3C3CF00BE3841 /* ServerListTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CCF0A91AD3C3CF00BE3841 /* ServerListTable.xib */; };
-		42D61B151AD15B610000CC58 /* SMServerConfigSplitController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D61B141AD15B610000CC58 /* SMServerConfigSplitController.m */; };
 		42E0A44E1ACFBAB800890EA7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A44D1ACFBAB800890EA7 /* AppDelegate.m */; };
 		42E0A4501ACFBAB800890EA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A44F1ACFBAB800890EA7 /* main.m */; };
 		42E0A4551ACFBAB800890EA7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42E0A4541ACFBAB800890EA7 /* Images.xcassets */; };
@@ -80,18 +80,18 @@
 		42840D881B2981040015DA34 /* SMSSHTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSHTask.m; sourceTree = "<group>"; };
 		42840D891B2981040015DA34 /* SMSSHTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSHTaskManager.h; sourceTree = "<group>"; };
 		42840D8A1B2981040015DA34 /* SMSSHTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSHTaskManager.m; sourceTree = "<group>"; };
+		42840D961B2981630015DA34 /* SMServerConfigSplitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigSplitController.h; sourceTree = "<group>"; };
+		42840D971B2981630015DA34 /* SMServerConfigSplitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigSplitController.m; sourceTree = "<group>"; };
+		42840D991B2981630015DA34 /* SMServerConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigView.h; sourceTree = "<group>"; };
+		42840D9A1B2981630015DA34 /* SMServerConfigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigView.m; sourceTree = "<group>"; };
+		42840D9C1B2981630015DA34 /* SMServerListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerListView.h; sourceTree = "<group>"; };
+		42840D9D1B2981630015DA34 /* SMServerListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerListView.m; sourceTree = "<group>"; };
 		429422881B268523008A19F8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SSHMoleSystemConfigurationHelper; sourceTree = BUILT_PRODUCTS_DIR; };
 		429422971B282681008A19F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		42BC34941ADCAE0E00A8BA66 /* SSHMole.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SSHMole.entitlements; sourceTree = "<group>"; };
 		42BC34C61ADFD1A100A8BA66 /* SSHMole.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = SSHMole.iconset; sourceTree = "<group>"; };
-		42CCF0A21AD3B3B200BE3841 /* SMServerConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigView.h; sourceTree = "<group>"; };
-		42CCF0A31AD3B3B200BE3841 /* SMServerConfigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigView.m; sourceTree = "<group>"; };
-		42CCF0A61AD3B3D200BE3841 /* SMServerListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerListView.h; sourceTree = "<group>"; };
-		42CCF0A71AD3B3D200BE3841 /* SMServerListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerListView.m; sourceTree = "<group>"; };
 		42CCF0A91AD3C3CF00BE3841 /* ServerListTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerListTable.xib; sourceTree = "<group>"; };
-		42D61B131AD15B610000CC58 /* SMServerConfigSplitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigSplitController.h; sourceTree = "<group>"; };
-		42D61B141AD15B610000CC58 /* SMServerConfigSplitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigSplitController.m; sourceTree = "<group>"; };
 		42E0A4471ACFBAB800890EA7 /* SSHMole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSHMole.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42E0A44B1ACFBAB800890EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42E0A44C1ACFBAB800890EA7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -225,39 +225,49 @@
 			path = SSHTask;
 			sourceTree = "<group>";
 		};
+		42840D941B2981630015DA34 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				42840D951B2981630015DA34 /* SMServerConfigSplitController */,
+				42840D981B2981630015DA34 /* SMServerConfigView */,
+				42840D9B1B2981630015DA34 /* SMServerListView */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		42840D951B2981630015DA34 /* SMServerConfigSplitController */ = {
+			isa = PBXGroup;
+			children = (
+				42840D961B2981630015DA34 /* SMServerConfigSplitController.h */,
+				42840D971B2981630015DA34 /* SMServerConfigSplitController.m */,
+			);
+			path = SMServerConfigSplitController;
+			sourceTree = "<group>";
+		};
+		42840D981B2981630015DA34 /* SMServerConfigView */ = {
+			isa = PBXGroup;
+			children = (
+				42840D991B2981630015DA34 /* SMServerConfigView.h */,
+				42840D9A1B2981630015DA34 /* SMServerConfigView.m */,
+			);
+			path = SMServerConfigView;
+			sourceTree = "<group>";
+		};
+		42840D9B1B2981630015DA34 /* SMServerListView */ = {
+			isa = PBXGroup;
+			children = (
+				42840D9C1B2981630015DA34 /* SMServerListView.h */,
+				42840D9D1B2981630015DA34 /* SMServerListView.m */,
+			);
+			path = SMServerListView;
+			sourceTree = "<group>";
+		};
 		429422961B282681008A19F8 /* SSHMoleSystemConfigurationHelper */ = {
 			isa = PBXGroup;
 			children = (
 				429422971B282681008A19F8 /* main.m */,
 			);
 			path = SSHMoleSystemConfigurationHelper;
-			sourceTree = "<group>";
-		};
-		42CCF0A11AD3B3B200BE3841 /* SMServerConfigView */ = {
-			isa = PBXGroup;
-			children = (
-				42CCF0A21AD3B3B200BE3841 /* SMServerConfigView.h */,
-				42CCF0A31AD3B3B200BE3841 /* SMServerConfigView.m */,
-			);
-			path = SMServerConfigView;
-			sourceTree = "<group>";
-		};
-		42CCF0A51AD3B3D200BE3841 /* SMServerListView */ = {
-			isa = PBXGroup;
-			children = (
-				42CCF0A61AD3B3D200BE3841 /* SMServerListView.h */,
-				42CCF0A71AD3B3D200BE3841 /* SMServerListView.m */,
-			);
-			path = SMServerListView;
-			sourceTree = "<group>";
-		};
-		42D61B121AD15B480000CC58 /* SMServerConfigSplitController */ = {
-			isa = PBXGroup;
-			children = (
-				42D61B131AD15B610000CC58 /* SMServerConfigSplitController.h */,
-				42D61B141AD15B610000CC58 /* SMServerConfigSplitController.m */,
-			);
-			path = SMServerConfigSplitController;
 			sourceTree = "<group>";
 		};
 		42E0A43E1ACFBAB800890EA7 = {
@@ -290,9 +300,7 @@
 				42BC34941ADCAE0E00A8BA66 /* SSHMole.entitlements */,
 				42E0A44C1ACFBAB800890EA7 /* AppDelegate.h */,
 				42E0A44D1ACFBAB800890EA7 /* AppDelegate.m */,
-				42D61B121AD15B480000CC58 /* SMServerConfigSplitController */,
-				42CCF0A51AD3B3D200BE3841 /* SMServerListView */,
-				42CCF0A11AD3B3B200BE3841 /* SMServerConfigView */,
+				42840D941B2981630015DA34 /* ViewControllers */,
 				427237B01AD7B01000BC072D /* Images */,
 				42BC34C61ADFD1A100A8BA66 /* SSHMole.iconset */,
 				42E0A4541ACFBAB800890EA7 /* Images.xcassets */,
@@ -468,19 +476,19 @@
 				42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */,
 				42840D8F1B2981040015DA34 /* SMSystemPreferenceManager.m in Sources */,
 				42840D8E1B2981040015DA34 /* SMUUIDHelper.m in Sources */,
+				42840D9E1B2981630015DA34 /* SMServerConfigSplitController.m in Sources */,
 				42840D8B1B2981040015DA34 /* NSView+Vibrancy.m in Sources */,
 				42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */,
 				42E0A4501ACFBAB800890EA7 /* main.m in Sources */,
 				42840D911B2981040015DA34 /* SMServerConfigStorage.m in Sources */,
 				42840D921B2981040015DA34 /* SMSSHTask.m in Sources */,
+				42840D9F1B2981630015DA34 /* SMServerConfigView.m in Sources */,
 				42840D8D1B2981040015DA34 /* SMOnlyIntegerNumberFormatter.m in Sources */,
+				42840DA01B2981630015DA34 /* SMServerListView.m in Sources */,
 				42840D931B2981040015DA34 /* SMSSHTaskManager.m in Sources */,
 				42840D8C1B2981040015DA34 /* SMUserEventDetectingTableView.m in Sources */,
 				42840D901B2981040015DA34 /* SMServerConfig.m in Sources */,
 				42E0A44E1ACFBAB800890EA7 /* AppDelegate.m in Sources */,
-				42CCF0A41AD3B3B200BE3841 /* SMServerConfigView.m in Sources */,
-				42D61B151AD15B610000CC58 /* SMServerConfigSplitController.m in Sources */,
-				42CCF0A81AD3B3D200BE3841 /* SMServerListView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
