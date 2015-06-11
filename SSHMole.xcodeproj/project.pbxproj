@@ -28,6 +28,7 @@
 		42840DA01B2981630015DA34 /* SMServerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D9D1B2981630015DA34 /* SMServerListView.m */; };
 		42840DA51B29820D0015DA34 /* SSHCommand.sh in Resources */ = {isa = PBXBuildFile; fileRef = 42840DA41B29820D0015DA34 /* SSHCommand.sh */; };
 		42840DA81B2985E10015DA34 /* CopyHelperCommand.sh in Resources */ = {isa = PBXBuildFile; fileRef = 42840DA71B2985E10015DA34 /* CopyHelperCommand.sh */; };
+		42840DB11B298CF50015DA34 /* SMCopyHelperWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840DB01B298CF50015DA34 /* SMCopyHelperWrapper.m */; };
 		429422891B268523008A19F8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429422881B268523008A19F8 /* SystemConfiguration.framework */; };
 		429422981B282681008A19F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 429422971B282681008A19F8 /* main.m */; };
 		429422A71B2828E3008A19F8 /* SSHMoleSystemConfigurationHelper in Resources */ = {isa = PBXBuildFile; fileRef = 429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */; };
@@ -88,6 +89,8 @@
 		42840D9D1B2981630015DA34 /* SMServerListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerListView.m; sourceTree = "<group>"; };
 		42840DA41B29820D0015DA34 /* SSHCommand.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = SSHCommand.sh; sourceTree = "<group>"; };
 		42840DA71B2985E10015DA34 /* CopyHelperCommand.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = CopyHelperCommand.sh; sourceTree = "<group>"; };
+		42840DAF1B298CF50015DA34 /* SMCopyHelperWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCopyHelperWrapper.h; sourceTree = "<group>"; };
+		42840DB01B298CF50015DA34 /* SMCopyHelperWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCopyHelperWrapper.m; sourceTree = "<group>"; };
 		429422881B268523008A19F8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SSHMoleSystemConfigurationHelper; sourceTree = BUILT_PRODUCTS_DIR; };
 		429422971B282681008A19F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -269,6 +272,8 @@
 			isa = PBXGroup;
 			children = (
 				42840DA71B2985E10015DA34 /* CopyHelperCommand.sh */,
+				42840DAF1B298CF50015DA34 /* SMCopyHelperWrapper.h */,
+				42840DB01B298CF50015DA34 /* SMCopyHelperWrapper.m */,
 			);
 			path = CommandLineResources;
 			sourceTree = "<group>";
@@ -492,6 +497,7 @@
 				42840D8B1B2981040015DA34 /* NSView+Vibrancy.m in Sources */,
 				42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */,
 				42E0A4501ACFBAB800890EA7 /* main.m in Sources */,
+				42840DB11B298CF50015DA34 /* SMCopyHelperWrapper.m in Sources */,
 				42840D911B2981040015DA34 /* SMServerConfigStorage.m in Sources */,
 				42840D921B2981040015DA34 /* SMSSHTask.m in Sources */,
 				42840D9F1B2981630015DA34 /* SMServerConfigView.m in Sources */,
