@@ -15,13 +15,18 @@
 		427237BA1AD7B01F00BC072D /* ServerListRedLight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 427237B41AD7B01F00BC072D /* ServerListRedLight@2x.png */; };
 		427237BB1AD7B01F00BC072D /* ServerListYellowLight.png in Resources */ = {isa = PBXBuildFile; fileRef = 427237B51AD7B01F00BC072D /* ServerListYellowLight.png */; };
 		427237BC1AD7B01F00BC072D /* ServerListYellowLight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 427237B61AD7B01F00BC072D /* ServerListYellowLight@2x.png */; };
-		427237C01AD7B18700BC072D /* SMUserEventDetectingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427237BF1AD7B18700BC072D /* SMUserEventDetectingTableView.m */; };
-		42905AF51AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42905AF41AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m */; };
-		429422841B2584B8008A19F8 /* SMSystemPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 429422831B2584B8008A19F8 /* SMSystemPreferenceManager.m */; };
+		42840D8B1B2981040015DA34 /* NSView+Vibrancy.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D731B2981040015DA34 /* NSView+Vibrancy.m */; };
+		42840D8C1B2981040015DA34 /* SMUserEventDetectingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D761B2981040015DA34 /* SMUserEventDetectingTableView.m */; };
+		42840D8D1B2981040015DA34 /* SMOnlyIntegerNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D791B2981040015DA34 /* SMOnlyIntegerNumberFormatter.m */; };
+		42840D8E1B2981040015DA34 /* SMUUIDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D7C1B2981040015DA34 /* SMUUIDHelper.m */; };
+		42840D8F1B2981040015DA34 /* SMSystemPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D801B2981040015DA34 /* SMSystemPreferenceManager.m */; };
+		42840D901B2981040015DA34 /* SMServerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D831B2981040015DA34 /* SMServerConfig.m */; };
+		42840D911B2981040015DA34 /* SMServerConfigStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D851B2981040015DA34 /* SMServerConfigStorage.m */; };
+		42840D921B2981040015DA34 /* SMSSHTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D881B2981040015DA34 /* SMSSHTask.m */; };
+		42840D931B2981040015DA34 /* SMSSHTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840D8A1B2981040015DA34 /* SMSSHTaskManager.m */; };
 		429422891B268523008A19F8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429422881B268523008A19F8 /* SystemConfiguration.framework */; };
 		429422981B282681008A19F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 429422971B282681008A19F8 /* main.m */; };
 		429422A71B2828E3008A19F8 /* SSHMoleSystemConfigurationHelper in Resources */ = {isa = PBXBuildFile; fileRef = 429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */; };
-		42B2F0851AD2DF4B000977C4 /* SMSSHTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */; };
 		42BC34C71ADFD1A100A8BA66 /* SSHMole.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 42BC34C61ADFD1A100A8BA66 /* SSHMole.iconset */; };
 		42CCF0A41AD3B3B200BE3841 /* SMServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CCF0A31AD3B3B200BE3841 /* SMServerConfigView.m */; };
 		42CCF0A81AD3B3D200BE3841 /* SMServerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CCF0A71AD3B3D200BE3841 /* SMServerListView.m */; };
@@ -33,12 +38,7 @@
 		42E0A4581ACFBAB800890EA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42E0A4561ACFBAB800890EA7 /* Main.storyboard */; };
 		42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4771ACFBD4700890EA7 /* SSKeychain.m */; };
 		42E0A47A1ACFBD5500890EA7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E0A4791ACFBD5500890EA7 /* Security.framework */; };
-		42E0A47E1ACFBDAA00890EA7 /* SMServerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A47D1ACFBDAA00890EA7 /* SMServerConfig.m */; };
-		42E0A4811ACFBDBA00890EA7 /* SMSSHTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4801ACFBDBA00890EA7 /* SMSSHTask.m */; };
-		42E0A4841ACFC49400890EA7 /* SMServerConfigStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4831ACFC49400890EA7 /* SMServerConfigStorage.m */; };
 		42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */; };
-		42F8D6651AD14D400085DF6C /* SMUUIDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F8D6641AD14D400085DF6C /* SMUUIDHelper.m */; };
-		42F8D6691AD14DE90085DF6C /* NSView+Vibrancy.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F8D6681AD14DE90085DF6C /* NSView+Vibrancy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,17 +62,27 @@
 		427237B41AD7B01F00BC072D /* ServerListRedLight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ServerListRedLight@2x.png"; sourceTree = "<group>"; };
 		427237B51AD7B01F00BC072D /* ServerListYellowLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ServerListYellowLight.png; sourceTree = "<group>"; };
 		427237B61AD7B01F00BC072D /* ServerListYellowLight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ServerListYellowLight@2x.png"; sourceTree = "<group>"; };
-		427237BE1AD7B18700BC072D /* SMUserEventDetectingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUserEventDetectingTableView.h; sourceTree = "<group>"; };
-		427237BF1AD7B18700BC072D /* SMUserEventDetectingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMUserEventDetectingTableView.m; sourceTree = "<group>"; };
-		42905AF31AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMOnlyIntegerNumberFormatter.h; sourceTree = "<group>"; };
-		42905AF41AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMOnlyIntegerNumberFormatter.m; sourceTree = "<group>"; };
-		429422821B2584B8008A19F8 /* SMSystemPreferenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSystemPreferenceManager.h; sourceTree = "<group>"; };
-		429422831B2584B8008A19F8 /* SMSystemPreferenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSystemPreferenceManager.m; sourceTree = "<group>"; };
+		42840D721B2981040015DA34 /* NSView+Vibrancy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+Vibrancy.h"; sourceTree = "<group>"; };
+		42840D731B2981040015DA34 /* NSView+Vibrancy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+Vibrancy.m"; sourceTree = "<group>"; };
+		42840D751B2981040015DA34 /* SMUserEventDetectingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUserEventDetectingTableView.h; sourceTree = "<group>"; };
+		42840D761B2981040015DA34 /* SMUserEventDetectingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMUserEventDetectingTableView.m; sourceTree = "<group>"; };
+		42840D781B2981040015DA34 /* SMOnlyIntegerNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMOnlyIntegerNumberFormatter.h; sourceTree = "<group>"; };
+		42840D791B2981040015DA34 /* SMOnlyIntegerNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMOnlyIntegerNumberFormatter.m; sourceTree = "<group>"; };
+		42840D7B1B2981040015DA34 /* SMUUIDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUUIDHelper.h; sourceTree = "<group>"; };
+		42840D7C1B2981040015DA34 /* SMUUIDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMUUIDHelper.m; sourceTree = "<group>"; };
+		42840D7F1B2981040015DA34 /* SMSystemPreferenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSystemPreferenceManager.h; sourceTree = "<group>"; };
+		42840D801B2981040015DA34 /* SMSystemPreferenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSystemPreferenceManager.m; sourceTree = "<group>"; };
+		42840D821B2981040015DA34 /* SMServerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfig.h; sourceTree = "<group>"; };
+		42840D831B2981040015DA34 /* SMServerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfig.m; sourceTree = "<group>"; };
+		42840D841B2981040015DA34 /* SMServerConfigStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigStorage.h; sourceTree = "<group>"; };
+		42840D851B2981040015DA34 /* SMServerConfigStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigStorage.m; sourceTree = "<group>"; };
+		42840D871B2981040015DA34 /* SMSSHTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSHTask.h; sourceTree = "<group>"; };
+		42840D881B2981040015DA34 /* SMSSHTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSHTask.m; sourceTree = "<group>"; };
+		42840D891B2981040015DA34 /* SMSSHTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSHTaskManager.h; sourceTree = "<group>"; };
+		42840D8A1B2981040015DA34 /* SMSSHTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSHTaskManager.m; sourceTree = "<group>"; };
 		429422881B268523008A19F8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SSHMoleSystemConfigurationHelper; sourceTree = BUILT_PRODUCTS_DIR; };
 		429422971B282681008A19F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		42B2F0831AD2DF4B000977C4 /* SMSSHTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSHTaskManager.h; sourceTree = "<group>"; };
-		42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSHTaskManager.m; sourceTree = "<group>"; };
 		42BC34941ADCAE0E00A8BA66 /* SSHMole.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SSHMole.entitlements; sourceTree = "<group>"; };
 		42BC34C61ADFD1A100A8BA66 /* SSHMole.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = SSHMole.iconset; sourceTree = "<group>"; };
 		42CCF0A21AD3B3B200BE3841 /* SMServerConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigView.h; sourceTree = "<group>"; };
@@ -92,18 +102,8 @@
 		42E0A4761ACFBD4700890EA7 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
 		42E0A4771ACFBD4700890EA7 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		42E0A4791ACFBD5500890EA7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		42E0A47C1ACFBDAA00890EA7 /* SMServerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfig.h; sourceTree = "<group>"; };
-		42E0A47D1ACFBDAA00890EA7 /* SMServerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfig.m; sourceTree = "<group>"; };
-		42E0A47F1ACFBDBA00890EA7 /* SMSSHTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSSHTask.h; sourceTree = "<group>"; };
-		42E0A4801ACFBDBA00890EA7 /* SMSSHTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSSHTask.m; sourceTree = "<group>"; };
-		42E0A4821ACFC49400890EA7 /* SMServerConfigStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMServerConfigStorage.h; sourceTree = "<group>"; };
-		42E0A4831ACFC49400890EA7 /* SMServerConfigStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMServerConfigStorage.m; sourceTree = "<group>"; };
 		42E0A48D1AD0073500890EA7 /* YYYJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYYJsonParser.h; sourceTree = "<group>"; };
 		42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYYJsonParser.m; sourceTree = "<group>"; };
-		42F8D6631AD14D400085DF6C /* SMUUIDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUUIDHelper.h; sourceTree = "<group>"; };
-		42F8D6641AD14D400085DF6C /* SMUUIDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMUUIDHelper.m; sourceTree = "<group>"; };
-		42F8D6671AD14DE90085DF6C /* NSView+Vibrancy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+Vibrancy.h"; sourceTree = "<group>"; };
-		42F8D6681AD14DE90085DF6C /* NSView+Vibrancy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+Vibrancy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,39 +139,90 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
-		427237BD1AD7B17400BC072D /* SMCellClickDetectingTableView */ = {
+		42840D701B2981040015DA34 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				427237BE1AD7B18700BC072D /* SMUserEventDetectingTableView.h */,
-				427237BF1AD7B18700BC072D /* SMUserEventDetectingTableView.m */,
+				42840D711B2981040015DA34 /* NSView+Vibrancy */,
+				42840D741B2981040015DA34 /* SMCellClickDetectingTableView */,
+				42840D771B2981040015DA34 /* SMOnlyIntegerNumberFormatter */,
+				42840D7A1B2981040015DA34 /* SMUUIDHelper */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		42840D711B2981040015DA34 /* NSView+Vibrancy */ = {
+			isa = PBXGroup;
+			children = (
+				42840D721B2981040015DA34 /* NSView+Vibrancy.h */,
+				42840D731B2981040015DA34 /* NSView+Vibrancy.m */,
+			);
+			path = "NSView+Vibrancy";
+			sourceTree = "<group>";
+		};
+		42840D741B2981040015DA34 /* SMCellClickDetectingTableView */ = {
+			isa = PBXGroup;
+			children = (
+				42840D751B2981040015DA34 /* SMUserEventDetectingTableView.h */,
+				42840D761B2981040015DA34 /* SMUserEventDetectingTableView.m */,
 			);
 			path = SMCellClickDetectingTableView;
 			sourceTree = "<group>";
 		};
-		42905AF21AD9A0CC00B12AD3 /* SMOnlyIntegerNumberFormatter */ = {
+		42840D771B2981040015DA34 /* SMOnlyIntegerNumberFormatter */ = {
 			isa = PBXGroup;
 			children = (
-				42905AF31AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.h */,
-				42905AF41AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m */,
+				42840D781B2981040015DA34 /* SMOnlyIntegerNumberFormatter.h */,
+				42840D791B2981040015DA34 /* SMOnlyIntegerNumberFormatter.m */,
 			);
 			path = SMOnlyIntegerNumberFormatter;
 			sourceTree = "<group>";
 		};
-		429422801B25848D008A19F8 /* Manager */ = {
+		42840D7A1B2981040015DA34 /* SMUUIDHelper */ = {
 			isa = PBXGroup;
 			children = (
-				429422811B2584A6008A19F8 /* SystemPreferenceManager */,
+				42840D7B1B2981040015DA34 /* SMUUIDHelper.h */,
+				42840D7C1B2981040015DA34 /* SMUUIDHelper.m */,
+			);
+			path = SMUUIDHelper;
+			sourceTree = "<group>";
+		};
+		42840D7D1B2981040015DA34 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				42840D7E1B2981040015DA34 /* SystemPreferenceManager */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		429422811B2584A6008A19F8 /* SystemPreferenceManager */ = {
+		42840D7E1B2981040015DA34 /* SystemPreferenceManager */ = {
 			isa = PBXGroup;
 			children = (
-				429422821B2584B8008A19F8 /* SMSystemPreferenceManager.h */,
-				429422831B2584B8008A19F8 /* SMSystemPreferenceManager.m */,
+				42840D7F1B2981040015DA34 /* SMSystemPreferenceManager.h */,
+				42840D801B2981040015DA34 /* SMSystemPreferenceManager.m */,
 			);
 			path = SystemPreferenceManager;
+			sourceTree = "<group>";
+		};
+		42840D811B2981040015DA34 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				42840D821B2981040015DA34 /* SMServerConfig.h */,
+				42840D831B2981040015DA34 /* SMServerConfig.m */,
+				42840D841B2981040015DA34 /* SMServerConfigStorage.h */,
+				42840D851B2981040015DA34 /* SMServerConfigStorage.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		42840D861B2981040015DA34 /* SSHTask */ = {
+			isa = PBXGroup;
+			children = (
+				42840D871B2981040015DA34 /* SMSSHTask.h */,
+				42840D881B2981040015DA34 /* SMSSHTask.m */,
+				42840D891B2981040015DA34 /* SMSSHTaskManager.h */,
+				42840D8A1B2981040015DA34 /* SMSSHTaskManager.m */,
+			);
+			path = SSHTask;
 			sourceTree = "<group>";
 		};
 		429422961B282681008A19F8 /* SSHMoleSystemConfigurationHelper */ = {
@@ -212,10 +263,6 @@
 		42E0A43E1ACFBAB800890EA7 = {
 			isa = PBXGroup;
 			children = (
-				42E0A4881ACFC66B00890EA7 /* Helpers */,
-				429422801B25848D008A19F8 /* Manager */,
-				42E0A4721ACFBD2700890EA7 /* Model */,
-				42E0A4731ACFBD2700890EA7 /* SSHTask */,
 				42E0A4491ACFBAB800890EA7 /* SSHMole */,
 				429422961B282681008A19F8 /* SSHMoleSystemConfigurationHelper */,
 				42E0A47B1ACFBD7700890EA7 /* Frameworks */,
@@ -236,6 +283,10 @@
 		42E0A4491ACFBAB800890EA7 /* SSHMole */ = {
 			isa = PBXGroup;
 			children = (
+				42840D701B2981040015DA34 /* Helpers */,
+				42840D7D1B2981040015DA34 /* Manager */,
+				42840D811B2981040015DA34 /* Model */,
+				42840D861B2981040015DA34 /* SSHTask */,
 				42BC34941ADCAE0E00A8BA66 /* SSHMole.entitlements */,
 				42E0A44C1ACFBAB800890EA7 /* AppDelegate.h */,
 				42E0A44D1ACFBAB800890EA7 /* AppDelegate.m */,
@@ -261,28 +312,6 @@
 				42E0A44F1ACFBAB800890EA7 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		42E0A4721ACFBD2700890EA7 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				42E0A47C1ACFBDAA00890EA7 /* SMServerConfig.h */,
-				42E0A47D1ACFBDAA00890EA7 /* SMServerConfig.m */,
-				42E0A4821ACFC49400890EA7 /* SMServerConfigStorage.h */,
-				42E0A4831ACFC49400890EA7 /* SMServerConfigStorage.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		42E0A4731ACFBD2700890EA7 /* SSHTask */ = {
-			isa = PBXGroup;
-			children = (
-				42E0A47F1ACFBDBA00890EA7 /* SMSSHTask.h */,
-				42E0A4801ACFBDBA00890EA7 /* SMSSHTask.m */,
-				42B2F0831AD2DF4B000977C4 /* SMSSHTaskManager.h */,
-				42B2F0841AD2DF4B000977C4 /* SMSSHTaskManager.m */,
-			);
-			path = SSHTask;
 			sourceTree = "<group>";
 		};
 		42E0A4741ACFBD3500890EA7 /* ThirdPartyLib */ = {
@@ -313,17 +342,6 @@
 			path = SSHMoleTests;
 			sourceTree = "<group>";
 		};
-		42E0A4881ACFC66B00890EA7 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				42905AF21AD9A0CC00B12AD3 /* SMOnlyIntegerNumberFormatter */,
-				42F8D6661AD14DC80085DF6C /* NSView+Vibrancy */,
-				42F8D6621AD14D400085DF6C /* SMUUIDHelper */,
-				427237BD1AD7B17400BC072D /* SMCellClickDetectingTableView */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
 		42E0A48C1AD0073500890EA7 /* YYYJsonParser */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,24 +349,6 @@
 				42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */,
 			);
 			path = YYYJsonParser;
-			sourceTree = "<group>";
-		};
-		42F8D6621AD14D400085DF6C /* SMUUIDHelper */ = {
-			isa = PBXGroup;
-			children = (
-				42F8D6631AD14D400085DF6C /* SMUUIDHelper.h */,
-				42F8D6641AD14D400085DF6C /* SMUUIDHelper.m */,
-			);
-			path = SMUUIDHelper;
-			sourceTree = "<group>";
-		};
-		42F8D6661AD14DC80085DF6C /* NSView+Vibrancy */ = {
-			isa = PBXGroup;
-			children = (
-				42F8D6671AD14DE90085DF6C /* NSView+Vibrancy.h */,
-				42F8D6681AD14DE90085DF6C /* NSView+Vibrancy.m */,
-			);
-			path = "NSView+Vibrancy";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -465,19 +465,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42B2F0851AD2DF4B000977C4 /* SMSSHTaskManager.m in Sources */,
-				42E0A47E1ACFBDAA00890EA7 /* SMServerConfig.m in Sources */,
-				42E0A4811ACFBDBA00890EA7 /* SMSSHTask.m in Sources */,
 				42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */,
+				42840D8F1B2981040015DA34 /* SMSystemPreferenceManager.m in Sources */,
+				42840D8E1B2981040015DA34 /* SMUUIDHelper.m in Sources */,
+				42840D8B1B2981040015DA34 /* NSView+Vibrancy.m in Sources */,
 				42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */,
-				429422841B2584B8008A19F8 /* SMSystemPreferenceManager.m in Sources */,
-				42F8D6691AD14DE90085DF6C /* NSView+Vibrancy.m in Sources */,
-				42F8D6651AD14D400085DF6C /* SMUUIDHelper.m in Sources */,
 				42E0A4501ACFBAB800890EA7 /* main.m in Sources */,
-				427237C01AD7B18700BC072D /* SMUserEventDetectingTableView.m in Sources */,
-				42905AF51AD9A0D900B12AD3 /* SMOnlyIntegerNumberFormatter.m in Sources */,
+				42840D911B2981040015DA34 /* SMServerConfigStorage.m in Sources */,
+				42840D921B2981040015DA34 /* SMSSHTask.m in Sources */,
+				42840D8D1B2981040015DA34 /* SMOnlyIntegerNumberFormatter.m in Sources */,
+				42840D931B2981040015DA34 /* SMSSHTaskManager.m in Sources */,
+				42840D8C1B2981040015DA34 /* SMUserEventDetectingTableView.m in Sources */,
+				42840D901B2981040015DA34 /* SMServerConfig.m in Sources */,
 				42E0A44E1ACFBAB800890EA7 /* AppDelegate.m in Sources */,
-				42E0A4841ACFC49400890EA7 /* SMServerConfigStorage.m in Sources */,
 				42CCF0A41AD3B3B200BE3841 /* SMServerConfigView.m in Sources */,
 				42D61B151AD15B610000CC58 /* SMServerConfigSplitController.m in Sources */,
 				42CCF0A81AD3B3D200BE3841 /* SMServerListView.m in Sources */,
