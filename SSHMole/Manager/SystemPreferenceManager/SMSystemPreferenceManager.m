@@ -31,21 +31,27 @@
     if (self)
     {
 #warning todo: change proxy mode with other settings.
-        self.proxyMode = SMSystemProferenceManagerProxyModeGlobal;
+        _proxyMode = SMSystemProferenceManagerProxyModeGlobal;
     }
     return self;
 }
 
 - (void)setProxyMode:(SMSystemProferenceManagerProxyMode)proxyMode
 {
-    _proxyMode = proxyMode;
-    [self updateProxySettings];
+    if (_proxyMode != proxyMode)
+    {
+        _proxyMode = proxyMode;
+        [self updateProxySettings];
+    }
 }
 
 - (void)setCurrentProxySettingsByConfig:(SMServerConfig *)config
 {
-    _currentConfig = config;
-    [self updateProxySettings];
+    if (_currentConfig != config)
+    {
+        _currentConfig = config;
+        [self updateProxySettings];
+    }
 }
 
 - (void)updateProxySettings
@@ -54,7 +60,7 @@
     {
         [self runSystemConfigurationHelperWithMode:@"off" localPort:nil];
     }
-    if (_proxyMode == SMSystemProferenceManagerProxyModeOff)
+    else if (_proxyMode == SMSystemProferenceManagerProxyModeOff)
     {
         [self runSystemConfigurationHelperWithMode:@"off" localPort:nil];
     }
