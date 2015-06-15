@@ -8,19 +8,27 @@
 
 #import "SMCopyHelperWrapper.h"
 
-static NSString *const CopyHelperPath = @"~/Library/Containers/openthread.SSHMole/SSHMoleSystemConfigurationHelper";
-
 @implementation SMCopyHelperWrapper
 
-+ (BOOL)installHelper
++ (NSString *)helperPath
+{
+    static NSString *helperPath = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *homeDir = NSHomeDirectory();
+        helperPath = [homeDir stringByAppendingPathComponent:@"/Library/Containers/openthread.SSHMole/SSHMoleSystemConfigurationHelper"];
+    });
+    return helperPath;
+}
+
++ (BOOL)installHelperIfNotExist
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:CopyHelperPath])
+    if (![fileManager fileExistsAtPath:[self helperPath]])
     {
-        NSString *helperPath = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"install_helper.sh"];
-        NSLog(@"run install script: %@", helperPath);
+        NSString *installerPath = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"CopyHelperCommand.sh"];
         NSDictionary *error;
-        NSString *script = [NSString stringWithFormat:@"do shell script \"bash %@\" with administrator privileges", helperPath];
+        NSString *script = [NSString stringWithFormat:@"do shell script \"bash %@\" with administrator privileges", installerPath];
         NSAppleScript *appleScript = [[NSAppleScript new] initWithSource:script];
         NSAppleEventDescriptor *descriptor = [appleScript executeAndReturnError:&error];
         if (descriptor && !error)

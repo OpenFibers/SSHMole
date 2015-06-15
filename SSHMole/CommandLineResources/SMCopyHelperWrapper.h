@@ -10,6 +10,6 @@
 
 @interface SMCopyHelperWrapper : NSObject
 
-+ (BOOL)installHelper;
++ (BOOL)installHelperIfNotExist;
 
 @end

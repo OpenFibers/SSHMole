@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "SMCopyHelperWrapper.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) NSWindowController *windowController;
@@ -16,6 +17,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    //Install change system network setting helper.
+    [SMCopyHelperWrapper installHelperIfNotExist];
+    
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     self.windowController = [storyboard instantiateControllerWithIdentifier:@"ServerConfigController"];
     [self.windowController.window makeKeyAndOrderFront:self];
