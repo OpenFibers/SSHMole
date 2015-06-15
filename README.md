@@ -7,6 +7,10 @@ OSX 下使用 ssh 穿越功夫网。
 
 ![demo](https://raw.githubusercontent.com/OpenFibers/SSHMole/master/demo.png)
 
+##已编译好的App下载链接
+[SSHMole v0.1](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v0.1.zip)
+
 ##TODO
 1. status bar icon
 2. auto Proxy Mode
+
