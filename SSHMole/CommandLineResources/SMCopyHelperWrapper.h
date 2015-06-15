@@ -10,6 +10,8 @@
 
 @interface SMCopyHelperWrapper : NSObject
 
++ (NSString *)helperPath;
+
 + (BOOL)installHelperIfNotExist;
 
 @end
