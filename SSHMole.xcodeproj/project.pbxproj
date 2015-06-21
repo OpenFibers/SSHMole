@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		423B41971B3740BC00BA52CA /* OTHTTPDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 423B41941B3740BC00BA52CA /* OTHTTPDownloadRequest.m */; };
+		423B41981B3740BC00BA52CA /* OTHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 423B41961B3740BC00BA52CA /* OTHTTPRequest.m */; };
 		4262AF211AD17ADF00C54A2A /* ServerConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */; };
 		427237B71AD7B01F00BC072D /* ServerListGreenLight.png in Resources */ = {isa = PBXBuildFile; fileRef = 427237B11AD7B01F00BC072D /* ServerListGreenLight.png */; };
 		427237B81AD7B01F00BC072D /* ServerListGreenLight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 427237B21AD7B01F00BC072D /* ServerListGreenLight@2x.png */; };
@@ -72,6 +74,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		423B41931B3740BC00BA52CA /* OTHTTPDownloadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTHTTPDownloadRequest.h; sourceTree = "<group>"; };
+		423B41941B3740BC00BA52CA /* OTHTTPDownloadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTHTTPDownloadRequest.m; sourceTree = "<group>"; };
+		423B41951B3740BC00BA52CA /* OTHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTHTTPRequest.h; sourceTree = "<group>"; };
+		423B41961B3740BC00BA52CA /* OTHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTHTTPRequest.m; sourceTree = "<group>"; };
 		4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerConfigView.xib; sourceTree = "<group>"; };
 		427237B11AD7B01F00BC072D /* ServerListGreenLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ServerListGreenLight.png; sourceTree = "<group>"; };
 		427237B21AD7B01F00BC072D /* ServerListGreenLight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ServerListGreenLight@2x.png"; sourceTree = "<group>"; };
@@ -181,6 +187,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		423B41921B3740BC00BA52CA /* OTHTTPRequest */ = {
+			isa = PBXGroup;
+			children = (
+				423B41931B3740BC00BA52CA /* OTHTTPDownloadRequest.h */,
+				423B41941B3740BC00BA52CA /* OTHTTPDownloadRequest.m */,
+				423B41951B3740BC00BA52CA /* OTHTTPRequest.h */,
+				423B41961B3740BC00BA52CA /* OTHTTPRequest.m */,
+			);
+			path = OTHTTPRequest;
+			sourceTree = "<group>";
+		};
 		427237B01AD7B01000BC072D /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +358,7 @@
 		42C5C6E11B37301200C69389 /* ThirdPartyLibs */ = {
 			isa = PBXGroup;
 			children = (
+				423B41921B3740BC00BA52CA /* OTHTTPRequest */,
 				42C5C6E21B37301200C69389 /* GCDWebServer */,
 			);
 			path = ThirdPartyLibs;
@@ -634,12 +652,14 @@
 				42840D8F1B2981040015DA34 /* SMSystemPreferenceManager.m in Sources */,
 				42C5C70C1B37301200C69389 /* GCDWebServerErrorResponse.m in Sources */,
 				42840D8E1B2981040015DA34 /* SMUUIDHelper.m in Sources */,
+				423B41971B3740BC00BA52CA /* OTHTTPDownloadRequest.m in Sources */,
 				42C5C70A1B37301200C69389 /* GCDWebServerURLEncodedFormRequest.m in Sources */,
 				42C5C70D1B37301200C69389 /* GCDWebServerFileResponse.m in Sources */,
 				42840D9E1B2981630015DA34 /* SMServerConfigSplitController.m in Sources */,
 				42840D8B1B2981040015DA34 /* NSView+Vibrancy.m in Sources */,
 				42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */,
 				42C5C7041B37301200C69389 /* GCDWebServerFunctions.m in Sources */,
+				423B41981B3740BC00BA52CA /* OTHTTPRequest.m in Sources */,
 				42E0A4501ACFBAB800890EA7 /* main.m in Sources */,
 				42C5C7081B37301200C69389 /* GCDWebServerFileRequest.m in Sources */,
 				42840DB11B298CF50015DA34 /* SMCopyHelperWrapper.m in Sources */,

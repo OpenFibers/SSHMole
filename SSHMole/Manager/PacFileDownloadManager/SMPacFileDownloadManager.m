@@ -7,6 +7,7 @@
 //
 
 #import "SMPacFileDownloadManager.h"
+#import "OTHTTPRequest.h"
 
 @implementation SMPacFileDownloadManager
 
