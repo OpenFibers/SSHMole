@@ -13,7 +13,7 @@
 
 + (instancetype)defaultManager;
 
-- (void)beginPacServerWithData:(NSData *)data path:(NSString *)path;
+- (void)beginPacServerWithPort:(NSUInteger)port data:(NSData *)data path:(NSString *)path;
 
 - (void)stopPacServer;
 
