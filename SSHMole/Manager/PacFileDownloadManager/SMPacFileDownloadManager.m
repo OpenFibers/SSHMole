@@ -61,7 +61,7 @@
     NSDictionary *replaceOption = @{@"var IP_ADDRESS = 'www.abc.com:443';": localServerString,
                                     @"var PROXY_TYPE = 'HTTPS';": @"var PROXY_TYPE = 'SOCKS5';",
                                     };
-    [self getPacDataWithURL:url
+    [self getPacDataWithURL:(shouldUpdate ? url : nil)
                   cachePath:cachePath
               replaceOption:replaceOption
                  completion:completion];
