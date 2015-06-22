@@ -30,6 +30,11 @@ typedef NS_ENUM(NSUInteger, SMSystemProferenceManagerProxyMode) {
 + (instancetype)managerWithPacHTTPServerPort:(NSUInteger)port;
 
 /**
+ *  manager 当前的pac HTTP 本地端口
+ */
+@property (nonatomic, readonly) NSUInteger pacHTTPServerPort;
+
+/**
  *  设置proxy mode，manager将根据需要自行更新系统设置
  */
 @property (nonatomic, assign) SMSystemProferenceManagerProxyMode proxyMode;

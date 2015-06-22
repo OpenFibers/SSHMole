@@ -33,6 +33,11 @@
     return self;
 }
 
+- (NSUInteger)pacHTTPServerPort
+{
+    return _pacHTTPServerPort;
+}
+
 - (void)setProxyMode:(SMSystemProferenceManagerProxyMode)proxyMode
 {
     if (_proxyMode != proxyMode)
