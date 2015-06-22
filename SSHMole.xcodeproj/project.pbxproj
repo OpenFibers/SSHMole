@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		423B41971B3740BC00BA52CA /* OTHTTPDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 423B41941B3740BC00BA52CA /* OTHTTPDownloadRequest.m */; };
 		423B41981B3740BC00BA52CA /* OTHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 423B41961B3740BC00BA52CA /* OTHTTPRequest.m */; };
+		423B419C1B37B38000BA52CA /* SMSandboxPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 423B419B1B37B38000BA52CA /* SMSandboxPath.m */; };
 		4262AF211AD17ADF00C54A2A /* ServerConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */; };
 		427237B71AD7B01F00BC072D /* ServerListGreenLight.png in Resources */ = {isa = PBXBuildFile; fileRef = 427237B11AD7B01F00BC072D /* ServerListGreenLight.png */; };
 		427237B81AD7B01F00BC072D /* ServerListGreenLight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 427237B21AD7B01F00BC072D /* ServerListGreenLight@2x.png */; };
@@ -78,6 +79,8 @@
 		423B41941B3740BC00BA52CA /* OTHTTPDownloadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTHTTPDownloadRequest.m; sourceTree = "<group>"; };
 		423B41951B3740BC00BA52CA /* OTHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTHTTPRequest.h; sourceTree = "<group>"; };
 		423B41961B3740BC00BA52CA /* OTHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTHTTPRequest.m; sourceTree = "<group>"; };
+		423B419A1B37B38000BA52CA /* SMSandboxPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSandboxPath.h; sourceTree = "<group>"; };
+		423B419B1B37B38000BA52CA /* SMSandboxPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSandboxPath.m; sourceTree = "<group>"; };
 		4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerConfigView.xib; sourceTree = "<group>"; };
 		427237B11AD7B01F00BC072D /* ServerListGreenLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ServerListGreenLight.png; sourceTree = "<group>"; };
 		427237B21AD7B01F00BC072D /* ServerListGreenLight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ServerListGreenLight@2x.png"; sourceTree = "<group>"; };
@@ -198,6 +201,15 @@
 			path = OTHTTPRequest;
 			sourceTree = "<group>";
 		};
+		423B41991B37B37500BA52CA /* SanboxPath */ = {
+			isa = PBXGroup;
+			children = (
+				423B419A1B37B38000BA52CA /* SMSandboxPath.h */,
+				423B419B1B37B38000BA52CA /* SMSandboxPath.m */,
+			);
+			path = SanboxPath;
+			sourceTree = "<group>";
+		};
 		427237B01AD7B01000BC072D /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +226,7 @@
 		42840D701B2981040015DA34 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				423B41991B37B37500BA52CA /* SanboxPath */,
 				42840D711B2981040015DA34 /* NSView+Vibrancy */,
 				42840D741B2981040015DA34 /* SMCellClickDetectingTableView */,
 				42840D771B2981040015DA34 /* SMOnlyIntegerNumberFormatter */,
@@ -677,6 +690,7 @@
 				42840D8C1B2981040015DA34 /* SMUserEventDetectingTableView.m in Sources */,
 				42840D901B2981040015DA34 /* SMServerConfig.m in Sources */,
 				42C5C7031B37301200C69389 /* GCDWebServerConnection.m in Sources */,
+				423B419C1B37B38000BA52CA /* SMSandboxPath.m in Sources */,
 				42C5C7181B373BE900C69389 /* SMPacFileDownloadManager.m in Sources */,
 				42C5C7051B37301200C69389 /* GCDWebServerRequest.m in Sources */,
 				42E0A44E1ACFBAB800890EA7 /* AppDelegate.m in Sources */,
