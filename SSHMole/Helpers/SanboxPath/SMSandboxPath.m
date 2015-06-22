@@ -22,12 +22,8 @@
 
 + (NSString *)pacPathForName:(NSString *)name
 {
-    static NSString *helperPath = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        helperPath = [[self sandboxPath] stringByAppendingPathComponent:@"Documents/PAC"];
-        helperPath = [helperPath stringByAppendingPathComponent:name];
-    });
+    NSString *helperPath = [[self sandboxPath] stringByAppendingPathComponent:@"Documents/PAC"];
+    helperPath = [helperPath stringByAppendingPathComponent:name];
     return helperPath;
 }
 
