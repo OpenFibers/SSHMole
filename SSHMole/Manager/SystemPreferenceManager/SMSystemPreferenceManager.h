@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, SMSystemProferenceManagerProxyMode) {
 
 @interface SMSystemPreferenceManager : NSObject
 
-+ (instancetype)defaultManager;
++ (instancetype)managerWithPacHTTPServerPort:(NSUInteger)port;
 @property (nonatomic, assign) SMSystemProferenceManagerProxyMode proxyMode;
 - (void)setCurrentProxySettingsByConfig:(SMServerConfig *)config;
 

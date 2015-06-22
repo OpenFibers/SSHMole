@@ -12,25 +12,22 @@
 
 @implementation SMSystemPreferenceManager
 {
+    NSUInteger _pacHTTPServerPort;
     SMServerConfig *_currentConfig;
 }
 
-+ (instancetype)defaultManager
++ (instancetype)managerWithPacHTTPServerPort:(NSUInteger)port
 {
-    static id manager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        manager = [[self alloc] init];
-    });
+    id manager = [[self alloc] initWithPacHTTPServerPort:port];
     return manager;
 }
 
-- (id)init
+- (id)initWithPacHTTPServerPort:(NSUInteger)port
 {
     self = [super init];
     if (self)
     {
-#warning todo: change proxy mode with other settings.
+        _pacHTTPServerPort = port;
         _proxyMode = SMSystemProferenceManagerProxyModeGlobal;
     }
     return self;
@@ -73,8 +70,7 @@
         }
         else if (_proxyMode == SMSystemProferenceManagerProxyModeAuto)
         {
-#warning change local port string to http server port
-            NSString *localPortString = @"8091";
+            NSString *localPortString = [NSString stringWithFormat:@"%tu", _pacHTTPServerPort];
             [self runSystemConfigurationHelperWithMode:@"auto" localPort:localPortString];
         }
     }
@@ -82,44 +78,46 @@
 
 - (void)runSystemConfigurationHelperWithMode:(NSString *)mode localPort:(NSString *)localPort
 {
-    NSTask *task;
-    task = [[NSTask alloc] init];
-    [task setLaunchPath:[SMCopyHelperWrapper helperPath]];
-    
-    NSArray *arguments;
-    arguments = [NSArray arrayWithObjects:mode, localPort, nil];
-    [task setArguments:arguments];
-    
-    NSPipe *stdoutpipe;
-    stdoutpipe = [NSPipe pipe];
-    [task setStandardOutput:stdoutpipe];
-    
-    NSPipe *stderrpipe;
-    stderrpipe = [NSPipe pipe];
-    [task setStandardError:stderrpipe];
-    
-    NSFileHandle *file;
-    file = [stdoutpipe fileHandleForReading];
-    
-    [task launch];
-    
-    NSData *data;
-    data = [file readDataToEndOfFile];
-    
-    NSString *string;
-    string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    if (string.length > 0)
-    {
-        NSLog(@"SSHMole: change network settings result: %@", string);
-    }
-    
-    file = [stderrpipe fileHandleForReading];
-    data = [file readDataToEndOfFile];
-    string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    if (string.length > 0)
-    {
-        NSLog(@"SSHMole: change network settings error: %@", string);
-    }
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSTask *task;
+        task = [[NSTask alloc] init];
+        [task setLaunchPath:[SMCopyHelperWrapper helperPath]];
+        
+        NSArray *arguments;
+        arguments = [NSArray arrayWithObjects:mode, localPort, nil];
+        [task setArguments:arguments];
+        
+        NSPipe *stdoutpipe;
+        stdoutpipe = [NSPipe pipe];
+        [task setStandardOutput:stdoutpipe];
+        
+        NSPipe *stderrpipe;
+        stderrpipe = [NSPipe pipe];
+        [task setStandardError:stderrpipe];
+        
+        NSFileHandle *file;
+        file = [stdoutpipe fileHandleForReading];
+        
+        [task launch];
+        
+        NSData *data;
+        data = [file readDataToEndOfFile];
+        
+        NSString *string;
+        string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if (string.length > 0)
+        {
+            NSLog(@"SSHMole: change network settings result: %@", string);
+        }
+        
+        file = [stderrpipe fileHandleForReading];
+        data = [file readDataToEndOfFile];
+        string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if (string.length > 0)
+        {
+            NSLog(@"SSHMole: change network settings error: %@", string);
+        }
+    });
 }
 
 @end
