@@ -16,7 +16,7 @@
 #import "SMServerConfig.h"
 #import "SMServerConfigStorage.h"
 #import "SMSSHTaskManager.h"
-#import "SMSystemPreferenceManager.h"
+#import "SMUserProxySettingsManager.h"
 
 @interface SMServerConfigSplitController () <NSSplitViewDelegate, SMServerListViewDelegate, SMServerConfigViewDelegate>
 @property (nonatomic, weak) IBOutlet SMServerListView *serverListView;
@@ -149,11 +149,11 @@
          //设置
          if (status == SMSSHTaskStatusDisconnected)
          {
-             [[SMSystemPreferenceManager defaultManager] setCurrentProxySettingsByConfig:nil];
+             [[SMUserProxySettingsManager defaultManager] updateProxySettingsForConfig:nil];
          }
          else if (status == SMSSHTaskStatusConnected)
          {
-             [[SMSystemPreferenceManager defaultManager] setCurrentProxySettingsByConfig:currentConfig];
+             [[SMUserProxySettingsManager defaultManager] updateProxySettingsForConfig:currentConfig];
          }
      }];
 }
