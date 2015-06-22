@@ -7,18 +7,13 @@
 //
 
 #import "SMCopyHelperWrapper.h"
+#import "SMSandboxPath.h"
 
 @implementation SMCopyHelperWrapper
 
 + (NSString *)helperPath
 {
-    static NSString *helperPath = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        NSString *homeDir = NSHomeDirectory();
-        helperPath = [homeDir stringByAppendingPathComponent:@"/Library/Containers/openthread.SSHMole/SSHMoleSystemConfigurationHelper"];
-    });
-    return helperPath;
+    return [SMSandboxPath systemConfigrationHelperPath];
 }
 
 + (BOOL)installHelperIfNotExist
