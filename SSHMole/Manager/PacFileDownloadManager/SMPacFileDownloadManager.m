@@ -82,7 +82,7 @@
     NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/n0wa11/gfw_whitelist/master/whitelist.pac"];
     NSString *localServerString = [NSString stringWithFormat:@"var IP_ADDRESS = '127.0.0.1:%tu';", localPort];
     NSDictionary *replaceOption = @{@"var IP_ADDRESS = 'www.abc.com:443';": localServerString,
-                                    @"var PROXY_TYPE = 'HTTPS';": @"var PROXY_TYPE = 'SOCKS5';",
+                                    @"var PROXY_TYPE = 'HTTPS';": @"var PROXY_TYPE = 'SOCKS';",
                                     };
     [self getPacDataWithURL:(shouldUpdate ? url : nil)
                   cachePath:cachePath
