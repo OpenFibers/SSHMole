@@ -40,7 +40,7 @@
         _pacDownloadManger = [SMPacFileDownloadManager defaultManager];
         _pacServerManager = [SMWebServerManager defaultManager];
         
-        self.proxyMode = SMUserProxySettingsManagerProxyModeAutoWhiteList;
+        self.proxyMode = SMUserProxySettingsManagerProxyModeAutoBlackList;
     }
     return self;
 }
