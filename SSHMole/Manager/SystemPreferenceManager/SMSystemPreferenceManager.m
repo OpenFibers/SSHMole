@@ -42,7 +42,7 @@
     }
 }
 
-- (void)setCurrentProxySettingsByConfig:(SMServerConfig *)config
+- (void)updateCurrentProxySettingsForConfig:(SMServerConfig *)config
 {
     if (_currentConfig != config)
     {
@@ -61,18 +61,15 @@
     {
         [self runSystemConfigurationHelperWithMode:@"off" localPort:nil];
     }
-    else
+    else if (_proxyMode == SMSystemProferenceManagerProxyModeGlobal)
     {
-        if (_proxyMode == SMSystemProferenceManagerProxyModeGlobal)
-        {
-            NSString *localPortString = [NSString stringWithFormat:@"%zd", _currentConfig.localPort];
-            [self runSystemConfigurationHelperWithMode:@"global" localPort:localPortString];
-        }
-        else if (_proxyMode == SMSystemProferenceManagerProxyModeAuto)
-        {
-            NSString *localPortString = [NSString stringWithFormat:@"%tu", _pacHTTPServerPort];
-            [self runSystemConfigurationHelperWithMode:@"auto" localPort:localPortString];
-        }
+        NSString *localPortString = [NSString stringWithFormat:@"%zd", _currentConfig.localPort];
+        [self runSystemConfigurationHelperWithMode:@"global" localPort:localPortString];
+    }
+    else if (_proxyMode == SMSystemProferenceManagerProxyModeAuto)
+    {
+        NSString *localPortString = [NSString stringWithFormat:@"%tu", _pacHTTPServerPort];
+        [self runSystemConfigurationHelperWithMode:@"auto" localPort:localPortString];
     }
 }
 

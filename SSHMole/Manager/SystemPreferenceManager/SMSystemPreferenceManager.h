@@ -15,10 +15,30 @@ typedef NS_ENUM(NSUInteger, SMSystemProferenceManagerProxyMode) {
     SMSystemProferenceManagerProxyModeGlobal,
 };
 
+/**
+ *  根据proxy mode和server config来更新系统设置。
+ */
 @interface SMSystemPreferenceManager : NSObject
 
+/**
+ *  生成一个system preference manager
+ *
+ *  @param port Pac文件的本地HTTP服务器端口
+ *
+ *  @return manager实例
+ */
 + (instancetype)managerWithPacHTTPServerPort:(NSUInteger)port;
+
+/**
+ *  设置proxy mode，manager将根据需要自行更新系统设置
+ */
 @property (nonatomic, assign) SMSystemProferenceManagerProxyMode proxyMode;
-- (void)setCurrentProxySettingsByConfig:(SMServerConfig *)config;
+
+/**
+ *  设置server config，manager将根据需要自行更新系统设置
+ *
+ *  @param config Server config 实例
+ */
+- (void)updateCurrentProxySettingsForConfig:(SMServerConfig *)config;
 
 @end
