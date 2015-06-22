@@ -2,7 +2,7 @@
 
 cd `dirname "${BASH_SOURCE[0]}"`
 
-helper_dir_path="$HOME/Library/Containers/openthread.SSHMole/"
+helper_dir_path="$HOME/Library/Containers/openthread.SSHMole/Data/Documents/"
 helper_name="SSHMoleSystemConfigurationHelper"
 helper_path="$helper_dir_path$helper_name"
 
