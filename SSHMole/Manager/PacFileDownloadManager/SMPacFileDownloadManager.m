@@ -37,8 +37,31 @@
     {
         _requestDictionary = [NSMutableDictionary dictionary];
         _callbackDictionary = [NSMutableDictionary dictionary];
+        [self installDefaultPacIfNotExist];
     }
     return self;
+}
+
+- (void)installDefaultPacIfNotExist
+{
+    [self installDefaultPacIfNotExistForFileName:@"whitelist.pac"];
+    [self installDefaultPacIfNotExistForFileName:@"blacklist.pac"];
+}
+
+- (void)installDefaultPacIfNotExistForFileName:(NSString *)fileName
+{
+    NSString *cachePath = [SMSandboxPath pacPathForName:fileName];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:cachePath])
+    {
+        NSString *pacSuperPath = [cachePath stringByDeletingLastPathComponent];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:pacSuperPath])
+        {
+            [[NSFileManager defaultManager] createDirectoryAtPath:pacSuperPath withIntermediateDirectories:YES attributes:nil error:nil];
+        }
+        
+        NSString *pacPathInBundle = [[NSBundle mainBundle] pathForResource:fileName ofType:@""];
+        [[NSFileManager defaultManager] copyItemAtPath:pacPathInBundle toPath:cachePath error:nil];
+    }
 }
 
 /**
@@ -79,7 +102,15 @@
                            localPort:(NSUInteger)localPort
                           completion:(void(^)(NSData *data))completion
 {
-#warning todo
+    NSString *cachePath = [SMSandboxPath pacPathForName:@"blacklist.pac"];
+    NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/OpenFibers/SSHMole/master/SSHMole/PacFiles/blacklist.pac"];
+    NSString *localServerString = [NSString stringWithFormat:@"127.0.0.1:%tu", localPort];
+    NSDictionary *replaceOption = @{@"127.0.0.1:1080": localServerString,
+                                    };
+    [self getPacDataWithURL:(shouldUpdate ? url : nil)
+                  cachePath:cachePath
+              replaceOption:replaceOption
+                 completion:completion];
 }
 
 /**
