@@ -11,6 +11,7 @@
 
 @interface SMStatusBarController ()
 @property (nonatomic, strong) NSStatusItem *statusBar;
+@property (nonatomic, strong) NSMenu *statusBarMenu;
 @end
 
 @implementation SMStatusBarController
@@ -29,16 +30,20 @@
 
 - (void)initStatusBarIcon
 {
+    //Init status bar icon
     self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:44];
-    
-    self.statusBar.title = @"";
-    
     NSImage *statusBarImage = [NSImage imageNamed:@"StatusBarPawIcon"];
     [statusBarImage setTemplate:YES];
     self.statusBar.image = statusBarImage;
-    
-//    self.statusBar.menu = self.statusMenu;
+    self.statusBar.title = @"";
     self.statusBar.highlightMode = YES;
+    
+    //Init status bar menu
+    self.statusBarMenu = [[NSMenu alloc] initWithTitle:@""];
+    self.statusBar.menu = self.statusBarMenu;
+    
+    NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"aaa" action:nil keyEquivalent:@""];
+    [self.statusBarMenu addItem:item];
 }
 
 @end
