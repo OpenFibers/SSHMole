@@ -8,9 +8,11 @@
 
 #import "AppDelegate.h"
 #import "SMCopyHelperWrapper.h"
+#import "SMStatusBarController.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) NSWindowController *windowController;
+@property (nonatomic, strong) SMStatusBarController *statusBarController;
 @end
 
 @implementation AppDelegate
@@ -19,6 +21,9 @@
 {
     //Install change system network setting helper.
     [SMCopyHelperWrapper installHelperIfNotExist];
+    
+    //Init status bar item
+    self.statusBarController = [[SMStatusBarController alloc] init];
     
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     self.windowController = [storyboard instantiateControllerWithIdentifier:@"ServerConfigController"];

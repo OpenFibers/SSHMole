@@ -65,6 +65,7 @@
 		42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4771ACFBD4700890EA7 /* SSKeychain.m */; };
 		42E0A47A1ACFBD5500890EA7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E0A4791ACFBD5500890EA7 /* Security.framework */; };
 		42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */; };
+		42F639B31B3BE4B0007F3856 /* SMStatusBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F639B21B3BE4B0007F3856 /* SMStatusBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -178,6 +179,8 @@
 		42E0A4791ACFBD5500890EA7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		42E0A48D1AD0073500890EA7 /* YYYJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYYJsonParser.h; sourceTree = "<group>"; };
 		42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYYJsonParser.m; sourceTree = "<group>"; };
+		42F639B11B3BE4B0007F3856 /* SMStatusBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMStatusBarController.h; sourceTree = "<group>"; };
+		42F639B21B3BE4B0007F3856 /* SMStatusBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMStatusBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,6 +351,7 @@
 		42840D941B2981630015DA34 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				42F639B01B3BE4A1007F3856 /* SMStatusBarController */,
 				42840D951B2981630015DA34 /* SMServerConfigSplitController */,
 				42840D981B2981630015DA34 /* SMServerConfigView */,
 				42840D9B1B2981630015DA34 /* SMServerListView */,
@@ -578,6 +582,15 @@
 			path = YYYJsonParser;
 			sourceTree = "<group>";
 		};
+		42F639B01B3BE4A1007F3856 /* SMStatusBarController */ = {
+			isa = PBXGroup;
+			children = (
+				42F639B11B3BE4B0007F3856 /* SMStatusBarController.h */,
+				42F639B21B3BE4B0007F3856 /* SMStatusBarController.m */,
+			);
+			path = SMStatusBarController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -706,6 +719,7 @@
 				423B41971B3740BC00BA52CA /* OTHTTPDownloadRequest.m in Sources */,
 				42C5C70A1B37301200C69389 /* GCDWebServerURLEncodedFormRequest.m in Sources */,
 				42C5C70D1B37301200C69389 /* GCDWebServerFileResponse.m in Sources */,
+				42F639B31B3BE4B0007F3856 /* SMStatusBarController.m in Sources */,
 				42840D9E1B2981630015DA34 /* SMServerConfigSplitController.m in Sources */,
 				42840D8B1B2981040015DA34 /* NSView+Vibrancy.m in Sources */,
 				42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */,
