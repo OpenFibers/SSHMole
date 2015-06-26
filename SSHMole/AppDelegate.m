@@ -35,8 +35,8 @@
     if ([[SMServerConfigStorage defaultStorage] configs].count == 0)
     {
         [self.windowController.window makeKeyAndOrderFront:self];
-        [NSApp activateIgnoringOtherApps:YES];
     }
+    [NSApp activateIgnoringOtherApps:YES];
 }
 
 - (SMServerConfigSplitController *)contentViewController
