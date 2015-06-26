@@ -8,11 +8,14 @@
 
 #import "AppDelegate.h"
 #import "SMCopyHelperWrapper.h"
+#import "SMServerConfigSplitController.h"
 #import "SMStatusBarController.h"
+#import "SMServerConfigStorage.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <SMStatusBarControllerDelegate>
 @property (nonatomic, strong) NSWindowController *windowController;
 @property (nonatomic, strong) SMStatusBarController *statusBarController;
+@property (nonatomic, readonly) SMServerConfigSplitController *contentViewController;
 @end
 
 @implementation AppDelegate
@@ -24,11 +27,25 @@
     
     //Init status bar item
     self.statusBarController = [[SMStatusBarController alloc] init];
+    self.statusBarController.delegate = self;
     
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     self.windowController = [storyboard instantiateControllerWithIdentifier:@"ServerConfigController"];
-    [self.windowController.window makeKeyAndOrderFront:self];
-    [NSApp activateIgnoringOtherApps:YES];
+    
+    if ([[SMServerConfigStorage defaultStorage] configs].count == 0)
+    {
+        [self.windowController.window makeKeyAndOrderFront:self];
+        [NSApp activateIgnoringOtherApps:YES];
+    }
+}
+
+- (SMServerConfigSplitController *)contentViewController
+{
+    if ([self.windowController.contentViewController isKindOfClass:[SMServerConfigSplitController class]])
+    {
+        return (SMServerConfigSplitController *)self.windowController.contentViewController;
+    }
+    return nil;
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -39,6 +56,32 @@
 {
     [self.windowController.window makeKeyAndOrderFront:self];
     return YES;
+}
+
+#pragma mark - Status bar controller callback
+
+- (void)statusBarControllerEditServerListMenuClicked:(SMStatusBarController *)controller
+{
+    [self.windowController.window makeKeyAndOrderFront:self];
+}
+
+- (void)statusBarControllerEditPACFileMenuClicked:(SMStatusBarController *)controller
+{
+    
+}
+
+- (void)statusBarControllerUpdateWhitelistPacMenuClicked:(SMStatusBarController *)controller
+{
+}
+
+- (void)statusBarControllerUpdateBlacklistPacMenuClicked:(SMStatusBarController *)controller
+{
+    
+}
+
+- (void)statusBarController:(SMStatusBarController *)controller changeProxyModeMenuClickedWithMode:(SMStatusBarControllerProxyMode)mode
+{
+    
 }
 
 @end
