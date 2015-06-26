@@ -12,6 +12,7 @@
 @interface SMStatusBarController ()
 @property (nonatomic, strong) NSStatusItem *statusBar;
 @property (nonatomic, strong) NSMenu *statusBarMenu;
+@property (nonatomic, assign) SMStatusBarControllerProxyMode currentProxyMode;
 @end
 
 @implementation SMStatusBarController
@@ -77,7 +78,7 @@
                                                                    action:@selector(proxyModeItemClicked:)
                                                             keyEquivalent:@""];
         _whitelistModeItem.target = self;
-        _proxyOffItem.tag = SMStatusBarControllerProxyModeAutoWhitelist;
+        _whitelistModeItem.tag = SMStatusBarControllerProxyModeAutoWhitelist;
         [self.statusBarMenu addItem:_whitelistModeItem];
         
         //blacklist
@@ -85,7 +86,7 @@
                                                                    action:@selector(proxyModeItemClicked:)
                                                             keyEquivalent:@""];
         _blacklistModeItem.target = self;
-        _proxyOffItem.tag = SMStatusBarControllerProxyModeAutoBlacklist;
+        _blacklistModeItem.tag = SMStatusBarControllerProxyModeAutoBlacklist;
         [self.statusBarMenu addItem:_blacklistModeItem];
         
         //global
@@ -93,7 +94,7 @@
                                                                 action:@selector(proxyModeItemClicked:)
                                                          keyEquivalent:@""];
         _globalModeItem.target = self;
-        _proxyOffItem.tag = SMStatusBarControllerProxyModeGlobal;
+        _globalModeItem.tag = SMStatusBarControllerProxyModeGlobal;
         [self.statusBarMenu addItem:_globalModeItem];
     }
     
@@ -151,7 +152,12 @@
 - (void)setCurrentProxyMode:(SMStatusBarControllerProxyMode)currentProxyMode
 {
     _currentProxyMode = currentProxyMode;
+    [_proxyOffItem setState:(currentProxyMode == _proxyOffItem.tag ? NSOnState : NSOffState)];
+    [_whitelistModeItem setState:(currentProxyMode == _whitelistModeItem.tag ? NSOnState : NSOffState)];
+    [_blacklistModeItem setState:(currentProxyMode == _blacklistModeItem.tag ? NSOnState : NSOffState)];
+    [_globalModeItem setState:(currentProxyMode == _globalModeItem.tag ? NSOnState : NSOffState)];
     
+    [self.delegate statusBarController:self changeProxyModeMenuClickedWithMode:currentProxyMode];
 }
 
 #pragma mark - Menu events
@@ -159,7 +165,7 @@
 - (void)proxyModeItemClicked:(NSMenuItem *)proxyModeItemClicked
 {
     SMStatusBarControllerProxyMode mode = proxyModeItemClicked.tag;
-    [self.delegate statusBarController:self changeProxyModeMenuClickedWithMode:mode];
+    [self setCurrentProxyMode:mode];
 }
 
 - (void)editServerListItemClicked:(NSMenuItem *)editServerListItem
