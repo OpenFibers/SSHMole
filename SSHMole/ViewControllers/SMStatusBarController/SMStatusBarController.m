@@ -59,6 +59,9 @@
     self.statusBarMenu = [[NSMenu alloc] initWithTitle:@""];
     self.statusBar.menu = self.statusBarMenu;
     [self initMenu];
+    
+    //Get last config
+    [self initProxyModeConfig];
 }
 
 - (void)initMenu
@@ -145,6 +148,11 @@
         [quitItem setKeyEquivalentModifierMask:NSCommandKeyMask];
         [self.statusBarMenu addItem:quitItem];
     }
+}
+
+- (void)initProxyModeConfig
+{
+    self.currentProxyMode = SMStatusBarControllerProxyModeAutoWhitelist;
 }
 
 #pragma mark - Properties

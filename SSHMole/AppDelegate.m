@@ -11,6 +11,7 @@
 #import "SMServerConfigSplitController.h"
 #import "SMStatusBarController.h"
 #import "SMServerConfigStorage.h"
+#import "SMUserProxySettingsManager.h"
 
 @interface AppDelegate () <SMStatusBarControllerDelegate>
 @property (nonatomic, strong) NSWindowController *windowController;
@@ -82,7 +83,23 @@
 
 - (void)statusBarController:(SMStatusBarController *)controller changeProxyModeMenuClickedWithMode:(SMStatusBarControllerProxyMode)mode
 {
-    
+    switch (mode)
+    {
+        case SMStatusBarControllerProxyModeOff:
+            [SMUserProxySettingsManager defaultManager].proxyMode = SMUserProxySettingsManagerProxyModeOff;
+            break;
+        case SMStatusBarControllerProxyModeAutoWhitelist:
+            [SMUserProxySettingsManager defaultManager].proxyMode = SMUserProxySettingsManagerProxyModeAutoWhiteList;
+            break;
+        case SMStatusBarControllerProxyModeAutoBlacklist:
+            [SMUserProxySettingsManager defaultManager].proxyMode = SMUserProxySettingsManagerProxyModeAutoBlackList;
+            break;
+        case SMStatusBarControllerProxyModeGlobal:
+            [SMUserProxySettingsManager defaultManager].proxyMode = SMUserProxySettingsManagerProxyModeGlobal;
+            break;
+        default:
+            break;
+    }
 }
 
 @end

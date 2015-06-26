@@ -39,8 +39,6 @@
         _systemPreferenceManager = [SMSystemPreferenceManager managerWithPacHTTPServerPort:9099];
         _pacDownloadManger = [SMPacFileDownloadManager defaultManager];
         _pacServerManager = [SMWebServerManager defaultManager];
-        
-        self.proxyMode = SMUserProxySettingsManagerProxyModeAutoBlackList;
     }
     return self;
 }
