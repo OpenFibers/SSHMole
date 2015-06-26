@@ -18,6 +18,9 @@
 {
     NSMenuItem *_serverConfigItem;
     NSMenuItem *_editServerListItem;
+    NSMenuItem *_editPACFileItem;
+    NSMenuItem *_updateWhitelistItem;
+    NSMenuItem *_updateBlacklistItem;
 }
 
 - (id)init
@@ -48,30 +51,39 @@
 
 - (void)initMenu
 {
+    //Proxy mode
     {
+        //Off
         NSMenuItem *proxyOffItem = [[NSMenuItem alloc] initWithTitle:@"Turn Proxy Off"
                                                                 action:@selector(proxyModeItemClicked:)
                                                          keyEquivalent:@""];
         proxyOffItem.target = self;
+        proxyOffItem.tag = SMStatusBarControllerProxyModeOff;
         [self.statusBarMenu addItem:proxyOffItem];
         
-        NSMenuItem *globalModeItem = [[NSMenuItem alloc] initWithTitle:@"Global Proxy Mode"
-                                                                action:@selector(proxyModeItemClicked:)
-                                                         keyEquivalent:@""];
-        globalModeItem.target = self;
-        [self.statusBarMenu addItem:globalModeItem];
-        
+        //whitelist
         NSMenuItem *whitelistModeItem = [[NSMenuItem alloc] initWithTitle:@"Whitelist Auto Proxy Mode"
                                                                    action:@selector(proxyModeItemClicked:)
                                                             keyEquivalent:@""];
         whitelistModeItem.target = self;
+        proxyOffItem.tag = SMStatusBarControllerProxyModeAutoWhitelist;
         [self.statusBarMenu addItem:whitelistModeItem];
         
+        //blacklist
         NSMenuItem *blacklistModeItem = [[NSMenuItem alloc] initWithTitle:@"Blacklist Auto Proxy Mode"
                                                                    action:@selector(proxyModeItemClicked:)
                                                             keyEquivalent:@""];
         blacklistModeItem.target = self;
+        proxyOffItem.tag = SMStatusBarControllerProxyModeAutoBlacklist;
         [self.statusBarMenu addItem:blacklistModeItem];
+        
+        //global
+        NSMenuItem *globalModeItem = [[NSMenuItem alloc] initWithTitle:@"Global Proxy Mode"
+                                                                action:@selector(proxyModeItemClicked:)
+                                                         keyEquivalent:@""];
+        globalModeItem.target = self;
+        proxyOffItem.tag = SMStatusBarControllerProxyModeGlobal;
+        [self.statusBarMenu addItem:globalModeItem];
     }
     
     
@@ -92,23 +104,23 @@
     //Custom PAC
     {
         [self.statusBarMenu addItem:[NSMenuItem separatorItem]];
-        _serverConfigItem = [[NSMenuItem alloc] initWithTitle:@"Edit PAC for Auto Proxy Mode"
+        _editPACFileItem = [[NSMenuItem alloc] initWithTitle:@"Edit PAC for Auto Proxy Mode"
                                                        action:@selector(customPACItemClicked:)
                                                 keyEquivalent:@""];
-        _serverConfigItem.target = self;
-        [self.statusBarMenu addItem:_serverConfigItem];
+        _editPACFileItem.target = self;
+        [self.statusBarMenu addItem:_editPACFileItem];
         
-        _serverConfigItem = [[NSMenuItem alloc] initWithTitle:@"Update Whitelist PAC"
-                                                       action:@selector(customPACItemClicked:)
-                                                keyEquivalent:@""];
-        _serverConfigItem.target = self;
-        [self.statusBarMenu addItem:_serverConfigItem];
+        _updateWhitelistItem = [[NSMenuItem alloc] initWithTitle:@"Update Whitelist PAC"
+                                                          action:@selector(customPACItemClicked:)
+                                                   keyEquivalent:@""];
+        _updateWhitelistItem.target = self;
+        [self.statusBarMenu addItem:_updateWhitelistItem];
         
-        _serverConfigItem = [[NSMenuItem alloc] initWithTitle:@"Update Blacklist PAC"
-                                                       action:@selector(customPACItemClicked:)
-                                                keyEquivalent:@""];
-        _serverConfigItem.target = self;
-        [self.statusBarMenu addItem:_serverConfigItem];
+        _updateBlacklistItem = [[NSMenuItem alloc] initWithTitle:@"Update Blacklist PAC"
+                                                          action:@selector(customPACItemClicked:)
+                                                   keyEquivalent:@""];
+        _updateBlacklistItem.target = self;
+        [self.statusBarMenu addItem:_updateBlacklistItem];
     }
     
     //Quit app
@@ -126,17 +138,29 @@
 
 - (void)proxyModeItemClicked:(NSMenuItem *)proxyModeItemClicked
 {
-    
+    SMStatusBarControllerProxyMode mode = proxyModeItemClicked.tag;
+    [self.delegate statusBarController:self changeProxyModeMenuClickedWithMode:mode];
 }
 
 - (void)editServerListItemClicked:(NSMenuItem *)editServerListItem
 {
-    
+    [self.delegate statusBarControllerEditServerListMenuClicked:self];
 }
 
 - (void)customPACItemClicked:(NSMenuItem *)sender
 {
-    
+    if (sender == _editPACFileItem)
+    {
+        [self.delegate statusBarControllerEditPACFileMenuClicked:self];
+    }
+    else if (sender == _updateWhitelistItem)
+    {
+        [self.delegate statusBarControllerUpdateWhitelistPacMenuClicked:self];
+    }
+    else if (sender == _updateBlacklistItem)
+    {
+        [self.delegate statusBarControllerUpdateBlacklistPacMenuClicked:self];
+    }
 }
 
 - (void)quitItemClicked:(NSMenuItem *)sender

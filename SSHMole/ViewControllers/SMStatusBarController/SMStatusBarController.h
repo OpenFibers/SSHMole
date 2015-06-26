@@ -8,6 +8,31 @@
 
 #import <Foundation/Foundation.h>
 
+@class SMStatusBarController;
+
+typedef NS_ENUM(NSUInteger, SMStatusBarControllerProxyMode) {
+    SMStatusBarControllerProxyModeOff,
+    SMStatusBarControllerProxyModeAutoWhitelist,
+    SMStatusBarControllerProxyModeAutoBlacklist,
+    SMStatusBarControllerProxyModeGlobal,
+};
+
+@protocol SMStatusBarControllerDelegate <NSObject>
+
+- (void)statusBarControllerEditServerListMenuClicked:(SMStatusBarController *)controller;
+
+- (void)statusBarControllerEditPACFileMenuClicked:(SMStatusBarController *)controller;
+
+- (void)statusBarControllerUpdateWhitelistPacMenuClicked:(SMStatusBarController *)controller;
+
+- (void)statusBarControllerUpdateBlacklistPacMenuClicked:(SMStatusBarController *)controller;
+
+- (void)statusBarController:(SMStatusBarController *)controller changeProxyModeMenuClickedWithMode:(SMStatusBarControllerProxyMode)mode;
+
+@end
+
 @interface SMStatusBarController : NSObject
+
+@property (nonatomic, weak) id<SMStatusBarControllerDelegate> delegate;
 
 @end
