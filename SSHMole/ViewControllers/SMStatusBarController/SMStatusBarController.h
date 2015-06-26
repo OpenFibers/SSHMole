@@ -34,5 +34,6 @@ typedef NS_ENUM(NSUInteger, SMStatusBarControllerProxyMode) {
 @interface SMStatusBarController : NSObject
 
 @property (nonatomic, weak) id<SMStatusBarControllerDelegate> delegate;
+@property (nonatomic, assign) SMStatusBarControllerProxyMode currentProxyMode;
 
 @end

@@ -16,12 +16,23 @@
 
 @implementation SMStatusBarController
 {
+    //Proxy mode menu items
+    NSMenuItem *_proxyOffItem;
+    NSMenuItem *_whitelistModeItem;
+    NSMenuItem *_blacklistModeItem;
+    NSMenuItem *_globalModeItem;
+    
+    //Server config menu items
     NSMenuItem *_serverConfigItem;
     NSMenuItem *_editServerListItem;
+    
+    //Edit PAC files items
     NSMenuItem *_editPACFileItem;
     NSMenuItem *_updateWhitelistItem;
     NSMenuItem *_updateBlacklistItem;
 }
+
+#pragma mark - Init methods
 
 - (id)init
 {
@@ -54,38 +65,37 @@
     //Proxy mode
     {
         //Off
-        NSMenuItem *proxyOffItem = [[NSMenuItem alloc] initWithTitle:@"Turn Proxy Off"
+        _proxyOffItem = [[NSMenuItem alloc] initWithTitle:@"Turn Proxy Off"
                                                                 action:@selector(proxyModeItemClicked:)
                                                          keyEquivalent:@""];
-        proxyOffItem.target = self;
-        proxyOffItem.tag = SMStatusBarControllerProxyModeOff;
-        [self.statusBarMenu addItem:proxyOffItem];
+        _proxyOffItem.target = self;
+        _proxyOffItem.tag = SMStatusBarControllerProxyModeOff;
+        [self.statusBarMenu addItem:_proxyOffItem];
         
         //whitelist
-        NSMenuItem *whitelistModeItem = [[NSMenuItem alloc] initWithTitle:@"Whitelist Auto Proxy Mode"
+        _whitelistModeItem = [[NSMenuItem alloc] initWithTitle:@"Whitelist Auto Proxy Mode"
                                                                    action:@selector(proxyModeItemClicked:)
                                                             keyEquivalent:@""];
-        whitelistModeItem.target = self;
-        proxyOffItem.tag = SMStatusBarControllerProxyModeAutoWhitelist;
-        [self.statusBarMenu addItem:whitelistModeItem];
+        _whitelistModeItem.target = self;
+        _proxyOffItem.tag = SMStatusBarControllerProxyModeAutoWhitelist;
+        [self.statusBarMenu addItem:_whitelistModeItem];
         
         //blacklist
-        NSMenuItem *blacklistModeItem = [[NSMenuItem alloc] initWithTitle:@"Blacklist Auto Proxy Mode"
+        _blacklistModeItem = [[NSMenuItem alloc] initWithTitle:@"Blacklist Auto Proxy Mode"
                                                                    action:@selector(proxyModeItemClicked:)
                                                             keyEquivalent:@""];
-        blacklistModeItem.target = self;
-        proxyOffItem.tag = SMStatusBarControllerProxyModeAutoBlacklist;
-        [self.statusBarMenu addItem:blacklistModeItem];
+        _blacklistModeItem.target = self;
+        _proxyOffItem.tag = SMStatusBarControllerProxyModeAutoBlacklist;
+        [self.statusBarMenu addItem:_blacklistModeItem];
         
         //global
-        NSMenuItem *globalModeItem = [[NSMenuItem alloc] initWithTitle:@"Global Proxy Mode"
+        _globalModeItem = [[NSMenuItem alloc] initWithTitle:@"Global Proxy Mode"
                                                                 action:@selector(proxyModeItemClicked:)
                                                          keyEquivalent:@""];
-        globalModeItem.target = self;
-        proxyOffItem.tag = SMStatusBarControllerProxyModeGlobal;
-        [self.statusBarMenu addItem:globalModeItem];
+        _globalModeItem.target = self;
+        _proxyOffItem.tag = SMStatusBarControllerProxyModeGlobal;
+        [self.statusBarMenu addItem:_globalModeItem];
     }
-    
     
     //Server config
     {
@@ -135,6 +145,16 @@
         [self.statusBarMenu addItem:quitItem];
     }
 }
+
+#pragma mark - Properties
+
+- (void)setCurrentProxyMode:(SMStatusBarControllerProxyMode)currentProxyMode
+{
+    _currentProxyMode = currentProxyMode;
+    
+}
+
+#pragma mark - Menu events
 
 - (void)proxyModeItemClicked:(NSMenuItem *)proxyModeItemClicked
 {
