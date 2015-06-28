@@ -20,6 +20,16 @@
 
 - (void)insertConfig:(SMServerConfig *)config atIndex:(NSUInteger)index;
 
+/**
+ *  替换Config
+ *
+ *  @param config    被替换的原始config
+ *  @param newConfig 新的config
+ *
+ *  @return 替换的index
+ */
+- (NSUInteger)replaceConfig:(SMServerConfig *)config withNewConfig:(SMServerConfig *)newConfig;
+
 - (void)removeConfig:(SMServerConfig *)config;
 
 - (NSArray *)sameServerConfigWithConfig:(SMServerConfig *)config;

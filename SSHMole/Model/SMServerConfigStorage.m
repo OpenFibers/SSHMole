@@ -70,6 +70,18 @@
     [config saveToKeychain];
 }
 
+- (NSUInteger)replaceConfig:(SMServerConfig *)config withNewConfig:(SMServerConfig *)newConfig
+{
+    NSUInteger index = [_serverConfigArray indexOfObject:config];
+    if (index != NSNotFound)
+    {
+        [_serverConfigArray replaceObjectAtIndex:index withObject:newConfig];
+        [config removeFromKeychain];
+        [newConfig saveToKeychain];
+    }
+    return index;
+}
+
 - (void)removeConfig:(SMServerConfig *)config
 {
     if ([_serverConfigArray containsObject:config])
