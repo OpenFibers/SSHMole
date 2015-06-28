@@ -11,6 +11,7 @@
 #import "SMWebServerManager.h"
 #import "SMSystemPreferenceManager.h"
 #import "SMServerConfig.h"
+#import <AppKit/AppKit.h>
 
 @implementation SMUserProxySettingsManager
 {
@@ -115,10 +116,56 @@
 
 - (void)updateWhitelistPACFile
 {
+    [_pacDownloadManger updatWhitelistPACDataWithCompletion:^(BOOL successed) {
+        NSString *alertMessage = @"";
+        if (successed)
+        {
+            alertMessage = @"Update whitelist PAC file successed";
+            
+            //如果当前设置为白名单，切换状态，强制系统刷新proxy settings
+            if (self.proxyMode == SMUserProxySettingsManagerProxyModeAutoWhiteList)
+            {
+                self.proxyMode = SMUserProxySettingsManagerProxyModeOff;
+                self.proxyMode = SMUserProxySettingsManagerProxyModeAutoWhiteList;
+            }
+        }
+        else
+        {
+            alertMessage = @"Update whitelist PAC file failed";
+        }
+        
+        NSAlert *alert = [[NSAlert alloc]init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:alertMessage];
+        [alert runModal];
+    }];
 }
 
 - (void)updateBlacklistPACFile
 {
+    [_pacDownloadManger updateBlacklistPACDataWithCompletion:^(BOOL successed) {
+        NSString *alertMessage = @"";
+        if (successed)
+        {
+            alertMessage = @"Update blacklist PAC file successed";
+
+            //如果当前设置为黑名单，切换状态，强制系统刷新proxy settings
+            if (self.proxyMode == SMUserProxySettingsManagerProxyModeAutoBlackList)
+            {
+                self.proxyMode = SMUserProxySettingsManagerProxyModeOff;
+                self.proxyMode = SMUserProxySettingsManagerProxyModeAutoBlackList;
+            }
+        }
+        else
+        {
+            alertMessage = @"Update blacklist PAC file failed";
+        }
+        
+        NSAlert *alert = [[NSAlert alloc]init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:alertMessage];
+        [alert runModal];
+    }];
 }
 
 @end
