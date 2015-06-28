@@ -11,7 +11,8 @@
 
 typedef NS_ENUM(NSUInteger, SMSystemProferenceManagerProxyMode) {
     SMSystemProferenceManagerProxyModeOff = 0,
-    SMSystemProferenceManagerProxyModeAuto,
+    SMSystemProferenceManagerProxyModeAutoWhitelist,
+    SMSystemProferenceManagerProxyModeAutoBlacklist,
     SMSystemProferenceManagerProxyModeGlobal,
 };
 
@@ -21,18 +22,15 @@ typedef NS_ENUM(NSUInteger, SMSystemProferenceManagerProxyMode) {
 @interface SMSystemPreferenceManager : NSObject
 
 /**
- *  生成一个system preference manager
+ *  初始化一个system preference manager
  *
- *  @param port Pac文件的本地HTTP服务器端口
+ *  @param whitelistPACURLString 白名单 PAC URL
+ *  @param blacklistPACURLString 黑名单 PAC URL
  *
  *  @return manager实例
  */
-+ (instancetype)managerWithPacHTTPServerPort:(NSUInteger)port;
-
-/**
- *  manager 当前的pac HTTP 本地端口
- */
-@property (nonatomic, readonly) NSUInteger pacHTTPServerPort;
+- (id)initWithWhitelistPACURLString:(NSString *)whitelistPACURLString
+              blacklistPACURLString:(NSString *)blacklistPACURLString;
 
 /**
  *  设置proxy mode，manager将根据需要自行更新系统设置

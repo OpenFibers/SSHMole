@@ -36,7 +36,10 @@
     self = [super init];
     if (self)
     {
-        _systemPreferenceManager = [SMSystemPreferenceManager managerWithPacHTTPServerPort:9099];
+        NSString *whitelistPACURLString = @"http://127.0.0.1:9099/whitelist.pac";
+        NSString *blacklistPACURLString = @"http://127.0.0.1:9099/blacklist.pac";
+        _systemPreferenceManager = [[SMSystemPreferenceManager alloc] initWithWhitelistPACURLString:whitelistPACURLString
+                                                                              blacklistPACURLString:blacklistPACURLString];
         _pacDownloadManger = [SMPacFileDownloadManager defaultManager];
         _pacServerManager = [SMWebServerManager defaultManager];
     }
@@ -81,25 +84,23 @@
             break;
         case SMUserProxySettingsManagerProxyModeAutoBlackList:
         {
-            systemPrefenceProxyMode = SMSystemProferenceManagerProxyModeAuto;
+            systemPrefenceProxyMode = SMSystemProferenceManagerProxyModeAutoBlacklist;
             __weak SMWebServerManager *weakPacServerManager = _pacServerManager;
-            __weak SMSystemPreferenceManager *weakSystemPreferenceManager = _systemPreferenceManager;
             [_pacDownloadManger getBlackListPacDataAndUpdate:NO localPort:_currentServerConfig.localPort completion:^(NSData *data) {
-                [weakPacServerManager beginPacServerWithPort:weakSystemPreferenceManager.pacHTTPServerPort
+                [weakPacServerManager beginPacServerWithPort:9099
                                                         data:data
-                                                        path:@"/proxy.pac"];
+                                                        path:@"/blacklist.pac"];
             }];
         }
             break;
         case SMUserProxySettingsManagerProxyModeAutoWhiteList:
         {
-            systemPrefenceProxyMode = SMSystemProferenceManagerProxyModeAuto;
+            systemPrefenceProxyMode = SMSystemProferenceManagerProxyModeAutoWhitelist;
             __weak SMWebServerManager *weakPacServerManager = _pacServerManager;
-            __weak SMSystemPreferenceManager *weakSystemPreferenceManager = _systemPreferenceManager;
             [_pacDownloadManger getWhiteListPacDataAndUpdate:NO localPort:_currentServerConfig.localPort completion:^(NSData *data) {
-                [weakPacServerManager beginPacServerWithPort:weakSystemPreferenceManager.pacHTTPServerPort
+                [weakPacServerManager beginPacServerWithPort:9099
                                                         data:data
-                                                        path:@"/proxy.pac"];
+                                                        path:@"/whitelist.pac"];
             }];
         }
             break;

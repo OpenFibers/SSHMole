@@ -12,30 +12,22 @@
 
 @implementation SMSystemPreferenceManager
 {
-    NSUInteger _pacHTTPServerPort;
+    NSString *_whitelistPACURLString;
+    NSString *_blacklistPACURLString;
     SMServerConfig *_currentConfig;
 }
 
-+ (instancetype)managerWithPacHTTPServerPort:(NSUInteger)port
-{
-    id manager = [[self alloc] initWithPacHTTPServerPort:port];
-    return manager;
-}
-
-- (id)initWithPacHTTPServerPort:(NSUInteger)port
+- (id)initWithWhitelistPACURLString:(NSString *)whitelistPACURLString
+              blacklistPACURLString:(NSString *)blacklistPACURLString
 {
     self = [super init];
     if (self)
     {
-        _pacHTTPServerPort = port;
+        _whitelistPACURLString = whitelistPACURLString;
+        _blacklistPACURLString = blacklistPACURLString;
         _proxyMode = SMSystemProferenceManagerProxyModeGlobal;
     }
     return self;
-}
-
-- (NSUInteger)pacHTTPServerPort
-{
-    return _pacHTTPServerPort;
 }
 
 - (void)setProxyMode:(SMSystemProferenceManagerProxyMode)proxyMode
@@ -60,25 +52,28 @@
 {
     if (_currentConfig == nil)
     {
-        [self runSystemConfigurationHelperWithMode:@"off" localPort:nil];
+        [self runSystemConfigurationHelperWithMode:@"off" argument:nil];
     }
     else if (_proxyMode == SMSystemProferenceManagerProxyModeOff)
     {
-        [self runSystemConfigurationHelperWithMode:@"off" localPort:nil];
+        [self runSystemConfigurationHelperWithMode:@"off" argument:nil];
     }
     else if (_proxyMode == SMSystemProferenceManagerProxyModeGlobal)
     {
         NSString *localPortString = [NSString stringWithFormat:@"%zd", _currentConfig.localPort];
-        [self runSystemConfigurationHelperWithMode:@"global" localPort:localPortString];
+        [self runSystemConfigurationHelperWithMode:@"global" argument:localPortString];
     }
-    else if (_proxyMode == SMSystemProferenceManagerProxyModeAuto)
+    else if (_proxyMode == SMSystemProferenceManagerProxyModeAutoWhitelist)
     {
-        NSString *localPortString = [NSString stringWithFormat:@"%tu", _pacHTTPServerPort];
-        [self runSystemConfigurationHelperWithMode:@"auto" localPort:localPortString];
+        [self runSystemConfigurationHelperWithMode:@"auto" argument:_whitelistPACURLString];
+    }
+    else if (_proxyMode == SMSystemProferenceManagerProxyModeAutoBlacklist)
+    {
+        [self runSystemConfigurationHelperWithMode:@"auto" argument:_blacklistPACURLString];
     }
 }
 
-- (void)runSystemConfigurationHelperWithMode:(NSString *)mode localPort:(NSString *)localPort
+- (void)runSystemConfigurationHelperWithMode:(NSString *)mode argument:(NSString *)argument
 {
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSTask *task;
@@ -86,7 +81,7 @@
         [task setLaunchPath:[SMCopyHelperWrapper helperPath]];
         
         NSArray *arguments;
-        arguments = [NSArray arrayWithObjects:mode, localPort, nil];
+        arguments = [NSArray arrayWithObjects:mode, argument, nil];
         [task setArguments:arguments];
         
         NSPipe *stdoutpipe;
