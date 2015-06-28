@@ -15,6 +15,7 @@
     NSString *_whitelistPACURLString;
     NSString *_blacklistPACURLString;
     SMServerConfig *_currentConfig;
+    dispatch_queue_t _lockQueue;
 }
 
 - (id)initWithWhitelistPACURLString:(NSString *)whitelistPACURLString
@@ -26,8 +27,16 @@
         _whitelistPACURLString = whitelistPACURLString;
         _blacklistPACURLString = blacklistPACURLString;
         _proxyMode = SMSystemProferenceManagerProxyModeGlobal;
+        
+        _lockQueue = dispatch_queue_create([[NSString stringWithFormat:@"SSHMole.SystemPreferenceManagerQueue.%@", self] UTF8String], NULL);
+
     }
     return self;
+}
+
+- (void)dealloc
+{
+    _lockQueue = nil;
 }
 
 - (void)setProxyMode:(SMSystemProferenceManagerProxyMode)proxyMode
@@ -75,7 +84,7 @@
 
 - (void)runSystemConfigurationHelperWithMode:(NSString *)mode argument:(NSString *)argument
 {
-    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_sync(_lockQueue, ^{
         NSTask *task;
         task = [[NSTask alloc] init];
         [task setLaunchPath:[SMCopyHelperWrapper helperPath]];
