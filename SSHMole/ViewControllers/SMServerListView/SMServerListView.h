@@ -11,6 +11,9 @@
 @class SMServerListView;
 @class SMServerConfig;
 
+FOUNDATION_EXTERN NSString *const SMServerListViewAnyConfigChangedNotification;
+FOUNDATION_EXTERN NSString *const SMServerListViewAnyConfigChangedNotificationServerConfigsKey;
+
 @protocol SMServerListViewDelegate <NSObject>
 
 //User did select add config table row.

@@ -11,6 +11,9 @@
 #import "SMSSHTaskManager.h"
 #import "SMUserEventDetectingTableView.h"
 
+NSString *const SMServerListViewAnyConfigChangedNotification = @"SMServerListViewAnyConfigChangedNotification";
+NSString *const SMServerListViewAnyConfigChangedNotificationServerConfigsKey = @"ServerConfigs";
+
 @interface SMServerListView () <NSTableViewDataSource, NSTableViewDelegate, SMUserEventDetectingTableViewDelegate>
 @property (nonatomic, weak) IBOutlet SMUserEventDetectingTableView *tableView;
 @end
@@ -76,6 +79,7 @@
 {
     _serverConfigs = [[[SMServerConfigStorage defaultStorage] configs] mutableCopy];
     [self.tableView reloadData];
+    [self postServerConfigChangedNotification];
 }
 
 - (NSUInteger)indexOfConfig:(SMServerConfig *)config
@@ -138,6 +142,7 @@
     NSIndexSet *columnIndexSet = [NSIndexSet indexSetWithIndex:0];
     [self.tableView reloadDataForRowIndexes:rowIndexSet columnIndexes:columnIndexSet];
     [self.tableView endUpdates];
+    [self postServerConfigChangedNotification];
 }
 
 - (void)addServerConfig:(SMServerConfig *)config
@@ -165,6 +170,7 @@
         NSIndexSet *reloadIndex = [NSIndexSet indexSetWithIndex:existingIndex];
         [self.tableView reloadDataForRowIndexes:reloadIndex columnIndexes:[NSIndexSet indexSetWithIndex:0]];
         [self.tableView endUpdates];
+        [self postServerConfigChangedNotification];
     }
     else
     {
@@ -175,6 +181,7 @@
         [self.tableView insertRowsAtIndexes:addedIndex withAnimation:NSTableViewAnimationEffectFade];
         [self.tableView reloadDataForRowIndexes:reloadIndex columnIndexes:[NSIndexSet indexSetWithIndex:0]];
         [self.tableView endUpdates];
+        [self postServerConfigChangedNotification];
     }
 }
 
@@ -190,6 +197,7 @@
     [self.tableView removeRowsAtIndexes:removedIndex withAnimation:NSTableViewAnimationEffectGap];
     [_serverConfigs removeObject:config];
     [self.tableView endUpdates];
+    [self postServerConfigChangedNotification];
 }
 
 - (void)selectConfig:(SMServerConfig *)config
@@ -202,6 +210,20 @@
     
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:index];
     [self.tableView selectRowIndexes:indexSet byExtendingSelection:NO];
+}
+
+#pragma mark - Any Server Config Changed
+
+- (void)postServerConfigChangedNotification
+{
+    NSDictionary *userInfo = nil;
+    if (_serverConfigs)
+    {
+        userInfo = @{SMServerListViewAnyConfigChangedNotificationServerConfigsKey : [NSArray arrayWithArray:_serverConfigs]};
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:SMServerListViewAnyConfigChangedNotification
+                                                        object:self
+                                                      userInfo:userInfo];
 }
 
 #pragma mark - Table view callback

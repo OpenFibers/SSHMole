@@ -7,6 +7,8 @@
 //
 
 #import "SMStatusBarController.h"
+#import "SMServerListView.h"
+#import "SMServerConfig.h"
 #import <AppKit/AppKit.h>
 
 @interface SMStatusBarController ()
@@ -41,8 +43,18 @@
     if (self)
     {
         [self initStatusBarIcon];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(serverConfigsUpdated:)
+                                                     name:SMServerListViewAnyConfigChangedNotification
+                                                   object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)initStatusBarIcon
@@ -168,12 +180,38 @@
     [self.delegate statusBarController:self changeProxyModeMenuClickedWithMode:currentProxyMode];
 }
 
+#pragma mark - Server configs updated notification
+
+- (void)serverConfigsUpdated:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    NSArray *configs = userInfo[SMServerListViewAnyConfigChangedNotificationServerConfigsKey];
+    if (configs)
+    {
+        [_serverConfigItem.submenu removeAllItems];
+        for (SMServerConfig *config in configs)
+        {
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:config.accountStringForDisplay
+                                                          action:@selector(serverConfigItemClicked:)
+                                                   keyEquivalent:@""];
+            item.target = self;
+            [_serverConfigItem.submenu addItem:item];
+        }
+        [_serverConfigItem.submenu addItem:_editServerListItem];
+    }
+}
+
 #pragma mark - Menu events
 
 - (void)proxyModeItemClicked:(NSMenuItem *)proxyModeItemClicked
 {
     SMStatusBarControllerProxyMode mode = proxyModeItemClicked.tag;
     [self setCurrentProxyMode:mode];
+}
+
+- (void)serverConfigItemClicked:(NSMenuItem *)item
+{
+    
 }
 
 - (void)editServerListItemClicked:(NSMenuItem *)editServerListItem
