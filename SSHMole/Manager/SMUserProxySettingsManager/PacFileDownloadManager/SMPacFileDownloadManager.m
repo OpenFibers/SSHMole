@@ -19,7 +19,6 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
 @implementation SMPacFileDownloadManager
 {
     NSMutableDictionary *_requestDictionary;
-    NSMutableDictionary *_callbackDictionary;
     
     NSDictionary *_whitelistReplaceOption;
     NSDictionary *_blacklistReplaceOption;
@@ -54,6 +53,8 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
     return self;
 }
 
+#pragma mark - Install default PAC files
+
 - (void)installDefaultPacIfNotExist
 {
     [self installDefaultPacIfNotExistForFileName:@"whitelist.pac" replaceOption:_whitelistReplaceOption];
@@ -80,70 +81,39 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
     }
 }
 
+#pragma mark - Get local PAC data
+
 /**
- *  获取白名单pac。
- *  文件地址: https://raw.githubusercontent.com/n0wa11/gfw_whitelist/master/whitelist.pac
- *  项目主页: https://github.com/n0wa11/gfw_whitelist
- *  本地缓存地址: ~/Library/Containers/openthread.SSHMole/Data/Documents/whitelist.pac
+ *  读取本地的白名单PAC文件内容
  *
- *  @param shouldUpdate 是否从远端获取后更新
- *  @param localPort    本地的pac http server端口
- *  @param completion   完成handler
+ *  @param localPort  本地转发端口，用于PAC文件内文本替换
+ *  @param completion 完成回调
  */
-- (void)getWhiteListPacDataAndUpdate:(BOOL)shouldUpdate
-                           localPort:(NSUInteger)localPort
-                          completion:(void(^)(NSData *data))completion
+- (void)getWhiteListLocalPacDataForLocalPort:(NSUInteger)localPort
+                                  completion:(void(^)(NSData *data))completion
 {
     NSString *cachePath = [SMSandboxPath pacPathForName:@"whitelist.pac"];
-    NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/n0wa11/gfw_whitelist/master/whitelist.pac"];
-    NSString *localServerAndPortString = [NSString stringWithFormat:@"127.0.0.1:%zd", localPort];
-    [self getPacDataWithURL:(shouldUpdate ? url : nil)
-                  cachePath:cachePath
-              replaceOption:_whitelistReplaceOption
-   localServerAndPortString:localServerAndPortString
-                 completion:completion];
+    [self getLocalPacDataForCachePath:cachePath localPort:localPort completion:completion];
 }
 
 /**
- *  获取黑名单pac。
- *  文件地址?
+ *  读取本地的黑名单PAC文件内容
  *
- *  @param shouldUpdate 是否从远端获取后更新
- *  @param localPort    本地的pac http server端口
- *  @param completion   完成handler
+ *  @param localPort  本地转发端口，用于PAC文件内文本替换
+ *  @param completion 完成回调
  */
-- (void)getBlackListPacDataAndUpdate:(BOOL)shouldUpdate
-                           localPort:(NSUInteger)localPort
-                          completion:(void(^)(NSData *data))completion
+- (void)getBlackListLocalPacDataForLocalPort:(NSUInteger)localPort
+                                  completion:(void(^)(NSData *data))completion
 {
     NSString *cachePath = [SMSandboxPath pacPathForName:@"blacklist.pac"];
-    NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/OpenFibers/SSHMole/master/SSHMole/PacFiles/blacklist.pac"];
-    NSString *localServerAndPortString = [NSString stringWithFormat:@"127.0.0.1:%zd", localPort];
-    [self getPacDataWithURL:(shouldUpdate ? url : nil)
-                  cachePath:cachePath
-              replaceOption:_blacklistReplaceOption
-   localServerAndPortString:localServerAndPortString
-                 completion:completion];
+    [self getLocalPacDataForCachePath:cachePath localPort:localPort completion:completion];
 }
 
-
-/**
- *  获取pac data，从url更新到缓存，或者直接从缓存读取
- *
- *  @param url                      pac的远程url。如果不填，则直接从本地缓存读取。
- *  @param cachePath                本地缓存地址。如果传了url，则下载后更新到cachePath
- *  @param replaceOption            字符串替换dictionary，下载完成时，pac中匹配到key会被替换成value，写入文件
- *  @param localServerAndPortString 本地转发端口地址。从文件中读出调用回调前，会用此地址替换<*Server and Port String*>
- *  @param completion               完成的handler
- */
-
-- (void)getPacDataWithURL:(NSURL *)url
-                cachePath:(NSString *)cachePath
-            replaceOption:(NSDictionary *)replaceOption
- localServerAndPortString:(NSString *)localServerAndPortString
-               completion:(void(^)(NSData *data))completion
+- (void)getLocalPacDataForCachePath:(NSString *)cachePath
+                          localPort:(NSUInteger)localPort
+                         completion:(void(^)(NSData *data))completion
 {
-    if (cachePath.length == 0)
+    if (cachePath.length == 0 || localPort == 0)
     {
         if (completion)
         {
@@ -151,39 +121,12 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
         }
         return;
     }
-    
-    if (localServerAndPortString.length == 0)
+    if ([[NSFileManager defaultManager] fileExistsAtPath:cachePath])
     {
-        if (completion)
-        {
-            completion(nil);
-        }
-    }
-    
-    __weak id weakSelf = self;
-    if (url.absoluteString)
-    {
-        NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-        userInfo[@"cachePath"] = cachePath;
-        userInfo[@"localServerAndPort"] = localServerAndPortString;
-        if (replaceOption)
-        {
-            userInfo[@"replaceOption"] = replaceOption;
-        }
-        
-        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-        OTHTTPRequest *request = [[OTHTTPRequest alloc] initWithNSURLRequest:urlRequest];
-        request.userInfo = [NSDictionary dictionaryWithDictionary:userInfo];
-        request.delegate = self;
-        [request start];
-        
-        _requestDictionary[url.absoluteString] = request;
-        _callbackDictionary[url.absoluteString] = [completion copy];
-    }
-    else if ([[NSFileManager defaultManager] fileExistsAtPath:cachePath])
-    {
+        __weak id weakSelf = self;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *data = [[NSData alloc] initWithContentsOfFile:cachePath];
+            NSString *localServerAndPortString = [NSString stringWithFormat:@"127.0.0.1:%zd", localPort];
             NSDictionary *localServerReplaceOption = @{ServerAndPortOptionString : localServerAndPortString};
             data = [weakSelf getReplacedPacStringForOriginalData:data
                                                   replaceOptions:localServerReplaceOption];
@@ -204,17 +147,62 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
     }
 }
 
+#pragma mark - Update PAC File from Remote
+
+/**
+ *  获取pac data，从url更新到缓存，或者直接从缓存读取
+ *
+ *  @param url                      pac的远程url。如果不填，则直接从本地缓存读取。
+ *  @param cachePath                本地缓存地址。如果传了url，则下载后更新到cachePath
+ *  @param replaceOption            字符串替换dictionary，下载完成时，pac中匹配到key会被替换成value，写入文件
+ *  @param localServerAndPortString 本地转发端口地址。从文件中读出调用回调前，会用此地址替换<*Server and Port String*>
+ *  @param completion               完成的handler
+ */
+
+- (void)getPacDataWithURL:(NSURL *)url
+                cachePath:(NSString *)cachePath
+            replaceOption:(NSDictionary *)replaceOption
+               completion:(void(^)(void))completion
+{
+    if (cachePath.length == 0 ||
+        url.absoluteString.length == 0)
+    {
+        if (completion)
+        {
+            completion();
+        }
+        return;
+    }
+    
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    userInfo[@"cachePath"] = cachePath;
+    if (replaceOption)
+    {
+        userInfo[@"replaceOption"] = replaceOption;
+    }
+    if (completion)
+    {
+        userInfo[@"callback"] = completion;
+    }
+    
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    OTHTTPRequest *request = [[OTHTTPRequest alloc] initWithNSURLRequest:urlRequest];
+    request.userInfo = [NSDictionary dictionaryWithDictionary:userInfo];
+    request.delegate = self;
+    [request start];
+    
+    _requestDictionary[url.absoluteString] = request;
+}
+
 - (void)otHTTPRequestFinished:(OTHTTPRequest *)request
 {
     NSString *key = request.request.URL.absoluteString;
     if (key)
     {
-        void (^callback)(NSData *data) = _requestDictionary[key];
-        
         NSDictionary *userInfo = request.userInfo;
+        void (^callback)(void) = userInfo[@"callback"];
         NSString *cachePath = userInfo[@"cachePath"];
         NSDictionary *replaceOption = userInfo[@"replaceOption"];
-        NSString *localServerAndPortString = userInfo[@"localServerAndPort"];
         
         __weak id weakSelf = self;
         
@@ -222,20 +210,16 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
             NSData *responseData = request.responseData;
             NSData *data = [weakSelf getReplacedPacStringForOriginalData:responseData
                                                           replaceOptions:replaceOption];
+            [data writeToFile:cachePath atomically:YES];
             if (callback)
             {
-                NSDictionary *localServerReplaceOption = @{ServerAndPortOptionString : localServerAndPortString};
-                NSData *finalData = [weakSelf getReplacedPacStringForOriginalData:data replaceOptions:localServerReplaceOption];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    callback(finalData);
+                    callback();
                 });
             }
-            [data writeToFile:cachePath atomically:YES];
         });
         
         [_requestDictionary removeObjectForKey:key];
-        [_callbackDictionary removeObjectForKey:key];
-        
     }
 }
 
@@ -244,18 +228,16 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
     NSString *key = request.request.URL.absoluteString;
     if (key)
     {
-        void (^callback)(NSData *data) = _requestDictionary[key];
-
-        [_requestDictionary removeObjectForKey:key];
-        [_callbackDictionary removeObjectForKey:key];
-        
+        void (^callback)(void) = request.userInfo[@"callback"];
         if (callback)
         {
-            callback(nil);
+            callback();
         }
+        [_requestDictionary removeObjectForKey:key];
     }
 }
 
+#warning - 改为+
 - (NSData *)getReplacedPacStringForOriginalData:(NSData *)originalData
                              replaceOptions:(NSDictionary *)replaceOptions
 {
