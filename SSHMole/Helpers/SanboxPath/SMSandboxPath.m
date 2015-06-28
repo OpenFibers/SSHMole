@@ -20,10 +20,20 @@
     return helperPath;
 }
 
++ (NSString *)pacFolderPath
+{
+    static NSString *folderPath = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        folderPath = [[self sandboxPath] stringByAppendingPathComponent:@"Documents/PAC"];
+    });
+    return folderPath;
+}
+
 + (NSString *)pacPathForName:(NSString *)name
 {
-    NSString *helperPath = [[self sandboxPath] stringByAppendingPathComponent:@"Documents/PAC"];
-    helperPath = [helperPath stringByAppendingPathComponent:name];
+    NSString *folderPath = [self pacFolderPath];
+    NSString *helperPath = [folderPath stringByAppendingPathComponent:name];
     return helperPath;
 }
 

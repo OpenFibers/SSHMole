@@ -18,6 +18,13 @@
 + (NSString *)systemConfigrationHelperPath;
 
 /**
+ *  PAC files folder path
+ *
+ *  @return PAC files folder path
+ */
++ (NSString *)pacFolderPath;
+
+/**
  *  Pac file path for pac file name
  *
  *  @param name Pac file name

@@ -12,6 +12,7 @@
 #import "SMStatusBarController.h"
 #import "SMServerConfigStorage.h"
 #import "SMUserProxySettingsManager.h"
+#import "SMSandboxPath.h"
 
 @interface AppDelegate () <SMStatusBarControllerDelegate>
 @property (nonatomic, strong) NSWindowController *windowController;
@@ -69,11 +70,13 @@
 
 - (void)statusBarControllerEditPACFileMenuClicked:(SMStatusBarController *)controller
 {
-    
+    NSString *pacFolderPath = [SMSandboxPath pacFolderPath];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:pacFolderPath]];
 }
 
 - (void)statusBarControllerUpdateWhitelistPacMenuClicked:(SMStatusBarController *)controller
 {
+    
 }
 
 - (void)statusBarControllerUpdateBlacklistPacMenuClicked:(SMStatusBarController *)controller
