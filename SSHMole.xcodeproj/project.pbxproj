@@ -236,11 +236,11 @@
 		423B41A71B38461700BA52CA /* SMUserProxySettingsManager */ = {
 			isa = PBXGroup;
 			children = (
+				423B41A81B38462500BA52CA /* SMUserProxySettingsManager.h */,
+				423B41A91B38462500BA52CA /* SMUserProxySettingsManager.m */,
 				425073261B3FC5B800C355DE /* PacFileDownloadManager */,
 				425073291B3FC5B800C355DE /* SystemPreferenceManager */,
 				4250732C1B3FC5B800C355DE /* WebServerManager */,
-				423B41A81B38462500BA52CA /* SMUserProxySettingsManager.h */,
-				423B41A91B38462500BA52CA /* SMUserProxySettingsManager.m */,
 			);
 			path = SMUserProxySettingsManager;
 			sourceTree = "<group>";
