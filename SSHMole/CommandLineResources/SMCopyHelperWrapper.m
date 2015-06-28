@@ -19,7 +19,7 @@
 + (BOOL)installHelperIfNotExist
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:[self helperPath]])
+    if (![fileManager fileExistsAtPath:[self helperPath]] || [self needUpdateHelper])
     {
         NSString *installerPath = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"CopyHelperCommand.sh"];
         NSDictionary *error;
@@ -34,6 +34,38 @@
         {
             return NO;
         }
+    }
+    return YES;
+}
+
++ (BOOL)needUpdateHelper
+{
+    NSTask *task;
+    task = [[NSTask alloc] init];
+    [task setLaunchPath:[self helperPath]];
+    
+    NSArray *args;
+    args = [NSArray arrayWithObjects:@"-v", nil];
+    [task setArguments: args];
+    
+    NSPipe *pipe;
+    pipe = [NSPipe pipe];
+    [task setStandardOutput:pipe];
+    
+    NSFileHandle *fd;
+    fd = [pipe fileHandleForReading];
+    
+    [task launch];
+    
+    NSData *data;
+    data = [fd readDataToEndOfFile];
+    
+    NSString *str;
+    str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    if ([str isEqualToString:@"1.0\n"])
+    {
+        return NO;
     }
     return YES;
 }
