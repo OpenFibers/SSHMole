@@ -13,7 +13,6 @@ Master分支开发中，有很多bug，请下载tag上的0.1或0.2版本使用�
 
 ##TODO
 1. 编辑好pac后，切到off mode再切回auto mode，强制系统刷新pac
-2. helper增加版本号函数，以便升级后更新。另外需要支持传入proxy uri
-3. 使用不同的uri表示黑名单和白名单pac，以便切换mode时，系统能够刷新缓存
-4. server config增加id
-5. server list bug，更改local port会往keychain里写入重复条目
+2. server config增加id
+3. server list bug，更改local port会往keychain里写入重复条目
+4. 连接成功后，并没有更新proxy设置

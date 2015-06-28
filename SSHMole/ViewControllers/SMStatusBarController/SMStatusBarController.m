@@ -61,7 +61,7 @@
     [self initMenu];
     
     //Get last config
-    [self initProxyModeConfig];
+    [self performSelector:@selector(initProxyModeConfig) withObject:nil afterDelay:0];
 }
 
 - (void)initMenu
