@@ -148,26 +148,49 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
 #pragma mark - Update PAC File from Remote
 
 /**
+ *  更新白名单文件，从remote
+ *
+ *  @param completion 完成时的回调
+ */
+- (void)updatWhitelistPACDataWithCompletion:(void(^)(BOOL successed))completion
+{
+    NSString *cachePath = [SMSandboxPath pacPathForName:@"whitelist.pac"];
+    NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/n0wa11/gfw_whitelist/master/whitelist.pac"];
+    [self updatePacDataWithURL:url cachePath:cachePath replaceOption:_whitelistReplaceOption completion:completion];
+}
+
+/**
+ *  更新黑名单文件，从remote
+ *
+ *  @param completion 完成时的回调
+ */
+- (void)updateBlacklistPACDataWithCompletion:(void(^)(BOOL successed))completion
+{
+    NSString *cachePath = [SMSandboxPath pacPathForName:@"blacklist.pac"];
+    NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/OpenFibers/SSHMole/master/SSHMole/PacFiles/blacklist.pac"];
+    [self updatePacDataWithURL:url cachePath:cachePath replaceOption:_blacklistReplaceOption completion:completion];
+}
+
+/**
  *  获取pac data，从url更新到缓存，或者直接从缓存读取
  *
- *  @param url                      pac的远程url。如果不填，则直接从本地缓存读取。
- *  @param cachePath                本地缓存地址。如果传了url，则下载后更新到cachePath
- *  @param replaceOption            字符串替换dictionary，下载完成时，pac中匹配到key会被替换成value，写入文件
- *  @param localServerAndPortString 本地转发端口地址。从文件中读出调用回调前，会用此地址替换<*Server and Port String*>
- *  @param completion               完成的handler
+ *  @param url           pac的远程url，如果传空，直接回调
+ *  @param cachePath     本地缓存地址，如果传空，直接回调
+ *  @param replaceOption 字符串替换dictionary，下载完成时，pac中匹配到key会被替换成value，写入文件
+ *  @param completion    完成的handler
  */
 
-- (void)getPacDataWithURL:(NSURL *)url
+- (void)updatePacDataWithURL:(NSURL *)url
                 cachePath:(NSString *)cachePath
             replaceOption:(NSDictionary *)replaceOption
-               completion:(void(^)(void))completion
+               completion:(void(^)(BOOL successed))completion
 {
     if (cachePath.length == 0 ||
         url.absoluteString.length == 0)
     {
         if (completion)
         {
-            completion();
+            completion(NO);
         }
         return;
     }
@@ -198,7 +221,7 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
     if (key)
     {
         NSDictionary *userInfo = request.userInfo;
-        void (^callback)(void) = userInfo[@"callback"];
+        void (^callback)(BOOL successed) = userInfo[@"callback"];
         NSString *cachePath = userInfo[@"cachePath"];
         NSDictionary *replaceOption = userInfo[@"replaceOption"];
         
@@ -206,11 +229,11 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
             NSData *responseData = request.responseData;
             NSData *data = [SMPacFileDownloadManager getReplacedPacStringForOriginalData:responseData
                                                                           replaceOptions:replaceOption];
-            [data writeToFile:cachePath atomically:YES];
+            BOOL successed = [data writeToFile:cachePath atomically:YES];
             if (callback)
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    callback();
+                    callback(successed);
                 });
             }
         });
@@ -224,14 +247,16 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
     NSString *key = request.request.URL.absoluteString;
     if (key)
     {
-        void (^callback)(void) = request.userInfo[@"callback"];
+        void (^callback)(BOOL successed) = request.userInfo[@"callback"];
         if (callback)
         {
-            callback();
+            callback(NO);
         }
         [_requestDictionary removeObjectForKey:key];
     }
 }
+
+#pragma mark - Replace Option
 
 + (NSData *)getReplacedPacStringForOriginalData:(NSData *)originalData
                                  replaceOptions:(NSDictionary *)replaceOptions

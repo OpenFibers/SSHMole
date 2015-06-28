@@ -13,28 +13,35 @@
 + (instancetype)defaultManager;
 
 /**
- *  获取白名单pac。
- *  文件地址: https://raw.githubusercontent.com/n0wa11/gfw_whitelist/master/whitelist.pac
- *  项目主页: https://github.com/n0wa11/gfw_whitelist
- *  本地缓存地址: ~/Library/Containers/openthread.SSHMole/Data/Documents/whitelist.pac
+ *  读取本地的白名单PAC文件内容
  *
- *  @param shouldUpdate 是否从远端获取后更新
- *  @param localPort    本地的pac http server端口
- *  @param completion   完成handler
+ *  @param localPort  本地转发端口，用于PAC文件内文本替换
+ *  @param completion 完成回调
  */
-- (void)getWhiteListPacDataAndUpdate:(BOOL)shouldUpdate
-                           localPort:(NSUInteger)localPort
-                          completion:(void(^)(NSData *data))completion;
+- (void)getWhiteListLocalPacDataForLocalPort:(NSUInteger)localPort
+                                  completion:(void(^)(NSData *data))completion;
+
 /**
- *  获取黑名单pac。
- *  文件地址?
+ *  读取本地的黑名单PAC文件内容
  *
- *  @param shouldUpdate 是否从远端获取后更新
- *  @param localPort    本地的pac http server端口
- *  @param completion   完成handler
+ *  @param localPort  本地转发端口，用于PAC文件内文本替换
+ *  @param completion 完成回调
  */
-- (void)getBlackListPacDataAndUpdate:(BOOL)shouldUpdate
-                           localPort:(NSUInteger)localPort
-                          completion:(void(^)(NSData *data))completion;
+- (void)getBlackListLocalPacDataForLocalPort:(NSUInteger)localPort
+                                  completion:(void(^)(NSData *data))completion;
+
+/**
+ *  更新白名单文件，从remote
+ *
+ *  @param completion 完成时的回调
+ */
+- (void)updatWhitelistPACDataWithCompletion:(void(^)(BOOL successed))completion;
+
+/**
+ *  更新黑名单文件，从remote
+ *
+ *  @param completion 完成时的回调
+ */
+- (void)updateBlacklistPACDataWithCompletion:(void(^)(BOOL successed))completion;
 
 @end
