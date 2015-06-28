@@ -40,7 +40,6 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
     if (self)
     {
         _requestDictionary = [NSMutableDictionary dictionary];
-        _callbackDictionary = [NSMutableDictionary dictionary];
         
         NSString *whitelistIPAddressString = [NSString stringWithFormat:@"var IP_ADDRESS = '%@';", ServerAndPortOptionString];
         _whitelistReplaceOption = @{@"var IP_ADDRESS = 'www.abc.com:443';": whitelistIPAddressString,
@@ -75,7 +74,7 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
         NSString *pacPathInBundle = [[NSBundle mainBundle] pathForResource:fileName ofType:@""];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *originalData = [[NSData alloc] initWithContentsOfFile:pacPathInBundle];
-            NSData *replacedData = [self getReplacedPacStringForOriginalData:originalData replaceOptions:replaceOption];
+            NSData *replacedData = [SMPacFileDownloadManager getReplacedPacStringForOriginalData:originalData replaceOptions:replaceOption];
             [replacedData writeToFile:cachePath atomically:YES];
         });
     }
@@ -123,13 +122,12 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
     }
     if ([[NSFileManager defaultManager] fileExistsAtPath:cachePath])
     {
-        __weak id weakSelf = self;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *data = [[NSData alloc] initWithContentsOfFile:cachePath];
             NSString *localServerAndPortString = [NSString stringWithFormat:@"127.0.0.1:%zd", localPort];
             NSDictionary *localServerReplaceOption = @{ServerAndPortOptionString : localServerAndPortString};
-            data = [weakSelf getReplacedPacStringForOriginalData:data
-                                                  replaceOptions:localServerReplaceOption];
+            data = [SMPacFileDownloadManager getReplacedPacStringForOriginalData:data
+                                                                  replaceOptions:localServerReplaceOption];
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completion)
                 {
@@ -204,12 +202,10 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
         NSString *cachePath = userInfo[@"cachePath"];
         NSDictionary *replaceOption = userInfo[@"replaceOption"];
         
-        __weak id weakSelf = self;
-        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *responseData = request.responseData;
-            NSData *data = [weakSelf getReplacedPacStringForOriginalData:responseData
-                                                          replaceOptions:replaceOption];
+            NSData *data = [SMPacFileDownloadManager getReplacedPacStringForOriginalData:responseData
+                                                                          replaceOptions:replaceOption];
             [data writeToFile:cachePath atomically:YES];
             if (callback)
             {
@@ -237,9 +233,8 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
     }
 }
 
-#warning - 改为+
-- (NSData *)getReplacedPacStringForOriginalData:(NSData *)originalData
-                             replaceOptions:(NSDictionary *)replaceOptions
++ (NSData *)getReplacedPacStringForOriginalData:(NSData *)originalData
+                                 replaceOptions:(NSDictionary *)replaceOptions
 {
     NSMutableString *utf8String = [[[NSString alloc] initWithData:originalData encoding:NSUTF8StringEncoding] mutableCopy];
     for (NSString *key in replaceOptions.allKeys)
