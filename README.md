@@ -15,7 +15,6 @@ Master分支开发中，有很多bug，请下载tag上的0.1或0.2版本使用�
 1. 编辑好pac后，切到off mode再切回auto mode，强制系统刷新pac
 2. server config增加id
 3. server list bug，更改local port会往keychain里写入重复条目
-4. 更新pac功能+更改字符串替换规则
-5. UserDefault保存上次的网络设置
-6. 打开时自动连接上次设置
-7. 菜单里显示服务器列表
+4. UserDefault保存上次的网络设置
+5. 打开时自动连接上次设置
+6. 菜单里显示服务器列表
