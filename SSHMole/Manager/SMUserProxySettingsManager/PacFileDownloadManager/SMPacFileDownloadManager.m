@@ -10,7 +10,7 @@
 #import "OTHTTPRequest.h"
 #import "SMSandboxPath.h"
 
-static NSString *const ServerAndPortOptionString = @"/*<Server and Port String>*/";
+static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO NOT CHANGE>*/";
 
 @interface SMPacFileDownloadManager () <OTHTTPRequestDelegate>
 
@@ -56,11 +56,11 @@ static NSString *const ServerAndPortOptionString = @"/*<Server and Port String>*
 
 - (void)installDefaultPacIfNotExist
 {
-    [self installDefaultPacIfNotExistForFileName:@"whitelist.pac"];
-    [self installDefaultPacIfNotExistForFileName:@"blacklist.pac"];
+    [self installDefaultPacIfNotExistForFileName:@"whitelist.pac" replaceOption:_whitelistReplaceOption];
+    [self installDefaultPacIfNotExistForFileName:@"blacklist.pac" replaceOption:_blacklistReplaceOption];
 }
 
-- (void)installDefaultPacIfNotExistForFileName:(NSString *)fileName
+- (void)installDefaultPacIfNotExistForFileName:(NSString *)fileName replaceOption:(NSDictionary *)replaceOption
 {
     NSString *cachePath = [SMSandboxPath pacPathForName:fileName];
     if (![[NSFileManager defaultManager] fileExistsAtPath:cachePath])
@@ -72,7 +72,11 @@ static NSString *const ServerAndPortOptionString = @"/*<Server and Port String>*
         }
         
         NSString *pacPathInBundle = [[NSBundle mainBundle] pathForResource:fileName ofType:@""];
-        [[NSFileManager defaultManager] copyItemAtPath:pacPathInBundle toPath:cachePath error:nil];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSData *originalData = [[NSData alloc] initWithContentsOfFile:pacPathInBundle];
+            NSData *replacedData = [self getReplacedPacStringForOriginalData:originalData replaceOptions:replaceOption];
+            [replacedData writeToFile:cachePath atomically:YES];
+        });
     }
 }
 
