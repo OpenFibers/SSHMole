@@ -66,6 +66,10 @@
 
 - (void)updateSettings
 {
+    if (!_currentServerConfig)
+    {
+        return;
+    }
     SMSystemProferenceManagerProxyMode systemPrefenceProxyMode = SMSystemProferenceManagerProxyModeOff;
     switch (self.proxyMode)
     {
@@ -107,6 +111,14 @@
     }
     _systemPreferenceManager.proxyMode = systemPrefenceProxyMode;
     [_systemPreferenceManager updateCurrentProxySettingsForConfig:_currentServerConfig];
+}
+
+- (void)updateWhitelistPACFile
+{
+}
+
+- (void)updateBlacklistPACFile
+{
 }
 
 @end

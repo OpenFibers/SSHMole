@@ -32,4 +32,14 @@ typedef NS_ENUM(NSUInteger, SMUserProxySettingsManagerProxyMode) {
  */
 - (void)updateProxySettingsForConfig:(SMServerConfig *)config;
 
+/**
+ *  更新白名单PAC文件
+ */
+- (void)updateWhitelistPACFile;
+
+/**
+ *  更新黑名单PAC文件
+ */
+- (void)updateBlacklistPACFile;
+
 @end

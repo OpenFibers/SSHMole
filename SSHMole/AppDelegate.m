@@ -76,12 +76,12 @@
 
 - (void)statusBarControllerUpdateWhitelistPacMenuClicked:(SMStatusBarController *)controller
 {
-    
+    [[SMUserProxySettingsManager defaultManager] updateWhitelistPACFile];
 }
 
 - (void)statusBarControllerUpdateBlacklistPacMenuClicked:(SMStatusBarController *)controller
 {
-    
+    [[SMUserProxySettingsManager defaultManager] updateBlacklistPACFile];
 }
 
 - (void)statusBarController:(SMStatusBarController *)controller changeProxyModeMenuClickedWithMode:(SMStatusBarControllerProxyMode)mode
