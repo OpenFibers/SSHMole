@@ -227,58 +227,64 @@
 {
     //disable save button
     self.serverConfigView.saveButtonEnabled = NO;
-
+    
     //get current editing or adding config index
-    NSUInteger configIndex = [self.serverListView selectedIndex];
-    if (configIndex == -1)
+    NSUInteger editingIndex = [self.serverListView selectedIndex];
+    if (editingIndex == -1)
     {
         return;
     }
     
-    //if current config exist, remove from server config storage
-    if (self.currentConfig)
+    if (self.currentConfig)//Editing config
     {
-        [[SMServerConfigStorage defaultStorage] removeConfig:self.currentConfig];
+        SMServerConfig *removingConfig = self.currentConfig;
+        
+        //Generate a new config
+        self.currentConfig = [[SMServerConfig alloc] init];
+        self.currentConfig.serverAddress = view.serverAddressString;
+        self.currentConfig.serverPort = view.serverPort;
+        self.currentConfig.account = view.accountString;
+        self.currentConfig.password = view.passwordString;
+        self.currentConfig.localPort = view.localPort;
+        self.currentConfig.remark = view.remarkString;
+        
+        NSUInteger index = [[SMServerConfigStorage defaultStorage] replaceConfig:removingConfig withNewConfig:self.currentConfig];
+        [self.serverListView reloadRowForServerConfig:self.currentConfig atIndex:index];
+    }
+    else//Adding config
+    {
+        //Generate a new config
+        self.currentConfig = [[SMServerConfig alloc] init];
+        self.currentConfig.serverAddress = view.serverAddressString;
+        self.currentConfig.serverPort = view.serverPort;
+        self.currentConfig.account = view.accountString;
+        self.currentConfig.password = view.passwordString;
+        self.currentConfig.localPort = view.localPort;
+        self.currentConfig.remark = view.remarkString;
+        
+        [[SMServerConfigStorage defaultStorage] addConfig:self.currentConfig];
+        [self.serverListView addServerConfig:self.currentConfig];
     }
     
-    //Generate a new config
-    self.currentConfig = [[SMServerConfig alloc] init];
-    self.currentConfig.serverAddress = view.serverAddressString;
-    self.currentConfig.serverPort = view.serverPort;
-    self.currentConfig.account = view.accountString;
-    self.currentConfig.password = view.passwordString;
-    self.currentConfig.localPort = view.localPort;
-    self.currentConfig.remark = view.remarkString;
-    
-    //Remove existing same config
+    //remove save config from server config storage
     NSArray *sameConfigArray = [[SMServerConfigStorage defaultStorage] sameServerConfigWithConfig:self.currentConfig];
     if (sameConfigArray.count > 0)
     {
         for (SMServerConfig *existingSameConfig in sameConfigArray)
         {
-            [[SMServerConfigStorage defaultStorage] removeConfig:existingSameConfig];
-            [self.serverListView removeServerConfig:existingSameConfig];
-            
-            //if removing config connected, disconnect it.
-            if ([[SMSSHTaskManager defaultManager] connectingConfig] == existingSameConfig)
+            if (existingSameConfig != self.currentConfig)
             {
-                [[SMSSHTaskManager defaultManager] disconnect];
+                [[SMServerConfigStorage defaultStorage] removeConfig:existingSameConfig];
+                [self.serverListView removeServerConfig:existingSameConfig];
+                
+                //if removing config connected, disconnect it.
+                if ([[SMSSHTaskManager defaultManager] connectingConfig] == existingSameConfig)
+                {
+                    [[SMSSHTaskManager defaultManager] disconnect];
+                }
+                
             }
         }
-    }
-    
-    NSUInteger newSavingIndex = configIndex - sameConfigArray.count;
-    
-    //Save to storage
-    [[SMServerConfigStorage defaultStorage] insertConfig:self.currentConfig atIndex:newSavingIndex];
-    
-    if (newSavingIndex == [self.serverListView configCount])//If about to add
-    {
-        [self.serverListView addServerConfig:self.currentConfig];
-    }
-    else//If editing exist config
-    {
-        [self.serverListView reloadRowForServerConfig:self.currentConfig atIndex:newSavingIndex];
     }
 }
 
