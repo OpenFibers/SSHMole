@@ -10,6 +10,8 @@
 #import "OTHTTPRequest.h"
 #import "SMSandboxPath.h"
 
+static NSString *const ServerAndPortOptionString = @"/*<Server and Port String>*/";
+
 @interface SMPacFileDownloadManager () <OTHTTPRequestDelegate>
 
 @end
@@ -18,6 +20,9 @@
 {
     NSMutableDictionary *_requestDictionary;
     NSMutableDictionary *_callbackDictionary;
+    
+    NSDictionary *_whitelistReplaceOption;
+    NSDictionary *_blacklistReplaceOption;
 }
 
 + (instancetype)defaultManager
@@ -37,6 +42,13 @@
     {
         _requestDictionary = [NSMutableDictionary dictionary];
         _callbackDictionary = [NSMutableDictionary dictionary];
+        
+        NSString *whitelistIPAddressString = [NSString stringWithFormat:@"var IP_ADDRESS = '%@';", ServerAndPortOptionString];
+        _whitelistReplaceOption = @{@"var IP_ADDRESS = 'www.abc.com:443';": whitelistIPAddressString,
+                                    @"var PROXY_TYPE = 'HTTPS';": @"var PROXY_TYPE = 'SOCKS';",
+                                    };
+        _blacklistReplaceOption = @{@"127.0.0.1:1080": ServerAndPortOptionString};
+        
         [self installDefaultPacIfNotExist];
     }
     return self;
@@ -80,13 +92,11 @@
 {
     NSString *cachePath = [SMSandboxPath pacPathForName:@"whitelist.pac"];
     NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/n0wa11/gfw_whitelist/master/whitelist.pac"];
-    NSString *localServerString = [NSString stringWithFormat:@"var IP_ADDRESS = '127.0.0.1:%tu';", localPort];
-    NSDictionary *replaceOption = @{@"var IP_ADDRESS = 'www.abc.com:443';": localServerString,
-                                    @"var PROXY_TYPE = 'HTTPS';": @"var PROXY_TYPE = 'SOCKS';",
-                                    };
+    NSString *localServerAndPortString = [NSString stringWithFormat:@"127.0.0.1:%zd", localPort];
     [self getPacDataWithURL:(shouldUpdate ? url : nil)
                   cachePath:cachePath
-              replaceOption:replaceOption
+              replaceOption:_whitelistReplaceOption
+   localServerAndPortString:localServerAndPortString
                  completion:completion];
 }
 
@@ -104,26 +114,29 @@
 {
     NSString *cachePath = [SMSandboxPath pacPathForName:@"blacklist.pac"];
     NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/OpenFibers/SSHMole/master/SSHMole/PacFiles/blacklist.pac"];
-    NSString *localServerString = [NSString stringWithFormat:@"127.0.0.1:%tu", localPort];
-    NSDictionary *replaceOption = @{@"127.0.0.1:1080": localServerString,
-                                    };
+    NSString *localServerAndPortString = [NSString stringWithFormat:@"127.0.0.1:%zd", localPort];
     [self getPacDataWithURL:(shouldUpdate ? url : nil)
                   cachePath:cachePath
-              replaceOption:replaceOption
+              replaceOption:_blacklistReplaceOption
+   localServerAndPortString:localServerAndPortString
                  completion:completion];
 }
+
 
 /**
  *  获取pac data，从url更新到缓存，或者直接从缓存读取
  *
- *  @param url           pac的远程url。如果不填，则直接从本地缓存读取。
- *  @param cachePath     本地缓存地址。如果传了url，则下载后更新到cachePath
- *  @param replaceOption 字符串替换dictionary，pac中匹配到key会被替换成value
- *  @param completion    完成的handler
+ *  @param url                      pac的远程url。如果不填，则直接从本地缓存读取。
+ *  @param cachePath                本地缓存地址。如果传了url，则下载后更新到cachePath
+ *  @param replaceOption            字符串替换dictionary，下载完成时，pac中匹配到key会被替换成value，写入文件
+ *  @param localServerAndPortString 本地转发端口地址。从文件中读出调用回调前，会用此地址替换<*Server and Port String*>
+ *  @param completion               完成的handler
  */
+
 - (void)getPacDataWithURL:(NSURL *)url
                 cachePath:(NSString *)cachePath
             replaceOption:(NSDictionary *)replaceOption
+ localServerAndPortString:(NSString *)localServerAndPortString
                completion:(void(^)(NSData *data))completion
 {
     if (cachePath.length == 0)
@@ -135,11 +148,20 @@
         return;
     }
     
+    if (localServerAndPortString.length == 0)
+    {
+        if (completion)
+        {
+            completion(nil);
+        }
+    }
+    
     __weak id weakSelf = self;
     if (url.absoluteString)
     {
         NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
         userInfo[@"cachePath"] = cachePath;
+        userInfo[@"localServerAndPort"] = localServerAndPortString;
         if (replaceOption)
         {
             userInfo[@"replaceOption"] = replaceOption;
@@ -158,7 +180,9 @@
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *data = [[NSData alloc] initWithContentsOfFile:cachePath];
-            data = [weakSelf getReplacedPacStringForOriginalData:data replaceOptions:replaceOption];
+            NSDictionary *localServerReplaceOption = @{ServerAndPortOptionString : localServerAndPortString};
+            data = [weakSelf getReplacedPacStringForOriginalData:data
+                                                  replaceOptions:localServerReplaceOption];
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completion)
                 {
@@ -186,20 +210,23 @@
         NSDictionary *userInfo = request.userInfo;
         NSString *cachePath = userInfo[@"cachePath"];
         NSDictionary *replaceOption = userInfo[@"replaceOption"];
+        NSString *localServerAndPortString = userInfo[@"localServerAndPort"];
         
         __weak id weakSelf = self;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *responseData = request.responseData;
+            NSData *data = [weakSelf getReplacedPacStringForOriginalData:responseData
+                                                          replaceOptions:replaceOption];
             if (callback)
             {
-                NSData *data = [weakSelf getReplacedPacStringForOriginalData:responseData
-                                                          replaceOptions:replaceOption];
+                NSDictionary *localServerReplaceOption = @{ServerAndPortOptionString : localServerAndPortString};
+                NSData *finalData = [weakSelf getReplacedPacStringForOriginalData:data replaceOptions:localServerReplaceOption];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    callback(data);
+                    callback(finalData);
                 });
             }
-            [responseData writeToFile:cachePath atomically:YES];
+            [data writeToFile:cachePath atomically:YES];
         });
         
         [_requestDictionary removeObjectForKey:key];
