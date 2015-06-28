@@ -43,8 +43,8 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
     }
     if ([object isKindOfClass:[SMServerConfig class]])
     {
-        NSString *objectAccountAndServerAddress = ((SMServerConfig *)object).accountAndServerAddressString;
-        BOOL result = [self.accountAndServerAddressString isEqualToString:objectAccountAndServerAddress];
+        NSString *objectAccountAndServerAddress = ((SMServerConfig *)object).identifierString;
+        BOOL result = [self.identifierString isEqualToString:objectAccountAndServerAddress];
         return result;
     }
     return [super isEqualTo:object];
@@ -52,7 +52,7 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
 - (NSUInteger)hash
 {
-    NSString *objectAccountAndServerAddress = self.accountAndServerAddressString;
+    NSString *objectAccountAndServerAddress = self.identifierString;
     NSUInteger hash = [objectAccountAndServerAddress hash];
     return hash;
 }
