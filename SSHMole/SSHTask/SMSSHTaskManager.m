@@ -44,6 +44,7 @@
 - (void)beginConnectWithServerConfig:(SMServerConfig *)config
                             callback:(void(^)(SMSSHTaskStatus status, NSError *error))callback
 {
+#warning 分开begin和callback，增加add callback方法，给status bar controller使用
     if (_currentTask)
     {
         [_currentTask disconnect];
