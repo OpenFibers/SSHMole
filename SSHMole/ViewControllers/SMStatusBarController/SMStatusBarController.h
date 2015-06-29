@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class SMStatusBarController;
+@class SMServerConfig;
 
 typedef NS_ENUM(NSUInteger, SMStatusBarControllerProxyMode) {
     SMStatusBarControllerProxyModeOff,
@@ -28,6 +29,8 @@ typedef NS_ENUM(NSUInteger, SMStatusBarControllerProxyMode) {
 - (void)statusBarControllerUpdateBlacklistPacMenuClicked:(SMStatusBarController *)controller;
 
 - (void)statusBarController:(SMStatusBarController *)controller changeProxyModeMenuClickedWithMode:(SMStatusBarControllerProxyMode)mode;
+
+- (void)statusBarController:(SMStatusBarController *)controller didPickServerConfig:(SMServerConfig *)config;
 
 @end
 

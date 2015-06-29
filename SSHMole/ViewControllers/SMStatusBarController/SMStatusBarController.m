@@ -9,6 +9,7 @@
 #import "SMStatusBarController.h"
 #import "SMServerListView.h"
 #import "SMServerConfig.h"
+#import "NSObject+OTRuntimeUserInfo.h"
 #import <AppKit/AppKit.h>
 
 @interface SMStatusBarController ()
@@ -194,6 +195,7 @@
             NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:config.accountStringForDisplay
                                                           action:@selector(serverConfigItemClicked:)
                                                    keyEquivalent:@""];
+            item.otRuntimeUserInfo = config;
             item.target = self;
             [_serverConfigItem.submenu addItem:item];
         }
@@ -211,7 +213,8 @@
 
 - (void)serverConfigItemClicked:(NSMenuItem *)item
 {
-    
+    SMServerConfig *selectedConfig = item.otRuntimeUserInfo;
+    [self.delegate statusBarController:self didPickServerConfig:selectedConfig];
 }
 
 - (void)editServerListItemClicked:(NSMenuItem *)editServerListItem
