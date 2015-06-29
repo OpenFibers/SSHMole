@@ -47,6 +47,7 @@
 - (void)dealloc
 {
     [self disconnect];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)connect:(void(^)(SMSSHTaskStatus status, NSError *error))callback
