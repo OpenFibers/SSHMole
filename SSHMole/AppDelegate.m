@@ -105,4 +105,9 @@
     }
 }
 
+- (void)statusBarController:(SMStatusBarController *)controller didPickServerConfig:(SMServerConfig *)config
+{
+    [[self contentViewController] connectServerConfig:config];
+}
+
 @end

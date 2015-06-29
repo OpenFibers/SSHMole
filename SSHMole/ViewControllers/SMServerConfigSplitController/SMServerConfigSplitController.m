@@ -100,6 +100,16 @@
     }
 }
 
+#pragma mark - Public Connect Method
+
+- (void)connectServerConfig:(SMServerConfig *)config
+{
+    NSUInteger index = [self.serverListView indexOfConfig:config];
+    self.serverListView.selectedIndex = index;
+    
+    [self connectCurrentConfig];
+}
+
 #pragma mark - Server config view call back
 
 - (void)serverConfigViewConnectButtonTouched:(SMServerConfigView *)configView

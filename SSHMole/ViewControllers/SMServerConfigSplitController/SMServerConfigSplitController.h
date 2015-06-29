@@ -7,7 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@class SMServerConfig;
 
 @interface SMServerConfigSplitController : NSViewController
+
+- (void)connectServerConfig:(SMServerConfig *)config;
 
 @end
