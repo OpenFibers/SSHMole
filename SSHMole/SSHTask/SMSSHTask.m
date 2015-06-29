@@ -44,6 +44,7 @@
 
 - (void)dealloc
 {
+    self.callback = nil;
     [self disconnect];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
