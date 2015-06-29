@@ -39,6 +39,7 @@
 		42840DA51B29820D0015DA34 /* SSHCommand.sh in Resources */ = {isa = PBXBuildFile; fileRef = 42840DA41B29820D0015DA34 /* SSHCommand.sh */; };
 		42840DA81B2985E10015DA34 /* CopyHelperCommand.sh in Resources */ = {isa = PBXBuildFile; fileRef = 42840DA71B2985E10015DA34 /* CopyHelperCommand.sh */; };
 		42840DB11B298CF50015DA34 /* SMCopyHelperWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840DB01B298CF50015DA34 /* SMCopyHelperWrapper.m */; };
+		4290598B1B41831C00D6D687 /* NSObject+OTRuntimeUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4290598A1B41831C00D6D687 /* NSObject+OTRuntimeUserInfo.m */; };
 		429422891B268523008A19F8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429422881B268523008A19F8 /* SystemConfiguration.framework */; };
 		429422981B282681008A19F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 429422971B282681008A19F8 /* main.m */; };
 		429422A71B2828E3008A19F8 /* SSHMoleSystemConfigurationHelper in Resources */ = {isa = PBXBuildFile; fileRef = 429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */; };
@@ -132,6 +133,8 @@
 		42840DA71B2985E10015DA34 /* CopyHelperCommand.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = CopyHelperCommand.sh; sourceTree = "<group>"; };
 		42840DAF1B298CF50015DA34 /* SMCopyHelperWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCopyHelperWrapper.h; sourceTree = "<group>"; };
 		42840DB01B298CF50015DA34 /* SMCopyHelperWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCopyHelperWrapper.m; sourceTree = "<group>"; };
+		429059891B41831C00D6D687 /* NSObject+OTRuntimeUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+OTRuntimeUserInfo.h"; sourceTree = "<group>"; };
+		4290598A1B41831C00D6D687 /* NSObject+OTRuntimeUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+OTRuntimeUserInfo.m"; sourceTree = "<group>"; };
 		429422881B268523008A19F8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SSHMoleSystemConfigurationHelper; sourceTree = BUILT_PRODUCTS_DIR; };
 		429422971B282681008A19F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -291,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				423B41991B37B37500BA52CA /* SanboxPath */,
+				429059881B41831C00D6D687 /* NSObject+OTRuntimeUserInfo */,
 				42840D711B2981040015DA34 /* NSView+Vibrancy */,
 				42840D741B2981040015DA34 /* SMCellClickDetectingTableView */,
 				42840D771B2981040015DA34 /* SMOnlyIntegerNumberFormatter */,
@@ -412,6 +416,15 @@
 				42840DB01B298CF50015DA34 /* SMCopyHelperWrapper.m */,
 			);
 			path = CommandLineResources;
+			sourceTree = "<group>";
+		};
+		429059881B41831C00D6D687 /* NSObject+OTRuntimeUserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				429059891B41831C00D6D687 /* NSObject+OTRuntimeUserInfo.h */,
+				4290598A1B41831C00D6D687 /* NSObject+OTRuntimeUserInfo.m */,
+			);
+			path = "NSObject+OTRuntimeUserInfo";
 			sourceTree = "<group>";
 		};
 		429422961B282681008A19F8 /* SSHMoleSystemConfigurationHelper */ = {
@@ -726,6 +739,7 @@
 				42E0A4501ACFBAB800890EA7 /* main.m in Sources */,
 				4250732F1B3FC5B800C355DE /* SMPacFileDownloadManager.m in Sources */,
 				42C5C7081B37301200C69389 /* GCDWebServerFileRequest.m in Sources */,
+				4290598B1B41831C00D6D687 /* NSObject+OTRuntimeUserInfo.m in Sources */,
 				42840DB11B298CF50015DA34 /* SMCopyHelperWrapper.m in Sources */,
 				42840D911B2981040015DA34 /* SMServerConfigStorage.m in Sources */,
 				42840D921B2981040015DA34 /* SMSSHTask.m in Sources */,
