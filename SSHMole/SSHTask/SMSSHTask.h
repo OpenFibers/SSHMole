@@ -42,10 +42,20 @@ typedef NS_ENUM(NSUInteger, SMSSHTaskErrorCode) {
 
 - (id)initWithServerConfig:(SMServerConfig *)config;
 
+/**
+ *  Set or clear callback of connection status.
+ *  失败时， SMSSHTaskStatusErrorOccured 和 SMSSHTaskStatusDisconnected 并无时序保证。回调顺序看系统心情。
+ */
 @property (nonatomic, copy) void(^callback)(SMSSHTaskStatus status, NSError *error);
 
+/**
+ *  Connect task
+ */
 - (void)connect;
 
+/**
+ *  Disconnect task
+ */
 - (void)disconnect;
 
 @end
