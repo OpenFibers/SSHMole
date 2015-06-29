@@ -8,8 +8,6 @@
 
 #import "SMSSHTask.h"
 
-#warning separate connect and set callback
-
 @implementation SMSSHTask
 {
     SMServerConfig *_config;
@@ -50,11 +48,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)connect:(void(^)(SMSSHTaskStatus status, NSError *error))callback
+- (void)connect
 {
-    //store callback block
-    _callback = [callback copy];
-    
     //check config available
     if (!_config || ![_config ableToConnect])
     {
@@ -335,7 +330,10 @@
 - (void)callbackWithStatus:(SMSSHTaskStatus)status error:(NSError *)error
 {
     _currentStatus = status;
-    _callback(status, error);
+    if (_callback)
+    {
+        _callback(status, error);
+    }
     if (error)
     {
         [self disconnect];

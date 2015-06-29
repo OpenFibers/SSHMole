@@ -42,7 +42,9 @@ typedef NS_ENUM(NSUInteger, SMSSHTaskErrorCode) {
 
 - (id)initWithServerConfig:(SMServerConfig *)config;
 
-- (void)connect:(void(^)(SMSSHTaskStatus status, NSError *error))callback;
+@property (nonatomic, copy) void(^callback)(SMSSHTaskStatus status, NSError *error);
+
+- (void)connect;
 
 - (void)disconnect;
 
