@@ -104,10 +104,26 @@
 
 - (void)connectServerConfig:(SMServerConfig *)config
 {
+    //This code will select config, and update self.currentConfig
     NSUInteger index = [self.serverListView indexOfConfig:config];
     self.serverListView.selectedIndex = index;
     
-    [self connectCurrentConfig];
+    //connect current config, if current config not connecting
+    SMServerConfig *connectingConfig = [[SMSSHTaskManager defaultManager] connectingConfig];
+    if (!connectingConfig)//connect current config if no config connecting
+    {
+        [self connectCurrentConfig];
+    }
+    else if (connectingConfig != self.currentConfig)//disconnect and connect current config, if other config connecting
+    {
+        [self disconnectConnectingConfig];
+        [self connectCurrentConfig];
+    }
+    else//if current config connecting
+    {
+        //do nothing
+    }
+    
 }
 
 #pragma mark - Server config view call back
