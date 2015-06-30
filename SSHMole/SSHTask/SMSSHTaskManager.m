@@ -11,6 +11,7 @@
 @implementation SMSSHTaskManager
 {
     SMSSHTask *_currentTask;
+    NSMutableDictionary *_callbackDictionary;
 }
 
 + (instancetype)defaultManager
@@ -28,6 +29,7 @@
     self = [super init];
     if (self)
     {
+        _callbackDictionary = [NSMutableDictionary dictionary];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(disconnect)
                                                      name:NSApplicationWillTerminateNotification
@@ -41,19 +43,46 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)beginConnectWithServerConfig:(SMServerConfig *)config
-                            callback:(void(^)(SMSSHTaskStatus status, NSError *error))callback
+- (void)addCallback:(void(^)(SMSSHTask *task, SMSSHTaskStatus status, NSError *error))callback forKey:(NSString *)key
 {
-#warning 分开begin和callback，增加add callback方法，给status bar controller使用
+    if (key)
+    {
+        _callbackDictionary[key] = [callback copy];
+    }
+}
+
+- (void)removeCallbackForKey:(NSString *)key
+{
+    if (key)
+    {
+        _callbackDictionary[key] = nil;
+    }
+}
+
+- (void)removeAllCallbacks
+{
+    [_callbackDictionary removeAllObjects];
+}
+
+- (void)beginConnectWithServerConfig:(SMServerConfig *)config
+{
     if (_currentTask)
     {
         [_currentTask disconnect];
         _currentTask = nil;
     }
     _currentTask = [[SMSSHTask alloc] initWithServerConfig:config];
+#ifdef DEBUG
     _currentTask.shouldLogTaskStdOut = YES;
-    _currentTask.callback = ^(SMSSHTaskStatus status, NSError *error) {
-        callback(status, error);
+#endif
+    __weak NSMutableDictionary *weakCallbackDictionary = _callbackDictionary;
+    __weak SMSSHTask *weakCurrentTask = _currentTask;
+    _currentTask.callback = ^(SMSSHTaskStatus status, NSError *error)
+    {
+        for (void(^callback)(SMSSHTask *task, SMSSHTaskStatus status, NSError *error) in weakCallbackDictionary.allValues)
+        {
+            callback(weakCurrentTask ,status, error);
+        }
         //Error occurred 和 disconnect 的 callback 没有时序保证
         //所以在Error occurred 或 disconnect 时不会clear _currentTask
         //防止后到的状态无法回调

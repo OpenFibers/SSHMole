@@ -15,8 +15,11 @@
 
 + (instancetype)defaultManager;
 
-- (void)beginConnectWithServerConfig:(SMServerConfig *)config
-                            callback:(void(^)(SMSSHTaskStatus status, NSError *error))callback;
+- (void)addCallback:(void(^)(SMSSHTask *task, SMSSHTaskStatus status, NSError *error))callback forKey:(NSString *)key;
+- (void)removeCallbackForKey:(NSString *)key;
+- (void)removeAllCallbacks;
+
+- (void)beginConnectWithServerConfig:(SMServerConfig *)config;
 - (void)disconnect;
 
 - (SMSSHTaskStatus)currentConnectionStatus;

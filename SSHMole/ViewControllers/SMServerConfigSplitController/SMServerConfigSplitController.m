@@ -28,6 +28,44 @@
 {
 }
 
+- (id)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self)
+    {
+        [[SMSSHTaskManager defaultManager] addCallback:^(SMSSHTask *task, SMSSHTaskStatus status, NSError *error)
+         {
+             //Generate info
+             NSMutableDictionary *infoDictionary = [NSMutableDictionary dictionary];
+             infoDictionary[@"Status"] = [NSNumber numberWithUnsignedInteger:status];
+             infoDictionary[@"Config"] = task.config;
+             if (error)
+             {
+                 infoDictionary[@"Error"] = error;
+             }
+             
+             //Update UI
+             [self updateUIForConnectionStatusChangedWithInfo:infoDictionary];
+             
+             //设置
+             if (status == SMSSHTaskStatusDisconnected)
+             {
+                 [[SMUserProxySettingsManager defaultManager] updateProxySettingsForConfig:nil];
+             }
+             else if (status == SMSSHTaskStatusConnected)
+             {
+                 [[SMUserProxySettingsManager defaultManager] updateProxySettingsForConfig:task.config];
+             }
+         } forKey:NSStringFromClass([self class])];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [[SMSSHTaskManager defaultManager] removeCallbackForKey:NSStringFromClass([self class])];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -123,7 +161,6 @@
     {
         //do nothing
     }
-    
 }
 
 #pragma mark - Server config view call back
@@ -149,33 +186,8 @@
         [self serverConfigViewSaveButtonTouched:self.serverConfigView];
     }
     
-    SMServerConfig *currentConfig = self.currentConfig;
-    
     //Make a connection
-    [[SMSSHTaskManager defaultManager] beginConnectWithServerConfig:self.currentConfig callback:^(SMSSHTaskStatus status, NSError *error)
-     {
-         //Generate info
-         NSMutableDictionary *infoDictionary = [NSMutableDictionary dictionary];
-         infoDictionary[@"Status"] = [NSNumber numberWithUnsignedInteger:status];
-         infoDictionary[@"Config"] = currentConfig;
-         if (error)
-         {
-             infoDictionary[@"Error"] = error;
-         }
-         
-         //Update UI
-         [self updateUIForConnectionStatusChangedWithInfo:infoDictionary];
-         
-         //设置
-         if (status == SMSSHTaskStatusDisconnected)
-         {
-             [[SMUserProxySettingsManager defaultManager] updateProxySettingsForConfig:nil];
-         }
-         else if (status == SMSSHTaskStatusConnected)
-         {
-             [[SMUserProxySettingsManager defaultManager] updateProxySettingsForConfig:currentConfig];
-         }
-     }];
+    [[SMSSHTaskManager defaultManager] beginConnectWithServerConfig:self.currentConfig];
 }
 
 - (void)disconnectConnectingConfig
