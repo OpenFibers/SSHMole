@@ -10,6 +10,7 @@
 #import "SMServerListView.h"
 #import "SMServerConfig.h"
 #import "NSObject+OTRuntimeUserInfo.h"
+#import "SMSSHTaskManager.h"
 #import <AppKit/AppKit.h>
 
 @interface SMStatusBarController ()
@@ -44,7 +45,7 @@
     if (self)
     {
         [self initStatusBarIcon];
-        
+        [self installSSHTaskCallback];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(serverConfigsUpdated:)
                                                      name:SMServerListViewAnyConfigChangedNotification
@@ -55,6 +56,7 @@
 
 - (void)dealloc
 {
+    [self uninstallSSHTaskCallback];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -168,6 +170,21 @@
     self.currentProxyMode = SMStatusBarControllerProxyModeAutoWhitelist;
 }
 
+#pragma mark - SSH Task Callback
+
+- (void)installSSHTaskCallback
+{
+    __weak id weakSelf = self;
+    [[SMSSHTaskManager defaultManager] addCallback:^(SMSSHTask *task, SMSSHTaskStatus status, NSError *error) {
+        [weakSelf updateServerConfig:task.config forSSHTaskStatus:status];
+    } forKey:NSStringFromClass([self class])];
+}
+
+- (void)uninstallSSHTaskCallback
+{
+    [[SMSSHTaskManager defaultManager] removeCallbackForKey:NSStringFromClass([self class])];
+}
+
 #pragma mark - Properties
 
 - (void)setCurrentProxyMode:(SMStatusBarControllerProxyMode)currentProxyMode
@@ -182,6 +199,22 @@
 }
 
 #pragma mark - Server configs updated notification
+
+- (void)updateServerConfig:(SMServerConfig *)config forSSHTaskStatus:(SMSSHTaskStatus)status
+{
+    for (NSMenuItem *item in _serverConfigItem.submenu.itemArray)
+    {
+        if (item != _editServerListItem && item.otRuntimeUserInfo == config)
+        {
+            BOOL shouldAddCheckmark = (status == SMSSHTaskStatusConnected ||
+                                       status == SMSSHTaskStatusConnecting);
+            if (item.state != shouldAddCheckmark)
+            {
+                [item setState:shouldAddCheckmark];
+            }
+        }
+    }
+}
 
 - (void)serverConfigsUpdated:(NSNotification *)notification
 {

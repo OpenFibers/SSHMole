@@ -142,7 +142,6 @@ NSString *const SMServerListViewAnyConfigChangedNotificationServerConfigsKey = @
     NSIndexSet *columnIndexSet = [NSIndexSet indexSetWithIndex:0];
     [self.tableView reloadDataForRowIndexes:rowIndexSet columnIndexes:columnIndexSet];
     [self.tableView endUpdates];
-    [self postServerConfigChangedNotification];
 }
 
 - (void)addServerConfig:(SMServerConfig *)config
