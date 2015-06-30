@@ -221,9 +221,9 @@
     [self updateServerConfigViewConnectButtonStatus];
     
     //Show alert if error occurred
-    if (info[@"Error"])
+    NSError *error = info[@"Error"];
+    if (error && error.code != SMSSHTaskErrorCodeDisconnectForAppTermination)
     {
-        NSError *error = info[@"Error"];
         NSAlert *alert = [[NSAlert alloc]init];
         [alert addButtonWithTitle:@"OK"];
         [alert setMessageText:error.domain];
