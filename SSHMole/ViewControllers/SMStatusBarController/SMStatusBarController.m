@@ -11,6 +11,7 @@
 #import "SMServerConfig.h"
 #import "NSObject+OTRuntimeUserInfo.h"
 #import "SMSSHTaskManager.h"
+#import "SMStatusBarUserDefaultsManager.h"
 #import <AppKit/AppKit.h>
 
 @interface SMStatusBarController ()
@@ -167,7 +168,7 @@
 
 - (void)initProxyModeConfig
 {
-    self.currentProxyMode = SMStatusBarControllerProxyModeAutoWhitelist;
+    self.currentProxyMode = [SMStatusBarUserDefaultsManager defaultManager].lastProxyMode;
 }
 
 #pragma mark - SSH Task Callback
@@ -176,7 +177,10 @@
 {
     __weak id weakSelf = self;
     [[SMSSHTaskManager defaultManager] addCallback:^(SMSSHTask *task, SMSSHTaskStatus status, NSError *error) {
-        [weakSelf updateServerConfig:task.config forSSHTaskStatus:status];
+        if (error.code != SMSSHTaskDisconnectForAppTerminationErrorCode)//App terminate时不需要更新UI和保存user defaults
+        {
+            [weakSelf updateServerConfig:task.config forSSHTaskStatus:status];
+        }
     } forKey:NSStringFromClass([self class])];
 }
 
@@ -190,11 +194,17 @@
 - (void)setCurrentProxyMode:(SMStatusBarControllerProxyMode)currentProxyMode
 {
     _currentProxyMode = currentProxyMode;
+    
+    //update UI
     [_proxyOffItem setState:(currentProxyMode == _proxyOffItem.tag ? NSOnState : NSOffState)];
     [_whitelistModeItem setState:(currentProxyMode == _whitelistModeItem.tag ? NSOnState : NSOffState)];
     [_blacklistModeItem setState:(currentProxyMode == _blacklistModeItem.tag ? NSOnState : NSOffState)];
     [_globalModeItem setState:(currentProxyMode == _globalModeItem.tag ? NSOnState : NSOffState)];
     
+    //update user defaults
+    [SMStatusBarUserDefaultsManager defaultManager].lastProxyMode = currentProxyMode;
+    
+    //callback delegate
     [self.delegate statusBarController:self changeProxyModeMenuClickedWithMode:currentProxyMode];
 }
 
@@ -202,6 +212,7 @@
 
 - (void)updateServerConfig:(SMServerConfig *)config forSSHTaskStatus:(SMSSHTaskStatus)status
 {
+    //update UI
     for (NSMenuItem *item in _serverConfigItem.submenu.itemArray)
     {
         if (item != _editServerListItem && item.otRuntimeUserInfo == config)
@@ -213,6 +224,16 @@
                 [item setState:shouldAddCheckmark];
             }
         }
+    }
+    
+    //update user defaults
+    if (status == SMSSHTaskStatusDisconnected || status == SMSSHTaskStatusErrorOccured)
+    {
+        [SMStatusBarUserDefaultsManager defaultManager].lastConnectingConfigIdentifier = @"";
+    }
+    else
+    {
+        [SMStatusBarUserDefaultsManager defaultManager].lastConnectingConfigIdentifier = config.identifierString;
     }
 }
 

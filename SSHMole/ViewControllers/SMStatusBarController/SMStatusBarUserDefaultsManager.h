@@ -11,6 +11,8 @@
 
 @interface SMStatusBarUserDefaultsManager : NSObject
 
++ (instancetype)defaultManager;
+
 @property (nonatomic, assign) SMStatusBarControllerProxyMode lastProxyMode;
 @property (nonatomic, strong) NSString *lastConnectingConfigIdentifier;
 
