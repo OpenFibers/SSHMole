@@ -239,6 +239,12 @@
 
 - (void)serverConfigsUpdated:(NSNotification *)notification
 {
+    if (![NSThread isMainThread])
+    {
+        [self performSelectorOnMainThread:@selector(serverConfigsUpdated:) withObject:notification waitUntilDone:NO];
+        return;
+    }
+    
     NSDictionary *userInfo = notification.userInfo;
     NSArray *configs = userInfo[SMServerListViewAnyConfigChangedNotificationServerConfigsKey];
     if (configs)
@@ -255,6 +261,29 @@
         }
         [_serverConfigItem.submenu addItem:_editServerListItem];
     }
+    
+    //connect to last picked config, at first server config update time(app start up and server list reload)
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *lastConnectedConfigIdentifer = [SMStatusBarUserDefaultsManager defaultManager].lastConnectingConfigIdentifier;
+        NSMenuItem *lastConnectedConfigItem = nil;
+        for (NSMenuItem *item in _serverConfigItem.submenu.itemArray)
+        {
+            if (item != _editServerListItem)
+            {
+                SMServerConfig *config = item.otRuntimeUserInfo;
+                if ([config.identifierString isEqualToString:lastConnectedConfigIdentifer])
+                {
+                    lastConnectedConfigItem = item;
+                    break;
+                }
+            }
+        }
+        if (lastConnectedConfigItem)
+        {
+            [self performSelector:@selector(serverConfigItemClicked:) withObject:lastConnectedConfigItem afterDelay:1];
+        }
+    });
 }
 
 #pragma mark - Menu events
