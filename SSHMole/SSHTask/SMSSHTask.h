@@ -32,6 +32,8 @@ typedef NS_ENUM(NSUInteger, SMSSHTaskErrorCode) {
     SMSSHTaskErrorCodeNSTaskException,
 };
 
+FOUNDATION_EXTERN const NSInteger SMSSHTaskDisconnectForAppTerminationErrorCode;
+
 @interface SMSSHTask : NSObject
 
 @property (nonatomic, readonly) BOOL connectionInProgress;
@@ -59,7 +61,7 @@ typedef NS_ENUM(NSUInteger, SMSSHTaskErrorCode) {
 - (void)disconnect;
 
 /**
- *  Disconnect for app termination. An error will raise with domain "App Terminated" and code 1001 for callback.
+ *  Disconnect for app termination. An error will raise with domain "App Terminated" and code SMSSHTaskDisconnectForAppTerminationErrorCode(1001) for callback.
  */
 - (void)disconnectForAppTermination;
 

@@ -8,6 +8,8 @@
 
 #import "SMSSHTask.h"
 
+const NSInteger SMSSHTaskDisconnectForAppTerminationErrorCode = 1001;
+
 @implementation SMSSHTask
 {
     SMServerConfig *_config;
@@ -107,7 +109,7 @@
 
 - (void)disconnectForAppTermination
 {
-    NSError *error = [NSError errorWithDomain:@"App Terminated" code:1001 userInfo:nil];
+    NSError *error = [NSError errorWithDomain:@"App Terminated" code:SMSSHTaskDisconnectForAppTerminationErrorCode userInfo:nil];
     [self disconnectWithError:error];
 }
 
