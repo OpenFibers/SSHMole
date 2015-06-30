@@ -177,7 +177,7 @@
 {
     __weak id weakSelf = self;
     [[SMSSHTaskManager defaultManager] addCallback:^(SMSSHTask *task, SMSSHTaskStatus status, NSError *error) {
-        if (error.code != SMSSHTaskDisconnectForAppTerminationErrorCode)//App terminate时不需要更新UI和保存user defaults
+        if (error.code != SMSSHTaskErrorCodeDisconnectForAppTermination)//App terminate时不需要更新UI和保存user defaults
         {
             [weakSelf updateServerConfig:task.config forSSHTaskStatus:status];
         }

@@ -30,9 +30,8 @@ typedef NS_ENUM(NSUInteger, SMSSHTaskErrorCode) {
     SMSSHTaskErrorCodeSyntaxError,
     SMSSHTaskErrorCodeWrongPassword,
     SMSSHTaskErrorCodeNSTaskException,
+    SMSSHTaskErrorCodeDisconnectForAppTermination,
 };
-
-FOUNDATION_EXTERN const NSInteger SMSSHTaskDisconnectForAppTerminationErrorCode;
 
 @interface SMSSHTask : NSObject
 
