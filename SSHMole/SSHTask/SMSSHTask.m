@@ -102,10 +102,21 @@
 
 - (void)disconnect
 {
+    [self disconnectWithError:nil];
+}
+
+- (void)disconnectForAppTerminate
+{
+    NSError *error = [NSError errorWithDomain:@"App Terminated" code:1001 userInfo:nil];
+    [self disconnectWithError:error];
+}
+
+- (void)disconnectWithError:(NSError *)error
+{
     [self disconnectWithoutResetCallback];
     if (_callback)
     {
-        _callback(SMSSHTaskStatusDisconnected, nil);
+        _callback(SMSSHTaskStatusDisconnected, error);
     }
     _callback = nil;
 }

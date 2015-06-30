@@ -58,4 +58,9 @@ typedef NS_ENUM(NSUInteger, SMSSHTaskErrorCode) {
  */
 - (void)disconnect;
 
+/**
+ *  Disconnect for app terminate. An error will raise with domain "App Terminated" and code 1001 for callback.
+ */
+- (void)disconnectForAppTerminate;
+
 @end
