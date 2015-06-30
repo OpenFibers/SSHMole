@@ -105,7 +105,7 @@
     [self disconnectWithError:nil];
 }
 
-- (void)disconnectForAppTerminate
+- (void)disconnectForAppTermination
 {
     NSError *error = [NSError errorWithDomain:@"App Terminated" code:1001 userInfo:nil];
     [self disconnectWithError:error];

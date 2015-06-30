@@ -31,7 +31,7 @@
     {
         _callbackDictionary = [NSMutableDictionary dictionary];
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(disconnect)
+                                                 selector:@selector(disconnectForAppTermination)
                                                      name:NSApplicationWillTerminateNotification
                                                    object:nil];
     }
@@ -93,6 +93,12 @@
 - (void)disconnect
 {
     [_currentTask disconnect];
+    _currentTask = nil;
+}
+
+- (void)disconnectForAppTermination
+{
+    [_currentTask disconnectForAppTermination];
     _currentTask = nil;
 }
 
