@@ -15,4 +15,4 @@ Master分支开发中，有很多bug，请下载tag上的0.1或0.2版本使用�
 1. 编辑好pac后，切到off mode再切回auto mode，强制系统刷新pac
 2. UserDefault保存上次的网络设置
 3. 打开时自动连接上次设置
-4. status bar显示连接状态
+4. 列表中保存两个配置；当第二个通过更改配置和第一个ID一致时，UI会重叠
