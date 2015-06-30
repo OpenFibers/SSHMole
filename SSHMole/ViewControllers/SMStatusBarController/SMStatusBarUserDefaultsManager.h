@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SMStatusBarController.h"
 
 @interface SMStatusBarUserDefaultsManager : NSObject
+
+@property (nonatomic, assign) SMStatusBarControllerProxyMode lastProxyMode;
+@property (nonatomic, strong) NSString *lastConnectingConfigIdentifier;
 
 @end

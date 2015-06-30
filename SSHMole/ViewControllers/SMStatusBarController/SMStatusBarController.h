@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, SMStatusBarControllerProxyMode) {
     SMStatusBarControllerProxyModeAutoWhitelist,
     SMStatusBarControllerProxyModeAutoBlacklist,
     SMStatusBarControllerProxyModeGlobal,
+    SMStatusBarControllerProxyModeCount,
 };
 
 @protocol SMStatusBarControllerDelegate <NSObject>
