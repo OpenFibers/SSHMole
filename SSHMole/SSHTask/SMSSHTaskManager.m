@@ -55,7 +55,7 @@
 {
     if (key)
     {
-        _callbackDictionary[key] = nil;
+        [_callbackDictionary removeObjectForKey:key];
     }
 }
 
