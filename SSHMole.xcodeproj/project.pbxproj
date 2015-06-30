@@ -40,6 +40,7 @@
 		42840DA81B2985E10015DA34 /* CopyHelperCommand.sh in Resources */ = {isa = PBXBuildFile; fileRef = 42840DA71B2985E10015DA34 /* CopyHelperCommand.sh */; };
 		42840DB11B298CF50015DA34 /* SMCopyHelperWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42840DB01B298CF50015DA34 /* SMCopyHelperWrapper.m */; };
 		4290598B1B41831C00D6D687 /* NSObject+OTRuntimeUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4290598A1B41831C00D6D687 /* NSObject+OTRuntimeUserInfo.m */; };
+		4290598E1B42F32B00D6D687 /* SMStatusBarUserDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4290598D1B42F32B00D6D687 /* SMStatusBarUserDefaultsManager.m */; };
 		429422891B268523008A19F8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429422881B268523008A19F8 /* SystemConfiguration.framework */; };
 		429422981B282681008A19F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 429422971B282681008A19F8 /* main.m */; };
 		429422A71B2828E3008A19F8 /* SSHMoleSystemConfigurationHelper in Resources */ = {isa = PBXBuildFile; fileRef = 429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */; };
@@ -135,6 +136,8 @@
 		42840DB01B298CF50015DA34 /* SMCopyHelperWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCopyHelperWrapper.m; sourceTree = "<group>"; };
 		429059891B41831C00D6D687 /* NSObject+OTRuntimeUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+OTRuntimeUserInfo.h"; sourceTree = "<group>"; };
 		4290598A1B41831C00D6D687 /* NSObject+OTRuntimeUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+OTRuntimeUserInfo.m"; sourceTree = "<group>"; };
+		4290598C1B42F32B00D6D687 /* SMStatusBarUserDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMStatusBarUserDefaultsManager.h; sourceTree = "<group>"; };
+		4290598D1B42F32B00D6D687 /* SMStatusBarUserDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMStatusBarUserDefaultsManager.m; sourceTree = "<group>"; };
 		429422881B268523008A19F8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SSHMoleSystemConfigurationHelper; sourceTree = BUILT_PRODUCTS_DIR; };
 		429422971B282681008A19F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -600,6 +603,8 @@
 			children = (
 				42F639B11B3BE4B0007F3856 /* SMStatusBarController.h */,
 				42F639B21B3BE4B0007F3856 /* SMStatusBarController.m */,
+				4290598C1B42F32B00D6D687 /* SMStatusBarUserDefaultsManager.h */,
+				4290598D1B42F32B00D6D687 /* SMStatusBarUserDefaultsManager.m */,
 			);
 			path = SMStatusBarController;
 			sourceTree = "<group>";
@@ -723,6 +728,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4290598E1B42F32B00D6D687 /* SMStatusBarUserDefaultsManager.m in Sources */,
 				423B41AA1B38462500BA52CA /* SMUserProxySettingsManager.m in Sources */,
 				42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */,
 				42C5C70C1B37301200C69389 /* GCDWebServerErrorResponse.m in Sources */,
