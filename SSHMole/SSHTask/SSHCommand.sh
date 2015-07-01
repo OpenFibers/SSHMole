@@ -28,6 +28,8 @@ expect {
         "*onnection closed by remote host*" {puts "REMOTE_PORT_SHUT_DOWN"; exit};
 #syntax error
         "*sage*" {puts "SSH_SYNTAX_ERROR"; exit};
+#broken pipe
+        "*roken pipe*" {puts "BROKEN_PIPE"; exit};
 
 #bot answers
 		"*yes/no*" {send "yes\r"; exp_continue};

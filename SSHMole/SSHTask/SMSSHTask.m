@@ -161,6 +161,9 @@
     //syntax error
     static NSPredicate *syntaxErrorPredicate;
     
+    //broken pipe
+    static NSPredicate *brokenPipePredicate;
+    
     //wrong pass
     static NSPredicate *wrongPasswordPredicate;
 
@@ -189,6 +192,9 @@
         
         //syntax error
         syntaxErrorPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'SSH_SYNTAX_ERROR'"];
+        
+        //broken pipe
+        brokenPipePredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'BROKEN_PIPE'"];
         
         //wrong pass check
         wrongPasswordPredicate	= [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'WRONG_PASSWORD'"];
@@ -295,6 +301,15 @@
         {
             [self disconnectWithoutResetCallback];
             NSError *error = [NSError errorWithDomain:@"Syntax Error"
+                                                 code:SMSSHTaskErrorCodeSyntaxError
+                                             userInfo:nil];
+            [self callbackWithStatus:SMSSHTaskStatusErrorOccured error:error];
+        }
+        //broken pipe
+        else if ([brokenPipePredicate evaluateWithObject:_outputContent] == YES)
+        {
+            [self disconnectWithoutResetCallback];
+            NSError *error = [NSError errorWithDomain:@"Broken Pipe"
                                                  code:SMSSHTaskErrorCodeSyntaxError
                                              userInfo:nil];
             [self callbackWithStatus:SMSSHTaskStatusErrorOccured error:error];
