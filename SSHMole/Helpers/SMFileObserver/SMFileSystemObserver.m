@@ -8,12 +8,10 @@
 
 #import "SMFileSystemObserver.h"
 #import "SCEvents.h"
-#import "NSMutableArray+WeakReferences.h"
 
 @interface SMFileSystemObserver () <SCEventListenerProtocol>
 {
     SCEvents *_events;
-    NSMutableArray *_delegateArray;
     NSString *_observingPath;
 }
 
@@ -26,7 +24,6 @@
     self = [super init];
     if (self)
     {
-        _delegateArray = [NSMutableArray mutableArrayUsingWeakReferences];
     }
     return self;
 }
@@ -38,13 +35,14 @@
 
 - (void)beginObserve
 {
-    if (_events)
-    {
-        return;
-    }
     if (!_observingPath)
     {
         return;
+    }
+    if (_events)
+    {
+        [_events stopWatchingPaths];
+        _events = nil;
     }
     NSURL *observingURL = [NSURL fileURLWithPath:_observingPath];
     if (!observingURL)
@@ -53,7 +51,6 @@
     }
     _events = [[SCEvents alloc] init];
     [_events setDelegate:self];
-	[_events setExcludedPaths:self.excludedPaths];
 	[_events startWatchingPaths:@[_observingPath]];
 }
 
@@ -67,47 +64,18 @@
     static dispatch_queue_t queue = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        queue = dispatch_queue_create([[NSString stringWithFormat:@"fmdb.%@", self] UTF8String], NULL);
+        queue = dispatch_queue_create([[NSString stringWithFormat:@"SMFileSystemObserver.%@", self] UTF8String], NULL);
+    });
+    
+    __weak id weakSelf = self;
+    dispatch_async(queue, ^{
+        [weakSelf handlePathWatch:pathWatcher eventOccurred:event];
     });
 }
 
-- (void)addDelegate:(id<SMFileSystemObserverDelegate>)delegate
+- (void)handlePathWatch:(SCEvents *)pathWatch eventOccurred:(SCEvent *)event
 {
-    if ([_delegateArray containsObject:delegate])
-    {
-        return;
-    }
-    [_delegateArray addObject:delegate];
-}
-
-- (void)removeDelegate:(id<SMFileSystemObserverDelegate>)delegate
-{
-    if ([_delegateArray containsObject:delegate])
-    {
-        [_delegateArray removeObject:delegate];
-    }
-}
-
-- (void)callbackDeleagteWithAddedPaths:(NSArray *)paths
-{
-    for (id<SMFileSystemObserverDelegate> eachDelegate in _delegateArray)
-    {
-        if ([eachDelegate respondsToSelector:@selector(fileSystemObserver:fileAddedInPaths:)])
-        {
-            [eachDelegate fileSystemObserver:self fileAddedInPaths:paths];
-        }
-    }
-}
-
-- (void)callbackDeleagteWithRemovedPaths:(NSArray *)paths
-{
-    for (id<SMFileSystemObserverDelegate> eachDelegate in _delegateArray)
-    {
-        if ([eachDelegate respondsToSelector:@selector(fileSystemObserver:fileRemovedPaths:)])
-        {
-            [eachDelegate fileSystemObserver:self fileRemovedPaths:paths];
-        }
-    }
+#warning callback delegate for different event
 }
 
 @end

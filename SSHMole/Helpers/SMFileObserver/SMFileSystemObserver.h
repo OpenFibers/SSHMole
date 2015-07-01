@@ -12,18 +12,17 @@
 
 @protocol SMFileSystemObserverDelegate <NSObject>
 
-- (void)fileSystemObserver:(SMFileSystemObserver *)observer fileRemovedPaths:(NSArray *)removedPaths;
-- (void)fileSystemObserver:(SMFileSystemObserver *)observer fileAddedInPaths:(NSArray *)addedPaths;
+- (void)fileSystemObserverFileChangedEvent:(SMFileSystemObserver *)observer;
+- (void)fileSystemObserverFileDeletedEvent:(SMFileSystemObserver *)observer;
 
 @end
 
 @interface SMFileSystemObserver : NSObject
 
-@property (nonatomic, retain) NSString *observingPath;//set observing path before begin observe
-@property (nonatomic, retain) NSArray *excludedPaths;//set excluded paths before begin observe
+@property (nonatomic, strong) NSString *observingPath;//set observing path before begin observe
+@property (nonatomic, weak) id<SMFileSystemObserverDelegate> delegate;
+
 - (void)beginObserve;
 - (void)stopObserve;
-- (void)addDelegate:(id<SMFileSystemObserverDelegate>)delegate;
-- (void)removeDelegate:(id<SMFileSystemObserverDelegate>)delegate;
 
 @end
