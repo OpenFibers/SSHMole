@@ -223,8 +223,7 @@
     //Show alert if error occurred
     NSError *error = info[@"Error"];
     if (error &&
-        (error.code != SMSSHTaskErrorCodeDisconnectForAppTermination ||
-         error.code != SMSSHTaskErrorCodeBrokenPipeNeedReconnect
+        (error.code != SMSSHTaskErrorCodeDisconnectForAppTermination
          )
         )
     {

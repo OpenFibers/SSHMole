@@ -29,7 +29,6 @@ typedef NS_ENUM(NSUInteger, SMSSHTaskErrorCode) {
     SMSSHTaskErrorCodeRemotePortClosedByServer,
     SMSSHTaskErrorCodeSyntaxError,
     SMSSHTaskErrorCodeBrokenPipe,
-    SMSSHTaskErrorCodeBrokenPipeNeedReconnect,
     SMSSHTaskErrorCodeWrongPassword,
     SMSSHTaskErrorCodeNSTaskException,
     SMSSHTaskErrorCodeDisconnectForAppTermination,
