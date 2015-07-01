@@ -8,6 +8,10 @@
 
 #import "SMSSHTask.h"
 
+@interface SMSSHTask()
+@property (nonatomic, assign) BOOL taskEverConnected;//是否连接成功过，如果成功过，非用户断开则自动重连
+@end
+
 @implementation SMSSHTask
 {
     SMServerConfig *_config;
@@ -342,6 +346,12 @@
 - (void)callbackWithStatus:(SMSSHTaskStatus)status error:(NSError *)error
 {
     _currentStatus = status;
+    
+    if (status == SMSSHTaskStatusConnected)
+    {
+        self.taskEverConnected = YES;
+    }
+    
     if (_callback)
     {
         _callback(status, error);
