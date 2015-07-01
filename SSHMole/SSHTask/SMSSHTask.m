@@ -310,7 +310,7 @@
         {
             [self disconnectWithoutResetCallback];
             NSError *error = [NSError errorWithDomain:@"Broken Pipe"
-                                                 code:SMSSHTaskErrorCodeSyntaxError
+                                                 code:(self.taskEverConnected ? SMSSHTaskErrorCodeBrokenPipeNeedReconnect : SMSSHTaskErrorCodeBrokenPipe)
                                              userInfo:nil];
             [self callbackWithStatus:SMSSHTaskStatusErrorOccured error:error];
         }
