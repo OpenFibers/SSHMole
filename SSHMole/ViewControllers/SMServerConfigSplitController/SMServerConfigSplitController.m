@@ -222,7 +222,11 @@
     
     //Show alert if error occurred
     NSError *error = info[@"Error"];
-    if (error && error.code != SMSSHTaskErrorCodeDisconnectForAppTermination)
+    if (error &&
+        (error.code != SMSSHTaskErrorCodeDisconnectForAppTermination ||
+         error.code != SMSSHTaskErrorCodeBrokenPipeNeedReconnect
+         )
+        )
     {
         NSAlert *alert = [[NSAlert alloc]init];
         [alert addButtonWithTitle:@"OK"];
