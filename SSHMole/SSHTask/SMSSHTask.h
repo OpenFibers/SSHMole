@@ -10,10 +10,10 @@
 #import "SMServerConfig.h"
 
 typedef NS_ENUM(NSUInteger, SMSSHTaskStatus) {
+    SMSSHTaskStatusDisconnected = 0,
     SMSSHTaskStatusConnecting,
     SMSSHTaskStatusConnected,
     SMSSHTaskStatusErrorOccured,
-    SMSSHTaskStatusDisconnected,
 };
 
 typedef NS_ENUM(NSUInteger, SMSSHTaskErrorCode) {

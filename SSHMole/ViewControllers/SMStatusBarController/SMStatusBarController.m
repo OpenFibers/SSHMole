@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSStatusItem *statusBar;
 @property (nonatomic, strong) NSMenu *statusBarMenu;
 @property (nonatomic, assign) SMStatusBarControllerProxyMode currentProxyMode;
+@property (nonatomic, assign) SMSSHTaskStatus currentSSHTaskStatus;
 @end
 
 @implementation SMStatusBarController
@@ -64,11 +65,11 @@
 - (void)initStatusBarIcon
 {
     //Init status bar icon
-    self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:44];
+    self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:22];
     NSImage *statusBarImage = [NSImage imageNamed:@"StatusBarPawIcon"];
     [statusBarImage setTemplate:YES];
     self.statusBar.image = statusBarImage;
-    self.statusBar.title = @"...";
+    self.statusBar.title = @"";
     self.statusBar.highlightMode = YES;
     
     //Init status bar menu
@@ -195,11 +196,14 @@
 {
     _currentProxyMode = currentProxyMode;
     
-    //update UI
+    //update menu UI
     [_proxyOffItem setState:(currentProxyMode == _proxyOffItem.tag ? NSOnState : NSOffState)];
     [_whitelistModeItem setState:(currentProxyMode == _whitelistModeItem.tag ? NSOnState : NSOffState)];
     [_blacklistModeItem setState:(currentProxyMode == _blacklistModeItem.tag ? NSOnState : NSOffState)];
     [_globalModeItem setState:(currentProxyMode == _globalModeItem.tag ? NSOnState : NSOffState)];
+    
+    //update status bar UI
+    [self updateStatusItemUIForCurrentSSHTaskStatusAndProxyMode];
     
     //update user defaults
     [SMStatusBarUserDefaultsManager defaultManager].lastProxyMode = currentProxyMode;
@@ -210,9 +214,48 @@
 
 #pragma mark - Server configs updated notification
 
+- (void)updateStatusItemUIForCurrentSSHTaskStatusAndProxyMode
+{
+    if (self.currentSSHTaskStatus == SMSSHTaskStatusDisconnected || self.currentSSHTaskStatus == SMSSHTaskStatusErrorOccured)
+    {
+        self.statusBar.title = @"";
+        self.statusBar.length = 22.f;
+    }
+    else if (self.currentSSHTaskStatus == SMSSHTaskStatusConnecting)
+    {
+        self.statusBar.title = @"...";
+        self.statusBar.length = 44.f;
+    }
+    else if (self.currentSSHTaskStatus == SMSSHTaskStatusConnected)
+    {
+        if (self.currentProxyMode == SMStatusBarControllerProxyModeAutoBlacklist)
+        {
+            self.statusBar.title = @"B";
+            self.statusBar.length = 44.f;
+        }
+        else if (self.currentProxyMode == SMStatusBarControllerProxyModeAutoWhitelist)
+        {
+            self.statusBar.title = @"W";
+            self.statusBar.length = 44.f;
+        }
+        else if (self.currentProxyMode == SMStatusBarControllerProxyModeGlobal)
+        {
+            self.statusBar.title = @"G";
+            self.statusBar.length = 44.f;
+        }
+        else if (self.currentProxyMode == SMStatusBarControllerProxyModeOff)
+        {
+            self.statusBar.title = @"";
+            self.statusBar.length = 22.f;
+        }
+    }
+}
+
 - (void)updateServerConfig:(SMServerConfig *)config forSSHTaskStatus:(SMSSHTaskStatus)status
 {
-    //update UI
+    self.currentSSHTaskStatus = status;
+    
+    //update menu UI
     for (NSMenuItem *item in _serverConfigItem.submenu.itemArray)
     {
         if (item != _editServerListItem && item.otRuntimeUserInfo == config)
@@ -225,6 +268,9 @@
             }
         }
     }
+    
+    //update status bar UI
+    [self updateStatusItemUIForCurrentSSHTaskStatusAndProxyMode];
     
     //update user defaults
     if (status == SMSSHTaskStatusDisconnected || status == SMSSHTaskStatusErrorOccured)
