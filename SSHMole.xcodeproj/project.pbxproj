@@ -47,7 +47,6 @@
 		4290598E1B42F32B00D6D687 /* SMStatusBarUserDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4290598D1B42F32B00D6D687 /* SMStatusBarUserDefaultsManager.m */; };
 		429422891B268523008A19F8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429422881B268523008A19F8 /* SystemConfiguration.framework */; };
 		429422981B282681008A19F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 429422971B282681008A19F8 /* main.m */; };
-		429422A71B2828E3008A19F8 /* SSHMoleSystemConfigurationHelper in Resources */ = {isa = PBXBuildFile; fileRef = 429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */; };
 		42BC34C71ADFD1A100A8BA66 /* SSHMole.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 42BC34C61ADFD1A100A8BA66 /* SSHMole.iconset */; };
 		42C5C7021B37301200C69389 /* GCDWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C5C6E51B37301200C69389 /* GCDWebServer.m */; };
 		42C5C7031B37301200C69389 /* GCDWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C5C6E71B37301200C69389 /* GCDWebServerConnection.m */; };
@@ -73,6 +72,16 @@
 		42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */; };
 		42F639B31B3BE4B0007F3856 /* SMStatusBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F639B21B3BE4B0007F3856 /* SMStatusBarController.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		42670D1D1B44DA2500E646FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42E0A43F1ACFBAB800890EA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 429422941B282681008A19F8;
+			remoteInfo = SSHMoleSystemConfigurationHelper;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		429422931B282681008A19F8 /* CopyFiles */ = {
@@ -688,6 +697,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				42670D1E1B44DA2500E646FE /* PBXTargetDependency */,
 			);
 			name = SSHMole;
 			productName = SSHMole;
@@ -741,7 +751,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4262B8FD1B3B14A800C9430C /* StatusBarPawIcon.png in Resources */,
-				429422A71B2828E3008A19F8 /* SSHMoleSystemConfigurationHelper in Resources */,
 				4262AF211AD17ADF00C54A2A /* ServerConfigView.xib in Resources */,
 				42E0A4551ACFBAB800890EA7 /* Images.xcassets in Resources */,
 				427237B81AD7B01F00BC072D /* ServerListGreenLight@2x.png in Resources */,
@@ -823,6 +832,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		42670D1E1B44DA2500E646FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 429422941B282681008A19F8 /* SSHMoleSystemConfigurationHelper */;
+			targetProxy = 42670D1D1B44DA2500E646FE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		42E0A4561ACFBAB800890EA7 /* Main.storyboard */ = {
