@@ -69,6 +69,32 @@
     [self endTimer];
 }
 
+#pragma mark - SCEvent callback
+
+- (void)pathWatcher:(SCEvents *)pathWatcher eventOccurred:(SCEvent *)event
+{
+    static dispatch_queue_t queue = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        queue = dispatch_queue_create([[NSString stringWithFormat:@"SMFileSystemObserver.%@", self] UTF8String], NULL);
+    });
+    
+    __weak id weakSelf = self;
+    dispatch_async(queue, ^{
+        [weakSelf handlePathWatch:pathWatcher eventOccurred:event];
+    });
+}
+
+- (void)handlePathWatch:(SCEvents *)pathWatch eventOccurred:(SCEvent *)event
+{
+    if (![[NSFileManager defaultManager] fileExistsAtPath:event.eventPath])
+    {
+        [self.delegate fileSystemObserverFileDeletedEvent:self];
+    }
+}
+
+#pragma mark - Timer methods
+
 - (void)beginTimer
 {
     if (_checkFileModifyTimer)
@@ -118,29 +144,6 @@
     else
     {
         _lastObservingPathModifyTime = 0;
-    }
-}
-
-
-- (void)pathWatcher:(SCEvents *)pathWatcher eventOccurred:(SCEvent *)event
-{
-    static dispatch_queue_t queue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        queue = dispatch_queue_create([[NSString stringWithFormat:@"SMFileSystemObserver.%@", self] UTF8String], NULL);
-    });
-    
-    __weak id weakSelf = self;
-    dispatch_async(queue, ^{
-        [weakSelf handlePathWatch:pathWatcher eventOccurred:event];
-    });
-}
-
-- (void)handlePathWatch:(SCEvents *)pathWatch eventOccurred:(SCEvent *)event
-{
-    if (![[NSFileManager defaultManager] fileExistsAtPath:event.eventPath])
-    {
-        [self.delegate fileSystemObserverFileDeletedEvent:self];
     }
 }
 
