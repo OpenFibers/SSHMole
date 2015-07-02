@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const SMSandboxWhitelistPACFileName;
+extern NSString *const SMSandboxBlacklistPACFileName;
+
 @interface SMSandboxPath : NSObject
 
 /**

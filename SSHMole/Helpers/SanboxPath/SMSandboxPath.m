@@ -8,6 +8,9 @@
 
 #import "SMSandboxPath.h"
 
+NSString *const SMSandboxWhitelistPACFileName = @"whitelist.pac";
+NSString *const SMSandboxBlacklistPACFileName = @"blacklist.pac";
+
 @implementation SMSandboxPath
 
 + (NSString *)systemConfigrationHelperPath

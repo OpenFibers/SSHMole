@@ -56,8 +56,8 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
 
 - (void)installDefaultPacIfNotExist
 {
-    [self installDefaultPacIfNotExistForFileName:@"whitelist.pac" replaceOption:_whitelistReplaceOption];
-    [self installDefaultPacIfNotExistForFileName:@"blacklist.pac" replaceOption:_blacklistReplaceOption];
+    [self installDefaultPacIfNotExistForFileName:SMSandboxWhitelistPACFileName replaceOption:_whitelistReplaceOption];
+    [self installDefaultPacIfNotExistForFileName:SMSandboxBlacklistPACFileName replaceOption:_blacklistReplaceOption];
 }
 
 - (void)installDefaultPacIfNotExistForFileName:(NSString *)fileName replaceOption:(NSDictionary *)replaceOption
@@ -91,7 +91,7 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
 - (void)getWhiteListLocalPacDataForLocalPort:(NSUInteger)localPort
                                   completion:(void(^)(NSData *data))completion
 {
-    NSString *cachePath = [SMSandboxPath pacPathForName:@"whitelist.pac"];
+    NSString *cachePath = [SMSandboxPath pacPathForName:SMSandboxWhitelistPACFileName];
     [self getLocalPacDataForCachePath:cachePath localPort:localPort completion:completion];
 }
 
@@ -104,7 +104,7 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
 - (void)getBlackListLocalPacDataForLocalPort:(NSUInteger)localPort
                                   completion:(void(^)(NSData *data))completion
 {
-    NSString *cachePath = [SMSandboxPath pacPathForName:@"blacklist.pac"];
+    NSString *cachePath = [SMSandboxPath pacPathForName:SMSandboxBlacklistPACFileName];
     [self getLocalPacDataForCachePath:cachePath localPort:localPort completion:completion];
 }
 
@@ -154,7 +154,7 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
  */
 - (void)updatWhitelistPACDataWithCompletion:(void(^)(BOOL successed))completion
 {
-    NSString *cachePath = [SMSandboxPath pacPathForName:@"whitelist.pac"];
+    NSString *cachePath = [SMSandboxPath pacPathForName:SMSandboxWhitelistPACFileName];
     NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/n0wa11/gfw_whitelist/master/whitelist.pac"];
     [self updatePacDataWithURL:url cachePath:cachePath replaceOption:_whitelistReplaceOption completion:completion];
 }
@@ -166,7 +166,7 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
  */
 - (void)updateBlacklistPACDataWithCompletion:(void(^)(BOOL successed))completion
 {
-    NSString *cachePath = [SMSandboxPath pacPathForName:@"blacklist.pac"];
+    NSString *cachePath = [SMSandboxPath pacPathForName:SMSandboxBlacklistPACFileName];
     NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/OpenFibers/SSHMole/master/SSHMole/PacFiles/blacklist.pac"];
     [self updatePacDataWithURL:url cachePath:cachePath replaceOption:_blacklistReplaceOption completion:completion];
 }
