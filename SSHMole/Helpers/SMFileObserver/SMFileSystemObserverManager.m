@@ -41,13 +41,11 @@
     self = [super init];
     if (self)
     {
-        _whitelistObserver = [[SMFileSystemObserver alloc] init];
-        _whitelistObserver.observingPath = [SMSandboxPath pacPathForName:SMSandboxWhitelistPACFileName];
+        _whitelistObserver = [[SMFileSystemObserver alloc] initWithObservingPath:[SMSandboxPath pacPathForName:SMSandboxWhitelistPACFileName]];
         _whitelistObserver.delegate = self;
         [_whitelistObserver beginObserve];
         
-        _blacklistObserver = [[SMFileSystemObserver alloc] init];
-        _blacklistObserver.observingPath = [SMSandboxPath pacPathForName:SMSandboxBlacklistPACFileName];
+        _blacklistObserver = [[SMFileSystemObserver alloc] initWithObservingPath:[SMSandboxPath pacPathForName:SMSandboxBlacklistPACFileName]];
         _blacklistObserver.delegate = self;
         [_blacklistObserver beginObserve];
     }
@@ -58,6 +56,11 @@
 {
     [_whitelistObserver stopObserve];
     [_blacklistObserver stopObserve];
+}
+
+- (void)fileSystemObserverFileAddedEvent:(SMFileSystemObserver *)observer
+{
+    
 }
 
 - (void)fileSystemObserverFileChangedEvent:(SMFileSystemObserver *)observer

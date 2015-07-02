@@ -12,6 +12,7 @@
 
 @protocol SMFileSystemObserverDelegate <NSObject>
 
+- (void)fileSystemObserverFileAddedEvent:(SMFileSystemObserver *)observer;
 - (void)fileSystemObserverFileChangedEvent:(SMFileSystemObserver *)observer;
 - (void)fileSystemObserverFileDeletedEvent:(SMFileSystemObserver *)observer;
 
@@ -19,7 +20,9 @@
 
 @interface SMFileSystemObserver : NSObject
 
-@property (nonatomic, strong) NSString *observingPath;//set observing path before begin observe
+
+- (id)initWithObservingPath:(NSString *)observingPath;
+@property (nonatomic, readonly) NSString *observingPath;//set observing path before begin observe
 @property (nonatomic, weak) id<SMFileSystemObserverDelegate> delegate;
 
 - (void)beginObserve;

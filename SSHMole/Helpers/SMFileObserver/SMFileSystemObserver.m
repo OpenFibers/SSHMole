@@ -14,17 +14,22 @@
 {
     SCEvents *_events;
     NSString *_observingPath;
+    
+    NSTimer *_checkFileModifyTimer;
+    NSTimeInterval _lastObservingPathModifyTime;
 }
 
 @end
 
 @implementation SMFileSystemObserver
 
-- (id)init
+- (id)initWithObservingPath:(NSString *)observingPath
 {
     self = [super init];
     if (self)
     {
+        _observingPath = observingPath;
+        [self updateLastObservingPathModifyTime];
     }
     return self;
 }
@@ -53,12 +58,69 @@
     _events = [[SCEvents alloc] init];
     [_events setDelegate:self];
 	[_events startWatchingPaths:@[_observingPath]];
+    
+    [self beginTimer];
 }
 
 - (void)stopObserve
 {
     [_events stopWatchingPaths];
+    
+    [self endTimer];
 }
+
+- (void)beginTimer
+{
+    if (_checkFileModifyTimer)
+    {
+        [_checkFileModifyTimer invalidate];
+        _checkFileModifyTimer = nil;
+    }
+    
+    _checkFileModifyTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(checkObservingFileModifyTime) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_checkFileModifyTimer forMode:NSRunLoopCommonModes];
+    [_checkFileModifyTimer fire];
+}
+
+- (void)endTimer
+{
+    [_checkFileModifyTimer invalidate];
+    _checkFileModifyTimer = nil;
+}
+
+- (void)checkObservingFileModifyTime
+{
+    NSTimeInterval lastModifyTime = _lastObservingPathModifyTime;
+    [self updateLastObservingPathModifyTime];
+    
+    if (_lastObservingPathModifyTime != 0 && _lastObservingPathModifyTime != lastModifyTime)
+    {
+        if (lastModifyTime != 0)
+        {
+            [self.delegate fileSystemObserverFileAddedEvent:self];
+        }
+        else
+        {
+            [self.delegate fileSystemObserverFileChangedEvent:self];
+        }
+    }
+}
+
+- (void)updateLastObservingPathModifyTime
+{
+    NSError * error = nil;
+    NSDictionary * attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:_observingPath error:&error];
+    if (attrs && !error)
+    {
+        NSDate *modifyDate = [attrs fileModificationDate];
+        _lastObservingPathModifyTime = [modifyDate timeIntervalSince1970];
+    }
+    else
+    {
+        _lastObservingPathModifyTime = 0;
+    }
+}
+
 
 - (void)pathWatcher:(SCEvents *)pathWatcher eventOccurred:(SCEvent *)event
 {
