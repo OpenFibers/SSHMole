@@ -8,6 +8,7 @@
 
 #import "SMFileSystemObserver.h"
 #import "SCEvents.h"
+#import "SCEvent.h"
 
 @interface SMFileSystemObserver () <SCEventListenerProtocol>
 {
@@ -75,7 +76,10 @@
 
 - (void)handlePathWatch:(SCEvents *)pathWatch eventOccurred:(SCEvent *)event
 {
-#warning callback delegate for different event
+    if (![[NSFileManager defaultManager] fileExistsAtPath:event.eventPath])
+    {
+        [self.delegate fileSystemObserverFileDeletedEvent:self];
+    }
 }
 
 @end
