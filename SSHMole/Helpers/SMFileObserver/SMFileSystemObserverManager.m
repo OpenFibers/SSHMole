@@ -22,8 +22,8 @@
 
 + (void)load
 {
+    //wake manager
     [self defaultManager];
-#warning test code
 }
 
 + (instancetype)defaultManager
@@ -60,17 +60,38 @@
 
 - (void)fileSystemObserverFileAddedEvent:(SMFileSystemObserver *)observer
 {
-    
+    if (observer == _whitelistObserver)
+    {
+        [self.pacAddDelegate fileSystemObserverManagerWhitelistPACAdded:self];
+    }
+    else if (observer == _blacklistObserver)
+    {
+        [self.pacAddDelegate fileSystemObserverManagerBlacklistPACAdded:self];
+    }
 }
 
 - (void)fileSystemObserverFileChangedEvent:(SMFileSystemObserver *)observer
 {
-    
+    if (observer == _whitelistObserver)
+    {
+        [self.pacModifyDelegate fileSystemObserverManagerWhitelistPACModified:self];
+    }
+    else if (observer == _blacklistObserver)
+    {
+        [self.pacModifyDelegate fileSystemObserverManagerBlacklistPACModified:self];
+    }
 }
 
 - (void)fileSystemObserverFileDeletedEvent:(SMFileSystemObserver *)observer
 {
-    
+    if (observer == _whitelistObserver)
+    {
+        [self.pacDeleteDelegate fileSystemObserverManagerWhitelistPACDeleted:self];
+    }
+    else if (observer == _blacklistObserver)
+    {
+        [self.pacDeleteDelegate fileSystemObserverManagerBlacklistPACDeleted:self];
+    }
 }
 
 @end
