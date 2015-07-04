@@ -95,33 +95,37 @@
         //Off
         _proxyOffItem = [[NSMenuItem alloc] initWithTitle:@"Turn Proxy Off"
                                                                 action:@selector(proxyModeItemClicked:)
-                                                         keyEquivalent:@""];
+                                                         keyEquivalent:@"0"];
         _proxyOffItem.target = self;
         _proxyOffItem.tag = SMStatusBarControllerProxyModeOff;
+        [_proxyOffItem setKeyEquivalentModifierMask:NSCommandKeyMask];
         [self.statusBarMenu addItem:_proxyOffItem];
+        
+        //blacklist
+        _blacklistModeItem = [[NSMenuItem alloc] initWithTitle:@"Blacklist Auto Proxy Mode"
+                                                        action:@selector(proxyModeItemClicked:)
+                                                 keyEquivalent:@"1"];
+        _blacklistModeItem.target = self;
+        _blacklistModeItem.tag = SMStatusBarControllerProxyModeAutoBlacklist;
+        [_blacklistModeItem setKeyEquivalentModifierMask:NSCommandKeyMask];
+        [self.statusBarMenu addItem:_blacklistModeItem];
         
         //whitelist
         _whitelistModeItem = [[NSMenuItem alloc] initWithTitle:@"Whitelist Auto Proxy Mode"
                                                                    action:@selector(proxyModeItemClicked:)
-                                                            keyEquivalent:@""];
+                                                            keyEquivalent:@"2"];
         _whitelistModeItem.target = self;
         _whitelistModeItem.tag = SMStatusBarControllerProxyModeAutoWhitelist;
+        [_whitelistModeItem setKeyEquivalentModifierMask:NSCommandKeyMask];
         [self.statusBarMenu addItem:_whitelistModeItem];
-        
-        //blacklist
-        _blacklistModeItem = [[NSMenuItem alloc] initWithTitle:@"Blacklist Auto Proxy Mode"
-                                                                   action:@selector(proxyModeItemClicked:)
-                                                            keyEquivalent:@""];
-        _blacklistModeItem.target = self;
-        _blacklistModeItem.tag = SMStatusBarControllerProxyModeAutoBlacklist;
-        [self.statusBarMenu addItem:_blacklistModeItem];
         
         //global
         _globalModeItem = [[NSMenuItem alloc] initWithTitle:@"Global Proxy Mode"
                                                                 action:@selector(proxyModeItemClicked:)
-                                                         keyEquivalent:@""];
+                                                         keyEquivalent:@"3"];
         _globalModeItem.target = self;
         _globalModeItem.tag = SMStatusBarControllerProxyModeGlobal;
+        [_globalModeItem setKeyEquivalentModifierMask:NSCommandKeyMask];
         [self.statusBarMenu addItem:_globalModeItem];
     }
     
@@ -157,17 +161,17 @@
         _editPACFileItem.target = self;
         [self.statusBarMenu addItem:_editPACFileItem];
         
-        _updateWhitelistItem = [[NSMenuItem alloc] initWithTitle:@"Update Whitelist PAC"
-                                                          action:@selector(customPACItemClicked:)
-                                                   keyEquivalent:@""];
-        _updateWhitelistItem.target = self;
-        [self.statusBarMenu addItem:_updateWhitelistItem];
-        
         _updateBlacklistItem = [[NSMenuItem alloc] initWithTitle:@"Update Blacklist PAC"
                                                           action:@selector(customPACItemClicked:)
                                                    keyEquivalent:@""];
         _updateBlacklistItem.target = self;
         [self.statusBarMenu addItem:_updateBlacklistItem];
+        
+        _updateWhitelistItem = [[NSMenuItem alloc] initWithTitle:@"Update Whitelist PAC"
+                                                          action:@selector(customPACItemClicked:)
+                                                   keyEquivalent:@""];
+        _updateWhitelistItem.target = self;
+        [self.statusBarMenu addItem:_updateWhitelistItem];
     }
     
     {
