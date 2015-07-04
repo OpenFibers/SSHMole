@@ -12,8 +12,7 @@ Master分支开发中，有很多bug，请下载tag上的0.1或0.2版本使用�
 [SSHMole v0.1](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v0.1.zip)
 
 ##TODO
-1. 编辑好pac后，切到off mode再切回auto mode，强制系统刷新pac
-2. 列表中保存两个配置；当第二个通过更改配置和第一个ID一致时，UI会重叠
-3. donate
-4. 检查更新
-5. 开机启动
+1. 列表中保存两个配置；当第二个通过更改配置和第一个ID一致时，UI会重叠
+2. donate
+3. 检查更新
+4. 开机启动
