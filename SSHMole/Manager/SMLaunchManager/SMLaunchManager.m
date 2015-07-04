@@ -38,11 +38,11 @@
     _appLaunchesAtUserLogin = appLaunchesAtUserLogin;
     if (appLaunchesAtUserLogin)
     {
-        [self deleteAppFromLoginItem];
+        [self addAppAsLoginItem];
     }
     else
     {
-        [self addAppAsLoginItem];
+        [self deleteAppFromLoginItem];
     }
 }
 

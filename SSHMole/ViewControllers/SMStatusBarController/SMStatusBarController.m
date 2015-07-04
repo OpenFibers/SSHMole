@@ -404,7 +404,7 @@
 {
     BOOL launchesAtLogin = [SMLaunchManager defaultManager].appLaunchesAtUserLogin;
     [SMLaunchManager defaultManager].appLaunchesAtUserLogin = !launchesAtLogin;
-    [_launchesAtUserLoginItem setState:launchesAtLogin];
+    [_launchesAtUserLoginItem setState:!launchesAtLogin];
 }
 
 - (void)editServerListItemClicked:(NSMenuItem *)editServerListItem
