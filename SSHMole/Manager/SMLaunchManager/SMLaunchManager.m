@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 openthread. All rights reserved.
 //
 
-#import "SMLaunchHelper.h"
+#import "SMLaunchManager.h"
 
-@implementation SMLaunchHelper
+@implementation SMLaunchManager
 
-+ (void)addAppAsLoginItem
+- (void)addAppAsLoginItem
 {
     [self deleteAppFromLoginItem];
     
@@ -37,7 +37,7 @@
     }
 }
 
-+ (void)deleteAppFromLoginItem
+- (void)deleteAppFromLoginItem
 {
     NSString * appPath = [[NSBundle mainBundle] bundlePath];
     

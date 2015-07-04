@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SMLaunchHelper : NSObject
+@interface SMLaunchManager : NSObject
 
 + (void)addAppAsLoginItem;
 
