@@ -10,8 +10,12 @@
 
 @interface SMLaunchManager : NSObject
 
-+ (void)addAppAsLoginItem;
++ (instancetype)defaultManager;
 
-+ (void)deleteAppFromLoginItem;
+@property (nonatomic, readonly, assign) BOOL isAppLaunchsAtUserLogin;
+
+- (void)addAppAsLoginItem;
+
+- (void)deleteAppFromLoginItem;
 
 @end
