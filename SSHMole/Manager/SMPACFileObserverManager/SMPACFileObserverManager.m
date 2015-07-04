@@ -62,11 +62,11 @@
 {
     if (observer == _whitelistObserver)
     {
-        [self.pacAddDelegate fileSystemObserverManagerWhitelistPACAdded:self];
+        [self.pacAddDelegate PACFileObserverManagerWhitelistPACAdded:self];
     }
     else if (observer == _blacklistObserver)
     {
-        [self.pacAddDelegate fileSystemObserverManagerBlacklistPACAdded:self];
+        [self.pacAddDelegate PACFileObserverManagerBlacklistPACAdded:self];
     }
 }
 
@@ -74,11 +74,11 @@
 {
     if (observer == _whitelistObserver)
     {
-        [self.pacModifyDelegate fileSystemObserverManagerWhitelistPACModified:self];
+        [self.pacModifyDelegate PACFileObserverManagerWhitelistPACModified:self];
     }
     else if (observer == _blacklistObserver)
     {
-        [self.pacModifyDelegate fileSystemObserverManagerBlacklistPACModified:self];
+        [self.pacModifyDelegate PACFileObserverManagerBlacklistPACModified:self];
     }
 }
 
@@ -86,11 +86,11 @@
 {
     if (observer == _whitelistObserver)
     {
-        [self.pacDeleteDelegate fileSystemObserverManagerWhitelistPACDeleted:self];
+        [self.pacDeleteDelegate PACFileObserverManagerWhitelistPACDeleted:self];
     }
     else if (observer == _blacklistObserver)
     {
-        [self.pacDeleteDelegate fileSystemObserverManagerBlacklistPACDeleted:self];
+        [self.pacDeleteDelegate PACFileObserverManagerBlacklistPACDeleted:self];
     }
 }
 

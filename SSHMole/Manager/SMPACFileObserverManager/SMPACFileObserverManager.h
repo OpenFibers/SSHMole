@@ -12,22 +12,22 @@
 
 @protocol SMPACFileObserverManagerFileAddedDelegate <NSObject>
 
-- (void)fileSystemObserverManagerWhitelistPACAdded:(SMPACFileObserverManager *)manager;
-- (void)fileSystemObserverManagerBlacklistPACAdded:(SMPACFileObserverManager *)manager;
+- (void)PACFileObserverManagerWhitelistPACAdded:(SMPACFileObserverManager *)manager;
+- (void)PACFileObserverManagerBlacklistPACAdded:(SMPACFileObserverManager *)manager;
 
 @end
 
 @protocol SMPACFileObserverManagerFileModifiedDelegate <NSObject>
 
-- (void)fileSystemObserverManagerWhitelistPACModified:(SMPACFileObserverManager *)manager;
-- (void)fileSystemObserverManagerBlacklistPACModified:(SMPACFileObserverManager *)manager;
+- (void)PACFileObserverManagerWhitelistPACModified:(SMPACFileObserverManager *)manager;
+- (void)PACFileObserverManagerBlacklistPACModified:(SMPACFileObserverManager *)manager;
 
 @end
 
 @protocol SMPACFileObserverManagerFileDeletedDelegate <NSObject>
 
-- (void)fileSystemObserverManagerWhitelistPACDeleted:(SMPACFileObserverManager *)manager;
-- (void)fileSystemObserverManagerBlacklistPACDeleted:(SMPACFileObserverManager *)manager;
+- (void)PACFileObserverManagerWhitelistPACDeleted:(SMPACFileObserverManager *)manager;
+- (void)PACFileObserverManagerBlacklistPACDeleted:(SMPACFileObserverManager *)manager;
 
 @end
 

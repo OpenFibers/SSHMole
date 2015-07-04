@@ -9,10 +9,11 @@
 #import "SMPacFileDownloadManager.h"
 #import "OTHTTPRequest.h"
 #import "SMSandboxPath.h"
+#import "SMPACFileObserverManager.h"
 
 static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO NOT CHANGE>*/";
 
-@interface SMPacFileDownloadManager () <OTHTTPRequestDelegate>
+@interface SMPacFileDownloadManager () <OTHTTPRequestDelegate, SMPACFileObserverManagerFileDeletedDelegate>
 
 @end
 
@@ -47,6 +48,8 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
                                     };
         _blacklistReplaceOption = @{@"127.0.0.1:1080": ServerAndPortOptionString};
         
+        [SMPACFileObserverManager defaultManager].pacDeleteDelegate = self;
+        
         [self installDefaultPacIfNotExist];
     }
     return self;
@@ -78,6 +81,18 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
             [replacedData writeToFile:cachePath atomically:YES];
         });
     }
+}
+
+#pragma mark - PAC File Deleted Delegate
+
+- (void)PACFileObserverManagerWhitelistPACDeleted:(SMPACFileObserverManager *)manager
+{
+    [self installDefaultPacIfNotExistForFileName:SMSandboxWhitelistPACFileName replaceOption:_whitelistReplaceOption];
+}
+
+- (void)PACFileObserverManagerBlacklistPACDeleted:(SMPACFileObserverManager *)manager
+{
+    [self installDefaultPacIfNotExistForFileName:SMSandboxBlacklistPACFileName replaceOption:_blacklistReplaceOption];    
 }
 
 #pragma mark - Get local PAC data
