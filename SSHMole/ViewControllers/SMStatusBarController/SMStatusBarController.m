@@ -144,7 +144,7 @@
         [self.statusBarMenu addItem:[NSMenuItem separatorItem]];
         _launchesAtUserLoginItem = [[NSMenuItem alloc] initWithTitle:@"Launches at Login" action:@selector(launchesAtUserLoginItemClicked:) keyEquivalent:@""];
         _launchesAtUserLoginItem.target = self;
-        [_launchesAtUserLoginItem setState:[SMLaunchManager defaultManager].isAppLaunchesAtUserLogin];
+        [_launchesAtUserLoginItem setState:[SMLaunchManager defaultManager].appLaunchesAtUserLogin];
         [self.statusBarMenu addItem:_launchesAtUserLoginItem];
     }
     
@@ -402,8 +402,8 @@
 
 - (void)launchesAtUserLoginItemClicked:(NSMenuItem *)item
 {
-    BOOL launchesAtLogin = [SMLaunchManager defaultManager].isAppLaunchesAtUserLogin;
-    [SMLaunchManager defaultManager].isAppLaunchesAtUserLogin = !launchesAtLogin;
+    BOOL launchesAtLogin = [SMLaunchManager defaultManager].appLaunchesAtUserLogin;
+    [SMLaunchManager defaultManager].appLaunchesAtUserLogin = !launchesAtLogin;
     [_launchesAtUserLoginItem setState:launchesAtLogin];
 }
 

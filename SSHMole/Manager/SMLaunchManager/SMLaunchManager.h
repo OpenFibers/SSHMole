@@ -12,6 +12,6 @@
 
 + (instancetype)defaultManager;
 
-@property (nonatomic, assign) BOOL isAppLaunchesAtUserLogin;
+@property (nonatomic, assign) BOOL appLaunchesAtUserLogin;
 
 @end

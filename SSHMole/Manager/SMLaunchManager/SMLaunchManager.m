@@ -10,7 +10,7 @@
 
 @implementation SMLaunchManager
 {
-    BOOL _isAppLaunchesAtUserLogin;
+    BOOL _appLaunchesAtUserLogin;
 }
 
 + (instancetype)defaultManager
@@ -28,15 +28,15 @@
     self = [super init];
     if (self)
     {
-        _isAppLaunchesAtUserLogin = [SMLaunchManager isAppLaunchesAtUserLogin];
+        _appLaunchesAtUserLogin = [SMLaunchManager isAppLaunchesAtUserLogin];
     }
     return self;
 }
 
-- (void)setIsAppLaunchesAtUserLogin:(BOOL)isAppLaunchesAtUserLogin
+- (void)setAppLaunchesAtUserLogin:(BOOL)appLaunchesAtUserLogin
 {
-    _isAppLaunchesAtUserLogin = isAppLaunchesAtUserLogin;
-    if (isAppLaunchesAtUserLogin)
+    _appLaunchesAtUserLogin = appLaunchesAtUserLogin;
+    if (appLaunchesAtUserLogin)
     {
         [self deleteAppFromLoginItem];
     }
