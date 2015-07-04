@@ -6,15 +6,15 @@
 //  Copyright (c) 2015 openthread. All rights reserved.
 //
 
-#import "SMFileSystemObserverManager.h"
+#import "SMPACFileObserverManager.h"
 #import "SMFileSystemObserver.h"
 #import "SMSandboxPath.h"
 
-@interface SMFileSystemObserverManager () <SMFileSystemObserverDelegate>
+@interface SMPACFileObserverManager () <SMFileSystemObserverDelegate>
 
 @end
 
-@implementation SMFileSystemObserverManager
+@implementation SMPACFileObserverManager
 {
     SMFileSystemObserver *_whitelistObserver;
     SMFileSystemObserver *_blacklistObserver;

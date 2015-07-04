@@ -20,7 +20,7 @@
 		425667731B44347C0009980E /* SCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4256676F1B44347C0009980E /* SCEvent.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		425667741B44347C0009980E /* SCEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 425667721B44347C0009980E /* SCEvents.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		425667781B4434B00009980E /* NSMutableArray+WeakReferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 425667771B4434B00009980E /* NSMutableArray+WeakReferences.m */; };
-		4256677B1B45954B0009980E /* SMFileSystemObserverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4256677A1B45954B0009980E /* SMFileSystemObserverManager.m */; };
+		4256677B1B45954B0009980E /* SMPACFileObserverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4256677A1B45954B0009980E /* SMPACFileObserverManager.m */; };
 		4262AF211AD17ADF00C54A2A /* ServerConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */; };
 		4262B8FD1B3B14A800C9430C /* StatusBarPawIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4262B8FB1B3B14A800C9430C /* StatusBarPawIcon.png */; };
 		4262B8FE1B3B14A800C9430C /* StatusBarPawIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4262B8FC1B3B14A800C9430C /* StatusBarPawIcon@2x.png */; };
@@ -123,8 +123,8 @@
 		425667721B44347C0009980E /* SCEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCEvents.m; sourceTree = "<group>"; };
 		425667761B4434B00009980E /* NSMutableArray+WeakReferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+WeakReferences.h"; sourceTree = "<group>"; };
 		425667771B4434B00009980E /* NSMutableArray+WeakReferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+WeakReferences.m"; sourceTree = "<group>"; };
-		425667791B45954B0009980E /* SMFileSystemObserverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMFileSystemObserverManager.h; sourceTree = "<group>"; };
-		4256677A1B45954B0009980E /* SMFileSystemObserverManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMFileSystemObserverManager.m; sourceTree = "<group>"; };
+		425667791B45954B0009980E /* SMPACFileObserverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPACFileObserverManager.h; sourceTree = "<group>"; };
+		4256677A1B45954B0009980E /* SMPACFileObserverManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMPACFileObserverManager.m; sourceTree = "<group>"; };
 		4262AF201AD17ADF00C54A2A /* ServerConfigView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerConfigView.xib; sourceTree = "<group>"; };
 		4262B8FB1B3B14A800C9430C /* StatusBarPawIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StatusBarPawIcon.png; sourceTree = "<group>"; };
 		4262B8FC1B3B14A800C9430C /* StatusBarPawIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StatusBarPawIcon@2x.png"; sourceTree = "<group>"; };
@@ -309,8 +309,8 @@
 			children = (
 				425667691B4433F60009980E /* SMFileSystemObserver.h */,
 				4256676A1B4433F60009980E /* SMFileSystemObserver.m */,
-				425667791B45954B0009980E /* SMFileSystemObserverManager.h */,
-				4256677A1B45954B0009980E /* SMFileSystemObserverManager.m */,
+				425667791B45954B0009980E /* SMPACFileObserverManager.h */,
+				4256677A1B45954B0009980E /* SMPACFileObserverManager.m */,
 			);
 			path = SMFileObserver;
 			sourceTree = "<group>";
@@ -794,7 +794,7 @@
 				4290598E1B42F32B00D6D687 /* SMStatusBarUserDefaultsManager.m in Sources */,
 				423B41AA1B38462500BA52CA /* SMUserProxySettingsManager.m in Sources */,
 				42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */,
-				4256677B1B45954B0009980E /* SMFileSystemObserverManager.m in Sources */,
+				4256677B1B45954B0009980E /* SMPACFileObserverManager.m in Sources */,
 				42C5C70C1B37301200C69389 /* GCDWebServerErrorResponse.m in Sources */,
 				42840D8E1B2981040015DA34 /* SMUUIDHelper.m in Sources */,
 				423B41971B3740BC00BA52CA /* OTHTTPDownloadRequest.m in Sources */,
