@@ -13,6 +13,7 @@
 #import "SMSSHTaskManager.h"
 #import "SMStatusBarUserDefaultsManager.h"
 #import "SMPACFileObserverManager.h"
+#import "SMLaunchManager.h"
 #import <AppKit/AppKit.h>
 
 @interface SMStatusBarController () <SMPACFileObserverManagerFileAddedDelegate, SMPACFileObserverManagerFileModifiedDelegate>
@@ -33,6 +34,9 @@
     //Server config menu items
     NSMenuItem *_serverConfigItem;
     NSMenuItem *_editServerListItem;
+    
+    //Launches at user login
+    NSMenuItem *_launchesAtUserLoginItem;
     
     //Edit PAC files items
     NSMenuItem *_editPACFileItem;
@@ -133,6 +137,15 @@
         _editServerListItem = [[NSMenuItem alloc] initWithTitle:@"Edit Server List" action:@selector(editServerListItemClicked:) keyEquivalent:@""];
         _editServerListItem.target = self;
         [_serverConfigItem.submenu addItem:_editServerListItem];
+    }
+    
+    //Launches at user login
+    {
+        [self.statusBarMenu addItem:[NSMenuItem separatorItem]];
+        _launchesAtUserLoginItem = [[NSMenuItem alloc] initWithTitle:@"Launches at Login" action:@selector(launchesAtUserLoginItemClicked:) keyEquivalent:@""];
+        _launchesAtUserLoginItem.target = self;
+        [_launchesAtUserLoginItem setState:[SMLaunchManager defaultManager].isAppLaunchesAtUserLogin];
+        [self.statusBarMenu addItem:_launchesAtUserLoginItem];
     }
     
     //Custom PAC
@@ -385,6 +398,13 @@
 {
     SMServerConfig *selectedConfig = item.otRuntimeUserInfo;
     [self.delegate statusBarController:self didPickServerConfig:selectedConfig];
+}
+
+- (void)launchesAtUserLoginItemClicked:(NSMenuItem *)item
+{
+    BOOL launchesAtLogin = [SMLaunchManager defaultManager].isAppLaunchesAtUserLogin;
+    [SMLaunchManager defaultManager].isAppLaunchesAtUserLogin = !launchesAtLogin;
+    [_launchesAtUserLoginItem setState:launchesAtLogin];
 }
 
 - (void)editServerListItemClicked:(NSMenuItem *)editServerListItem

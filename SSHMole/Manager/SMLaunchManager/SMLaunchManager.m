@@ -10,7 +10,7 @@
 
 @implementation SMLaunchManager
 {
-    BOOL _isAppLaunchsAtUserLogin;
+    BOOL _isAppLaunchesAtUserLogin;
 }
 
 + (instancetype)defaultManager
@@ -28,9 +28,22 @@
     self = [super init];
     if (self)
     {
-        _isAppLaunchsAtUserLogin = [SMLaunchManager isAppLaunchsAtUserLogin];
+        _isAppLaunchesAtUserLogin = [SMLaunchManager isAppLaunchesAtUserLogin];
     }
     return self;
+}
+
+- (void)setIsAppLaunchesAtUserLogin:(BOOL)isAppLaunchesAtUserLogin
+{
+    _isAppLaunchesAtUserLogin = isAppLaunchesAtUserLogin;
+    if (isAppLaunchesAtUserLogin)
+    {
+        [self deleteAppFromLoginItem];
+    }
+    else
+    {
+        [self addAppAsLoginItem];
+    }
 }
 
 - (void)addAppAsLoginItem
@@ -90,7 +103,7 @@
     }
 }
 
-+ (BOOL)isAppLaunchsAtUserLogin
++ (BOOL)isAppLaunchesAtUserLogin
 {
     NSString * appPath = [[NSBundle mainBundle] bundlePath];
     

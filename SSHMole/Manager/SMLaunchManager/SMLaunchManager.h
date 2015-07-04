@@ -12,10 +12,6 @@
 
 + (instancetype)defaultManager;
 
-@property (nonatomic, readonly, assign) BOOL isAppLaunchsAtUserLogin;
-
-- (void)addAppAsLoginItem;
-
-- (void)deleteAppFromLoginItem;
+@property (nonatomic, assign) BOOL isAppLaunchesAtUserLogin;
 
 @end
