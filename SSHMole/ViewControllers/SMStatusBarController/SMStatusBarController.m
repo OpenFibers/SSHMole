@@ -12,9 +12,10 @@
 #import "NSObject+OTRuntimeUserInfo.h"
 #import "SMSSHTaskManager.h"
 #import "SMStatusBarUserDefaultsManager.h"
+#import "SMPACFileObserverManager.h"
 #import <AppKit/AppKit.h>
 
-@interface SMStatusBarController ()
+@interface SMStatusBarController () <SMPACFileObserverManagerFileAddedDelegate, SMPACFileObserverManagerFileModifiedDelegate>
 @property (nonatomic, strong) NSStatusItem *statusBar;
 @property (nonatomic, strong) NSMenu *statusBarMenu;
 @property (nonatomic, assign) SMStatusBarControllerProxyMode currentProxyMode;
@@ -52,6 +53,8 @@
                                                  selector:@selector(serverConfigsUpdated:)
                                                      name:SMServerListViewAnyConfigChangedNotification
                                                    object:nil];
+        [SMPACFileObserverManager defaultManager].pacAddDelegate = self;
+        [SMPACFileObserverManager defaultManager].pacModifyDelegate = self;
     }
     return self;
 }
@@ -330,6 +333,44 @@
             [self performSelector:@selector(serverConfigItemClicked:) withObject:lastConnectedConfigItem afterDelay:1];
         }
     });
+}
+
+#pragma mark - PAC File Observer Callback
+
+- (void)PACFileObserverManagerWhitelistPACAdded:(SMPACFileObserverManager *)manager
+{
+    if (self.currentProxyMode == SMStatusBarControllerProxyModeAutoWhitelist)
+    {
+        self.currentProxyMode = SMStatusBarControllerProxyModeOff;
+        self.currentProxyMode = SMStatusBarControllerProxyModeAutoWhitelist;
+    }
+}
+
+- (void)PACFileObserverManagerWhitelistPACModified:(SMPACFileObserverManager *)manager
+{
+    if (self.currentProxyMode == SMStatusBarControllerProxyModeAutoWhitelist)
+    {
+        self.currentProxyMode = SMStatusBarControllerProxyModeOff;
+        self.currentProxyMode = SMStatusBarControllerProxyModeAutoWhitelist;
+    }
+}
+
+- (void)PACFileObserverManagerBlacklistPACAdded:(SMPACFileObserverManager *)manager
+{
+    if (self.currentProxyMode == SMStatusBarControllerProxyModeAutoBlacklist)
+    {
+        self.currentProxyMode = SMStatusBarControllerProxyModeOff;
+        self.currentProxyMode = SMStatusBarControllerProxyModeAutoBlacklist;
+    }
+}
+
+- (void)PACFileObserverManagerBlacklistPACModified:(SMPACFileObserverManager *)manager
+{
+    if (self.currentProxyMode == SMStatusBarControllerProxyModeAutoBlacklist)
+    {
+        self.currentProxyMode = SMStatusBarControllerProxyModeOff;
+        self.currentProxyMode = SMStatusBarControllerProxyModeAutoBlacklist;
+    }
 }
 
 #pragma mark - Menu events
