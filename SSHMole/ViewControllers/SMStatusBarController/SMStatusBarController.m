@@ -170,6 +170,21 @@
         [self.statusBarMenu addItem:_updateBlacklistItem];
     }
     
+    {
+        [self.statusBarMenu addItem:[NSMenuItem separatorItem]];
+        NSMenuItem *aboutItem = [[NSMenuItem alloc] initWithTitle:@"About"
+                                                      action:@selector(aboutItemClicked:)
+                                               keyEquivalent:@""];
+        aboutItem.target = self;
+        [self.statusBarMenu addItem:aboutItem];
+        
+        NSMenuItem *homePageItem = [[NSMenuItem alloc] initWithTitle:@"Project Home Page"
+                                                           action:@selector(homePageItemClicked:)
+                                                    keyEquivalent:@""];
+        homePageItem.target = self;
+        [self.statusBarMenu addItem:homePageItem];
+    }
+    
     //Quit app
     {
         [self.statusBarMenu addItem:[NSMenuItem separatorItem]];
@@ -426,6 +441,17 @@
     {
         [self.delegate statusBarControllerUpdateBlacklistPacMenuClicked:self];
     }
+}
+
+- (void)aboutItemClicked:(NSMenuItem *)sender
+{
+    [[NSApplication sharedApplication] orderFrontStandardAboutPanel:self];
+}
+
+- (void)homePageItemClicked:(NSMenuItem *)sender
+{
+    NSString *homePageURLString = @"https://github.com/openfibers/sshmole";
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:homePageURLString]];
 }
 
 - (void)quitItemClicked:(NSMenuItem *)sender
