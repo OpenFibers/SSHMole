@@ -6,18 +6,18 @@
 //  Copyright (c) 2015 openthread. All rights reserved.
 //
 
-#import "SMPacFileDownloadManager.h"
+#import "SMPACFileDownloadManager.h"
 #import "OTHTTPRequest.h"
 #import "SMSandboxPath.h"
 #import "SMPACFileObserverManager.h"
 
 static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO NOT CHANGE>*/";
 
-@interface SMPacFileDownloadManager () <OTHTTPRequestDelegate, SMPACFileObserverManagerFileDeletedDelegate>
+@interface SMPACFileDownloadManager () <OTHTTPRequestDelegate, SMPACFileObserverManagerFileDeletedDelegate>
 
 @end
 
-@implementation SMPacFileDownloadManager
+@implementation SMPACFileDownloadManager
 {
     NSMutableDictionary *_requestDictionary;
     
@@ -77,7 +77,7 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
         NSString *pacPathInBundle = [[NSBundle mainBundle] pathForResource:fileName ofType:@""];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *originalData = [[NSData alloc] initWithContentsOfFile:pacPathInBundle];
-            NSData *replacedData = [SMPacFileDownloadManager getReplacedPacStringForOriginalData:originalData replaceOptions:replaceOption];
+            NSData *replacedData = [SMPACFileDownloadManager getReplacedPacStringForOriginalData:originalData replaceOptions:replaceOption];
             [replacedData writeToFile:cachePath atomically:YES];
         });
     }
@@ -141,7 +141,7 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
             NSData *data = [[NSData alloc] initWithContentsOfFile:cachePath];
             NSString *localServerAndPortString = [NSString stringWithFormat:@"127.0.0.1:%zd", localPort];
             NSDictionary *localServerReplaceOption = @{ServerAndPortOptionString : localServerAndPortString};
-            data = [SMPacFileDownloadManager getReplacedPacStringForOriginalData:data
+            data = [SMPACFileDownloadManager getReplacedPacStringForOriginalData:data
                                                                   replaceOptions:localServerReplaceOption];
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completion)
@@ -242,7 +242,7 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *responseData = request.responseData;
-            NSData *data = [SMPacFileDownloadManager getReplacedPacStringForOriginalData:responseData
+            NSData *data = [SMPACFileDownloadManager getReplacedPacStringForOriginalData:responseData
                                                                           replaceOptions:replaceOption];
             BOOL successed = [data writeToFile:cachePath atomically:YES];
             if (callback)

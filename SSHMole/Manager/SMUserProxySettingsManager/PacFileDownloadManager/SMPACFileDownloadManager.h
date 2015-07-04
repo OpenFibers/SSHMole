@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SMPacFileDownloadManager : NSObject
+@interface SMPACFileDownloadManager : NSObject
 
 + (instancetype)defaultManager;
 

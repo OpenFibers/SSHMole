@@ -13,7 +13,7 @@
 		423B41A51B383D2300BA52CA /* blacklist.pac in Resources */ = {isa = PBXBuildFile; fileRef = 423B41A31B383D2300BA52CA /* blacklist.pac */; };
 		423B41A61B383D2300BA52CA /* whitelist.pac in Resources */ = {isa = PBXBuildFile; fileRef = 423B41A41B383D2300BA52CA /* whitelist.pac */; };
 		423B41AA1B38462500BA52CA /* SMUserProxySettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 423B41A91B38462500BA52CA /* SMUserProxySettingsManager.m */; };
-		4250732F1B3FC5B800C355DE /* SMPacFileDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 425073281B3FC5B800C355DE /* SMPacFileDownloadManager.m */; };
+		4250732F1B3FC5B800C355DE /* SMPACFileDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 425073281B3FC5B800C355DE /* SMPACFileDownloadManager.m */; };
 		425073301B3FC5B800C355DE /* SMSystemPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4250732B1B3FC5B800C355DE /* SMSystemPreferenceManager.m */; };
 		425073311B3FC5B800C355DE /* SMWebServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4250732E1B3FC5B800C355DE /* SMWebServerManager.m */; };
 		4256676B1B4433F60009980E /* SMFileSystemObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 4256676A1B4433F60009980E /* SMFileSystemObserver.m */; };
@@ -107,8 +107,8 @@
 		423B41A41B383D2300BA52CA /* whitelist.pac */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = whitelist.pac; sourceTree = "<group>"; };
 		423B41A81B38462500BA52CA /* SMUserProxySettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUserProxySettingsManager.h; sourceTree = "<group>"; };
 		423B41A91B38462500BA52CA /* SMUserProxySettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMUserProxySettingsManager.m; sourceTree = "<group>"; };
-		425073271B3FC5B800C355DE /* SMPacFileDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPacFileDownloadManager.h; sourceTree = "<group>"; };
-		425073281B3FC5B800C355DE /* SMPacFileDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMPacFileDownloadManager.m; sourceTree = "<group>"; };
+		425073271B3FC5B800C355DE /* SMPACFileDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPACFileDownloadManager.h; sourceTree = "<group>"; };
+		425073281B3FC5B800C355DE /* SMPACFileDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMPACFileDownloadManager.m; sourceTree = "<group>"; };
 		4250732A1B3FC5B800C355DE /* SMSystemPreferenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSystemPreferenceManager.h; sourceTree = "<group>"; };
 		4250732B1B3FC5B800C355DE /* SMSystemPreferenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSystemPreferenceManager.m; sourceTree = "<group>"; };
 		4250732D1B3FC5B800C355DE /* SMWebServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMWebServerManager.h; sourceTree = "<group>"; };
@@ -280,8 +280,8 @@
 		425073261B3FC5B800C355DE /* PacFileDownloadManager */ = {
 			isa = PBXGroup;
 			children = (
-				425073271B3FC5B800C355DE /* SMPacFileDownloadManager.h */,
-				425073281B3FC5B800C355DE /* SMPacFileDownloadManager.m */,
+				425073271B3FC5B800C355DE /* SMPACFileDownloadManager.h */,
+				425073281B3FC5B800C355DE /* SMPACFileDownloadManager.m */,
 			);
 			path = PacFileDownloadManager;
 			sourceTree = "<group>";
@@ -816,7 +816,7 @@
 				42C5C7041B37301200C69389 /* GCDWebServerFunctions.m in Sources */,
 				423B41981B3740BC00BA52CA /* OTHTTPRequest.m in Sources */,
 				42E0A4501ACFBAB800890EA7 /* main.m in Sources */,
-				4250732F1B3FC5B800C355DE /* SMPacFileDownloadManager.m in Sources */,
+				4250732F1B3FC5B800C355DE /* SMPACFileDownloadManager.m in Sources */,
 				42C5C7081B37301200C69389 /* GCDWebServerFileRequest.m in Sources */,
 				4290598B1B41831C00D6D687 /* NSObject+OTRuntimeUserInfo.m in Sources */,
 				42840DB11B298CF50015DA34 /* SMCopyHelperWrapper.m in Sources */,

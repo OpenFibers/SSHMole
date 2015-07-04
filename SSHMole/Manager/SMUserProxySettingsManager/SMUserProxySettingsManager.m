@@ -7,7 +7,7 @@
 //
 
 #import "SMUserProxySettingsManager.h"
-#import "SMPacFileDownloadManager.h"
+#import "SMPACFileDownloadManager.h"
 #import "SMWebServerManager.h"
 #import "SMSystemPreferenceManager.h"
 #import "SMServerConfig.h"
@@ -16,7 +16,7 @@
 @implementation SMUserProxySettingsManager
 {
     SMSystemPreferenceManager *_systemPreferenceManager;
-    SMPacFileDownloadManager *_pacDownloadManger;
+    SMPACFileDownloadManager *_pacDownloadManger;
     SMWebServerManager *_pacServerManager;
     
     SMServerConfig *_currentServerConfig;
@@ -41,7 +41,7 @@
         NSString *blacklistPACURLString = @"http://127.0.0.1:9099/blacklist.pac";
         _systemPreferenceManager = [[SMSystemPreferenceManager alloc] initWithWhitelistPACURLString:whitelistPACURLString
                                                                               blacklistPACURLString:blacklistPACURLString];
-        _pacDownloadManger = [SMPacFileDownloadManager defaultManager];
+        _pacDownloadManger = [SMPACFileDownloadManager defaultManager];
         _pacServerManager = [SMWebServerManager defaultManager];
     }
     return self;
