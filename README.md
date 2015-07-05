@@ -21,6 +21,12 @@ OSX 下最好用的 ssh 代理工具。
 ##没有VPS怎么办
 买一台。穷用[bandwagon host](http://www.tennfy.com/1347.html)年付$3.99每月100G流量。富用linode。  
 
+##Logo为什么这么像百度logo？
+反正在google搜paw icon就找到这么个矢量图。别问跟百度什么关系，一毛钱关系都没有。凑合看吧。欢迎设计师朋友捐赠Icon。  
+
+##为什么App没经Developer ID签名？
+没钱。欢迎土豪捐赠开发帐号，请邮件联系openfibers@gmail.com。  
+
 ##下载地址
 [SSHMole v1.0 build 114](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.0_build114.zip) 
 
