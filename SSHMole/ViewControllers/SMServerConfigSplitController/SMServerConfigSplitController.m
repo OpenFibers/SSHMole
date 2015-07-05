@@ -22,6 +22,7 @@
 @property (nonatomic, weak) IBOutlet SMServerListView *serverListView;
 @property (nonatomic, weak) IBOutlet SMServerConfigView *serverConfigView;
 @property (nonatomic, strong) SMServerConfig *currentConfig;
+@property (nonatomic, strong) SMServerConfig *sleepDisconnectedConfig;
 @end
 
 @implementation SMServerConfigSplitController
@@ -57,6 +58,15 @@
                  [[SMUserProxySettingsManager defaultManager] updateProxySettingsForConfig:task.config];
              }
          } forKey:NSStringFromClass([self class])];
+        
+        [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self
+                                                               selector:@selector(receiveSleepNote:)
+                                                                   name:NSWorkspaceWillSleepNotification
+                                                                 object:nil];
+        [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self
+                                                               selector:@selector(receiveWakeNote:)
+                                                                   name:NSWorkspaceDidWakeNotification
+                                                                 object:nil];
     }
     return self;
 }
@@ -64,6 +74,7 @@
 - (void)dealloc
 {
     [[SMSSHTaskManager defaultManager] removeCallbackForKey:NSStringFromClass([self class])];
+    [[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad
@@ -326,6 +337,31 @@
                 
             }
         }
+    }
+}
+
+#pragma mark - Sleep and Wake
+
+- (void)receiveSleepNote:(NSNotification*)note
+{
+    SMServerConfig *connectingConfig = [[SMSSHTaskManager defaultManager] connectingConfig];
+    if (connectingConfig && self.currentConfig == connectingConfig)
+    {
+        [[SMSSHTaskManager defaultManager] disconnect];
+        self.sleepDisconnectedConfig = connectingConfig;
+    }
+    else
+    {
+        self.sleepDisconnectedConfig = nil;
+    }
+}
+
+- (void)receiveWakeNote:(NSNotification *)note
+{
+    if (self.sleepDisconnectedConfig && self.sleepDisconnectedConfig == self.currentConfig)
+    {
+        [[SMSSHTaskManager defaultManager] beginConnectWithServerConfig:self.currentConfig];
+        self.sleepDisconnectedConfig = nil;
     }
 }
 
