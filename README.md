@@ -18,6 +18,9 @@ OSX 下最好用的 ssh 代理工具。
 4. 可自定义PAC，或从Web获取最新PAC文件。  
 5. 可设置开机自动启动，启动或唤醒Mac时，自动重连上次成功的连接。  
 
+##没有VPS怎么办
+买一台。穷用[bandwagon host](http://www.tennfy.com/1347.html)年付$3.99每月100G流量。富用linode。  
+
 ##下载地址
 [SSHMole v1.0 build 114](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.0_build114.zip) 
 
