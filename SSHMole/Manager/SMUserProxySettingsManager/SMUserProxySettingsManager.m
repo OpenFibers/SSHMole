@@ -69,6 +69,8 @@
 {
     if (!_currentServerConfig)
     {
+        _systemPreferenceManager.proxyMode = SMSystemProferenceManagerProxyModeOff;
+        [_systemPreferenceManager updateCurrentProxySettingsForConfig:_currentServerConfig];
         return;
     }
     SMSystemProferenceManagerProxyMode systemPrefenceProxyMode = SMSystemProferenceManagerProxyModeOff;
