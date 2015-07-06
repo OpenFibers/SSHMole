@@ -28,9 +28,11 @@ OSX 下最好用的 ssh 代理工具。
 没钱。欢迎土豪捐赠开发帐号，请邮件联系openfibers@gmail.com。  
 
 ##下载地址
-[SSHMole v1.0.1 build 116](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.0.1_build116.zip)  
+[SSHMole v1.0.2 build 118](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.0.2_build118.zip)  
 
 ##Change log
+[SSHMole v1.0.2 build 118](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.0.2_build118.zip)  修复全新安装启动崩溃（SSHMoleSystemConfigurationHelper未复制或权限错误）
+
 [SSHMole v1.0.1 build 116](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.0.1_build116.zip)  修复断开连接或退出时，系统代理设置未被清空的 bug
 
 [SSHMole v1.0 build 114](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.0_build114.zip)  自动代理(PAC)、自动连接、Status bar 菜单
