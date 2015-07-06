@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4219552C1B4A4ED0005A2996 /* SSHMoleSystemConfigurationHelper in Resources */ = {isa = PBXBuildFile; fileRef = 429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */; };
 		423B41971B3740BC00BA52CA /* OTHTTPDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 423B41941B3740BC00BA52CA /* OTHTTPDownloadRequest.m */; };
 		423B41981B3740BC00BA52CA /* OTHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 423B41961B3740BC00BA52CA /* OTHTTPRequest.m */; };
 		423B419C1B37B38000BA52CA /* SMSandboxPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 423B419B1B37B38000BA52CA /* SMSandboxPath.m */; };
@@ -776,6 +777,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4219552C1B4A4ED0005A2996 /* SSHMoleSystemConfigurationHelper in Resources */,
 				4262B8FD1B3B14A800C9430C /* StatusBarPawIcon.png in Resources */,
 				4262AF211AD17ADF00C54A2A /* ServerConfigView.xib in Resources */,
 				42E0A4551ACFBAB800890EA7 /* Images.xcassets in Resources */,
