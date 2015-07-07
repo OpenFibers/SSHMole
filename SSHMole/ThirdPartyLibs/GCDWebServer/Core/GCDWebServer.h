@@ -379,6 +379,15 @@ extern NSString* const GCDWebServerAuthenticationMethod_DigestAccess;
  */
 - (BOOL)startWithPort:(NSUInteger)port bonjourName:(NSString*)name;
 
+/**
+ *  Starts the server on a given port and with a specific Bonjour name.
+ *  Pass a nil Bonjour name to disable Bonjour entirely or an empty string to
+ *  use the default name.
+ *
+ *  Returns NO if the server failed to start.
+ */
+- (BOOL)startWithPort:(NSUInteger)port bonjourName:(NSString*)name error:(NSError **)error;
+
 #if !TARGET_OS_IPHONE
 
 /**

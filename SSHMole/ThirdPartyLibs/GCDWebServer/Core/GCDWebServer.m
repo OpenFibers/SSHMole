@@ -747,15 +747,19 @@ static inline NSString* _EncodeBase64(NSString* string) {
   return nil;
 }
 
-- (BOOL)start {
+- (BOOL)start{
   return [self startWithPort:kDefaultPort bonjourName:@""];
 }
 
-- (BOOL)startWithPort:(NSUInteger)port bonjourName:(NSString*)name {
+- (BOOL)startWithPort:(NSUInteger)port bonjourName:(NSString*)name{
+  return [self startWithPort:port bonjourName:name error:NULL];
+}
+
+- (BOOL)startWithPort:(NSUInteger)port bonjourName:(NSString*)name error:(NSError **)error{
   NSMutableDictionary* options = [NSMutableDictionary dictionary];
   [options setObject:[NSNumber numberWithInteger:port] forKey:GCDWebServerOption_Port];
   [options setValue:name forKey:GCDWebServerOption_BonjourName];
-  return [self startWithOptions:options error:NULL];
+  return [self startWithOptions:options error:error];
 }
 
 #if !TARGET_OS_IPHONE

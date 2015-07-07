@@ -30,7 +30,7 @@
     [self stopPacServer];
 }
 
-- (void)beginPacServerWithPort:(NSUInteger)port data:(NSData *)data path:(NSString *)path
+- (BOOL)beginPacServerWithPort:(NSUInteger)port data:(NSData *)data path:(NSString *)path error:(NSError **)error
 {
     if (_server)
     {
@@ -46,7 +46,8 @@
                                                               contentType:@"application/x-ns-proxy-autoconfig"];
                     }
      ];
-    [_server startWithPort:port bonjourName:@"SSHMole pac server"];
+    BOOL successed = [_server startWithPort:port bonjourName:@"SSHMole pac server" error:error];
+    return successed;
 }
 
 - (void)stopPacServer

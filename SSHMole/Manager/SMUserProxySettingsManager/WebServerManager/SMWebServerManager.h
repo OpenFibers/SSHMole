@@ -20,7 +20,7 @@
  *  @param data pac的data
  *  @param path web server 路径。system configuration helper中设置的是“/proxy.pac”
  */
-- (void)beginPacServerWithPort:(NSUInteger)port data:(NSData *)data path:(NSString *)path;
+- (BOOL)beginPacServerWithPort:(NSUInteger)port data:(NSData *)data path:(NSString *)path error:(NSError **)error;
 
 - (void)stopPacServer;
 

@@ -94,9 +94,11 @@
             systemPrefenceProxyMode = SMSystemProferenceManagerProxyModeAutoBlacklist;
             __weak SMWebServerManager *weakPacServerManager = _pacServerManager;
             [_pacDownloadManger getBlackListLocalPacDataForLocalPort:_currentServerConfig.localPort completion:^(NSData *data) {
+                NSError *error = nil;
                 [weakPacServerManager beginPacServerWithPort:9099
                                                         data:data
-                                                        path:@"/blacklist.pac"];
+                                                        path:@"/blacklist.pac"
+                                                       error:&error];
             }];
         }
             break;
@@ -105,9 +107,11 @@
             systemPrefenceProxyMode = SMSystemProferenceManagerProxyModeAutoWhitelist;
             __weak SMWebServerManager *weakPacServerManager = _pacServerManager;
             [_pacDownloadManger getWhiteListLocalPacDataForLocalPort:_currentServerConfig.localPort completion:^(NSData *data) {
+                NSError *error = nil;
                 [weakPacServerManager beginPacServerWithPort:9099
                                                         data:data
-                                                        path:@"/whitelist.pac"];
+                                                        path:@"/whitelist.pac"
+                                                       error:&error];
             }];
         }
             break;
