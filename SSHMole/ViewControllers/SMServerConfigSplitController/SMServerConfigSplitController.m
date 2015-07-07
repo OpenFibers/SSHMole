@@ -17,6 +17,7 @@
 #import "SMServerConfigStorage.h"
 #import "SMSSHTaskManager.h"
 #import "SMUserProxySettingsManager.h"
+#import "SMAlertHelper.h"
 
 @interface SMServerConfigSplitController () <NSSplitViewDelegate, SMServerListViewDelegate, SMServerConfigViewDelegate>
 @property (nonatomic, weak) IBOutlet SMServerListView *serverListView;
@@ -238,10 +239,7 @@
          )
         )
     {
-        NSAlert *alert = [[NSAlert alloc]init];
-        [alert addButtonWithTitle:@"OK"];
-        [alert setMessageText:error.domain];
-        [alert runModal];
+        [SMAlertHelper showAlertWithOKButtonAndString:error.domain];
     }
 }
 

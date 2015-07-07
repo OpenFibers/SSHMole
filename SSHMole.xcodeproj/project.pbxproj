@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4219552C1B4A4ED0005A2996 /* SSHMoleSystemConfigurationHelper in Resources */ = {isa = PBXBuildFile; fileRef = 429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */; };
+		422121151B4BAD84005D6F16 /* SMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 422121141B4BAD84005D6F16 /* SMAlertHelper.m */; };
 		423B41971B3740BC00BA52CA /* OTHTTPDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 423B41941B3740BC00BA52CA /* OTHTTPDownloadRequest.m */; };
 		423B41981B3740BC00BA52CA /* OTHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 423B41961B3740BC00BA52CA /* OTHTTPRequest.m */; };
 		423B419C1B37B38000BA52CA /* SMSandboxPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 423B419B1B37B38000BA52CA /* SMSandboxPath.m */; };
@@ -99,6 +100,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		422121131B4BAD84005D6F16 /* SMAlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAlertHelper.h; sourceTree = "<group>"; };
+		422121141B4BAD84005D6F16 /* SMAlertHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMAlertHelper.m; sourceTree = "<group>"; };
 		423B41931B3740BC00BA52CA /* OTHTTPDownloadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTHTTPDownloadRequest.h; sourceTree = "<group>"; };
 		423B41941B3740BC00BA52CA /* OTHTTPDownloadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTHTTPDownloadRequest.m; sourceTree = "<group>"; };
 		423B41951B3740BC00BA52CA /* OTHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTHTTPRequest.h; sourceTree = "<group>"; };
@@ -240,6 +243,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		422121121B4BAD7C005D6F16 /* SMAlertHelper */ = {
+			isa = PBXGroup;
+			children = (
+				422121131B4BAD84005D6F16 /* SMAlertHelper.h */,
+				422121141B4BAD84005D6F16 /* SMAlertHelper.m */,
+			);
+			path = SMAlertHelper;
+			sourceTree = "<group>";
+		};
 		423B41921B3740BC00BA52CA /* OTHTTPRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,6 +387,7 @@
 		42840D701B2981040015DA34 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				422121121B4BAD7C005D6F16 /* SMAlertHelper */,
 				425667751B4434B00009980E /* MutableArray+WeakReference */,
 				429059881B41831C00D6D687 /* NSObject+OTRuntimeUserInfo */,
 				42840D711B2981040015DA34 /* NSView+Vibrancy */,
@@ -813,6 +826,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				422121151B4BAD84005D6F16 /* SMAlertHelper.m in Sources */,
 				425667741B44347C0009980E /* SCEvents.m in Sources */,
 				4290598E1B42F32B00D6D687 /* SMStatusBarUserDefaultsManager.m in Sources */,
 				423B41AA1B38462500BA52CA /* SMUserProxySettingsManager.m in Sources */,
