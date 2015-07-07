@@ -110,6 +110,10 @@
     LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL,
                                                             kLSSharedFileListSessionLoginItems,
                                                             NULL);
+    if (!loginItems)
+    {
+        return NO;
+    }
     
     BOOL isLaunchesAtUserLogin = NO;
     if (loginItems)
