@@ -10,6 +10,7 @@
 #import "OTHTTPRequest.h"
 #import "SMSandboxPath.h"
 #import "SMPACFileObserverManager.h"
+#import "SMAlertHelper.h"
 
 static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO NOT CHANGE>*/";
 
@@ -71,15 +72,23 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
         NSString *pacSuperPath = [cachePath stringByDeletingLastPathComponent];
         if (![[NSFileManager defaultManager] fileExistsAtPath:pacSuperPath])
         {
-            [[NSFileManager defaultManager] createDirectoryAtPath:pacSuperPath withIntermediateDirectories:YES attributes:nil error:nil];
+            NSError *error = nil;
+            BOOL successed = [[NSFileManager defaultManager] createDirectoryAtPath:pacSuperPath withIntermediateDirectories:YES attributes:nil error:&error];
+            if (successed)
+            {
+                NSString *pacPathInBundle = [[NSBundle mainBundle] pathForResource:fileName ofType:@""];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    NSData *originalData = [[NSData alloc] initWithContentsOfFile:pacPathInBundle];
+                    NSData *replacedData = [SMPACFileDownloadManager getReplacedPacStringForOriginalData:originalData replaceOptions:replaceOption];
+                    [replacedData writeToFile:cachePath atomically:YES];
+                });
+            }
+            else
+            {
+                NSString *errorString = [NSString stringWithFormat:@"%@\n%@", error.domain, error.localizedDescription];
+                [SMAlertHelper showAlertWithOKButtonAndString:errorString];
+            }
         }
-        
-        NSString *pacPathInBundle = [[NSBundle mainBundle] pathForResource:fileName ofType:@""];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSData *originalData = [[NSData alloc] initWithContentsOfFile:pacPathInBundle];
-            NSData *replacedData = [SMPACFileDownloadManager getReplacedPacStringForOriginalData:originalData replaceOptions:replaceOption];
-            [replacedData writeToFile:cachePath atomically:YES];
-        });
     }
 }
 
