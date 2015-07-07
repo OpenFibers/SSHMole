@@ -111,6 +111,7 @@
                                                             kLSSharedFileListSessionLoginItems,
                                                             NULL);
     
+    BOOL isLaunchesAtUserLogin = NO;
     if (loginItems)
     {
         UInt32 seedValue;
@@ -126,13 +127,14 @@
                 NSString * urlPath = [url path];
                 if ([urlPath compare:appPath] == NSOrderedSame)
                 {
-                    return YES;
+                    isLaunchesAtUserLogin = YES;
+                    break;
                 }
             }
         }
     }
-    
-    return NO;
+    CFRelease(loginItems);
+    return isLaunchesAtUserLogin;
 }
 
 
