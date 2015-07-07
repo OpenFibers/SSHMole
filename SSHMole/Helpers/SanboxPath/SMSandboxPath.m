@@ -21,7 +21,7 @@ NSString *const SMSandboxBlacklistPACFileName = @"blacklist.pac";
     BOOL successed = [[NSFileManager defaultManager] createDirectoryAtPath:pacFolderPath withIntermediateDirectories:YES attributes:nil error:&error];
     if (!successed)
     {
-        [SMAlertHelper showAlertForErrorDomainAndDescription:error];
+        [SMAlertHelper showAlertForErrorDomainAndDescription:error additionalInfo:@"Quit SSHMole, delete ~/Library/Containers/openthread.SSHMole and open SSHMole again"];
     }
     return successed;
 }

@@ -16,4 +16,6 @@
 
 + (void)showAlertForErrorDomainAndDescription:(NSError *)error;
 
++ (void)showAlertForErrorDomainAndDescription:(NSError *)error additionalInfo:(NSString *)additionalInfo;
+
 @end

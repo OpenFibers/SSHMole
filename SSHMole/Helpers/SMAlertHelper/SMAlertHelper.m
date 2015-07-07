@@ -36,4 +36,10 @@
     [self showAlertWithOKButtonAndString:errorString];
 }
 
++ (void)showAlertForErrorDomainAndDescription:(NSError *)error additionalInfo:(NSString *)additionalInfo
+{
+    NSString *errorString = [NSString stringWithFormat:@"%@\n%@\n%@", error.domain, error.localizedDescription, additionalInfo];
+    [self showAlertWithOKButtonAndString:errorString];
+}
+
 @end
