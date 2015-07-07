@@ -11,6 +11,7 @@
 #import "SMWebServerManager.h"
 #import "SMSystemPreferenceManager.h"
 #import "SMServerConfig.h"
+#import "SMAlertHelper.h"
 #import <AppKit/AppKit.h>
 
 @implementation SMUserProxySettingsManager
@@ -99,6 +100,11 @@
                                                         data:data
                                                         path:@"/blacklist.pac"
                                                        error:&error];
+                if (error)
+                {
+                    NSString *errorString = [NSString stringWithFormat:@"%@\n%@", error.domain, error.localizedDescription];
+                    [SMAlertHelper showAlertWithOKButtonAndString:errorString];
+                }
             }];
         }
             break;
@@ -112,6 +118,11 @@
                                                         data:data
                                                         path:@"/whitelist.pac"
                                                        error:&error];
+                if (error)
+                {
+                    NSString *errorString = [NSString stringWithFormat:@"%@\n%@", error.domain, error.localizedDescription];
+                    [SMAlertHelper showAlertWithOKButtonAndString:errorString];
+                }
             }];
         }
             break;
@@ -140,10 +151,7 @@
             alertMessage = @"Update whitelist PAC file failed";
         }
         
-        NSAlert *alert = [[NSAlert alloc]init];
-        [alert addButtonWithTitle:@"OK"];
-        [alert setMessageText:alertMessage];
-        [alert runModal];
+        [SMAlertHelper showAlertWithOKButtonAndString:alertMessage];
     }];
 }
 
@@ -167,10 +175,7 @@
             alertMessage = @"Update blacklist PAC file failed";
         }
         
-        NSAlert *alert = [[NSAlert alloc]init];
-        [alert addButtonWithTitle:@"OK"];
-        [alert setMessageText:alertMessage];
-        [alert runModal];
+        [SMAlertHelper showAlertWithOKButtonAndString:alertMessage];
     }];
 }
 
