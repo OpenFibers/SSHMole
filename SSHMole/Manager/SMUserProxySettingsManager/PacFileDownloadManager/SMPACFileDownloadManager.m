@@ -74,22 +74,31 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
         {
             NSError *error = nil;
             BOOL successed = [[NSFileManager defaultManager] createDirectoryAtPath:pacSuperPath withIntermediateDirectories:YES attributes:nil error:&error];
-            if (successed)
-            {
-                NSString *pacPathInBundle = [[NSBundle mainBundle] pathForResource:fileName ofType:@""];
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    NSData *originalData = [[NSData alloc] initWithContentsOfFile:pacPathInBundle];
-                    NSData *replacedData = [SMPACFileDownloadManager getReplacedPacStringForOriginalData:originalData replaceOptions:replaceOption];
-                    [replacedData writeToFile:cachePath atomically:YES];
-                });
-            }
-            else
+            if (!successed)
             {
                 NSString *errorString = [NSString stringWithFormat:@"%@\n%@", error.domain, error.localizedDescription];
                 [SMAlertHelper showAlertWithOKButtonAndString:errorString];
             }
+            else
+            {
+                [self writeBundleResourceWithFileName:fileName toCachePath:cachePath replaceOption:replaceOption];
+            }
+        }
+        else
+        {
+            [self writeBundleResourceWithFileName:fileName toCachePath:cachePath replaceOption:replaceOption];
         }
     }
+}
+
+- (void)writeBundleResourceWithFileName:(NSString *)fileName toCachePath:(NSString *)cachePath replaceOption:(NSDictionary *)replaceOption
+{
+    NSString *pacPathInBundle = [[NSBundle mainBundle] pathForResource:fileName ofType:@""];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *originalData = [[NSData alloc] initWithContentsOfFile:pacPathInBundle];
+        NSData *replacedData = [SMPACFileDownloadManager getReplacedPacStringForOriginalData:originalData replaceOptions:replaceOption];
+        [replacedData writeToFile:cachePath atomically:YES];
+    });
 }
 
 #pragma mark - PAC File Deleted Delegate

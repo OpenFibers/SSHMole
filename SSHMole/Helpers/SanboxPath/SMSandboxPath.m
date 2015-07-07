@@ -7,18 +7,31 @@
 //
 
 #import "SMSandboxPath.h"
+#import "SMAlertHelper.h"
 
 NSString *const SMSandboxWhitelistPACFileName = @"whitelist.pac";
 NSString *const SMSandboxBlacklistPACFileName = @"blacklist.pac";
 
 @implementation SMSandboxPath
 
++ (BOOL)createSandboxPathIfNotExist
+{
+    NSString *pacFolderPath = [self pacFolderPath];
+    NSError *error = nil;
+    BOOL successed = [[NSFileManager defaultManager] createDirectoryAtPath:pacFolderPath withIntermediateDirectories:YES attributes:nil error:&error];
+    if (!successed)
+    {
+        [SMAlertHelper showAlertForErrorDomainAndDescription:error];
+    }
+    return successed;
+}
+
 + (NSString *)systemConfigrationHelperPath
 {
     static NSString *helperPath = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        helperPath = [[self sandboxPath] stringByAppendingPathComponent:@"Documents/SSHMoleSystemConfigurationHelper"];
+        helperPath = [[self sandboxPath] stringByAppendingPathComponent:@"Data/Documents/SSHMoleSystemConfigurationHelper"];
     });
     return helperPath;
 }
@@ -28,7 +41,7 @@ NSString *const SMSandboxBlacklistPACFileName = @"blacklist.pac";
     static NSString *folderPath = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        folderPath = [[self sandboxPath] stringByAppendingPathComponent:@"Documents/PAC"];
+        folderPath = [[self sandboxPath] stringByAppendingPathComponent:@"Data/Documents/PAC"];
     });
     return folderPath;
 }
@@ -46,7 +59,7 @@ NSString *const SMSandboxBlacklistPACFileName = @"blacklist.pac";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSString *homeDir = NSHomeDirectory();
-        sandboxPath = [homeDir stringByAppendingPathComponent:@"/Library/Containers/openthread.SSHMole/Data/"];
+        sandboxPath = [homeDir stringByAppendingPathComponent:@"/Library/Containers/openthread.SSHMole/"];
     });
     return sandboxPath;
 }

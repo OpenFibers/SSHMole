@@ -14,6 +14,13 @@ extern NSString *const SMSandboxBlacklistPACFileName;
 @interface SMSandboxPath : NSObject
 
 /**
+ *  Create sandbox path
+ *
+ *  @return YES if successed, otherwise NO.
+ */
++ (BOOL)createSandboxPathIfNotExist;
+
+/**
  *  Path for system configuration helper
  *
  *  @return Path for system configuration helper

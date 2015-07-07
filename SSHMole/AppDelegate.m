@@ -24,6 +24,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    //Create sandbox path
+    [SMSandboxPath createSandboxPathIfNotExist];
+    
     //Install change system network setting helper.
     [SMCopyHelperWrapper installHelperIfNotExist];
     
