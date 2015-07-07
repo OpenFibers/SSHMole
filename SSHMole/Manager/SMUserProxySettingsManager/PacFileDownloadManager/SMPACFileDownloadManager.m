@@ -11,6 +11,7 @@
 #import "SMSandboxPath.h"
 #import "SMPACFileObserverManager.h"
 #import "SMAlertHelper.h"
+#import "SMIPAddressHelper.h"
 
 static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO NOT CHANGE>*/";
 
@@ -157,7 +158,8 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *data = [[NSData alloc] initWithContentsOfFile:cachePath];
-            NSString *localServerAndPortString = [NSString stringWithFormat:@"127.0.0.1:%zd", localPort];
+            NSString *hostIPAddressString = [SMIPAddressHelper primaryNetworkIPv4AddressFromSystemConfiguration] ?: @"127.0.0.1";
+            NSString *localServerAndPortString = [NSString stringWithFormat:@"%@:%zd", hostIPAddressString, localPort];
             NSDictionary *localServerReplaceOption = @{ServerAndPortOptionString : localServerAndPortString};
             data = [SMPACFileDownloadManager getReplacedPacStringForOriginalData:data
                                                                   replaceOptions:localServerReplaceOption];
