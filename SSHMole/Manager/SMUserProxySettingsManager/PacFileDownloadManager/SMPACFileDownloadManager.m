@@ -120,29 +120,34 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
  *  读取本地的白名单PAC文件内容
  *
  *  @param localPort  本地转发端口，用于PAC文件内文本替换
+ *  @param allowConnectionsFromLAN 代理是否允许局域网内其他设备访问
  *  @param completion 完成回调
  */
 - (void)getWhiteListLocalPacDataForLocalPort:(NSUInteger)localPort
+                     allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
                                   completion:(void(^)(NSData *data))completion
 {
     NSString *cachePath = [SMSandboxPath pacPathForName:SMSandboxWhitelistPACFileName];
-    [self getLocalPacDataForCachePath:cachePath localPort:localPort completion:completion];
+    [self getLocalPacDataForCachePath:cachePath allowConnectionsFromLAN:allowConnectionsFromLAN localPort:localPort completion:completion];
 }
 
 /**
  *  读取本地的黑名单PAC文件内容
  *
  *  @param localPort  本地转发端口，用于PAC文件内文本替换
+ *  @param allowConnectionsFromLAN 代理是否允许局域网内其他设备访问
  *  @param completion 完成回调
  */
 - (void)getBlackListLocalPacDataForLocalPort:(NSUInteger)localPort
+                     allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
                                   completion:(void(^)(NSData *data))completion
 {
     NSString *cachePath = [SMSandboxPath pacPathForName:SMSandboxBlacklistPACFileName];
-    [self getLocalPacDataForCachePath:cachePath localPort:localPort completion:completion];
+    [self getLocalPacDataForCachePath:cachePath allowConnectionsFromLAN:allowConnectionsFromLAN localPort:localPort completion:completion];
 }
 
 - (void)getLocalPacDataForCachePath:(NSString *)cachePath
+            allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
                           localPort:(NSUInteger)localPort
                          completion:(void(^)(NSData *data))completion
 {
@@ -158,7 +163,15 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *data = [[NSData alloc] initWithContentsOfFile:cachePath];
-            NSString *hostIPAddressString = [SMIPAddressHelper primaryNetworkIPv4AddressFromSystemConfiguration] ?: @"127.0.0.1";
+            NSString *hostIPAddressString = nil;
+            if (allowConnectionsFromLAN)
+            {
+                hostIPAddressString = [SMIPAddressHelper primaryNetworkIPv4AddressFromSystemConfiguration] ?: @"127.0.0.1";
+            }
+            else
+            {
+                hostIPAddressString = @"127.0.0.1";
+            }
             NSString *localServerAndPortString = [NSString stringWithFormat:@"%@:%zd", hostIPAddressString, localPort];
             NSDictionary *localServerReplaceOption = @{ServerAndPortOptionString : localServerAndPortString};
             data = [SMPACFileDownloadManager getReplacedPacStringForOriginalData:data
