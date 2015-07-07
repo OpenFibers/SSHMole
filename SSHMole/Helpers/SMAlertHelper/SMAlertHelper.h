@@ -12,4 +12,8 @@
 
 + (void)showAlertWithOKButtonAndString:(NSString *)string;
 
++ (void)showAlertForErrorDomain:(NSError *)error;
+
++ (void)showAlertForErrorDomainAndDescription:(NSError *)error;
+
 @end

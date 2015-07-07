@@ -25,4 +25,15 @@
     [alert runModal];
 }
 
++ (void)showAlertForErrorDomain:(NSError *)error
+{
+    [self showAlertWithOKButtonAndString:error.domain];
+}
+
++ (void)showAlertForErrorDomainAndDescription:(NSError *)error
+{
+    NSString *errorString = [NSString stringWithFormat:@"%@\n%@", error.domain, error.localizedDescription];
+    [self showAlertWithOKButtonAndString:errorString];
+}
+
 @end
