@@ -31,6 +31,7 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
         self.account = @"";
         self.password = @"";
         self.remark = @"";
+        self.allowConnectionFromLAN = NO;
     }
     return self;
 }
@@ -115,7 +116,8 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 {
     if ([self ableToConnect])
     {
-        NSString *result = [NSString stringWithFormat:@"ssh -D %tu %@@%@ -p %tu",
+        NSString *result = [NSString stringWithFormat:@"ssh%@ -D %tu %@@%@ -p %tu",
+                            self.allowConnectionFromLAN ? @" -N -g" : @"",
                             self.localPort,
                             self.account,
                             self.serverAddress,
@@ -179,6 +181,7 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
     {
         configDictionary[@"Remark"] = self.remark;
     }
+    configDictionary[@"AllowConnectionsFromLAN"] = [NSNumber numberWithBool:self.allowConnectionFromLAN];
     NSDictionary *result = [NSDictionary dictionaryWithDictionary:configDictionary];
     return result;
 }
@@ -232,6 +235,7 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
     config.serverPort = [dictionary[@"ServerPort"] integerValue];
     config.localPort = [dictionary[@"LocalPort"] integerValue];
     config.remark = dictionary[@"Remark"];
+    config.allowConnectionFromLAN = [dictionary[@"AllowConnectionsFromLAN"] boolValue];
     return config;
 }
 

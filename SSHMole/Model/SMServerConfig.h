@@ -18,6 +18,7 @@ extern NSString *const SSHMoleKeychainServiceString;
 @property (nonatomic, assign) NSUInteger serverPort;
 @property (nonatomic, assign) NSUInteger localPort;
 @property (nonatomic, strong) NSString *remark;
+@property (nonatomic, assign) BOOL allowConnectionFromLAN;
 
 - (id)init;
 
