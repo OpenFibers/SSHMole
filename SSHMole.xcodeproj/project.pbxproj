@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42145E411B4C221300A5B419 /* SMIPAddressHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42145E401B4C221300A5B419 /* SMIPAddressHelper.m */; };
 		4219552C1B4A4ED0005A2996 /* SSHMoleSystemConfigurationHelper in Resources */ = {isa = PBXBuildFile; fileRef = 429422951B282681008A19F8 /* SSHMoleSystemConfigurationHelper */; };
 		422121151B4BAD84005D6F16 /* SMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 422121141B4BAD84005D6F16 /* SMAlertHelper.m */; };
 		423B41971B3740BC00BA52CA /* OTHTTPDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 423B41941B3740BC00BA52CA /* OTHTTPDownloadRequest.m */; };
@@ -100,6 +101,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		42145E3F1B4C221300A5B419 /* SMIPAddressHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMIPAddressHelper.h; sourceTree = "<group>"; };
+		42145E401B4C221300A5B419 /* SMIPAddressHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMIPAddressHelper.m; sourceTree = "<group>"; };
 		422121131B4BAD84005D6F16 /* SMAlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAlertHelper.h; sourceTree = "<group>"; };
 		422121141B4BAD84005D6F16 /* SMAlertHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMAlertHelper.m; sourceTree = "<group>"; };
 		423B41931B3740BC00BA52CA /* OTHTTPDownloadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTHTTPDownloadRequest.h; sourceTree = "<group>"; };
@@ -243,6 +246,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42145E3E1B4C220800A5B419 /* SMIPAddressHelper */ = {
+			isa = PBXGroup;
+			children = (
+				42145E3F1B4C221300A5B419 /* SMIPAddressHelper.h */,
+				42145E401B4C221300A5B419 /* SMIPAddressHelper.m */,
+			);
+			path = SMIPAddressHelper;
+			sourceTree = "<group>";
+		};
 		422121121B4BAD7C005D6F16 /* SMAlertHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +406,7 @@
 				423B41991B37B37500BA52CA /* SanboxPath */,
 				42840D741B2981040015DA34 /* SMCellClickDetectingTableView */,
 				425667681B4433F60009980E /* SMFileObserver */,
+				42145E3E1B4C220800A5B419 /* SMIPAddressHelper */,
 				42840D771B2981040015DA34 /* SMOnlyIntegerNumberFormatter */,
 				42840D7A1B2981040015DA34 /* SMUUIDHelper */,
 			);
@@ -834,6 +847,7 @@
 				4256677F1B48372B0009980E /* SMPACFileObserverManager.m in Sources */,
 				42C5C70C1B37301200C69389 /* GCDWebServerErrorResponse.m in Sources */,
 				42840D8E1B2981040015DA34 /* SMUUIDHelper.m in Sources */,
+				42145E411B4C221300A5B419 /* SMIPAddressHelper.m in Sources */,
 				423B41971B3740BC00BA52CA /* OTHTTPDownloadRequest.m in Sources */,
 				42C5C70A1B37301200C69389 /* GCDWebServerURLEncodedFormRequest.m in Sources */,
 				42C5C70D1B37301200C69389 /* GCDWebServerFileResponse.m in Sources */,
