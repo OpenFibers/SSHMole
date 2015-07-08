@@ -14,6 +14,8 @@
 #import "SMAlertHelper.h"
 #import <AppKit/AppKit.h>
 
+static const NSUInteger kSMUserProxySettingsManagerPACServerPort = 9099;
+
 @implementation SMUserProxySettingsManager
 {
     SMSystemPreferenceManager *_systemPreferenceManager;
@@ -38,8 +40,8 @@
     self = [super init];
     if (self)
     {
-        NSString *whitelistPACURLString = @"http://127.0.0.1:9099/whitelist.pac";
-        NSString *blacklistPACURLString = @"http://127.0.0.1:9099/blacklist.pac";
+        NSString *whitelistPACURLString = [NSString stringWithFormat:@"http://127.0.0.1:%tu/whitelist.pac", kSMUserProxySettingsManagerPACServerPort];
+        NSString *blacklistPACURLString = [NSString stringWithFormat:@"http://127.0.0.1:%tu/blacklist.pac", kSMUserProxySettingsManagerPACServerPort];
         _systemPreferenceManager = [[SMSystemPreferenceManager alloc] initWithWhitelistPACURLString:whitelistPACURLString
                                                                               blacklistPACURLString:blacklistPACURLString];
         _pacDownloadManger = [SMPACFileDownloadManager defaultManager];
@@ -98,7 +100,7 @@
                                              allowConnectionsFromLAN:_currentServerConfig.allowConnectionFromLAN
                                                           completion:^(NSData *data) {
                 NSError *error = nil;
-                [weakPacServerManager beginPacServerWithPort:9099
+                [weakPacServerManager beginPacServerWithPort:kSMUserProxySettingsManagerPACServerPort
                                                         data:data
                                                         path:@"/blacklist.pac"
                                                        error:&error];
@@ -118,7 +120,7 @@
                                              allowConnectionsFromLAN:_currentServerConfig.allowConnectionFromLAN
                                                           completion:^(NSData *data) {
                 NSError *error = nil;
-                [weakPacServerManager beginPacServerWithPort:9099
+                [weakPacServerManager beginPacServerWithPort:kSMUserProxySettingsManagerPACServerPort
                                                         data:data
                                                         path:@"/whitelist.pac"
                                                        error:&error];
