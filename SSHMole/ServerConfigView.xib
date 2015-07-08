@@ -7,7 +7,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="SMServerConfigView">
             <connections>
                 <outlet property="accountTextField" destination="GIX-To-zAn" id="zUY-ci-CJH"/>
-                <outlet property="allowLANConnectionsCheckBox" destination="L2u-Hc-50R" id="eGV-Yl-zNh"/>
+                <outlet property="allowConnectionsFromLANCheckBox" destination="L2u-Hc-50R" id="ENt-u3-00D"/>
                 <outlet property="connectButton" destination="281-h3-MnZ" id="V20-Hq-SKw"/>
                 <outlet property="localPortTextField" destination="1G9-DT-jJx" id="0lD-vo-biq"/>
                 <outlet property="passwordTextField" destination="gQr-Yi-xaQ" id="etD-MJ-QWQ"/>
@@ -193,7 +193,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="allowLANConnectionsButtonClicked:" target="-2" id="bcl-TB-d8y"/>
+                        <action selector="allowConnectionsFromLANCheckBoxClicked:" target="-2" id="A5z-kc-In0"/>
                     </connections>
                 </button>
             </subviews>
