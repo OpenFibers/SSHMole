@@ -84,7 +84,15 @@ NSString *const SMServerListViewAnyConfigChangedNotificationServerConfigsKey = @
 
 - (NSUInteger)indexOfConfig:(SMServerConfig *)config
 {
-    NSUInteger index = [_serverConfigs indexOfObject:config];
+    NSUInteger index = NSNotFound;
+    for (SMServerConfig *eachConfig in _serverConfigs)
+    {
+        if ([config.identifierString isEqualToString:eachConfig.identifierString])
+        {
+            index = [_serverConfigs indexOfObject:eachConfig];
+            break;
+        }
+    }
     return index;
 }
 
