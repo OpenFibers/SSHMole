@@ -19,6 +19,7 @@
 @property (weak) IBOutlet NSTextField *remarkTextField;
 @property (weak) IBOutlet NSButton *connectButton;
 @property (weak) IBOutlet NSButton *saveButton;
+@property (weak) IBOutlet NSButton *allowLANConnectionsCheckBox;
 @end
 
 @implementation SMServerConfigView
@@ -164,6 +165,18 @@
     [self.remarkTextField setStringValue:remarkString];
 }
 
+- (BOOL)allowLANConnections
+{
+    BOOL allow = self.allowLANConnectionsCheckBox.state == NSOnState;
+    return allow;
+}
+
+- (void)setAllowLANConnections:(BOOL)allowLANConnections
+{
+    NSCellStateValue state = allowLANConnections ? NSOnState : NSOffState;
+    self.allowLANConnectionsCheckBox.state = state;
+}
+
 - (BOOL)saveButtonEnabled
 {
     BOOL enabled = self.saveButton.enabled;
@@ -208,6 +221,14 @@
 }
 
 #pragma mark - Button Actions
+
+- (IBAction)allowLANConnectionsButtonClicked:(id)sender
+{
+    if (!self.saveButtonEnabled)
+    {
+        self.saveButtonEnabled = YES;
+    }
+}
 
 - (IBAction)connectButtonTouched:(NSButton *)sender
 {

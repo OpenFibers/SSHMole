@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SMServerConfigView">
             <connections>
                 <outlet property="accountTextField" destination="GIX-To-zAn" id="zUY-ci-CJH"/>
+                <outlet property="allowLANConnectionsCheckBox" destination="L2u-Hc-50R" id="eGV-Yl-zNh"/>
                 <outlet property="connectButton" destination="281-h3-MnZ" id="V20-Hq-SKw"/>
                 <outlet property="localPortTextField" destination="1G9-DT-jJx" id="0lD-vo-biq"/>
                 <outlet property="passwordTextField" destination="gQr-Yi-xaQ" id="etD-MJ-QWQ"/>
@@ -122,7 +123,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1G9-DT-jJx">
-                    <rect key="frame" x="109" y="121" width="271" height="22"/>
+                    <rect key="frame" x="109" y="121" width="100" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="OtV-0p-b8d">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -181,17 +182,34 @@
                         <action selector="saveButtonTouched:" target="-2" id="yhw-bA-lM5"/>
                     </connections>
                 </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="L2u-Hc-50R">
+                    <rect key="frame" x="215" y="123" width="167" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="163" id="EWQ-sM-phF"/>
+                        <constraint firstAttribute="height" constant="14" id="IIc-qv-nLU"/>
+                    </constraints>
+                    <buttonCell key="cell" type="check" title="Allow LAN Connections" bezelStyle="regularSquare" imagePosition="right" state="on" inset="2" id="Sew-Db-XR5">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="allowLANConnectionsButtonClicked:" target="-2" id="bcl-TB-d8y"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="1G9-DT-jJx" firstAttribute="top" secondItem="gQr-Yi-xaQ" secondAttribute="bottom" constant="10" id="0Wk-s6-Hqq"/>
                 <constraint firstItem="N74-Ik-32K" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="0qq-Dg-vgv"/>
                 <constraint firstItem="7Tm-ma-GNC" firstAttribute="top" secondItem="laD-MO-HeN" secondAttribute="bottom" constant="13" id="0x6-lf-csL"/>
                 <constraint firstItem="sr9-vA-GDv" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="17" id="1Cj-FP-awo"/>
+                <constraint firstAttribute="trailing" secondItem="L2u-Hc-50R" secondAttribute="trailing" constant="20" id="1YO-5w-8sk"/>
                 <constraint firstAttribute="trailing" secondItem="rwk-xs-e6k" secondAttribute="trailing" constant="20" id="1uw-0n-2br"/>
                 <constraint firstItem="281-h3-MnZ" firstAttribute="leading" secondItem="15W-1c-COJ" secondAttribute="trailing" constant="40" id="3ZA-Br-XkP"/>
                 <constraint firstItem="1G9-DT-jJx" firstAttribute="leading" secondItem="sr9-vA-GDv" secondAttribute="trailing" constant="24" id="4ne-1S-G7j"/>
                 <constraint firstItem="gQr-Yi-xaQ" firstAttribute="top" secondItem="GIX-To-zAn" secondAttribute="bottom" constant="10" id="8TD-g4-8lN"/>
+                <constraint firstItem="L2u-Hc-50R" firstAttribute="leading" secondItem="1G9-DT-jJx" secondAttribute="trailing" constant="8" id="9EA-IN-iLO"/>
                 <constraint firstItem="KdI-gq-4Q8" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="23" id="Bqh-9j-GZg"/>
+                <constraint firstItem="KDZ-aP-lK9" firstAttribute="top" secondItem="1G9-DT-jJx" secondAttribute="bottom" constant="10" id="DoI-aA-13M"/>
                 <constraint firstItem="MRD-lz-7Oc" firstAttribute="top" secondItem="sr9-vA-GDv" secondAttribute="bottom" constant="15" id="E5J-io-8T1"/>
                 <constraint firstItem="laD-MO-HeN" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="23" id="Gds-eM-dbO"/>
                 <constraint firstItem="KDZ-aP-lK9" firstAttribute="top" secondItem="1G9-DT-jJx" secondAttribute="bottom" constant="10" id="KAn-iX-5LX"/>
@@ -201,7 +219,6 @@
                 <constraint firstAttribute="bottom" secondItem="281-h3-MnZ" secondAttribute="bottom" constant="20" id="UPM-Sy-MSE"/>
                 <constraint firstItem="KDZ-aP-lK9" firstAttribute="leading" secondItem="MRD-lz-7Oc" secondAttribute="trailing" constant="24" id="Vgc-LB-KlR"/>
                 <constraint firstItem="oNu-fB-PwY" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="Vpn-kq-zgF"/>
-                <constraint firstAttribute="trailing" secondItem="1G9-DT-jJx" secondAttribute="trailing" constant="20" id="Y4V-5m-2WA"/>
                 <constraint firstItem="GIX-To-zAn" firstAttribute="top" secondItem="rwk-xs-e6k" secondAttribute="bottom" constant="8" id="Zoy-ek-KIR"/>
                 <constraint firstAttribute="trailing" secondItem="KDZ-aP-lK9" secondAttribute="trailing" constant="20" id="axb-aJ-Vui"/>
                 <constraint firstAttribute="trailing" secondItem="gQr-Yi-xaQ" secondAttribute="trailing" constant="20" id="bQt-aT-YE2"/>
@@ -209,8 +226,11 @@
                 <constraint firstItem="rwk-xs-e6k" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="f2E-d1-o6T"/>
                 <constraint firstItem="laD-MO-HeN" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="41" id="kee-M1-lhz"/>
                 <constraint firstAttribute="trailing" secondItem="GIX-To-zAn" secondAttribute="trailing" constant="20" id="kpX-b7-na0"/>
+                <constraint firstItem="L2u-Hc-50R" firstAttribute="top" secondItem="gQr-Yi-xaQ" secondAttribute="bottom" constant="14" id="n5J-5V-3zE"/>
                 <constraint firstItem="N74-Ik-32K" firstAttribute="leading" secondItem="laD-MO-HeN" secondAttribute="trailing" constant="24" id="nBZ-Gw-eOc"/>
                 <constraint firstItem="GIX-To-zAn" firstAttribute="leading" secondItem="7Tm-ma-GNC" secondAttribute="trailing" constant="24" id="pBW-am-Wf9"/>
+                <constraint firstItem="1G9-DT-jJx" firstAttribute="top" secondItem="gQr-Yi-xaQ" secondAttribute="bottom" constant="10" id="qPi-ga-DVF"/>
+                <constraint firstItem="1G9-DT-jJx" firstAttribute="leading" secondItem="sr9-vA-GDv" secondAttribute="trailing" constant="24" id="qoH-R5-SSC"/>
                 <constraint firstItem="rwk-xs-e6k" firstAttribute="leading" secondItem="KdI-gq-4Q8" secondAttribute="trailing" constant="8" id="spL-yr-p7Z"/>
                 <constraint firstAttribute="trailing" secondItem="281-h3-MnZ" secondAttribute="trailing" constant="20" id="tkt-eq-sP1"/>
                 <constraint firstItem="MRD-lz-7Oc" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="33" id="wEZ-iR-CJv"/>

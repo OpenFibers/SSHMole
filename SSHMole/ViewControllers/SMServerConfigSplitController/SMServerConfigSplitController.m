@@ -107,6 +107,7 @@
     self.serverConfigView.passwordString = @"";
     self.serverConfigView.localPort = 0;//server config view will use default 7070 port
     self.serverConfigView.remarkString = @"";
+    self.serverConfigView.allowLANConnections = NO;
     
     [self.serverConfigView.window makeFirstResponder:self.serverConfigView];
     
@@ -126,6 +127,7 @@
     self.serverConfigView.passwordString = config.password;
     self.serverConfigView.localPort = config.localPort;//server config view will use default 7070 port
     self.serverConfigView.remarkString = config.remark;
+    self.serverConfigView.allowLANConnections = config.allowConnectionFromLAN;
     
     [self.serverConfigView.window makeFirstResponder:self.serverConfigView];
     
@@ -297,6 +299,7 @@
         self.currentConfig.password = view.passwordString;
         self.currentConfig.localPort = view.localPort;
         self.currentConfig.remark = view.remarkString;
+        self.currentConfig.allowConnectionFromLAN = view.allowLANConnections;
         
         NSUInteger index = [[SMServerConfigStorage defaultStorage] replaceConfig:removingConfig withNewConfig:self.currentConfig];
         [self.serverListView reloadRowForServerConfig:self.currentConfig atIndex:index];
@@ -311,7 +314,8 @@
         self.currentConfig.password = view.passwordString;
         self.currentConfig.localPort = view.localPort;
         self.currentConfig.remark = view.remarkString;
-        
+        self.currentConfig.allowConnectionFromLAN = view.allowLANConnections;
+
         [[SMServerConfigStorage defaultStorage] addConfig:self.currentConfig];
         [self.serverListView addServerConfig:self.currentConfig];
     }
