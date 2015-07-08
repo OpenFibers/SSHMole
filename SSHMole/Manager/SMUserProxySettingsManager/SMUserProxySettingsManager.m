@@ -12,6 +12,7 @@
 #import "SMSystemPreferenceManager.h"
 #import "SMServerConfig.h"
 #import "SMAlertHelper.h"
+#import "SMIPAddressHelper.h"
 #import <AppKit/AppKit.h>
 
 static const NSUInteger kSMUserProxySettingsManagerPACServerPort = 9099;
@@ -40,10 +41,7 @@ static const NSUInteger kSMUserProxySettingsManagerPACServerPort = 9099;
     self = [super init];
     if (self)
     {
-        NSString *whitelistPACURLString = [NSString stringWithFormat:@"http://127.0.0.1:%tu/whitelist.pac", kSMUserProxySettingsManagerPACServerPort];
-        NSString *blacklistPACURLString = [NSString stringWithFormat:@"http://127.0.0.1:%tu/blacklist.pac", kSMUserProxySettingsManagerPACServerPort];
-        _systemPreferenceManager = [[SMSystemPreferenceManager alloc] initWithWhitelistPACURLString:whitelistPACURLString
-                                                                              blacklistPACURLString:blacklistPACURLString];
+        _systemPreferenceManager = [[SMSystemPreferenceManager alloc] init];
         _pacDownloadManger = [SMPACFileDownloadManager defaultManager];
         _pacServerManager = [SMWebServerManager defaultManager];
     }
@@ -72,8 +70,7 @@ static const NSUInteger kSMUserProxySettingsManagerPACServerPort = 9099;
 {
     if (!_currentServerConfig)
     {
-        _systemPreferenceManager.proxyMode = SMSystemProferenceManagerProxyModeOff;
-        [_systemPreferenceManager updateCurrentProxySettingsForConfig:_currentServerConfig];
+        [_systemPreferenceManager updateCurrentProxySettingsForConfig:nil];
         return;
     }
     SMSystemProferenceManagerProxyMode systemPrefenceProxyMode = SMSystemProferenceManagerProxyModeOff;
@@ -133,6 +130,16 @@ static const NSUInteger kSMUserProxySettingsManagerPACServerPort = 9099;
         }
             break;
     }
+    
+    NSString *ipAddress = _currentServerConfig.allowConnectionFromLAN ? [SMIPAddressHelper primaryNetworkIPv4AddressFromSystemConfiguration] : @"127.0.0.1";
+    NSString *whitelistPACURLString = [NSString stringWithFormat:@"http://%@:%tu/whitelist.pac",
+                                       ipAddress,
+                                       kSMUserProxySettingsManagerPACServerPort];
+    NSString *blacklistPACURLString = [NSString stringWithFormat:@"http://%@:%tu/blacklist.pac",
+                                       ipAddress,
+                                       kSMUserProxySettingsManagerPACServerPort];
+    _systemPreferenceManager.whitelistPACURLString = whitelistPACURLString;
+    _systemPreferenceManager.blacklistPACURLString = blacklistPACURLString;
     _systemPreferenceManager.proxyMode = systemPrefenceProxyMode;
     [_systemPreferenceManager updateCurrentProxySettingsForConfig:_currentServerConfig];
 }

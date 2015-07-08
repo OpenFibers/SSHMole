@@ -12,20 +12,15 @@
 
 @implementation SMSystemPreferenceManager
 {
-    NSString *_whitelistPACURLString;
-    NSString *_blacklistPACURLString;
     SMServerConfig *_currentConfig;
     dispatch_queue_t _lockQueue;
 }
 
-- (id)initWithWhitelistPACURLString:(NSString *)whitelistPACURLString
-              blacklistPACURLString:(NSString *)blacklistPACURLString
+- (id)init
 {
     self = [super init];
     if (self)
     {
-        _whitelistPACURLString = whitelistPACURLString;
-        _blacklistPACURLString = blacklistPACURLString;
         _proxyMode = SMSystemProferenceManagerProxyModeGlobal;
         
         _lockQueue = dispatch_queue_create([[NSString stringWithFormat:@"SSHMole.SystemPreferenceManagerQueue.%@", self] UTF8String], NULL);
@@ -74,11 +69,11 @@
     }
     else if (_proxyMode == SMSystemProferenceManagerProxyModeAutoWhitelist)
     {
-        [self runSystemConfigurationHelperWithMode:@"auto" argument:_whitelistPACURLString];
+        [self runSystemConfigurationHelperWithMode:@"auto" argument:self.whitelistPACURLString];
     }
     else if (_proxyMode == SMSystemProferenceManagerProxyModeAutoBlacklist)
     {
-        [self runSystemConfigurationHelperWithMode:@"auto" argument:_blacklistPACURLString];
+        [self runSystemConfigurationHelperWithMode:@"auto" argument:self.blacklistPACURLString];
     }
 }
 

@@ -24,13 +24,23 @@ typedef NS_ENUM(NSUInteger, SMSystemProferenceManagerProxyMode) {
 /**
  *  初始化一个system preference manager
  *
- *  @param whitelistPACURLString 白名单 PAC URL
- *  @param blacklistPACURLString 黑名单 PAC URL
- *
- *  @return manager实例
+ *  @return @return manager实例
  */
-- (id)initWithWhitelistPACURLString:(NSString *)whitelistPACURLString
-              blacklistPACURLString:(NSString *)blacklistPACURLString;
+- (id)init;
+
+/**
+ *  白名单的PAC URl String。
+ *  setProxyMode: 和 updateCurrentProxySettingsForConfig: 时会使用这个属性。
+ *  所以务必在上述两个方法调用前更新此属性。
+ */
+@property (nonatomic, strong) NSString *whitelistPACURLString;
+
+/**
+ *  黑名单的PAC URL String。
+ *  setProxyMode: 和 updateCurrentProxySettingsForConfig: 时会使用这个属性。
+ *  所以务必在上述两个方法调用前更新此属性。
+ */
+@property (nonatomic, strong) NSString *blacklistPACURLString;
 
 /**
  *  设置proxy mode，manager将根据需要自行更新系统设置
