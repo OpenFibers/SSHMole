@@ -293,7 +293,8 @@
     //update menu UI
     for (NSMenuItem *item in _serverConfigItem.submenu.itemArray)
     {
-        if (item != _editServerListItem && item.otRuntimeUserInfo == config)
+        if (item != _editServerListItem &&
+            [((SMServerConfig *)item.otRuntimeUserInfo).identifierString isEqualToString:config.identifierString])
         {
             BOOL shouldAddCheckmark = (status == SMSSHTaskStatusConnected ||
                                        status == SMSSHTaskStatusConnecting);
