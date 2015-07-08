@@ -49,5 +49,6 @@ OSX 下最好用的 ssh 代理工具。
 ##TODO
 1. 增加提示状态menu：未连接/PAC url & SOCKS address
 2. 增加全局PAC，以便iPhone可以访问代理
-3. 列表中保存两个配置；当第二个通过更改配置和第一个ID一致时，UI会重叠  
-4. 中文支持
+3. 三种PAC文件的path统一为proxy.pac,以便iPhone设置后不需要再更改
+4. 列表中保存两个配置；当第二个通过更改配置和第一个ID一致时，UI会重叠  
+5. 中文支持
