@@ -47,6 +47,8 @@ OSX 下最好用的 ssh 代理工具。
 全局代理功能
 
 ##TODO
-1. 支持共享代理给iPhone
-2. 列表中保存两个配置；当第二个通过更改配置和第一个ID一致时，UI会重叠  
-3. 中文支持
+1. 增加提示状态menu：未连接/PAC url & SOCKS address
+2. 增加全局PAC，以便iPhone可以访问代理
+3. 支持局域网连接时，pac的url使用primary network ip address
+4. 列表中保存两个配置；当第二个通过更改配置和第一个ID一致时，UI会重叠  
+5. 中文支持
