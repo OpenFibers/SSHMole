@@ -165,15 +165,15 @@
     [self.remarkTextField setStringValue:remarkString];
 }
 
-- (BOOL)allowLANConnections
+- (BOOL)allowConnectionsFromLAN
 {
     BOOL allow = self.allowLANConnectionsCheckBox.state == NSOnState;
     return allow;
 }
 
-- (void)setAllowLANConnections:(BOOL)allowLANConnections
+- (void)setAllowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
 {
-    NSCellStateValue state = allowLANConnections ? NSOnState : NSOffState;
+    NSCellStateValue state = allowConnectionsFromLAN ? NSOnState : NSOffState;
     self.allowLANConnectionsCheckBox.state = state;
 }
 

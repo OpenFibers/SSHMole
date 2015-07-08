@@ -123,7 +123,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1G9-DT-jJx">
-                    <rect key="frame" x="109" y="121" width="100" height="22"/>
+                    <rect key="frame" x="109" y="121" width="68" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="OtV-0p-b8d">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -183,12 +183,12 @@
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="L2u-Hc-50R">
-                    <rect key="frame" x="215" y="123" width="167" height="18"/>
+                    <rect key="frame" x="183" y="122" width="199" height="18"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="163" id="EWQ-sM-phF"/>
-                        <constraint firstAttribute="height" constant="14" id="IIc-qv-nLU"/>
+                        <constraint firstAttribute="width" constant="195" id="50F-u0-Xnf"/>
+                        <constraint firstAttribute="height" constant="14" id="Zri-Rt-gE1"/>
                     </constraints>
-                    <buttonCell key="cell" type="check" title="Allow LAN Connections" bezelStyle="regularSquare" imagePosition="right" state="on" inset="2" id="Sew-Db-XR5">
+                    <buttonCell key="cell" type="check" title="Allow Connections from LAN" bezelStyle="regularSquare" imagePosition="right" state="on" inset="2" id="Sew-Db-XR5">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -212,6 +212,7 @@
                 <constraint firstItem="KDZ-aP-lK9" firstAttribute="top" secondItem="1G9-DT-jJx" secondAttribute="bottom" constant="10" id="DoI-aA-13M"/>
                 <constraint firstItem="MRD-lz-7Oc" firstAttribute="top" secondItem="sr9-vA-GDv" secondAttribute="bottom" constant="15" id="E5J-io-8T1"/>
                 <constraint firstItem="laD-MO-HeN" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="23" id="Gds-eM-dbO"/>
+                <constraint firstItem="L2u-Hc-50R" firstAttribute="top" secondItem="gQr-Yi-xaQ" secondAttribute="bottom" constant="15" id="J2I-vl-c2e"/>
                 <constraint firstItem="KDZ-aP-lK9" firstAttribute="top" secondItem="1G9-DT-jJx" secondAttribute="bottom" constant="10" id="KAn-iX-5LX"/>
                 <constraint firstItem="KdI-gq-4Q8" firstAttribute="leading" secondItem="N74-Ik-32K" secondAttribute="trailing" constant="8" id="O5i-RC-rd4"/>
                 <constraint firstItem="sr9-vA-GDv" firstAttribute="top" secondItem="oNu-fB-PwY" secondAttribute="bottom" constant="15" id="PJY-2H-91c"/>
@@ -226,7 +227,6 @@
                 <constraint firstItem="rwk-xs-e6k" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="f2E-d1-o6T"/>
                 <constraint firstItem="laD-MO-HeN" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="41" id="kee-M1-lhz"/>
                 <constraint firstAttribute="trailing" secondItem="GIX-To-zAn" secondAttribute="trailing" constant="20" id="kpX-b7-na0"/>
-                <constraint firstItem="L2u-Hc-50R" firstAttribute="top" secondItem="gQr-Yi-xaQ" secondAttribute="bottom" constant="14" id="n5J-5V-3zE"/>
                 <constraint firstItem="N74-Ik-32K" firstAttribute="leading" secondItem="laD-MO-HeN" secondAttribute="trailing" constant="24" id="nBZ-Gw-eOc"/>
                 <constraint firstItem="GIX-To-zAn" firstAttribute="leading" secondItem="7Tm-ma-GNC" secondAttribute="trailing" constant="24" id="pBW-am-Wf9"/>
                 <constraint firstItem="1G9-DT-jJx" firstAttribute="top" secondItem="gQr-Yi-xaQ" secondAttribute="bottom" constant="10" id="qPi-ga-DVF"/>
@@ -236,6 +236,7 @@
                 <constraint firstItem="MRD-lz-7Oc" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="33" id="wEZ-iR-CJv"/>
                 <constraint firstItem="gQr-Yi-xaQ" firstAttribute="leading" secondItem="oNu-fB-PwY" secondAttribute="trailing" constant="24" id="wkQ-PR-Xac"/>
                 <constraint firstAttribute="bottom" secondItem="15W-1c-COJ" secondAttribute="bottom" constant="20" id="y8X-OO-UNv"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="L2u-Hc-50R" secondAttribute="trailing" constant="20" id="z5U-TX-V6q"/>
             </constraints>
             <point key="canvasLocation" x="341" y="321.5"/>
         </customView>

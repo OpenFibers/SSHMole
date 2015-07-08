@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, SMServerConfigViewConnectButtonStatus) {
 @property (nonatomic, strong) NSString *passwordString;
 @property (nonatomic, assign) NSUInteger localPort;//if setted to 0, will use 7070 as default
 @property (nonatomic, strong) NSString *remarkString;
-@property (nonatomic, assign) BOOL allowLANConnections;
+@property (nonatomic, assign) BOOL allowConnectionsFromLAN;
 
 @property (nonatomic, assign) BOOL saveButtonEnabled;//Get and read save button enable status
 @property (nonatomic, assign) SMServerConfigViewConnectButtonStatus connectButtonStatus;//Connect button status
