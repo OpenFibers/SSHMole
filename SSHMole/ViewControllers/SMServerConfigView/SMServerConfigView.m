@@ -17,9 +17,9 @@
 @property (weak) IBOutlet NSSecureTextField *passwordTextField;
 @property (weak) IBOutlet NSTextField *localPortTextField;
 @property (weak) IBOutlet NSTextField *remarkTextField;
+@property (weak) IBOutlet NSButton *allowConnectionsFromLANCheckBox;
 @property (weak) IBOutlet NSButton *connectButton;
 @property (weak) IBOutlet NSButton *saveButton;
-@property (weak) IBOutlet NSButton *allowConnectionsFromLANCheckBox;
 @end
 
 @implementation SMServerConfigView
@@ -208,6 +208,20 @@
             buttonText = @"Connect";
     }
     [self.connectButton setTitle:buttonText];
+    
+    BOOL shouldInputControlEnabled = (connectButtonStatus == SMServerConfigViewConnectButtonStatusDisconnected);
+    [self setInputControlsEnabled:shouldInputControlEnabled];
+}
+
+- (void)setInputControlsEnabled:(BOOL)enabled
+{
+    self.serverAddressTextField.enabled = enabled;
+    self.serverPortTextField.enabled = enabled;
+    self.accountTextField.enabled = enabled;
+    self.passwordTextField.enabled = enabled;
+    self.localPortTextField.enabled = enabled;
+    self.remarkTextField.enabled = enabled;
+    self.allowConnectionsFromLANCheckBox.enabled = enabled;
 }
 
 #pragma mark - Text Field Actions
