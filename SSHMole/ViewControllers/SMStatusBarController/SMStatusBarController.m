@@ -302,6 +302,7 @@
             {
                 [item setState:shouldAddCheckmark];
             }
+            break;
         }
     }
     
