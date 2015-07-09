@@ -25,19 +25,36 @@
     return manager;
 }
 
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        _server = [[GCDWebServer alloc] init];
+    }
+    return self;
+}
+
 - (void)dealloc
 {
     [self stopPacServer];
+    _server = nil;
 }
 
-- (BOOL)beginPacServerWithPort:(NSUInteger)port data:(NSData *)data path:(NSString *)path error:(NSError **)error
+- (BOOL)beginPacServerWithPort:(NSUInteger)port error:(NSError **)error
 {
-    if (_server)
-    {
-        [_server stop];
-        _server = nil;
-    }
-    _server = [[GCDWebServer alloc] init];
+    [self stopPacServer];
+    BOOL successed = [_server startWithPort:port bonjourName:@"SSHMole pac server" error:error];
+    return successed;
+}
+
+- (void)stopPacServer
+{
+    [_server stop];
+}
+
+- (void)addHandlerForPath:(NSString *)path data:(NSData *)data
+{
     [_server addHandlerForMethod:@"GET"
                             path:path
                     requestClass:[GCDWebServerRequest class]
@@ -46,14 +63,11 @@
                                                               contentType:@"application/x-ns-proxy-autoconfig"];
                     }
      ];
-    BOOL successed = [_server startWithPort:port bonjourName:@"SSHMole pac server" error:error];
-    return successed;
 }
 
-- (void)stopPacServer
+- (void)removeAllHandlers
 {
-    [_server stop];
-    _server = nil;
+    [_server removeAllHandlers];
 }
 
 

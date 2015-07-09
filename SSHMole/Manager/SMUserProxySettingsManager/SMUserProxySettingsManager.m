@@ -98,13 +98,15 @@ static const NSUInteger kSMUserProxySettingsManagerPACServerPort = 9099;
                                                           completion:^(NSData *data) {
                 NSError *error = nil;
                 [weakPacServerManager beginPacServerWithPort:kSMUserProxySettingsManagerPACServerPort
-                                                        data:data
-                                                        path:@"/blacklist.pac"
                                                        error:&error];
                 if (error)
                 {
                     NSString *errorString = [NSString stringWithFormat:@"%@\n%@", error.domain, error.localizedDescription];
                     [SMAlertHelper showAlertWithOKButtonAndString:errorString];
+                }
+                else
+                {
+                    [weakPacServerManager addHandlerForPath:@"/blacklist.pac" data:data];
                 }
             }];
         }
@@ -118,13 +120,15 @@ static const NSUInteger kSMUserProxySettingsManagerPACServerPort = 9099;
                                                           completion:^(NSData *data) {
                 NSError *error = nil;
                 [weakPacServerManager beginPacServerWithPort:kSMUserProxySettingsManagerPACServerPort
-                                                        data:data
-                                                        path:@"/whitelist.pac"
                                                        error:&error];
                 if (error)
                 {
                     NSString *errorString = [NSString stringWithFormat:@"%@\n%@", error.domain, error.localizedDescription];
                     [SMAlertHelper showAlertWithOKButtonAndString:errorString];
+                }
+                else
+                {
+                    [weakPacServerManager addHandlerForPath:@"/whitelist.pac" data:data];
                 }
             }];
         }

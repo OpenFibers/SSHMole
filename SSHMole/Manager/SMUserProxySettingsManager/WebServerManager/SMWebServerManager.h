@@ -17,11 +17,19 @@
  *  开启pac server
  *
  *  @param port 端口
+ */
+- (BOOL)beginPacServerWithPort:(NSUInteger)port error:(NSError **)error;
+
+- (void)stopPacServer;
+
+/**
+ *  给server 增加 handler
+ *
  *  @param data pac的data
  *  @param path web server 路径。system configuration helper中设置的是“/proxy.pac”
  */
-- (BOOL)beginPacServerWithPort:(NSUInteger)port data:(NSData *)data path:(NSString *)path error:(NSError **)error;
+- (void)addHandlerForPath:(NSString *)path data:(NSData *)data;
 
-- (void)stopPacServer;
+- (void)removeAllHandlers;
 
 @end
