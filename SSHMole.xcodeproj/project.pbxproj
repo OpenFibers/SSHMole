@@ -75,6 +75,7 @@
 		42E0A4781ACFBD4700890EA7 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A4771ACFBD4700890EA7 /* SSKeychain.m */; };
 		42E0A47A1ACFBD5500890EA7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E0A4791ACFBD5500890EA7 /* Security.framework */; };
 		42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */; };
+		42E0C0D61B4EC1D500B2353A /* global.pac in Resources */ = {isa = PBXBuildFile; fileRef = 42E0C0D51B4EC1D500B2353A /* global.pac */; };
 		42F639B31B3BE4B0007F3856 /* SMStatusBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F639B21B3BE4B0007F3856 /* SMStatusBarController.m */; };
 /* End PBXBuildFile section */
 
@@ -221,6 +222,7 @@
 		42E0A4791ACFBD5500890EA7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		42E0A48D1AD0073500890EA7 /* YYYJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYYJsonParser.h; sourceTree = "<group>"; };
 		42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYYJsonParser.m; sourceTree = "<group>"; };
+		42E0C0D51B4EC1D500B2353A /* global.pac */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = global.pac; sourceTree = "<group>"; };
 		42F639B11B3BE4B0007F3856 /* SMStatusBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMStatusBarController.h; sourceTree = "<group>"; };
 		42F639B21B3BE4B0007F3856 /* SMStatusBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMStatusBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -289,6 +291,7 @@
 			children = (
 				423B41A31B383D2300BA52CA /* blacklist.pac */,
 				423B41A41B383D2300BA52CA /* whitelist.pac */,
+				42E0C0D51B4EC1D500B2353A /* global.pac */,
 			);
 			path = PacFiles;
 			sourceTree = "<group>";
@@ -818,6 +821,7 @@
 				42BC34C71ADFD1A100A8BA66 /* SSHMole.iconset in Resources */,
 				42840DA51B29820D0015DA34 /* SSHCommand.sh in Resources */,
 				423B41A61B383D2300BA52CA /* whitelist.pac in Resources */,
+				42E0C0D61B4EC1D500B2353A /* global.pac in Resources */,
 				427237BA1AD7B01F00BC072D /* ServerListRedLight@2x.png in Resources */,
 				427237BB1AD7B01F00BC072D /* ServerListYellowLight.png in Resources */,
 				42840DA81B2985E10015DA34 /* CopyHelperCommand.sh in Resources */,
