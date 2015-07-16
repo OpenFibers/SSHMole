@@ -71,6 +71,7 @@ static const NSUInteger kSMUserProxySettingsManagerPACServerPort = 9099;
     if (!_currentServerConfig)
     {
         [_systemPreferenceManager updateCurrentProxySettingsForConfig:nil];
+        [_pacServerManager stopPacServer];
         return;
     }
     SMSystemProferenceManagerProxyMode systemPrefenceProxyMode = SMSystemProferenceManagerProxyModeOff;
