@@ -76,6 +76,7 @@
 		42E0A47A1ACFBD5500890EA7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E0A4791ACFBD5500890EA7 /* Security.framework */; };
 		42E0A48F1AD0073500890EA7 /* YYYJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */; };
 		42E0C0D61B4EC1D500B2353A /* global.pac in Resources */ = {isa = PBXBuildFile; fileRef = 42E0C0D51B4EC1D500B2353A /* global.pac */; };
+		42E0C0D81B57EF5200B2353A /* direct.pac in Resources */ = {isa = PBXBuildFile; fileRef = 42E0C0D71B57EF5200B2353A /* direct.pac */; };
 		42F639B31B3BE4B0007F3856 /* SMStatusBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F639B21B3BE4B0007F3856 /* SMStatusBarController.m */; };
 /* End PBXBuildFile section */
 
@@ -223,6 +224,7 @@
 		42E0A48D1AD0073500890EA7 /* YYYJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYYJsonParser.h; sourceTree = "<group>"; };
 		42E0A48E1AD0073500890EA7 /* YYYJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYYJsonParser.m; sourceTree = "<group>"; };
 		42E0C0D51B4EC1D500B2353A /* global.pac */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = global.pac; sourceTree = "<group>"; };
+		42E0C0D71B57EF5200B2353A /* direct.pac */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = direct.pac; sourceTree = "<group>"; };
 		42F639B11B3BE4B0007F3856 /* SMStatusBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMStatusBarController.h; sourceTree = "<group>"; };
 		42F639B21B3BE4B0007F3856 /* SMStatusBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMStatusBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -292,6 +294,7 @@
 				423B41A31B383D2300BA52CA /* blacklist.pac */,
 				423B41A41B383D2300BA52CA /* whitelist.pac */,
 				42E0C0D51B4EC1D500B2353A /* global.pac */,
+				42E0C0D71B57EF5200B2353A /* direct.pac */,
 			);
 			path = PacFiles;
 			sourceTree = "<group>";
@@ -813,6 +816,7 @@
 				427237B81AD7B01F00BC072D /* ServerListGreenLight@2x.png in Resources */,
 				427237BC1AD7B01F00BC072D /* ServerListYellowLight@2x.png in Resources */,
 				4262B8FE1B3B14A800C9430C /* StatusBarPawIcon@2x.png in Resources */,
+				42E0C0D81B57EF5200B2353A /* direct.pac in Resources */,
 				42CCF0AA1AD3C3CF00BE3841 /* ServerListTable.xib in Resources */,
 				427237B71AD7B01F00BC072D /* ServerListGreenLight.png in Resources */,
 				423B41A51B383D2300BA52CA /* blacklist.pac in Resources */,
