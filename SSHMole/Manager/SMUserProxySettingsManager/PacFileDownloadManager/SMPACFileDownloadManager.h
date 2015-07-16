@@ -12,6 +12,16 @@
 
 + (instancetype)defaultManager;
 
+/**
+ *  读取本地的全局PAC文件内容
+ *
+ *  @param localPort  本地转发端口，用于PAC文件内文本替换
+ *  @param allowConnectionsFromLAN 代理是否允许局域网内其他设备访问
+ *  @param completion 完成回调
+ */
+- (void)getGlobalLocalPacDataForLocalPort:(NSUInteger)localPort
+                  allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
+                               completion:(void(^)(NSData *data))completion;
 
 /**
  *  读取本地的白名单PAC文件内容
