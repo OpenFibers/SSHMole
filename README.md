@@ -37,20 +37,20 @@ http://your-ip-address:9099/mirror.pac  和SSHMole中代理模式相同
 没钱。欢迎土豪捐赠开发帐号，请邮件联系openfibers@gmail.com。  
 
 ##下载地址
-[SSHMole v1.0.3 build 120](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.0.3_build120.zip)  
+[SSHMole v1.1.0 build 130](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.1.0_build130.zip)  
 
 ##Change log
+
+[SSHMole v1.1.0 build 130](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.1.0_build130.zip)  
+1. 允许共享代理到局域网的其他设备（比如iPhone）  
+2. 修复菜单栏不能显示config的连接状态的bug  
+
 [SSHMole v1.0.3 build 120](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.0.3_build120.zip)  
-修复默认PAC文件安装失败。使用过1.0.2之前的版本的话，需要手动删除~/Library/Containers/openthread.SSHMole文件夹，再启动新版
-
-[SSHMole v1.0.2 build 118](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.0.2_build118.zip)  
-修复全新安装启动崩溃（SSHMoleSystemConfigurationHelper未复制或权限错误）
-
-[SSHMole v1.0.1 build 116](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.0.1_build116.zip)  
-修复断开连接或退出时，系统代理设置未被清空的 bug
-
-[SSHMole v1.0 build 114](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.0_build114.zip)  
-自动代理(PAC)、自动连接、Status bar 菜单
+1. 自动代理(PAC)  
+2. 自动连接  
+3. Status bar 菜单  
+4. 崩溃、无法启动等若干bug修复  
+5. 修复默认PAC文件安装失败。使用过1.0.2之前的版本的话，需要手动删除~/Library/Containers/openthread.SSHMole文件夹，再启动新版  
 
 [SSHMole v0.1](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v0.1.zip)  
 全局代理功能
