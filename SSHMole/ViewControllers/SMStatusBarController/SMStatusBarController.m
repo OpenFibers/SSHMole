@@ -332,6 +332,16 @@
     NSArray *configs = userInfo[SMServerListViewAnyConfigChangedNotificationServerConfigsKey];
     if (configs)
     {
+        SMServerConfig *lastConnectedConfig = nil;
+        for (NSMenuItem *item in _serverConfigItem.submenu.itemArray)
+        {
+            if (item.state == NSOnState)
+            {
+                lastConnectedConfig = item.otRuntimeUserInfo;
+                break;
+            }
+        }
+        
         [_serverConfigItem.submenu removeAllItems];
         for (SMServerConfig *config in configs)
         {
@@ -340,6 +350,10 @@
                                                    keyEquivalent:@""];
             item.otRuntimeUserInfo = config;
             item.target = self;
+            if ([config.identifierString isEqualToString:lastConnectedConfig.identifierString])
+            {
+                [item setState:NSOnState];
+            }
             [_serverConfigItem.submenu addItem:item];
         }
         [_serverConfigItem.submenu addItem:_editServerListItem];
