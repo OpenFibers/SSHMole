@@ -17,33 +17,32 @@
  *
  *  @param localPort  本地转发端口，用于PAC文件内文本替换
  *  @param allowConnectionsFromLAN 代理是否允许局域网内其他设备访问
- *  @param completion 完成回调
+ *
+ *  @return 全局PAC文件内容
  */
-- (void)getGlobalLocalPacDataForLocalPort:(NSUInteger)localPort
-                  allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
-                               completion:(void(^)(NSData *data))completion;
+- (NSData *)getGlobalLocalPacDataForLocalPort:(NSUInteger)localPort
+                      allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN;
 
 /**
  *  读取本地的白名单PAC文件内容
  *
  *  @param localPort  本地转发端口，用于PAC文件内文本替换
  *  @param allowConnectionsFromLAN 代理是否允许局域网内其他设备访问
- *  @param completion 完成回调
+ *
+ *  @return 白名单PAC文件内容
  */
-- (void)getWhiteListLocalPacDataForLocalPort:(NSUInteger)localPort
-                     allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
-                                  completion:(void(^)(NSData *data))completion;
-
+- (NSData *)getWhiteListLocalPacDataForLocalPort:(NSUInteger)localPort
+                         allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN;
 /**
  *  读取本地的黑名单PAC文件内容
  *
  *  @param localPort  本地转发端口，用于PAC文件内文本替换
  *  @param allowConnectionsFromLAN 代理是否允许局域网内其他设备访问
- *  @param completion 完成回调
+ *
+ *  @return 黑名单PAC文件内容
  */
-- (void)getBlackListLocalPacDataForLocalPort:(NSUInteger)localPort
-                     allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
-                                  completion:(void(^)(NSData *data))completion;
+- (NSData *)getBlackListLocalPacDataForLocalPort:(NSUInteger)localPort
+                         allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN;
 
 /**
  *  更新白名单文件，从remote

@@ -118,6 +118,54 @@ static const NSUInteger kSMUserProxySettingsManagerPACServerPort = 9099;
 {
     [_pacServerManager stopPacServer];
     
+    //added server handler for direct mode
+    NSString *directPACPathInBundle = [[NSBundle mainBundle] pathForResource:@"direct.pac" ofType:@""];
+    NSData *directData = [[NSData alloc] initWithContentsOfFile:directPACPathInBundle];
+    if (directData)
+    {
+        [_pacServerManager addHandlerForPath:@"/direct.pac" data:directData];
+        if (proxyMode == SMUserProxySettingsManagerProxyModeOff)
+        {
+            [_pacServerManager addHandlerForPath:@"/mirror.pac" data:directData];
+        }
+    }
+    
+    //added server handler for global mode
+    NSData *globalData = [_pacDownloadManger getGlobalLocalPacDataForLocalPort:_currentServerConfig.localPort
+                                                       allowConnectionsFromLAN:_currentServerConfig.allowConnectionFromLAN];
+    if (globalData)
+    {
+        [_pacServerManager addHandlerForPath:@"/global.pac" data:globalData];
+        if (proxyMode == SMUserProxySettingsManagerProxyModeGlobal)
+        {
+            [_pacServerManager addHandlerForPath:@"/mirror.pac" data:globalData];
+        }
+    }
+    
+    //added server handler for blacklist mode
+    NSData *blacklistData = [_pacDownloadManger getBlackListLocalPacDataForLocalPort:_currentServerConfig.localPort
+                                                             allowConnectionsFromLAN:_currentServerConfig.allowConnectionFromLAN];
+    if (blacklistData)
+    {
+        [_pacServerManager addHandlerForPath:@"/blacklist.pac" data:blacklistData];
+        if (proxyMode == SMUserProxySettingsManagerProxyModeAutoBlackList)
+        {
+            [_pacServerManager addHandlerForPath:@"/mirror.pac" data:blacklistData];
+        }
+    }
+    
+    //added server handler for whitelist mode
+    NSData *whitelistData = [_pacDownloadManger getWhiteListLocalPacDataForLocalPort:_currentServerConfig.localPort
+                                                             allowConnectionsFromLAN:_currentServerConfig.allowConnectionFromLAN];
+    if (whitelistData)
+    {
+        [_pacServerManager addHandlerForPath:@"/whitelist.pac" data:whitelistData];
+        if (proxyMode == SMUserProxySettingsManagerProxyModeAutoWhiteList)
+        {
+            [_pacServerManager addHandlerForPath:@"/mirror.pac" data:whitelistData];
+        }
+    }
+    
     //Try begin pac server
     NSError *error = nil;
     [_pacServerManager beginPacServerWithPort:kSMUserProxySettingsManagerPACServerPort
@@ -128,52 +176,6 @@ static const NSUInteger kSMUserProxySettingsManagerPACServerPort = 9099;
         [SMAlertHelper showAlertWithOKButtonAndString:errorString];
         return NO;
     }
-    
-    __weak SMWebServerManager *weakPacServerManager = _pacServerManager;
-    
-    //added server handler for direct mode
-    NSString *directPACPathInBundle = [[NSBundle mainBundle] pathForResource:@"direct.pac" ofType:@""];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSData *data = [[NSData alloc] initWithContentsOfFile:directPACPathInBundle];
-        [weakPacServerManager addHandlerForPath:@"/direct.pac" data:data];
-        if (proxyMode == SMUserProxySettingsManagerProxyModeOff)
-        {
-            [weakPacServerManager addHandlerForPath:@"/mirror.pac" data:data];
-        }
-    });
-
-    //added server handler for global mode
-    [_pacDownloadManger getGlobalLocalPacDataForLocalPort:_currentServerConfig.localPort
-                                  allowConnectionsFromLAN:_currentServerConfig.allowConnectionFromLAN
-                                               completion:^(NSData *data) {
-                                                   [weakPacServerManager addHandlerForPath:@"/global.pac" data:data];
-                                                   if (proxyMode == SMUserProxySettingsManagerProxyModeGlobal)
-                                                   {
-                                                       [weakPacServerManager addHandlerForPath:@"/mirror.pac" data:data];
-                                                   }
-                                               }];
-    
-    //added server handler for blacklist mode
-    [_pacDownloadManger getBlackListLocalPacDataForLocalPort:_currentServerConfig.localPort
-                                     allowConnectionsFromLAN:_currentServerConfig.allowConnectionFromLAN
-                                                  completion:^(NSData *data) {
-                                                      [weakPacServerManager addHandlerForPath:@"/blacklist.pac" data:data];
-                                                      if (proxyMode == SMUserProxySettingsManagerProxyModeAutoBlackList)
-                                                      {
-                                                          [weakPacServerManager addHandlerForPath:@"/mirror.pac" data:data];
-                                                      }
-                                                  }];
-    
-    //added server handler for whitelist mode
-    [_pacDownloadManger getWhiteListLocalPacDataForLocalPort:_currentServerConfig.localPort
-                                     allowConnectionsFromLAN:_currentServerConfig.allowConnectionFromLAN
-                                                  completion:^(NSData *data) {
-                                                      [weakPacServerManager addHandlerForPath:@"/whitelist.pac" data:data];
-                                                      if (proxyMode == SMUserProxySettingsManagerProxyModeAutoWhiteList)
-                                                      {
-                                                          [weakPacServerManager addHandlerForPath:@"/mirror.pac" data:data];
-                                                      }
-                                                  }];
     return YES;
 }
 

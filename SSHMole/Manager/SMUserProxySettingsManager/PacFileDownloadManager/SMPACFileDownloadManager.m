@@ -121,14 +121,17 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
  *
  *  @param localPort  本地转发端口，用于PAC文件内文本替换
  *  @param allowConnectionsFromLAN 代理是否允许局域网内其他设备访问
- *  @param completion 完成回调
+ *
+ *  @return 全局PAC文件内容
  */
-- (void)getGlobalLocalPacDataForLocalPort:(NSUInteger)localPort
-                     allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
-                                  completion:(void(^)(NSData *data))completion
+- (NSData *)getGlobalLocalPacDataForLocalPort:(NSUInteger)localPort
+                      allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
 {
     NSString *cachePath = [[NSBundle mainBundle] pathForResource:@"global.pac" ofType:@""];
-    [self getLocalPacDataForCachePath:cachePath allowConnectionsFromLAN:allowConnectionsFromLAN localPort:localPort completion:completion];
+    NSData *result = [self getLocalPacDataForCachePath:cachePath
+                               allowConnectionsFromLAN:allowConnectionsFromLAN
+                                             localPort:localPort];
+    return result;
 }
 
 /**
@@ -136,14 +139,17 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
  *
  *  @param localPort  本地转发端口，用于PAC文件内文本替换
  *  @param allowConnectionsFromLAN 代理是否允许局域网内其他设备访问
- *  @param completion 完成回调
+ *
+ *  @return 白名单PAC文件内容
  */
-- (void)getWhiteListLocalPacDataForLocalPort:(NSUInteger)localPort
-                     allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
-                                  completion:(void(^)(NSData *data))completion
+- (NSData *)getWhiteListLocalPacDataForLocalPort:(NSUInteger)localPort
+                         allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
 {
     NSString *cachePath = [SMSandboxPath pacPathForName:SMSandboxWhitelistPACFileName];
-    [self getLocalPacDataForCachePath:cachePath allowConnectionsFromLAN:allowConnectionsFromLAN localPort:localPort completion:completion];
+    NSData *result = [self getLocalPacDataForCachePath:cachePath
+                               allowConnectionsFromLAN:allowConnectionsFromLAN
+                                             localPort:localPort];
+    return result;
 }
 
 /**
@@ -151,61 +157,48 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
  *
  *  @param localPort  本地转发端口，用于PAC文件内文本替换
  *  @param allowConnectionsFromLAN 代理是否允许局域网内其他设备访问
- *  @param completion 完成回调
+ *
+ *  @return 黑名单PAC文件内容
  */
-- (void)getBlackListLocalPacDataForLocalPort:(NSUInteger)localPort
+- (NSData *)getBlackListLocalPacDataForLocalPort:(NSUInteger)localPort
                      allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
-                                  completion:(void(^)(NSData *data))completion
 {
     NSString *cachePath = [SMSandboxPath pacPathForName:SMSandboxBlacklistPACFileName];
-    [self getLocalPacDataForCachePath:cachePath allowConnectionsFromLAN:allowConnectionsFromLAN localPort:localPort completion:completion];
+    NSData *result = [self getLocalPacDataForCachePath:cachePath
+                               allowConnectionsFromLAN:allowConnectionsFromLAN
+                                             localPort:localPort];
+    return result;
 }
 
-- (void)getLocalPacDataForCachePath:(NSString *)cachePath
-            allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
-                          localPort:(NSUInteger)localPort
-                         completion:(void(^)(NSData *data))completion
+- (NSData *)getLocalPacDataForCachePath:(NSString *)cachePath
+                allowConnectionsFromLAN:(BOOL)allowConnectionsFromLAN
+                              localPort:(NSUInteger)localPort
 {
     if (cachePath.length == 0 || localPort == 0)
     {
-        if (completion)
-        {
-            completion(nil);
-        }
-        return;
+        return nil;
     }
-    if ([[NSFileManager defaultManager] fileExistsAtPath:cachePath])
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:cachePath])
     {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSData *data = [[NSData alloc] initWithContentsOfFile:cachePath];
-            NSString *hostIPAddressString = nil;
-            if (allowConnectionsFromLAN)
-            {
-                hostIPAddressString = [SMIPAddressHelper primaryNetworkIPv4AddressFromSystemConfiguration] ?: @"127.0.0.1";
-            }
-            else
-            {
-                hostIPAddressString = @"127.0.0.1";
-            }
-            NSString *localServerAndPortString = [NSString stringWithFormat:@"%@:%zd", hostIPAddressString, localPort];
-            NSDictionary *localServerReplaceOption = @{ServerAndPortOptionString : localServerAndPortString};
-            data = [SMPACFileDownloadManager getReplacedPacStringForOriginalData:data
-                                                                  replaceOptions:localServerReplaceOption];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (completion)
-                {
-                    completion(data);
-                }
-            });
-        });
+        return nil;
+    }
+    
+    NSData *data = [[NSData alloc] initWithContentsOfFile:cachePath];
+    NSString *hostIPAddressString = nil;
+    if (allowConnectionsFromLAN)
+    {
+        hostIPAddressString = [SMIPAddressHelper primaryNetworkIPv4AddressFromSystemConfiguration] ?: @"127.0.0.1";
     }
     else
     {
-        if (completion)
-        {
-            completion(nil);
-        }
+        hostIPAddressString = @"127.0.0.1";
     }
+    NSString *localServerAndPortString = [NSString stringWithFormat:@"%@:%zd", hostIPAddressString, localPort];
+    NSDictionary *localServerReplaceOption = @{ServerAndPortOptionString : localServerAndPortString};
+    data = [SMPACFileDownloadManager getReplacedPacStringForOriginalData:data
+                                                          replaceOptions:localServerReplaceOption];
+    return data;
 }
 
 #pragma mark - Update PAC File from Remote
