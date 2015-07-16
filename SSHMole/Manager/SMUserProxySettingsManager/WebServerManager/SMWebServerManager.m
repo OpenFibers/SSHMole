@@ -52,8 +52,8 @@
 {
     if ([_server isRunning])
     {
-        [_server removeAllHandlers];
         [_server stop];
+        [_server removeAllHandlers];
     }
 }
 
