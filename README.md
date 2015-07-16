@@ -21,6 +21,15 @@ OSX 下最好用的 ssh 代理工具。
 ##没有VPS怎么办
 买一台。穷用[bandwagon host](http://www.tennfy.com/1347.html)年付$3.99每月100G流量。富用linode。  
 
+##如何共享代理给其他设备
+1. 在连接前勾选 Allow Connections from LAN，同局域网内的其他设备即可访问连接成功的SOCKS代理  
+2. 连接后本机9099端口会开启HTTP服务，返回PAC文件，同局域网内的其他设备可设置HTTP自动代理为下列链接之一：  
+http://your-ip-address:9099/global.pac  全局模式  
+http://your-ip-address:9099/whitelist.pac  白名单模式  
+http://your-ip-address:9099/blacklist.pac  黑名单模式  
+http://your-ip-address:9099/direct.pac  直连（一般没什么卵用）  
+http://your-ip-address:9099/mirror.pac  和SSHMole中代理模式相同  
+
 ##Logo为什么这么像百度logo？
 反正在google搜paw icon就找到这么个矢量图。别问跟百度什么关系，一毛钱关系都没有。凑合看吧。欢迎设计师朋友捐赠Icon。  
 
@@ -48,7 +57,10 @@ OSX 下最好用的 ssh 代理工具。
 
 ##TODO
 1. 增加提示状态menu：未连接/PAC url & SOCKS address
-2. 增加全局PAC，以便iPhone可以访问代理
-3. 三种PAC文件的path统一为proxy.pac,以便iPhone设置后不需要再更改
-4. 列表中保存两个配置；当第二个通过更改配置和第一个ID一致时，UI会重叠  
-5. 中文支持
+2. 列表中保存两个配置；当第二个通过更改配置和第一个ID一致时，UI会重叠  
+3. 中文支持
+
+##Third Party Libs
+[GCDWebServer](https://github.com/swisspol/GCDWebServer) by [swisspol](https://github.com/swisspol)  
+[SCEvents](http://stuconnolly.com/projects/code/) by [Stuart Connolly](http://stuconnolly.com/about/)  
+[OTHTTPRequest](https://github.com/OpenFibers/OTHTTPRequest)  
