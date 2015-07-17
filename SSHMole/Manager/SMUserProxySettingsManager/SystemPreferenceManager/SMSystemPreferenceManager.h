@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 @class SMServerConfig;
+@class SMSystemPreferenceManager;
+
+FOUNDATION_EXTERN NSString *SMSystemPreferenceManagerGlobalProxyInfoKey;
+FOUNDATION_EXTERN NSString *SMSystemPreferenceManagerAutoProxyInfoKey;
 
 typedef NS_ENUM(NSUInteger, SMSystemProferenceManagerProxyMode) {
     SMSystemProferenceManagerProxyModeOff = 0,
@@ -15,6 +19,12 @@ typedef NS_ENUM(NSUInteger, SMSystemProferenceManagerProxyMode) {
     SMSystemProferenceManagerProxyModeAutoBlacklist,
     SMSystemProferenceManagerProxyModeGlobal,
 };
+
+@protocol SMSystemPreferenceManagerDelegate <NSObject>
+
+- (void)systemPreferenceManager:(SMSystemPreferenceManager *)manager didUpdateProxyWithInfo:(NSDictionary *)proxyInfo;
+
+@end
 
 /**
  *  根据proxy mode和server config来更新系统设置。
@@ -27,6 +37,11 @@ typedef NS_ENUM(NSUInteger, SMSystemProferenceManagerProxyMode) {
  *  @return @return manager实例
  */
 - (id)init;
+
+/**
+ *  Delegate, type is SMSystemPreferenceManagerDelegate
+ */
+@property (nonatomic, weak) id<SMSystemPreferenceManagerDelegate> delegate;
 
 /**
  *  白名单的PAC URl String。

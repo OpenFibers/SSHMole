@@ -9,6 +9,10 @@
 #import "SMSystemPreferenceManager.h"
 #import "SMCopyHelperWrapper.h"
 #import "SMServerConfig.h"
+#import "SMIPAddressHelper.h"
+
+NSString *SMSystemPreferenceManagerGlobalProxyInfoKey = @"global";
+NSString *SMSystemPreferenceManagerAutoProxyInfoKey = @"auto";
 
 @implementation SMSystemPreferenceManager
 {
@@ -54,27 +58,52 @@
 
 - (void)updateProxySettings
 {
+    NSDictionary *proxyInfo = @{};
+    
     if (_currentConfig == nil)
     {
         [self runSystemConfigurationHelperWithMode:@"off" argument:nil];
+        proxyInfo = @{};
     }
     else if (_proxyMode == SMSystemProferenceManagerProxyModeOff)
     {
         [self runSystemConfigurationHelperWithMode:@"off" argument:nil];
+        proxyInfo = @{};
     }
     else if (_proxyMode == SMSystemProferenceManagerProxyModeGlobal)
     {
         NSString *localPortString = [NSString stringWithFormat:@"%zd", _currentConfig.localPort];
         [self runSystemConfigurationHelperWithMode:@"global" argument:localPortString];
+        
+        NSString *globalProxyString = [NSString stringWithFormat:@"SOCKS %@:%@",
+                                       [SMIPAddressHelper primaryNetworkIPv4AddressFromSystemConfiguration],
+                                       localPortString];
+        proxyInfo = @{SMSystemPreferenceManagerGlobalProxyInfoKey: globalProxyString};
     }
     else if (_proxyMode == SMSystemProferenceManagerProxyModeAutoWhitelist)
     {
         [self runSystemConfigurationHelperWithMode:@"auto" argument:self.whitelistPACURLString];
+        
+        NSString *localPortString = [NSString stringWithFormat:@"%zd", _currentConfig.localPort];
+        NSString *globalProxyString = [NSString stringWithFormat:@"SOCKS %@:%@",
+                                       [SMIPAddressHelper primaryNetworkIPv4AddressFromSystemConfiguration],
+                                       localPortString];
+        proxyInfo = @{SMSystemPreferenceManagerGlobalProxyInfoKey: globalProxyString,
+                      SMSystemPreferenceManagerAutoProxyInfoKey: self.whitelistPACURLString};
     }
     else if (_proxyMode == SMSystemProferenceManagerProxyModeAutoBlacklist)
     {
         [self runSystemConfigurationHelperWithMode:@"auto" argument:self.blacklistPACURLString];
+        
+        NSString *localPortString = [NSString stringWithFormat:@"%zd", _currentConfig.localPort];
+        NSString *globalProxyString = [NSString stringWithFormat:@"SOCKS %@:%@",
+                                       [SMIPAddressHelper primaryNetworkIPv4AddressFromSystemConfiguration],
+                                       localPortString];
+        proxyInfo = @{SMSystemPreferenceManagerGlobalProxyInfoKey: globalProxyString,
+                      SMSystemPreferenceManagerAutoProxyInfoKey: self.blacklistPACURLString};
     }
+    
+    [self.delegate systemPreferenceManager:self didUpdateProxyWithInfo:proxyInfo];
 }
 
 - (void)runSystemConfigurationHelperWithMode:(NSString *)mode argument:(NSString *)argument
