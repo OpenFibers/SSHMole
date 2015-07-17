@@ -30,6 +30,9 @@ http://your-ip-address:9099/blacklist.pac  黑名单模式
 http://your-ip-address:9099/direct.pac  直连（一般没什么卵用）  
 http://your-ip-address:9099/mirror.pac  和SSHMole中代理模式相同  
 
+例如iPhone，在wifi详情中，代理模式选自动，URL填PAC的URL：  
+![iPhone settings](https://raw.githubusercontent.com/OpenFibers/SSHMole/master/DemoPics/iphone_settings.png)  
+
 ##Logo为什么这么像百度logo？
 反正在google搜paw icon就找到这么个矢量图。别问跟百度什么关系，一毛钱关系都没有。凑合看吧。欢迎设计师朋友捐赠Icon。  
 
@@ -37,9 +40,12 @@ http://your-ip-address:9099/mirror.pac  和SSHMole中代理模式相同
 没钱。欢迎土豪捐赠开发帐号，请邮件联系openfibers@gmail.com。  
 
 ##下载地址
-[SSHMole v1.1.0 build 130](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.1.0_build130.zip)  
+[SSHMole v1.2.0 build 132](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.2.0_build132.zip)  
 
 ##Change log
+
+[SSHMole v1.2.0 build 132](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.2.0_build132.zip)  
+1. 状态栏中显示当前连接状态  
 
 [SSHMole v1.1.0 build 130](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.1.0_build130.zip)  
 1. 允许共享代理到局域网的其他设备（比如iPhone）  
