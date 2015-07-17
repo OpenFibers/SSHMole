@@ -14,7 +14,11 @@
 #import "SMStatusBarUserDefaultsManager.h"
 #import "SMPACFileObserverManager.h"
 #import "SMLaunchManager.h"
+#import "SMUserProxySettingsManager.h"
 #import <AppKit/AppKit.h>
+
+static NSString *const SMStatusBarControllerNotConnectedString = @"Not connected";
+static NSString *const SMStatusBarControllerConnectingString = @"Connecting...";
 
 @interface SMStatusBarController () <SMPACFileObserverManagerFileAddedDelegate, SMPACFileObserverManagerFileModifiedDelegate>
 @property (nonatomic, strong) NSStatusItem *statusBar;
@@ -25,6 +29,9 @@
 
 @implementation SMStatusBarController
 {
+    //Status menu item
+    NSMenuItem *_statusMenuItem;
+    
     //Proxy mode menu items
     NSMenuItem *_proxyOffItem;
     NSMenuItem *_whitelistModeItem;
@@ -59,6 +66,11 @@
                                                    object:nil];
         [SMPACFileObserverManager defaultManager].pacAddDelegate = self;
         [SMPACFileObserverManager defaultManager].pacModifyDelegate = self;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(proxyDidUpdatedNotification:)
+                                                     name:SMUserProxySettingsManagerProxyDidUpdateNotification
+                                                   object:[SMUserProxySettingsManager defaultManager]];
     }
     return self;
 }
@@ -90,8 +102,19 @@
 
 - (void)initMenu
 {
+    //Status menu
+    {
+        _statusMenuItem = [[NSMenuItem alloc] initWithTitle:SMStatusBarControllerNotConnectedString
+                                                   action:nil
+                                            keyEquivalent:@""];
+        _statusMenuItem.enabled = NO;
+        [self.statusBarMenu addItem:_statusMenuItem];
+    }
+    
     //Proxy mode
     {
+        [self.statusBarMenu addItem:[NSMenuItem separatorItem]];
+        
         //Off
         _proxyOffItem = [[NSMenuItem alloc] initWithTitle:@"Turn Proxy Off"
                                                                 action:@selector(proxyModeItemClicked:)
@@ -239,6 +262,7 @@
     
     //update status bar UI
     [self updateStatusItemUIForCurrentSSHTaskStatusAndProxyMode];
+    [self updateStatusMenuItemForCurrentSSHTaskStatusAndProxyModeWithConnectedProxyString:nil];
     
     //update user defaults
     [SMStatusBarUserDefaultsManager defaultManager].lastProxyMode = currentProxyMode;
@@ -286,6 +310,26 @@
     }
 }
 
+- (void)updateStatusMenuItemForCurrentSSHTaskStatusAndProxyModeWithConnectedProxyString:(NSString *)connectedProxyString
+{
+    if (self.currentSSHTaskStatus == SMSSHTaskStatusDisconnected ||
+        self.currentSSHTaskStatus == SMSSHTaskStatusErrorOccured)
+    {
+        _statusMenuItem.title = SMStatusBarControllerNotConnectedString;
+    }
+    else if (self.currentSSHTaskStatus == SMSSHTaskStatusConnecting)
+    {
+        _statusMenuItem.title = SMStatusBarControllerConnectingString;
+    }
+    else if (self.currentSSHTaskStatus == SMSSHTaskStatusConnected)
+    {
+        if (connectedProxyString)
+        {
+            _statusMenuItem.title = connectedProxyString;
+        }
+    }
+}
+
 - (void)updateServerConfig:(SMServerConfig *)config forSSHTaskStatus:(SMSSHTaskStatus)status
 {
     self.currentSSHTaskStatus = status;
@@ -308,7 +352,8 @@
     
     //update status bar UI
     [self updateStatusItemUIForCurrentSSHTaskStatusAndProxyMode];
-    
+    [self updateStatusMenuItemForCurrentSSHTaskStatusAndProxyModeWithConnectedProxyString:nil];
+
     //update user defaults
     if (status == SMSSHTaskStatusDisconnected || status == SMSSHTaskStatusErrorOccured)
     {
@@ -381,6 +426,27 @@
             [self performSelector:@selector(serverConfigItemClicked:) withObject:lastConnectedConfigItem afterDelay:1];
         }
     });
+}
+
+#pragma mark - Proxy did updated notification
+
+- (void)proxyDidUpdatedNotification:(NSNotification *)notification
+{
+    NSDictionary *info = notification.userInfo;
+    NSString *globalString = info[SMSystemPreferenceManagerGlobalProxyInfoKey];
+    NSString *pacString = info[SMSystemPreferenceManagerAutoProxyInfoKey];
+    if (pacString)
+    {
+        [self updateStatusMenuItemForCurrentSSHTaskStatusAndProxyModeWithConnectedProxyString:pacString];
+    }
+    else if (globalString)
+    {
+        [self updateStatusMenuItemForCurrentSSHTaskStatusAndProxyModeWithConnectedProxyString:globalString];
+    }
+    else
+    {
+        [self updateStatusMenuItemForCurrentSSHTaskStatusAndProxyModeWithConnectedProxyString:@""];
+    }
 }
 
 #pragma mark - PAC File Observer Callback
