@@ -70,3 +70,6 @@ http://your-ip-address:9099/mirror.pac  和SSHMole中代理模式相同
 [GCDWebServer](https://github.com/swisspol/GCDWebServer) by [swisspol](https://github.com/swisspol)  
 [SCEvents](http://stuconnolly.com/projects/code/) by [Stuart Connolly](http://stuconnolly.com/about/)  
 [OTHTTPRequest](https://github.com/OpenFibers/OTHTTPRequest)  
+
+##LICENCE
+GNU General Public Licence v2.0
