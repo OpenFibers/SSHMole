@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 @class SMServerConfig;
 
+FOUNDATION_EXTERN NSString *SMUserProxySettingsManagerProxyDidUpdateNotification;
+
 typedef NS_ENUM(NSUInteger, SMUserProxySettingsManagerProxyMode) {
     SMUserProxySettingsManagerProxyModeOff = 0,
     SMUserProxySettingsManagerProxyModeAutoWhiteList,

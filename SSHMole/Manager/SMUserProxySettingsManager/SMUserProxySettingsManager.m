@@ -17,6 +17,8 @@
 
 static const NSUInteger kSMUserProxySettingsManagerPACServerPort = 9099;
 
+NSString *SMUserProxySettingsManagerProxyDidUpdateNotification = @"SMUserProxySettingsManagerProxyDidUpdateNotification";
+
 @implementation SMUserProxySettingsManager
 {
     SMSystemPreferenceManager *_systemPreferenceManager;
