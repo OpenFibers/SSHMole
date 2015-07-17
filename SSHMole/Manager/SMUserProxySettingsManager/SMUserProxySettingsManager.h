@@ -10,6 +10,8 @@
 @class SMServerConfig;
 
 FOUNDATION_EXTERN NSString *SMUserProxySettingsManagerProxyDidUpdateNotification;
+FOUNDATION_EXTERN NSString *SMSystemPreferenceManagerGlobalProxyInfoKey;
+FOUNDATION_EXTERN NSString *SMSystemPreferenceManagerAutoProxyInfoKey;
 
 typedef NS_ENUM(NSUInteger, SMUserProxySettingsManagerProxyMode) {
     SMUserProxySettingsManagerProxyModeOff = 0,

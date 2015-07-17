@@ -19,6 +19,10 @@ static const NSUInteger kSMUserProxySettingsManagerPACServerPort = 9099;
 
 NSString *SMUserProxySettingsManagerProxyDidUpdateNotification = @"SMUserProxySettingsManagerProxyDidUpdateNotification";
 
+@interface SMUserProxySettingsManager () <SMSystemPreferenceManagerDelegate>
+
+@end
+
 @implementation SMUserProxySettingsManager
 {
     SMSystemPreferenceManager *_systemPreferenceManager;
@@ -44,6 +48,7 @@ NSString *SMUserProxySettingsManagerProxyDidUpdateNotification = @"SMUserProxySe
     if (self)
     {
         _systemPreferenceManager = [[SMSystemPreferenceManager alloc] init];
+        _systemPreferenceManager.delegate = self;
         _pacDownloadManger = [SMPACFileDownloadManager defaultManager];
         _pacServerManager = [SMWebServerManager defaultManager];
     }
@@ -227,6 +232,13 @@ NSString *SMUserProxySettingsManagerProxyDidUpdateNotification = @"SMUserProxySe
         
         [SMAlertHelper showAlertWithOKButtonAndString:alertMessage];
     }];
+}
+
+#pragma mark - System Preference Manager Delegate
+
+- (void)systemPreferenceManager:(SMSystemPreferenceManager *)manager didUpdateProxyWithInfo:(NSDictionary *)proxyInfo
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:SMUserProxySettingsManagerProxyDidUpdateNotification object:self userInfo:proxyInfo];
 }
 
 @end
