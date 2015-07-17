@@ -1,6 +1,10 @@
 #SSHMole
 
-OSX 下最好用的 ssh 代理工具。  
+OSX 下最好用的 SSH 翻墙工具。  
+
+This app is used to make a SSH tunnel, to get access to websites blocked by your gateway.  
+
+For typical use, watch youtube through your office network; visit twitter, facebook or other websites blocked by GFW in China mainland.
 
 ##使用说明
 1. 第一次打开需要输出管理员密码，绝对安全，不信看代码。  
