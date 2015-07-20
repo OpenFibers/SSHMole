@@ -435,6 +435,8 @@ static NSString *const SMStatusBarControllerConnectingString = @"Connecting...";
     NSDictionary *info = notification.userInfo;
     NSString *globalString = info[SMSystemPreferenceManagerGlobalProxyInfoKey];
     NSString *pacString = info[SMSystemPreferenceManagerAutoProxyInfoKey];
+    NSString *offString = info[SMSystemPreferenceManagerOffProxyInfoKey];
+    
     if (pacString)
     {
         [self updateStatusMenuItemForCurrentSSHTaskStatusAndProxyModeWithConnectedProxyString:pacString];
@@ -443,9 +445,14 @@ static NSString *const SMStatusBarControllerConnectingString = @"Connecting...";
     {
         [self updateStatusMenuItemForCurrentSSHTaskStatusAndProxyModeWithConnectedProxyString:globalString];
     }
+    else if (offString)
+    {
+        NSString *statusBarString = [@"Not Using Proxy | " stringByAppendingString:offString];
+        [self updateStatusMenuItemForCurrentSSHTaskStatusAndProxyModeWithConnectedProxyString:statusBarString];
+    }
     else
     {
-        [self updateStatusMenuItemForCurrentSSHTaskStatusAndProxyModeWithConnectedProxyString:@""];
+        [self updateStatusMenuItemForCurrentSSHTaskStatusAndProxyModeWithConnectedProxyString:@"Not Connected"];
     }
 }
 

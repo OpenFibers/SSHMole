@@ -11,6 +11,7 @@
 #import "SMServerConfig.h"
 #import "SMIPAddressHelper.h"
 
+NSString *SMSystemPreferenceManagerOffProxyInfoKey = @"off";
 NSString *SMSystemPreferenceManagerGlobalProxyInfoKey = @"global";
 NSString *SMSystemPreferenceManagerAutoProxyInfoKey = @"auto";
 
@@ -68,7 +69,12 @@ NSString *SMSystemPreferenceManagerAutoProxyInfoKey = @"auto";
     else if (_proxyMode == SMSystemProferenceManagerProxyModeOff)
     {
         [self runSystemConfigurationHelperWithMode:@"off" argument:nil];
-        proxyInfo = @{};
+        
+        NSString *localPortString = [NSString stringWithFormat:@"%zd", _currentConfig.localPort];
+        NSString *globalProxyString = [NSString stringWithFormat:@"SOCKS %@:%@",
+                                       [SMIPAddressHelper primaryNetworkIPv4AddressFromSystemConfiguration],
+                                       localPortString];
+        proxyInfo = @{SMSystemPreferenceManagerOffProxyInfoKey: globalProxyString};
     }
     else if (_proxyMode == SMSystemProferenceManagerProxyModeGlobal)
     {

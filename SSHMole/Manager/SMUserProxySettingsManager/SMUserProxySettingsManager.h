@@ -10,6 +10,7 @@
 @class SMServerConfig;
 
 FOUNDATION_EXTERN NSString *SMUserProxySettingsManagerProxyDidUpdateNotification;
+FOUNDATION_EXTERN NSString *SMSystemPreferenceManagerOffProxyInfoKey;
 FOUNDATION_EXTERN NSString *SMSystemPreferenceManagerGlobalProxyInfoKey;
 FOUNDATION_EXTERN NSString *SMSystemPreferenceManagerAutoProxyInfoKey;
 
