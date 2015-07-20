@@ -44,18 +44,25 @@ http://your-ip-address:9099/mirror.pac  和SSHMole中代理模式相同
 没钱。欢迎土豪捐赠开发帐号，请邮件联系openfibers@gmail.com。  
 
 ##下载地址
-[SSHMole v1.2.0 build 132](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.2.0_build132.zip)  
+[SSHMole v1.2.1 build 134](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.2.1_build134.zip)  
 
 ##Change log
 
+[SSHMole v1.2.1 build 134](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.2.1_build134.zip)  
+***07/20/2015***  
+1. 状态栏中显示已连接但关闭代理的状态  
+
 [SSHMole v1.2.0 build 132](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.2.0_build132.zip)  
+***07/17/2015***  
 1. 状态栏中显示当前连接状态  
 
 [SSHMole v1.1.0 build 130](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.1.0_build130.zip)  
+***07/16/2015***  
 1. 允许共享代理到局域网的其他设备（比如iPhone）  
 2. 修复菜单栏不能显示config的连接状态的bug  
 
 [SSHMole v1.0.3 build 120](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.0.3_build120.zip)  
+***07/07/2015***  
 1. 自动代理(PAC)  
 2. 自动连接  
 3. Status bar 菜单  
@@ -63,7 +70,10 @@ http://your-ip-address:9099/mirror.pac  和SSHMole中代理模式相同
 5. 修复默认PAC文件安装失败。使用过1.0.2之前的版本的话，需要手动删除~/Library/Containers/openthread.SSHMole文件夹，再启动新版  
 
 [SSHMole v0.1](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v0.1.zip)  
-全局代理功能
+***06/15/2015***  
+1. SSH动态端口转发
+2. 多服务器配置
+3. 自动设置全局代理
 
 ##TODO
 1. 增加提示状态menu：未连接/PAC url & SOCKS address
