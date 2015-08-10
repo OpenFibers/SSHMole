@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, SMSSHTaskErrorCode) {
     SMSSHTaskErrorCodeGeneralError,
     SMSSHTaskErrorCodeRefused,
     SMSSHTaskErrorCodeHostNotFound,
+    SMSSHTaskErrorCodeHostVerificationFailed,
     SMSSHTaskErrorCodeLocalPortCouldNotForward,
     SMSSHTaskErrorCodeBadLocalPort,
     SMSSHTaskErrorCodePrivilegedLocalPortUnavailable,

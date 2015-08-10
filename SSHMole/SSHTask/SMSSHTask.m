@@ -147,6 +147,7 @@
     
     //host error
     static NSPredicate *hostNotFoundPredicate;
+    static NSPredicate *hostVerificationFailedPredicate;
     
     //local port error
     static NSPredicate *localPortCouldNotForwardPredicate;
@@ -179,6 +180,7 @@
         
         //host error
         hostNotFoundPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'NO_ROUTE_TO_HOST'"];
+        hostVerificationFailedPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'HOST_KEY_VERIFICATION_FAILED'"];
         
         //forwarding port error
         localPortCouldNotForwardPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] 'Could not request local forwarding'"];
@@ -243,6 +245,14 @@
             [self disconnectWithoutResetCallback];
             NSError *error = [NSError errorWithDomain:@"Host not found"
                                                  code:SMSSHTaskErrorCodeHostNotFound
+                                             userInfo:nil];
+            [self callbackWithStatus:SMSSHTaskStatusErrorOccured error:error];
+        }
+        else if ([hostVerificationFailedPredicate evaluateWithObject:_outputContent] == YES)
+        {
+            [self disconnectWithoutResetCallback];
+            NSError *error = [NSError errorWithDomain:@"Host verification failed.\nIt's possible someone is doing man-in-the-middle attact, or host is changed (check ~/.ssh/known_hosts)"
+                                                 code:SMSSHTaskErrorCodeHostVerificationFailed
                                              userInfo:nil];
             [self callbackWithStatus:SMSSHTaskStatusErrorOccured error:error];
         }

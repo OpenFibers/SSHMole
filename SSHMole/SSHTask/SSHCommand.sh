@@ -19,6 +19,8 @@ expect {
         "*onnection refused*" {puts "CONNECTION_REFUSED"; exit};
 #host error
 		"*o route to host*" {puts "NO_ROUTE_TO_HOST"; exit};
+#host key verification failed
+        "*ey verification failed*" {puts "HOST_KEY_VERIFICATION_FAILED"; exit};
 #forwarding port error
 		"*ad dynamic forwarding specification*" {puts "BAD_DYNAMIC_FORWARDING_SPECIFICATION"; exit};
         "*rivileged ports can only be forwarded by root*" {puts "PRIVILEGED_DYNAMIC_PORTS_UNAVAILABLE"; exit};
