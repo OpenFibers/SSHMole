@@ -13,7 +13,7 @@ For typical use, watch youtube through your office network; visit twitter, faceb
 3. 打开Safari上网。或使用Google Drive、Dropbox等客户端（浏览器或App自动检测系统代理设置即可）。  
 4. 随时从系统菜单栏更改服务器或代理设置：  
 ![demo](https://raw.githubusercontent.com/OpenFibers/SSHMole/master/DemoPics/demo2.png)  
-5. 使用时请自觉遵守当地法律法规。  
+~~5. 使用时请自觉遵守当地法律法规。~~  
 
 ##Features
 1. 多份服务器配置，并支持iCloud同步。  
