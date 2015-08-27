@@ -44,7 +44,7 @@ http://your-ip-address:9099/mirror.pac  和SSHMole中代理模式相同
 没钱。欢迎土豪捐赠开发帐号，请邮件联系openfibers@gmail.com。  
 
 ##下载地址
-[SSHMole v1.2.2 build 136](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.2.2_build136.zip)    
+[SSHMole v1.2.2 build 136](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.2.2_build136.zip) （使用过1.0.2之前的版本的话，需要手动删除~/Library/Containers/openthread.SSHMole文件夹，再启动新版）    
 
 ##Change log
 [SSHMole v1.2.2 build 136](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.2.2_build136.zip)  
