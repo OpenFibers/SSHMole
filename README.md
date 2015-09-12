@@ -13,7 +13,7 @@ For typical use, watch youtube through your office network; visit twitter, faceb
 3. 打开Safari上网。或使用Google Drive、Dropbox等客户端（浏览器或App自动检测系统代理设置即可）。  
 4. 随时从系统菜单栏更改服务器或代理设置：  
 ![demo](https://raw.githubusercontent.com/OpenFibers/SSHMole/master/DemoPics/demo2.png)  
-5. 使用时请自觉遵守当地法律法规。  
+~~5. 使用时请自觉遵守当地法律法规。~~  
 
 ##Features
 1. 多份服务器配置，并支持iCloud同步。  
@@ -44,7 +44,7 @@ http://your-ip-address:9099/mirror.pac  和SSHMole中代理模式相同
 没钱。欢迎土豪捐赠开发帐号，请邮件联系openfibers@gmail.com。  
 
 ##下载地址
-[SSHMole v1.2.2 build 136](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.2.2_build136.zip)    
+[SSHMole v1.2.2 build 136](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.2.2_build136.zip) （使用过1.0.2之前的版本的话，需要手动删除~/Library/Containers/openthread.SSHMole文件夹，再启动新版）    
 
 ##Change log
 [SSHMole v1.2.2 build 136](https://github.com/OpenFibers/SSHMole/raw/master/Product/SSHMole_v1.2.2_build136.zip)  
