@@ -7,7 +7,7 @@ This app is used to make a SSH tunnel, to get access to websites blocked by your
 For typical use, watch youtube through your office network; visit twitter, facebook or other websites blocked by GFW in China mainland.
 
 ##使用说明
-1. 第一次打开需要输出管理员密码，绝对安全，不信看代码。  
+1. 第一次打开需要输入管理员密码，绝对安全，不信看代码。  
 2. 在Server Config窗口输入服务器、帐号密码，点击Connect：  
 ![demo](https://raw.githubusercontent.com/OpenFibers/SSHMole/master/DemoPics/demo1.png)  
 3. 打开Safari上网。或使用Google Drive、Dropbox等客户端（浏览器或App自动检测系统代理设置即可）。  
