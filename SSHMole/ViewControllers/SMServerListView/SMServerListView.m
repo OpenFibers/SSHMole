@@ -66,7 +66,8 @@ NSString *const SMServerListViewAnyConfigChangedNotificationServerConfigsKey = @
     //Set initial table selected index
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
     [self.tableView selectRowIndexes:indexSet byExtendingSelection:NO];
-    [self.tableView.delegate tableViewSelectionDidChange:nil];
+    NSNotification *notification = [[NSNotification alloc] initWithName:NSTableViewSelectionDidChangeNotification object:self userInfo:nil];
+    [self.tableView.delegate tableViewSelectionDidChange:notification];
 }
 
 - (void)layout
