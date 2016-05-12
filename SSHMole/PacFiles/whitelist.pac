@@ -51,11 +51,13 @@ var RULES = [
     ],
     //custom-list
     [
+        ".sfbuy.com",
         ".zoopda.com",
         ".yixun.com",
         ".jd.com",
         ".zdmimg.com",
         ".appgame.com",
+        ".qiniu.com",
         ".qiniucdn.com",
         ".wangyin.com",
         ".gewara.com",

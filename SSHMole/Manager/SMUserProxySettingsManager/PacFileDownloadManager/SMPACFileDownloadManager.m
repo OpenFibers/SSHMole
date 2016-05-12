@@ -211,7 +211,7 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
 - (void)updatWhitelistPACDataWithCompletion:(void(^)(BOOL successed))completion
 {
     NSString *cachePath = [SMSandboxPath pacPathForName:SMSandboxWhitelistPACFileName];
-    NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/n0wa11/gfw_whitelist/master/whitelist.pac"];
+    NSURL *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/OpenFibers/SSHMole/master/SSHMole/PacFiles/whitelist.pac"];
     [self updatePacDataWithURL:url cachePath:cachePath replaceOption:_whitelistReplaceOption completion:completion];
 }
 
