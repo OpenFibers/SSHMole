@@ -52,6 +52,9 @@ var RULES = [
     //custom-list
     [
         ".sfbuy.com",
+        ".wallstreetcn.com",
+        ".wallstcn.com",
+        ".plista.com",
         ".zoopda.com",
         ".yixun.com",
         ".jd.com",
