@@ -51,6 +51,9 @@ var RULES = [
     ],
     //custom-list
     [
+        ".tbcdn.com",
+        ".alicdn.com",
+        ".kaola.com",    
         ".sfbuy.com",
         ".wallstreetcn.com",
         ".wallstcn.com",
