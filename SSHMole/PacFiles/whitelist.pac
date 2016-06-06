@@ -37,6 +37,7 @@ var RULES = [
         ".sfbuy.com",
         ".zol.com.cn",
         ".feng.com",
+        ".weiphone.net",
         ".wallstreetcn.com",
         ".wallstcn.com",
         ".plista.com",
