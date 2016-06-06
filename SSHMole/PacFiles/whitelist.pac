@@ -33,7 +33,8 @@ var RULES = [
     [
         ".tbcdn.com",
         ".alicdn.com",
-        ".kaola.com",    
+        ".kaola.com",
+        ".fengqu.com",
         ".sfbuy.com",
         ".zol.com.cn",
         ".feng.com",
