@@ -16,6 +16,36 @@
 
 @implementation SMIPAddressHelper
 
++ (NSString *)primaryNetworkIPAddress
+{
+    NSString *ipv4Address = [self primaryNetworkIPv4AddressFromSystemConfiguration];
+    if (ipv4Address.length)
+    {
+        return ipv4Address;
+    }
+    NSString *ipv6Address = [self primaryNetworkIPv6AddressFromSystemConfiguration];
+    if (ipv6Address.length)
+    {
+        return ipv6Address;
+    }
+    return nil;
+}
+
++ (NSString *)primaryNetworkIPAddressForURL
+{
+    NSString *ipv4Address = [self primaryNetworkIPv4AddressFromSystemConfiguration];
+    if (ipv4Address.length)
+    {
+        return ipv4Address;
+    }
+    NSString *ipv6Address = [self primaryNetworkIPv6AddressFromSystemConfiguration];
+    if (ipv6Address.length)
+    {
+        return [NSString stringWithFormat:@"[%@]", ipv6Address];
+    }
+    return nil;
+}
+
 + (NSString *)primaryNetworkIPv4AddressFromSystemConfiguration
 {
     NSArray *primaryAddressArray = [self primaryNetworkIPv4AddressArrayFromSystemConfiguration];

@@ -12,6 +12,10 @@
 
 #pragma mark - Get primary network info from system configuration
 
++ (NSString *)primaryNetworkIPAddress;
+
++ (NSString *)primaryNetworkIPAddressForURL;
+
 #pragma mark IPv4
 
 /**
