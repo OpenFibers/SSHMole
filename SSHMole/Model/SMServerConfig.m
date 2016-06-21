@@ -9,6 +9,7 @@
 #import "SMServerConfig.h"
 #import "YYYJsonParser.h"
 #import "SSKeychain.h"
+#import "OTIPv4v6AddressAdapter.h"
 
 NSString *const SSHMoleKeychainServiceString = @"SSHMole";
 
@@ -120,7 +121,7 @@ NSString *const SSHMoleKeychainServiceString = @"SSHMole";
                             self.allowConnectionFromLAN ? @" -N -g" : @"",
                             self.localPort,
                             self.account,
-                            self.serverAddress,
+                            [OTIPv4v6AddressAdapter adaptedAddressForOriginalIPAddress:self.serverAddress],
                             self.serverPort
                             ];
         return result;
