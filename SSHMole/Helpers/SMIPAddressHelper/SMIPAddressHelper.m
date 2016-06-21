@@ -89,9 +89,15 @@
 + (NSString *)primaryNetworkIPv6AddressFromSystemConfiguration
 {
     NSArray *primaryAddressArray = [self primaryNetworkIPv6AddressArrayFromSystemConfiguration];
-    if (primaryAddressArray.count != 0)
+    for (NSString *address in primaryAddressArray)
     {
-        return primaryAddressArray[0];
+        if ([address isKindOfClass:[NSString class]] &&
+            ![address isEqualToString:@"::1"] && //localhost
+            ![address hasPrefix:@"fe80:"] //self assigned address
+            )
+        {
+            return address;
+        }
     }
     return nil;
 }
