@@ -188,7 +188,7 @@ static NSString *const ServerAndPortOptionString = @"/*<SSHMole Local Server DO 
     NSString *hostIPAddressString = nil;
     if (allowConnectionsFromLAN)
     {
-        hostIPAddressString = [SMIPAddressHelper primaryNetworkIPv4AddressFromSystemConfiguration] ?: @"127.0.0.1";
+        hostIPAddressString = [SMIPAddressHelper primaryNetworkIPAddressForURL] ?: @"127.0.0.1";
     }
     else
     {

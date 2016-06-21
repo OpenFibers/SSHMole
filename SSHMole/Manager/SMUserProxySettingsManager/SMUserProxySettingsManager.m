@@ -108,7 +108,7 @@ NSString *SMUserProxySettingsManagerProxyDidUpdateNotification = @"SMUserProxySe
     
     [self restartPACServerWithProxyMode:self.proxyMode];
     
-    NSString *ipAddress = _currentServerConfig.allowConnectionFromLAN ? [SMIPAddressHelper primaryNetworkIPv4AddressFromSystemConfiguration] : @"127.0.0.1";
+    NSString *ipAddress = _currentServerConfig.allowConnectionFromLAN ? [SMIPAddressHelper primaryNetworkIPAddressForURL] : @"127.0.0.1";
     NSString *whitelistPACURLString = [NSString stringWithFormat:@"http://%@:%tu/whitelist.pac",
                                        ipAddress,
                                        kSMUserProxySettingsManagerPACServerPort];
