@@ -31,6 +31,15 @@ var RULES = [
     ],
     //custom-list
     [
+        "bcx.org",
+        ".github.com",
+        ".superbtc.org",
+        ".8btc.com",
+        ".shimo.im",
+        ".dingtalk.com",
+        ".huobi.pro",
+        ".okex.com",
+        ".alibaba-inc.com",
         ".tbcdn.com",
         ".alicdn.com",
         ".kaola.com",
@@ -765,7 +774,7 @@ function FindProxyForURL(url, host) {
     }
 
     // skip local hosts
-    if (isPlainHostName(host) === true || check_ipv4() === true || rule_filter(isDomain) === true) {
+    if (rule_filter(isDomain) === true) {
         return "DIRECT";
 
     } else {
