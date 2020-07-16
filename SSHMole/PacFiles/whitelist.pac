@@ -40,6 +40,8 @@ var RULES = [
         ".huobi.pro",
         ".okex.com",
         ".alibaba-inc.com",
+        ".yuque.com",
+        ".antfin-inc.com",
         ".tbcdn.com",
         ".alicdn.com",
         ".kaola.com",
