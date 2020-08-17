@@ -41,6 +41,7 @@ var RULES = [
         ".okex.com",
         ".alibaba-inc.com",
         ".yuque.com",
+        ".aliway.com",
         ".antfin-inc.com",
         ".tbcdn.com",
         ".alicdn.com",
