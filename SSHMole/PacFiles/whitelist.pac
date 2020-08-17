@@ -119,6 +119,7 @@ var RULES = [
         ".aliimg.com",
         ".alipayobjects.com",
         ".aliyun.com",
+        ".aliyuncs.com",
         ".appinn.com",
         ".atdmt.com",
         ".atpanel.com",
